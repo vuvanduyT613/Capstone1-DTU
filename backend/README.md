@@ -1,432 +1,561 @@
-### BACK END DEV BY < DUY VU >
+<p align="center">
+  <img src="./w3tec-logo.png" alt="w3tec" width="400" />
+</p>
 
-## Quick Start
+<h1 align="center">BACK END CODE BY <DUY VU></h1>
 
-To create a project, simply run:
+<p align="center">
+  <a href="https://david-dm.org/w3tecch/express-typescript-boilerplate">
+    <img src="https://david-dm.org/w3tecch/express-typescript-boilerplate/status.svg?style=flat" alt="dependency" />
+  </a>
+  <a href="https://travis-ci.org/w3tecch/express-typescript-boilerplate">
+    <img src="https://travis-ci.org/w3tecch/express-typescript-boilerplate.svg?branch=master" alt="travis" />
+  </a>
+  <a href="https://ci.appveyor.com/project/dweber019/express-typescript-boilerplate/branch/master">
+    <img src="https://ci.appveyor.com/api/projects/status/f8e7jdm8v58hcwpq/branch/master?svg=true&passingText=Windows%20passing&pendingText=Windows%20pending&failingText=Windows%20failing" alt="appveyor" />
+  </a>
+  <a href="https://stackshare.io/hirsch88/express-typescript-boilerplate">
+    <img src="https://img.shields.io/badge/tech-stack-0690fa.svg?style=flat" alt="StackShare" />
+  </a>
+</p>
 
-```bash
-npx create-nodejs-express-app <project-name>
-```
+<p align="center">
+  <b>A delightful way to building a Node.js RESTful API Services with beautiful code written in TypeScript.</b></br>
+  <span>Inspired by the awesome framework <a href="https://laravel.com/">laravel</a> in PHP and of the repositories from <a href="https://github.com/pleerock">pleerock</a></span></br>
+  <sub>Made with ❤️ by <a href="https://github.com/w3tecch">w3tech</a>, <a href="https://twitter.com/GeryHirschfeld1">Gery Hirschfeld</a> and <a href="https://github.com/w3tecch/express-typescript-boilerplate/graphs/contributors">contributors</a></sub>
+</p>
 
-Or
+<br />
 
-```bash
-npm init nodejs-express-app <project-name>
-```
+![divider](./w3tec-divider.png)
 
-## Manual Installation
+## ❯ Why
 
-If you would still prefer to do the installation manually, follow these steps:
+Our main goal with this project is a feature complete server application.
+We like you to be focused on your business and not spending hours in project configuration.
 
-Clone the repo:
+Try it!! We are happy to hear your feedback or any kind of new features.
 
-```bash
-git clone --depth 1 https://github.com/hagopj13/node-express-boilerplate.git
-cd node-express-boilerplate
-npx rimraf ./.git
-```
+### Features
 
-Install the dependencies:
+-   **Beautiful Code** thanks to the awesome annotations of the libraries from [pleerock](https://github.com/pleerock).
+-   **Easy API Testing** with included e2e testing.
+-   **Dependency Injection** done with the nice framework from [TypeDI](https://github.com/pleerock/typedi).
+-   **Simplified Database Query** with the ORM [TypeORM](https://github.com/typeorm/typeorm).
+-   **Clear Structure** with different layers such as controllers, services, repositories, models, middlewares...
+-   **Easy Exception Handling** thanks to [routing-controllers](https://github.com/pleerock/routing-controllers).
+-   **Smart Validation** thanks to [class-validator](https://github.com/pleerock/class-validator) with some nice annotations.
+-   **Custom Validators** to validate your request even better and stricter. [custom-validation-classes](https://github.com/pleerock/class-validator#custom-validation-classes).
+-   **API Documentation** thanks to [swagger](http://swagger.io/) and [routing-controllers-openapi](https://github.com/epiphone/routing-controllers-openapi).
+-   **API Monitoring** thanks to [express-status-monitor](https://github.com/RafalWilinski/express-status-monitor).
+-   **Integrated Testing Tool** thanks to [Jest](https://facebook.github.io/jest).
+-   **E2E API Testing** thanks to [supertest](https://github.com/visionmedia/supertest).
+-   **Basic Security Features** thanks to [Helmet](https://helmetjs.github.io/).
+-   **Easy event dispatching** thanks to [event-dispatch](https://github.com/pleerock/event-dispatch).
+-   **Fast Database Building** with simple migration from [TypeORM](https://github.com/typeorm/typeorm).
+-   **Easy Data Seeding** with our own factories.
+-   **GraphQL** provides as a awesome query language for our api [GraphQL](http://graphql.org/).
+-   **TypeGraphQL** thanks to [TypeGraphQL](https://19majkel94.github.io/type-graphql/) we have a some cool decorators to simplify the usage of GraphQL.
+-   **DataLoaders** helps with performance thanks to caching and batching [DataLoaders](https://github.com/facebook/dataloader).
 
-```bash
-yarn install
-```
+![divider](./w3tec-divider.png)
 
-Set the environment variables:
+## ❯ Table of Contents
 
-```bash
-cp .env.example .env
+-   [Getting Started](#-getting-started)
+-   [Scripts and Tasks](#-scripts-and-tasks)
+-   [Debugger in VSCode](#-debugger-in-vscode)
+-   [API Routes](#-api-routes)
+-   [Project Structure](#-project-structure)
+-   [Logging](#-logging)
+-   [Event Dispatching](#-event-dispatching)
+-   [Seeding](#-seeding)
+-   [GraphQL](#-graph-q-l)
+-   [Docker](#-docker)
+-   [Further Documentations](#-further-documentations)
+-   [Related Projects](#-related-projects)
+-   [License](#-license)
 
-# open .env and modify the environment variables (if needed)
-```
+![divider](./w3tec-divider.png)
 
-## Table of Contents
+## ❯ Getting Started
 
-- [Features](#features)
-- [Commands](#commands)
-- [Environment Variables](#environment-variables)
-- [Project Structure](#project-structure)
-- [API Documentation](#api-documentation)
-- [Error Handling](#error-handling)
-- [Validation](#validation)
-- [Authentication](#authentication)
-- [Authorization](#authorization)
-- [Logging](#logging)
-- [Custom Mongoose Plugins](#custom-mongoose-plugins)
-- [Linting](#linting)
-- [Contributing](#contributing)
+### Step 1: Set up the Development Environment
 
-## Features
+You need to set up your development environment before you can do anything.
 
-- **NoSQL database**: [MongoDB](https://www.mongodb.com) object data modeling using [Mongoose](https://mongoosejs.com)
-- **Authentication and authorization**: using [passport](http://www.passportjs.org)
-- **Validation**: request data validation using [Joi](https://github.com/hapijs/joi)
-- **Logging**: using [winston](https://github.com/winstonjs/winston) and [morgan](https://github.com/expressjs/morgan)
-- **Testing**: unit and integration tests using [Jest](https://jestjs.io)
-- **Error handling**: centralized error handling mechanism
-- **API documentation**: with [swagger-jsdoc](https://github.com/Surnet/swagger-jsdoc) and [swagger-ui-express](https://github.com/scottie1984/swagger-ui-express)
-- **Process management**: advanced production process management using [PM2](https://pm2.keymetrics.io)
-- **Dependency management**: with [Yarn](https://yarnpkg.com)
-- **Environment variables**: using [dotenv](https://github.com/motdotla/dotenv) and [cross-env](https://github.com/kentcdodds/cross-env#readme)
-- **Security**: set security HTTP headers using [helmet](https://helmetjs.github.io)
-- **Santizing**: sanitize request data against xss and query injection
-- **CORS**: Cross-Origin Resource-Sharing enabled using [cors](https://github.com/expressjs/cors)
-- **Compression**: gzip compression with [compression](https://github.com/expressjs/compression)
-- **CI**: continuous integration with [Travis CI](https://travis-ci.org)
-- **Docker support**
-- **Code coverage**: using [coveralls](https://coveralls.io)
-- **Code quality**: with [Codacy](https://www.codacy.com)
-- **Git hooks**: with [husky](https://github.com/typicode/husky) and [lint-staged](https://github.com/okonet/lint-staged)
-- **Linting**: with [ESLint](https://eslint.org) and [Prettier](https://prettier.io)
-- **Editor config**: consistent editor configuration using [EditorConfig](https://editorconfig.org)
+Install [Node.js and NPM](https://nodejs.org/en/download/)
 
-## Commands
+-   on OSX use [homebrew](http://brew.sh) `brew install node`
+-   on Windows use [chocolatey](https://chocolatey.org/) `choco install nodejs`
 
-Running locally:
-
-```bash
-yarn dev
-```
-
-Running in production:
-
-```bash
-yarn start
-```
-
-Testing:
+Install yarn globally
 
 ```bash
-# run all tests
-yarn test
-
-# run all tests in watch mode
-yarn test:watch
-
-# run test coverage
-yarn coverage
+yarn global add yarn
 ```
 
-Docker:
+Install a MySQL database.
+
+> If you work with a mac, we recommend to use homebrew for the installation.
+
+### Step 2: Create new Project
+
+Fork or download this project. Configure your package.json for your new project.
+
+Then copy the `.env.example` file and rename it to `.env`. In this file you have to add your database connection information.
+
+Create a new database with the name you have in your `.env`-file.
+
+Then setup your application environment.
 
 ```bash
-# run docker container in development mode
-yarn docker:dev
-
-# run docker container in production mode
-yarn docker:prod
-
-# run all tests in a docker container
-yarn docker:test
+yarn run setup
 ```
 
-Linting:
+> This installs all dependencies with yarn. After that it migrates the database and seeds some test data into it. So after that your development environment is ready to use.
+
+### Step 3: Serve your App
+
+Go to the project dir and start your app with this yarn script.
 
 ```bash
-# run ESLint
-yarn lint
-
-# fix ESLint errors
-yarn lint:fix
-
-# run prettier
-yarn prettier
-
-# fix prettier errors
-yarn prettier:fix
+yarn start serve
 ```
 
-## Environment Variables
+> This starts a local server using `nodemon`, which will watch for any file changes and will restart the server according to these changes.
+> The server address will be displayed to you as `http://0.0.0.0:3000`.
 
-The environment variables can be found and modified in the `.env` file. They come with these default values:
+![divider](./w3tec-divider.png)
 
-```bash
-# Port number
-PORT=3000
+## ❯ Scripts and Tasks
 
-# URL of the Mongo DB
-MONGODB_URL=mongodb://127.0.0.1:27017/node-boilerplate
+All script are defined in the `package-scripts.js` file, but the most important ones are listed here.
 
-# JWT
-# JWT secret key
-JWT_SECRET=thisisasamplesecret
-# Number of minutes after which an access token expires
-JWT_ACCESS_EXPIRATION_MINUTES=30
-# Number of days after which a refresh token expires
-JWT_REFRESH_EXPIRATION_DAYS=30
+### Install
 
-# SMTP configuration options for the email service
-# For testing, you can use a fake SMTP service like Ethereal: https://ethereal.email/create
-SMTP_HOST=email-server
-SMTP_PORT=587
-SMTP_USERNAME=email-server-username
-SMTP_PASSWORD=email-server-password
-EMAIL_FROM=support@yourapp.com
+-   Install all dependencies with `yarn install`
+
+### Linting
+
+-   Run code quality analysis using `yarn start lint`. This runs tslint.
+-   There is also a vscode task for this called `lint`.
+
+### Tests
+
+-   Run the unit tests using `yarn start test` (There is also a vscode task for this called `test`).
+-   Run the integration tests using `yarn start test.integration`.
+-   Run the e2e tests using `yarn start test.e2e`.
+
+### Running in dev mode
+
+-   Run `yarn start serve` to start nodemon with ts-node, to serve the app.
+-   The server address will be displayed to you as `http://0.0.0.0:3000`
+
+### Building the project and run it
+
+-   Run `yarn start build` to generated all JavaScript files from the TypeScript sources (There is also a vscode task for this called `build`).
+-   To start the builded app located in `dist` use `yarn start`.
+
+### Database Migration
+
+-   Run `typeorm migration:create -n <migration-file-name>` to create a new migration file.
+-   Try `typeorm -h` to see more useful cli commands like generating migration out of your models.
+-   To migrate your database run `yarn start db.migrate`.
+-   To revert your latest migration run `yarn start db.revert`.
+-   Drops the complete database schema `yarn start db.drop`.
+
+### Database Seeding
+
+-   Run `yarn start db.seed` to seed your seeds into the database.
+
+![divider](./w3tec-divider.png)
+
+## ❯ Debugger in VSCode
+
+To debug your code run `yarn start build` or hit <kbd>cmd</kbd> + <kbd>b</kbd> to build your app.
+Then, just set a breakpoint and hit <kbd>F5</kbd> in your Visual Studio Code.
+
+![divider](./w3tec-divider.png)
+
+## ❯ API Routes
+
+The route prefix is `/api` by default, but you can change this in the .env file.
+The swagger and the monitor route can be altered in the `.env` file.
+
+| Route          | Description                                                        |
+| -------------- | ------------------------------------------------------------------ |
+| **/api**       | Shows us the name, description and the version of the package.json |
+| **/graphql**   | Route to the graphql editor or your query/mutations requests       |
+| **/swagger**   | This is the Swagger UI with our API documentation                  |
+| **/monitor**   | Shows a small monitor page for the server                          |
+| **/api/users** | Example entity endpoint                                            |
+| **/api/pets**  | Example entity endpoint                                            |
+
+![divider](./w3tec-divider.png)
+
+## ❯ Project Structure
+
+| Name                              | Description                                                                                      |
+| --------------------------------- | ------------------------------------------------------------------------------------------------ |
+| **.vscode/**                      | VSCode tasks, launch configuration and some other settings                                       |
+| **dist/**                         | Compiled source files will be placed here                                                        |
+| **src/**                          | Source files                                                                                     |
+| **src/api/controllers/**          | REST API Controllers                                                                             |
+| **src/api/controllers/requests**  | Request classes with validation rules if the body is not equal with a model                      |
+| **src/api/controllers/responses** | Response classes or interfaces to type json response bodies                                      |
+| **src/api/errors/**               | Custom HttpErrors like 404 NotFound                                                              |
+| **src/api/interceptors/**         | Interceptors are used to change or replace the data returned to the client.                      |
+| **src/api/middlewares/**          | Express Middlewares like helmet security features                                                |
+| **src/api/models/**               | TypeORM Models                                                                                   |
+| **src/api/repositories/**         | Repository / DB layer                                                                            |
+| **src/api/services/**             | Service layer                                                                                    |
+| **src/api/subscribers/**          | Event subscribers                                                                                |
+| **src/api/validators/**           | Custom validators, which can be used in the request classes                                      |
+| **src/api/resolvers/**            | GraphQL resolvers (query, mutation & field-resolver)                                             |
+| **src/api/types/**                | GraphQL types ,input-types and scalar types                                                      |
+| **src/api/** schema.gql           | Generated GraphQL schema                                                                         |
+| **src/auth/**                     | Authentication checkers and services                                                             |
+| **src/core/**                     | The core features like logger and env variables                                                  |
+| **src/database/factories**        | Factory the generate fake entities                                                               |
+| **src/database/migrations**       | Database migration scripts                                                                       |
+| **src/database/seeds**            | Seeds to create some data in the database                                                        |
+| **src/decorators/**               | Custom decorators like @Logger & @EventDispatch                                                  |
+| **src/loaders/**                  | Loader is a place where you can configure your app                                               |
+| **src/public/**                   | Static assets (fonts, css, js, img).                                                             |
+| **src/types/** \*.d.ts            | Custom type definitions and files that aren't on DefinitelyTyped                                 |
+| **test**                          | Tests                                                                                            |
+| **test/e2e/** \*.test.ts          | End-2-End tests (like e2e)                                                                       |
+| **test/integration/** \*.test.ts  | Integration test with SQLite3                                                                    |
+| **test/unit/** \*.test.ts         | Unit tests                                                                                       |
+| .env.example                      | Environment configurations                                                                       |
+| .env.test                         | Test environment configurations                                                                  |
+| mydb.sql                          | SQLite database for integration tests. Ignored by git and only available after integration tests |
+
+![divider](./w3tec-divider.png)
+
+## ❯ Logging
+
+Our logger is [winston](https://github.com/winstonjs/winston). To log http request we use the express middleware [morgan](https://github.com/expressjs/morgan).
+We created a simple annotation to inject the logger in your service (see example below).
+
+```typescript
+import { Logger, LoggerInterface } from '../../decorators/Logger';
+
+@Service()
+export class UserService {
+
+    constructor(
+        @Logger(__filename) private log: LoggerInterface
+    ) { }
+
+    ...
 ```
 
-## Project Structure
+![divider](./w3tec-divider.png)
 
+## ❯ Event Dispatching
+
+We use this awesome repository [event-dispatch](https://github.com/pleerock/event-dispatch) for event dispatching.
+We created a simple annotation to inject the EventDispatcher in your service (see example below). All events are listed in the `events.ts` file.
+
+```typescript
+import { events } from '../subscribers/events';
+import { EventDispatcher, EventDispatcherInterface } from '../../decorators/EventDispatcher';
+
+@Service()
+export class UserService {
+
+    constructor(
+        @EventDispatcher() private eventDispatcher: EventDispatcherInterface
+    ) { }
+
+    public async create(user: User): Promise<User> {
+        ...
+        this.eventDispatcher.dispatch(events.user.created, newUser);
+        ...
+    }
 ```
-src\
- |--config\         # Environment variables and configuration related things
- |--controllers\    # Route controllers (controller layer)
- |--docs\           # Swagger files
- |--middlewares\    # Custom express middlewares
- |--models\         # Mongoose models (data layer)
- |--routes\         # Routes
- |--services\       # Business logic (service layer)
- |--utils\          # Utility classes and functions
- |--validations\    # Request data validation schemas
- |--app.js          # Express app
- |--index.js        # App entry point
-```
 
-## API Documentation
+![divider](./w3tec-divider.png)
 
-To view the list of available APIs and their specifications, run the server and go to `http://localhost:3000/v1/docs` in your browser. This documentation page is automatically generated using the [swagger](https://swagger.io/) definitions written as comments in the route files.
+## ❯ Seeding
 
-### API Endpoints
+Isn't it exhausting to create some sample data for your database, well this time is over!
 
-List of available routes:
+How does it work? Just create a factory for your entities (models) and a seed script.
 
-**Auth routes**:\
-`POST /v1/auth/register` - register\
-`POST /v1/auth/login` - login\
-`POST /v1/auth/refresh-tokens` - refresh auth tokens\
-`POST /v1/auth/forgot-password` - send reset password email\
-`POST /v1/auth/reset-password` - reset password\
-`POST /v1/auth/send-verification-email` - send verification email\
-`POST /v1/auth/verify-email` - verify email
+### 1. Create a factory for your entity
 
-**User routes**:\
-`POST /v1/users` - create a user\
-`GET /v1/users` - get all users\
-`GET /v1/users/:userId` - get user\
-`PATCH /v1/users/:userId` - update user\
-`DELETE /v1/users/:userId` - delete user
+For all entities we want to seed, we need to define a factory. To do so we give you the awesome [faker](https://github.com/marak/Faker.js/) library as a parameter into your factory. Then create your "fake" entity and return it. Those factory files should be in the `src/database/factories` folder and suffixed with `Factory` like `src/database/factories/UserFactory.ts`.
 
-## Error Handling
+Settings can be used to pass some static value into the factory.
 
-The app has a centralized error handling mechanism.
+```typescript
+define(User, (faker: typeof Faker, settings: { roles: string[] }) => {
+    const gender = faker.random.number(1);
+    const firstName = faker.name.firstName(gender);
+    const lastName = faker.name.lastName(gender);
+    const email = faker.internet.email(firstName, lastName);
 
-Controllers should try to catch the errors and forward them to the error handling middleware (by calling `next(error)`). For convenience, you can also wrap the controller inside the catchAsync utility wrapper, which forwards the error.
-
-```javascript
-const catchAsync = require('../utils/catchAsync');
-
-const controller = catchAsync(async (req, res) => {
-  // this error will be forwarded to the error handling middleware
-  throw new Error('Something wrong happened');
+    const user = new User();
+    user.firstName = firstName;
+    user.lastName = lastName;
+    user.email = email;
+    user.roles = settings.roles;
+    return user;
 });
 ```
 
-The error handling middleware sends an error response, which has the following format:
+Handle relation in the entity factory like this.
 
-```json
-{
-  "code": 404,
-  "message": "Not found"
+```typescript
+define(Pet, (faker: typeof Faker, settings: undefined) => {
+    const gender = faker.random.number(1);
+    const name = faker.name.firstName(gender);
+
+    const pet = new Pet();
+    pet.name = name;
+    pet.age = faker.random.number();
+    pet.user = factory(User)({ roles: ["admin"] });
+    return pet;
+});
+```
+
+### 2. Create a seed file
+
+The seeds files define how much and how the data are connected with each other. The files will be executed alphabetically.
+With the second function, accepting your settings defined in the factories, you are able to create different variations of entities.
+
+```typescript
+export class CreateUsers implements Seed {
+    public async seed(factory: Factory, connection: Connection): Promise<any> {
+        await factory(User)({ roles: [] }).createMany(10);
+    }
 }
 ```
 
-When running in development mode, the error response also contains the error stack.
+Here an example with nested factories. You can use the `.map()` function to alter
+the generated value before they get persisted.
 
-The app has a utility ApiError class to which you can attach a response code and a message, and then throw it from anywhere (catchAsync will catch it).
-
-For example, if you are trying to get a user from the DB who is not found, and you want to send a 404 error, the code should look something like:
-
-```javascript
-const httpStatus = require('http-status');
-const ApiError = require('../utils/ApiError');
-const User = require('../models/User');
-
-const getUser = async (userId) => {
-  const user = await User.findById(userId);
-  if (!user) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'User not found');
-  }
-};
+```typescript
+...
+await factory(User)()
+    .map(async (user: User) => {
+        const pets: Pet[] = await factory(Pet)().createMany(2);
+        const petIds = pets.map((pet: Pet) => pet.Id);
+        await user.pets().attach(petIds);
+    })
+    .createMany(5);
+...
 ```
 
-## Validation
+To deal with relations you can use the entity manager like this.
 
-Request data is validated using [Joi](https://joi.dev/). Check the [documentation](https://joi.dev/api/) for more details on how to write Joi validation schemas.
+```typescript
+export class CreatePets implements SeedsInterface {
+    public async seed(
+        factory: FactoryInterface,
+        connection: Connection
+    ): Promise<any> {
+        const connection = await factory.getConnection();
+        const em = connection.createEntityManager();
 
-The validation schemas are defined in the `src/validations` directory and are used in the routes by providing them as parameters to the `validate` middleware.
-
-```javascript
-const express = require('express');
-const validate = require('../../middlewares/validate');
-const userValidation = require('../../validations/user.validation');
-const userController = require('../../controllers/user.controller');
-
-const router = express.Router();
-
-router.post('/users', validate(userValidation.createUser), userController.createUser);
-```
-
-## Authentication
-
-To require authentication for certain routes, you can use the `auth` middleware.
-
-```javascript
-const express = require('express');
-const auth = require('../../middlewares/auth');
-const userController = require('../../controllers/user.controller');
-
-const router = express.Router();
-
-router.post('/users', auth(), userController.createUser);
-```
-
-These routes require a valid JWT access token in the Authorization request header using the Bearer schema. If the request does not contain a valid access token, an Unauthorized (401) error is thrown.
-
-**Generating Access Tokens**:
-
-An access token can be generated by making a successful call to the register (`POST /v1/auth/register`) or login (`POST /v1/auth/login`) endpoints. The response of these endpoints also contains refresh tokens (explained below).
-
-An access token is valid for 30 minutes. You can modify this expiration time by changing the `JWT_ACCESS_EXPIRATION_MINUTES` environment variable in the .env file.
-
-**Refreshing Access Tokens**:
-
-After the access token expires, a new access token can be generated, by making a call to the refresh token endpoint (`POST /v1/auth/refresh-tokens`) and sending along a valid refresh token in the request body. This call returns a new access token and a new refresh token.
-
-A refresh token is valid for 30 days. You can modify this expiration time by changing the `JWT_REFRESH_EXPIRATION_DAYS` environment variable in the .env file.
-
-## Authorization
-
-The `auth` middleware can also be used to require certain rights/permissions to access a route.
-
-```javascript
-const express = require('express');
-const auth = require('../../middlewares/auth');
-const userController = require('../../controllers/user.controller');
-
-const router = express.Router();
-
-router.post('/users', auth('manageUsers'), userController.createUser);
-```
-
-In the example above, an authenticated user can access this route only if that user has the `manageUsers` permission.
-
-The permissions are role-based. You can view the permissions/rights of each role in the `src/config/roles.js` file.
-
-If the user making the request does not have the required permissions to access this route, a Forbidden (403) error is thrown.
-
-## Logging
-
-Import the logger from `src/config/logger.js`. It is using the [Winston](https://github.com/winstonjs/winston) logging library.
-
-Logging should be done according to the following severity levels (ascending order from most important to least important):
-
-```javascript
-const logger = require('<path to src>/config/logger');
-
-logger.error('message'); // level 0
-logger.warn('message'); // level 1
-logger.info('message'); // level 2
-logger.http('message'); // level 3
-logger.verbose('message'); // level 4
-logger.debug('message'); // level 5
-```
-
-In development mode, log messages of all severity levels will be printed to the console.
-
-In production mode, only `info`, `warn`, and `error` logs will be printed to the console.\
-It is up to the server (or process manager) to actually read them from the console and store them in log files.\
-This app uses pm2 in production mode, which is already configured to store the logs in log files.
-
-Note: API request information (request url, response code, timestamp, etc.) are also automatically logged (using [morgan](https://github.com/expressjs/morgan)).
-
-## Custom Mongoose Plugins
-
-The app also contains 2 custom mongoose plugins that you can attach to any mongoose model schema. You can find the plugins in `src/models/plugins`.
-
-```javascript
-const mongoose = require('mongoose');
-const { toJSON, paginate } = require('./plugins');
-
-const userSchema = mongoose.Schema(
-  {
-    /* schema definition here */
-  },
-  { timestamps: true }
-);
-
-userSchema.plugin(toJSON);
-userSchema.plugin(paginate);
-
-const User = mongoose.model('User', userSchema);
-```
-
-### toJSON
-
-The toJSON plugin applies the following changes in the toJSON transform call:
-
-- removes \_\_v, createdAt, updatedAt, and any schema path that has private: true
-- replaces \_id with id
-
-### paginate
-
-The paginate plugin adds the `paginate` static method to the mongoose schema.
-
-Adding this plugin to the `User` model schema will allow you to do the following:
-
-```javascript
-const queryUsers = async (filter, options) => {
-  const users = await User.paginate(filter, options);
-  return users;
-};
-```
-
-The `filter` param is a regular mongo filter.
-
-The `options` param can have the following (optional) fields:
-
-```javascript
-const options = {
-  sortBy: 'name:desc', // sort order
-  limit: 5, // maximum results per page
-  page: 2, // page number
-};
-```
-
-The plugin also supports sorting by multiple criteria (separated by a comma): `sortBy: name:desc,role:asc`
-
-The `paginate` method returns a Promise, which fulfills with an object having the following properties:
-
-```json
-{
-  "results": [],
-  "page": 2,
-  "limit": 5,
-  "totalPages": 10,
-  "totalResults": 48
+        await times(10, async (n) => {
+            // This creates a pet in the database
+            const pet = await factory(Pet)().create();
+            // This only returns a entity with fake data
+            const user = await factory(User)({ roles: ["admin"] }).make();
+            user.pets = [pet];
+            await em.save(user);
+        });
+    }
 }
 ```
 
-## Linting
+### 3. Run the seeder
 
-Linting is done using [ESLint](https://eslint.org/) and [Prettier](https://prettier.io).
+The last step is the easiest, just hit the following command in your terminal, but be sure you are in the projects root folder.
 
-In this app, ESLint is configured to follow the [Airbnb JavaScript style guide](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb-base) with some modifications. It also extends [eslint-config-prettier](https://github.com/prettier/eslint-config-prettier) to turn off all rules that are unnecessary or might conflict with Prettier.
+```bash
+yarn start db.seed
+```
 
-To modify the ESLint configuration, update the `.eslintrc.json` file. To modify the Prettier configuration, update the `.prettierrc.json` file.
+#### CLI Interface
 
-To prevent a certain file or directory from being linted, add it to `.eslintignore` and `.prettierignore`.
+| Command                                             | Description                                                         |
+| --------------------------------------------------- | ------------------------------------------------------------------- |
+| `yarn start "db.seed"`                              | Run all seeds                                                       |
+| `yarn start "db.seed --run CreateBruce,CreatePets"` | Run specific seeds (file names without extension)                   |
+| `yarn start "db.seed -L"`                           | Log database queries to the terminal                                |
+| `yarn start "db.seed --factories <path>"`           | Add a different path to your factories (Default: `src/database/`)   |
+| `yarn start "db.seed --seeds <path>"`               | Add a different path to your seeds (Default: `src/database/seeds/`) |
 
-To maintain a consistent coding style across different IDEs, the project contains `.editorconfig`
+![divider](./w3tec-divider.png)
 
-## Contributing
+## ❯ GraphQL
 
-Contributions are more than welcome! Please check out the [contributing guide](CONTRIBUTING.md).
+For the GraphQL part we used the library [TypeGraphQL](https://19majkel94.github.io/type-graphql/) to build awesome GraphQL API's.
 
-## Inspirations
+The context(shown below) of the GraphQL is builded in the **graphqlLoader.ts** file. Inside of this loader we create a scoped container for each incoming request.
 
-- [danielfsousa/express-rest-es2017-boilerplate](https://github.com/danielfsousa/express-rest-es2017-boilerplate)
-- [madhums/node-express-mongoose](https://github.com/madhums/node-express-mongoose)
-- [kunalkapadia/express-mongoose-es6-rest-api](https://github.com/kunalkapadia/express-mongoose-es6-rest-api)
+```typescript
+export interface Context {
+    requestId: number;
+    request: express.Request;
+    response: express.Response;
+    container: ContainerInstance;
+}
+```
 
-## License
+### DataLoader
 
-[MIT](LICENSE)
+For the usage of the DataLoaders we created a annotation, which automatically creates and registers a new DataLoader to the scoped container.
+
+Here is an example of the **PetResolver**.
+
+```typescript
+import DataLoader from 'dataloader';
+import { DLoader } from '../../decorators/DLoader';
+    ...
+    constructor(
+        private petService: PetService,
+        @Logger(__filename) private log: LoggerInterface,
+        @DLoader(UserModel) private userLoader: DataLoader<string, UserModel>
+    ) { }
+    ...
+```
+
+Or you could use the repository too.
+
+```typescript
+@DLoader(UserRepository) private userLoader: DataLoader<string, UserModel>
+```
+
+Or even use a custom method of your given repository.
+
+```typescript
+@DLoader(PetRepository, {
+    method: 'findByUserIds',
+    key: 'userId',
+    multiple: true,
+}) private petLoader: DataLoader<string, PetModel>
+```
+
+## ❯ Docker
+
+### Install Docker
+
+Before you start, make sure you have a recent version of [Docker](https://docs.docker.com/engine/installation/) installed
+
+### Build Docker image
+
+```shell
+docker build -t <your-image-name> .
+```
+
+### Run Docker image in container and map port
+
+The port which runs your application inside Docker container is either configured as `PORT` property in your `.env` configuration file or passed to Docker container via environment variable `PORT`. Default port is `3000`.
+
+#### Run image in detached mode
+
+```shell
+docker run -d -p <port-on-host>:<port-inside-docker-container> <your-image-name>
+```
+
+#### Run image in foreground mode
+
+```shell
+docker run -i -t -p <port-on-host>:<port-inside-docker-container> <your-image-name>
+```
+
+### Stop Docker container
+
+#### Detached mode
+
+```shell
+docker stop <container-id>
+```
+
+You can get a list of all running Docker container and its ids by following command
+
+```shell
+docker images
+```
+
+#### Foreground mode
+
+Go to console and press <CTRL> + C at any time.
+
+### Docker environment variables
+
+There are several options to configure your app inside a Docker container
+
+#### project .env file
+
+You can use `.env` file in project root folder which will be copied inside Docker image. If you want to change a property inside `.env` you have to rebuild your Docker image.
+
+#### run options
+
+You can also change app configuration by passing environment variables via `docker run` option `-e` or `--env`.
+
+```shell
+docker run --env DB_HOST=localhost -e DB_PORT=3306
+```
+
+#### environment file
+
+Last but not least you can pass a config file to `docker run`.
+
+```shell
+docker run --env-file ./env.list
+```
+
+`env.list` example:
+
+```
+# this is a comment
+DB_TYPE=mysql
+DB_HOST=localhost
+DB_PORT=3306
+```
+
+![divider](./w3tec-divider.png)
+
+## ❯ Further Documentations
+
+| Name & Link                                                                                | Description                                                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Express](https://expressjs.com/)                                                          | Express is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications.                                                                    |
+| [Microframework](https://github.com/pleerock/microframework)                               | Microframework is a simple tool that allows you to execute your modules in a proper order, helping you to organize bootstrap code in your application.                                                         |
+| [TypeDI](https://github.com/pleerock/typedi)                                               | Dependency Injection for TypeScript.                                                                                                                                                                           |
+| [routing-controllers](https://github.com/pleerock/routing-controllers)                     | Create structured, declarative and beautifully organized class-based controllers with heavy decorators usage in Express / Koa using TypeScript and Routing Controllers Framework.                              |
+| [TypeORM](http://typeorm.io/#/)                                                            | TypeORM is highly influenced by other ORMs, such as Hibernate, Doctrine and Entity Framework.                                                                                                                  |
+| [class-validator](https://github.com/pleerock/class-validator)                             | Validation made easy using TypeScript decorators.                                                                                                                                                              |
+| [class-transformer](https://github.com/pleerock/class-transformer)                         | Proper decorator-based transformation / serialization / deserialization of plain javascript objects to class constructors                                                                                      |
+|  [event-dispatcher](https://github.com/pleerock/event-dispatch)                            | Dispatching and listening for application events in Typescript                                                                                                                                                 |
+|  [Helmet](https://helmetjs.github.io/)                                                     | Helmet helps you secure your Express apps by setting various HTTP headers. It’s not a silver bullet, but it can help!                                                                                          |
+|  [Auth0 API Documentation](https://auth0.com/docs/api/management/v2)                       | Authentification service                                                                                                                                                                                       |
+|  [Jest](http://facebook.github.io/jest/)                                                   | Delightful JavaScript Testing Library for unit and e2e tests                                                                                                                                                   |
+|  [supertest](https://github.com/visionmedia/supertest)                                     | Super-agent driven library for testing node.js HTTP servers using a fluent API                                                                                                                                 |
+|  [nock](https://github.com/node-nock/nock)                                                 | HTTP mocking and expectations library                                                                                                                                                                          |
+| [swagger Documentation](http://swagger.io/)                                                |  API Tool to describe and document your api.                                                                                                                                                                   |
+| [SQLite Documentation](https://www.sitepoint.com/getting-started-sqlite3-basic-commands/)  | Getting Started with SQLite3 – Basic Commands.                                                                                                                                                                 |
+| [GraphQL Documentation](http://graphql.org/graphql-js/)                                    | A query language for your API.                                                                                                                                                                                 |
+| [DataLoader Documentation](https://github.com/facebook/dataloader)                         | DataLoader is a generic utility to be used as part of your application's data fetching layer to provide a consistent API over various backends and reduce requests to those backends via batching and caching. |
+
+![divider](./w3tec-divider.png)
+
+## ❯ Related Projects
+
+-   [Microsoft/TypeScript-Node-Starter](https://github.com/Microsoft/TypeScript-Node-Starter) - A starter template for TypeScript and Node with a detailed README describing how to use the two together.
+-   [express-graphql-typescript-boilerplate](https://github.com/w3tecch/express-graphql-typescript-boilerplate) - A starter kit for building amazing GraphQL API's with TypeScript and express by @w3tecch
+-   [aurelia-typescript-boilerplate](https://github.com/w3tecch/aurelia-typescript-boilerplate) - An Aurelia starter kit with TypeScript
+-   [Auth0 Mock Server](https://github.com/hirsch88/auth0-mock-server) - Useful for e2e testing or faking an oAuth server
+
+![divider](./w3tec-divider.png)
+
+## ❯ License
+
+[MIT](/LICENSE)

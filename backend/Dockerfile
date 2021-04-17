@@ -1,15 +1,16 @@
 FROM node:alpine
 
-RUN mkdir -p /usr/src/node-app && chown -R node:node /usr/src/node-app
+# Create work directory
+WORKDIR /usr/src/app
 
-WORKDIR /usr/src/node-app
+# Install runtime dependencies
+RUN npm install yarn -g
 
-COPY package.json yarn.lock ./
+# Copy app source to work directory
+COPY . /usr/src/app
 
-USER node
+# Install app dependencies
+RUN yarn install
 
-RUN yarn install --pure-lockfile
-
-COPY --chown=node:node . .
-
-EXPOSE 3000
+# Build and run the app
+CMD npm start serve

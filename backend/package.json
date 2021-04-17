@@ -7,6 +7,7 @@
   "repository": "https://github.com/hagopj13/node-express-boilerplate.git",
   "author": "Hagop Jamkojian <hagopj13@gmail.com>",
   "license": "MIT",
+  "type": "commonjs",
   "engines": {
     "node": ">=12.0.0"
   },

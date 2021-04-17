@@ -76,4 +76,6 @@ yarn genarate <component/ folder>
 ```
 ---
 
+#### CAPSTONE 1 DUY TAN UNIVERSITY
+
 

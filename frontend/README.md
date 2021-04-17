@@ -69,6 +69,11 @@ Remove the example app to start your project!
 yarn cleanAndSetup
 ```
 
+Create  componet cli or code
+
+```shell
+yarn genarate <component/ folder>
+```
 ---
 
 

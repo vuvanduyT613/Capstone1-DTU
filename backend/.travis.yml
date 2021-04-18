@@ -1,14 +1,20 @@
 language: node_js
 node_js:
-  - "8.9.4"
-install:
-  - yarn install
+  - '12'
+services:
+  - mongodb
+cache: yarn
+branches:
+  only:
+    - master
 env:
-  - DB_TYPE="sqlite" DB_DATABASE="./mydb.sql" DB_LOGGING=false
+  global:
+    - PORT=3000
+    - MONGODB_URL=mongodb://localhost:27017/node-boilerplate
+    - JWT_SECRET=thisisasamplesecret
+    - JWT_ACCESS_EXPIRATION_MINUTES=30
+    - JWT_REFRESH_EXPIRATION_DAYS=30
 script:
-  - npm start test
-  - npm start test.integration
-  - npm start test.e2e
-  - npm start build
-notifications:
-  email: false
+  - yarn lint
+  - yarn test
+after_success: yarn coverage:coveralls

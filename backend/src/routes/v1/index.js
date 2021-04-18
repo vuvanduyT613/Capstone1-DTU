@@ -12,7 +12,7 @@ const defaultRoutes = [
     route: authRoute,
   },
   {
-    path: '/client',
+    path: '/user',
     route: userRoute,
   },
 ];

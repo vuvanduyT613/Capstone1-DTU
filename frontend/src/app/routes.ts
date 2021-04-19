@@ -10,7 +10,7 @@ const routes = [
   },
   {
     path: '/admin',
-    exact: true,
+    exact: false,
     main: () => Admin,
   },
   {

@@ -6,9 +6,9 @@
 import * as React from 'react';
 import styled from 'styled-components/macro';
 import { useTranslation } from 'react-i18next';
-import { Navbar } from './components/Navbar';
-
-import { messages } from './messages';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import './assets/styles/tailwind.css';
+import Adminlayout from './layouts/Admin';
 
 interface Props {}
 
@@ -18,14 +18,9 @@ export function Admin(props: Props) {
 
   return (
     <Div>
-      <Navbar />
+      <Adminlayout />
     </Div>
   );
 }
 
-const Div = styled.div`
-  padding: 0px;
-  margin: 0px;
-  width: 100vw;
-  height: 100vh;
-`;
+const Div = styled.div``;

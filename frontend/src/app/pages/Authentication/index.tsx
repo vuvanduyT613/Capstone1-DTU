@@ -4,7 +4,7 @@
  *
  */
 import * as React from 'react';
-import styled from 'styled-components/macro';
+// import styled from 'styled-components/macro';
 import { useTranslation } from 'react-i18next';
 import Images from '../../asset/image';
 import { useSelector } from 'react-redux';
@@ -37,7 +37,11 @@ export function Authentication(props: Props) {
         direction="column"
       >
         <Grid container alignItems="center" direction="column">
-          <img src={Images.logo.default} className={classes.logo} />
+          <img
+            alt={'img1'}
+            src={Images.logo.default}
+            className={classes.logo}
+          />
           <div className={classes.title}>
             {isLoginForm
               ? 'Đăng nhập với'
@@ -84,5 +88,3 @@ export function Authentication(props: Props) {
     </Grid>
   );
 }
-
-const Div = styled.div``;

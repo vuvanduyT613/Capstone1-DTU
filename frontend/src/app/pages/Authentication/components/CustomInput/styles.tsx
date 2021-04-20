@@ -1,5 +1,5 @@
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import Images from '../../../../asset/image';
+//import Images from '../../../../asset/image';
 import { color } from '../../../../asset/constant/color';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

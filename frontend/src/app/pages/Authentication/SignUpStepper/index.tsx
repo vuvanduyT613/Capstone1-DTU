@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import CustomInput from '../components/CustomInput';
 import Images from '../../../asset/image';
 import ReactCodeInput from 'react-verification-code-input';
@@ -6,16 +6,16 @@ import ReactCodeInput from 'react-verification-code-input';
 // import { Grid, Typography, Dialog, IconButton } from '@material-ui/core';
 import useStyles from './styles';
 import { rootState } from 'store/reducers';
-import { Grid, Typography, Dialog, IconButton, Box } from '@material-ui/core';
-import { useDispatch, connect, useSelector } from 'react-redux';
-import { UPDATE_FIELD_SIGN_UP } from 'store/reducers/Authetication/actionTypes';
+import { Box } from '@material-ui/core';
+import { useDispatch, /*connect,*/ useSelector } from 'react-redux';
+//import { UPDATE_FIELD_SIGN_UP } from 'store/reducers/Authetication/actionTypes';
 // import CustomInput from '../components/CustomInput'
 
 // export interface loginFormInterface {
 //   handleTosignUp: Function
 // }
 const SignUpStepper = () => {
-  const { email, phoneNumber, step } = useSelector(
+  const { /*email, phoneNumber,*/ step } = useSelector(
     (state: rootState) => state.authenReducer.signUp,
   );
   const dispatch = useDispatch();
@@ -150,15 +150,24 @@ const SignUpStepper = () => {
               {dataSignUp.frontCard ? (
                 <div className={classes.wrapperImageCard}>
                   <img
+                    alt={'img1'}
                     src={Images.icDel.default}
                     className={classes.icDel}
                     onClick={handleDelFrontCard}
                   />
-                  <img src={dataSignUp.frontCard} className={classes.imgCard} />
+                  <img
+                    alt={'img1'}
+                    src={dataSignUp.frontCard}
+                    className={classes.imgCard}
+                  />
                 </div>
               ) : (
                 <div className={classes.cardEmpty}>
-                  <img width="18px" src={Images.icUpload.default} />
+                  <img
+                    alt={'img1'}
+                    width="18px"
+                    src={Images.icUpload.default}
+                  />
                   <div className={classes.textUploadCard}>Mặt trước CMND</div>
                 </div>
               )}
@@ -171,15 +180,24 @@ const SignUpStepper = () => {
               {dataSignUp.backCard ? (
                 <div className={classes.wrapperImageCard}>
                   <img
+                    alt={'img1'}
                     src={Images.icDel.default}
                     className={classes.icDel}
                     onClick={handleDelBackCard}
                   />
-                  <img src={dataSignUp.backCard} className={classes.imgCard} />
+                  <img
+                    alt={'img1'}
+                    src={dataSignUp.backCard}
+                    className={classes.imgCard}
+                  />
                 </div>
               ) : (
                 <div className={classes.cardEmpty}>
-                  <img width="18px" src={Images.icUpload.default} />
+                  <img
+                    alt={'img1'}
+                    width="18px"
+                    src={Images.icUpload.default}
+                  />
                   <div className={classes.textUploadCard}>Mặt sau CMND</div>
                 </div>
               )}
@@ -215,7 +233,11 @@ const SignUpStepper = () => {
           />
           {dataSignUp.avatar ? (
             <>
-              <img src={dataSignUp.avatar} className={classes.avatar} />
+              <img
+                alt={'img1'}
+                src={dataSignUp.avatar}
+                className={classes.avatar}
+              />
               <div onClick={handleChooseAvatar} className={classes.changeImage}>
                 Thay đổi ảnh
               </div>
@@ -225,7 +247,7 @@ const SignUpStepper = () => {
               className={classes.areaUploadAvatar}
               onClick={handleChooseAvatar}
             >
-              <img src={Images.iconAdd.default} />
+              <img alt={'img1'} src={Images.iconAdd.default} />
             </div>
           )}
         </>
@@ -246,4 +268,5 @@ const SignUpStepper = () => {
     </div>
   );
 };
+
 export default SignUpStepper;

@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import Images from '../../../../asset/image';
-import { useSelector } from 'react-redux';
-import { Grid, TextField, InputAdornment } from '@material-ui/core';
+import React /* useEffect, useState */ from 'react';
+// import Images from '../../../../asset/image';
+// import { useSelector } from 'react-redux';
+import { /*Grid,*/ TextField, InputAdornment } from '@material-ui/core';
 import useStyles from './styles';
-import { rootState } from 'store/reducers';
-import classes from '*.module.css';
+//import { rootState } from 'store/reducers';
+//import classes from '*.module.css';
 
 interface customInputProps {
   typeInput?: string;
@@ -30,12 +30,13 @@ const CustomInput = (props: customInputProps) => {
       InputProps={{
         startAdornment: iconLeft ? (
           <InputAdornment position="start">
-            <img src={iconLeft} />
+            <img alt={'img1'} src={iconLeft} />
           </InputAdornment>
         ) : undefined,
         endAdornment: iconRight ? (
           <InputAdornment position="end">
             <img
+              alt={'img1'}
               className={classes.righticon}
               onClick={() => {
                 handleClickRightIcon && handleClickRightIcon();

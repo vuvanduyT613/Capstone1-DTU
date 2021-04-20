@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import CustomInput from '../components/CustomInput';
 import Images from '../../../asset/image';
 import useStyles from './styles';
@@ -6,8 +6,8 @@ import useStyles from './styles';
 // import { useSelector } from 'react-redux'
 // import { Grid, Typography, Dialog, IconButton } from '@material-ui/core';
 // import { rootState } from 'store/reducers';
-import { Grid, Typography, Dialog, IconButton } from '@material-ui/core';
-import { useDispatch, connect, useSelector } from 'react-redux';
+import { Grid } from '@material-ui/core';
+//import { useDispatch } from 'react-redux';
 //import { UPDATE_FIELD_SIGN_UP } from 'store/reducers/Authetication/actionTypes';
 
 export interface loginFormInterface {
@@ -16,7 +16,7 @@ export interface loginFormInterface {
 
 const LoginForm = (props: loginFormInterface) => {
   const { handleTosignUp } = props;
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   // const classes= useStyles()
   // const [isLoginForm, setIsLoginForm] = useState(true)
   // const {signUp} =useSelector( (state:rootState) =>state.authenReducer)

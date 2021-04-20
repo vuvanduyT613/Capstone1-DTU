@@ -23,7 +23,7 @@ const LoginForm = (props: loginFormInterface) => {
   const classes = useStyles();
   const [showPass, setShowPass] = useState(false);
   return (
-    <div>
+    <>
       <CustomInput
         typeInput="email"
         placeholder="Email"
@@ -36,23 +36,23 @@ const LoginForm = (props: loginFormInterface) => {
         iconRight={Images.iconOpenPass.default}
         handleClickRightIcon={() => setShowPass(!showPass)}
       />
-      <div className={classes.forgotPass}> Quên mật khẩu? </div>
+      <div className={classes.forgotPass}> Forgot password? </div>
       <Grid container spacing={3}>
         <Grid container item xs={12} sm={6}>
           <button
             className={classes.btnCreate}
             onClick={() => handleTosignUp()}
           >
-            Tạo tài khoản
+            Sign up
           </button>
         </Grid>
         <Grid container item xs={12} sm={6}>
           <button className={classes.btnLogin} onClick={() => alert('Login')}>
-            Đăng nhập
+            Sign in
           </button>
         </Grid>
       </Grid>
-    </div>
+    </>
   );
 };
 

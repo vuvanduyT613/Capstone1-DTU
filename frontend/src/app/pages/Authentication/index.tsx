@@ -44,17 +44,17 @@ export function Authentication(props: Props) {
           />
           <div className={classes.title}>
             {isLoginForm
-              ? 'Đăng nhập với'
+              ? 'Sign in'
               : signUp.step === 1
-              ? 'Hãy bắt đầu với số điện thoại của bạn'
+              ? "Let's start with your phone number"
               : signUp.step === 2
-              ? 'Nhập mã xác minh số được gửi đến bạn'
+              ? 'Enter the verification code number sent to you'
               : signUp.step === 3
-              ? 'Cho chúng tôi biết các thông tin về bạn'
+              ? 'Let us know about you'
               : signUp.step === 4
-              ? 'Bây giờ hãy đặt mật khẩu của bạn'
+              ? 'Now set your password'
               : signUp.step === 5
-              ? 'Thêm hình ảnh đại diện của bạn'
+              ? 'Add your profile picture'
               : ''}
           </div>
         </Grid>
@@ -79,10 +79,10 @@ export function Authentication(props: Props) {
         className={classes.welcome}
         direction="column"
       >
-        <div className={classes.welcomeTitle}>Chào mừng bạn</div>
-        <div className={classes.welcomeTitle}>đến với Medical Schedule</div>
+        <div className={classes.welcomeTitle}>Welcome</div>
+        <div className={classes.welcomeTitle}>to Medical Schedule</div>
         <div className={classes.welcomeDescription}>
-          Nền tảng y tế chăm sóc sức khỏe toàn diện
+          Comprehensive healthcare medical platform.
         </div>
       </Grid>
     </Grid>

@@ -118,7 +118,7 @@ const SignUpStepper = () => {
             fields={4}
           />
           <div className={classes.sentCode}>
-            Gửi lại mã trong <span className={classes.time}>03:28</span>
+            Resend code in <span className={classes.time}>03:28</span>
           </div>
         </>
       ) : step === 3 ? (
@@ -168,7 +168,7 @@ const SignUpStepper = () => {
                     width="18px"
                     src={Images.icUpload.default}
                   />
-                  <div className={classes.textUploadCard}>Mặt trước CMND</div>
+                  <div className={classes.textUploadCard}>ID card front</div>
                 </div>
               )}
             </div>
@@ -198,7 +198,7 @@ const SignUpStepper = () => {
                     width="18px"
                     src={Images.icUpload.default}
                   />
-                  <div className={classes.textUploadCard}>Mặt sau CMND</div>
+                  <div className={classes.textUploadCard}>ID card back</div>
                 </div>
               )}
             </div>
@@ -208,14 +208,14 @@ const SignUpStepper = () => {
         <>
           <CustomInput
             typeInput={showPass ? 'text' : 'password'}
-            placeholder="Mật khẩu"
+            placeholder="Password"
             iconLeft={Images.iconPass.default}
             iconRight={Images.iconOpenPass.default}
             handleClickRightIcon={() => setShowPass(!showPass)}
           />
           <CustomInput
             typeInput={showPassConfirm ? 'text' : 'password'}
-            placeholder="Xác nhận mật khẩu"
+            placeholder="Confirm password"
             iconLeft={Images.iconPass.default}
             iconRight={Images.iconOpenPass.default}
             handleClickRightIcon={() => setShowPassConfirm(!showPassConfirm)}
@@ -255,12 +255,12 @@ const SignUpStepper = () => {
         <> </>
       )}
       <button className={classes.continueBtn} onClick={() => handleStep(1)}>
-        {step < 5 ? 'Tiếp theo' : 'Tạo tài khoản'}
-        <div className={classes.step}>Bước {step}/5</div>
+        {step < 5 ? 'Next' : 'Sign up'}
+        <div className={classes.step}>Step {step}/5</div>
       </button>
       {step !== 1 ? (
         <button className={classes.prevBtn} onClick={() => handleStep(-1)}>
-          Quay lại
+          Back to
         </button>
       ) : (
         ''

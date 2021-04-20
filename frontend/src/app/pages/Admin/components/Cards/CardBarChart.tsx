@@ -1,9 +1,9 @@
 import React from 'react';
-import * as Chart from 'chart.js';
+//import * as Chart from 'chart.js';
 
 export default function CardBarChart() {
   React.useEffect(() => {
-    let config = {
+    /* let config = {
       type: 'bar',
       data: {
         labels: [
@@ -94,7 +94,7 @@ export default function CardBarChart() {
           ],
         },
       },
-    };
+    };*/
   }, []);
   return (
     <>

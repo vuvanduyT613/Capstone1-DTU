@@ -8,6 +8,7 @@ import styled from 'styled-components/macro';
 import { useTranslation } from 'react-i18next';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import './assets/styles/tailwind.css';
+//@ts-ignore
 import Adminlayout from './layouts/Admin';
 
 interface Props {}

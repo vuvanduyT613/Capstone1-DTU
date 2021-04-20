@@ -1,6 +1,7 @@
 import { HomePage } from './pages/HomePage/Loadable';
 import { Admin } from './pages/Admin/Loadable';
 import { NotFoundPage } from './pages/NotFoundPage/Loadable';
+import { Authentication } from './pages/Authentication/Loadable';
 
 const routes = [
   {
@@ -12,6 +13,11 @@ const routes = [
     path: '/admin',
     exact: false,
     main: () => Admin,
+  },
+  {
+    path: '/auth',
+    exact: false,
+    main: () => Authentication,
   },
   {
     path: '*',

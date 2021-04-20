@@ -7,12 +7,12 @@ module.exports = {
     content: [
       './public/**/*.html',
       './public/*.html',
-      './src/**/*.js',
-      './src/*.js',
+      './src/**/*.ts',
+      './src/*.ts',
       './src/**/*.html',
       './src/*.html',
-      './public/**/*.js',
-      './public/*.js',
+      './public/**/*.ts',
+      './public/*.ts',
     ],
     options: {
       safelist: [],

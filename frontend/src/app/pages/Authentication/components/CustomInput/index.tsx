@@ -10,7 +10,9 @@ interface customInputProps {
   typeInput?: string;
   iconLeft?: any;
   iconRight?: any;
+  name?: string;
   handleClickRightIcon?: Function;
+  handlerChange?: Function;
   placeholder?: string;
 }
 
@@ -19,12 +21,15 @@ const CustomInput = (props: customInputProps) => {
     typeInput = 'text',
     iconLeft = undefined,
     iconRight = undefined,
+    name = 'text',
     handleClickRightIcon = undefined,
+    handlerChange = undefined,
     placeholder = '',
   } = props;
   const classes = useStyles();
   return (
     <TextField
+      name={name}
       classes={{ root: classes.inputCustom }}
       variant="outlined"
       InputProps={{
@@ -47,6 +52,7 @@ const CustomInput = (props: customInputProps) => {
         ) : undefined,
       }}
       placeholder={placeholder}
+      onChange={e => handlerChange && handlerChange(e)}
       type={typeInput}
     />
   );

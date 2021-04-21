@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 export class ResponseError extends Error {
   public response: Response;
 
@@ -40,15 +42,22 @@ function checkStatus(response: Response) {
  * Requests a URL, returning a promise
  *
  * @param  {string} url       The URL we want to request
- * @param  {object} [options] The options we want to pass to "fetch"
  *
  * @return {object}           The response data
  */
-export async function request(
+export async function requestGet(
   url: string,
-  options?: RequestInit,
 ): Promise<{} | { err: ResponseError }> {
-  const fetchResponse = await fetch(url, options);
-  const response = checkStatus(fetchResponse);
+  const fetchResponse = await axios.get(url);
+  const response = checkStatus(fetchResponse.data);
+  return parseJSON(response);
+}
+
+export async function requestPost(
+  url: string,
+  data?: Object,
+): Promise<{} | { err: ResponseError }> {
+  const fetchResponse = await axios.post(url, data);
+  const response = checkStatus(fetchResponse.data);
   return parseJSON(response);
 }

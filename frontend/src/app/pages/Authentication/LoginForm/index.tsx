@@ -2,37 +2,37 @@ import React, { useState } from 'react';
 import CustomInput from '../components/CustomInput';
 import Images from '../../../asset/image';
 import useStyles from './styles';
-
-import { useSelector, useDispatch } from 'react-redux';
-// import { Grid, Typography, Dialog, IconButton } from '@material-ui/core';
-import { rootState } from 'store/reducers';
 import { Grid } from '@material-ui/core';
-import { UPDATE_FIELD_SIGN_IN } from 'store/reducers/Authetication/actionTypes';
-
+import { requestPostLogin } from 'utils/request';
+import { Redirect } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 export interface loginFormInterface {
   handleTosignUp: Function;
 }
 
 const LoginForm = (props: loginFormInterface) => {
   const { handleTosignUp } = props;
-  const dispatch = useDispatch();
+  const classes = useStyles();
   const [isLoginForm, setIsLoginForm] = useState({
     email: '',
     password: '',
   });
-  const { email, password } = useSelector(
-    (state: rootState) => state.authenReducer.signUp,
-  );
-  const classes = useStyles();
+  const [role, setRole] = useState('');
+  const [cookies, setCookies] = useCookies(['JWT']);
   const [showPass, setShowPass] = useState(false);
-  const signIn = e => {
-    dispatch({
-      type: UPDATE_FIELD_SIGN_IN,
-      payload: {
-        email: isLoginForm.email,
-        password: isLoginForm.password,
-      },
-    });
+  const signIn = async () => {
+    //@ts-ignore
+    const { data } = await requestPostLogin(
+      `${process.env.REACT_APP_API_ENDPOINT}/auth/login`,
+      isLoginForm,
+    );
+
+    let expires = new Date();
+    //@ts-ignore
+    setCookies('access_token', data.tokens.access.token);
+    setCookies('access_refresh', data.tokens.refresh.token);
+    //@ts-ignore
+    setRole(data.user.role);
   };
 
   const handlerChange = e => {
@@ -43,9 +43,15 @@ const LoginForm = (props: loginFormInterface) => {
     });
   };
 
-  console.log(isLoginForm);
   return (
     <>
+      {role === 'admin' ? (
+        <Redirect to="/admin" />
+      ) : role === 'user' ? (
+        <Redirect to="/admin" />
+      ) : (
+        <></>
+      )}
       <CustomInput
         typeInput="email"
         name="email"

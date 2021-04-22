@@ -5,6 +5,8 @@
  */
 import * as React from 'react';
 import styled from 'styled-components/macro';
+import Cookies from 'js-cookie';
+import { Redirect } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import './assets/styles/tailwind.css';
@@ -18,10 +20,6 @@ export function Admin(props: Props) {
   const { t, i18n } = useTranslation();
 
   return (
-    <Div>
-      <Adminlayout />
-    </Div>
+    <>{Cookies.get('access_token') ? <Adminlayout /> : <Redirect to="/" />}</>
   );
 }
-
-const Div = styled.div``;

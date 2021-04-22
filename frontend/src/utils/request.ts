@@ -1,5 +1,6 @@
+import { combineReducers } from '@reduxjs/toolkit';
 import axios from 'axios';
-
+import { useHistory } from 'react-router-dom';
 export class ResponseError extends Error {
   public response: Response;
 
@@ -19,6 +20,7 @@ function parseJSON(response: Response) {
   if (response.status === 204 || response.status === 205) {
     return null;
   }
+  console.log(response);
   return response.json();
 }
 
@@ -45,7 +47,7 @@ function checkStatus(response: Response) {
  *
  * @return {object}           The response data
  */
-export async function requestGet(
+export async function request(
   url: string,
 ): Promise<{} | { err: ResponseError }> {
   const fetchResponse = await axios.get(url);
@@ -53,11 +55,12 @@ export async function requestGet(
   return parseJSON(response);
 }
 
-export async function requestPost(
+export async function requestPostLogin(
   url: string,
   data?: Object,
 ): Promise<{} | { err: ResponseError }> {
   const fetchResponse = await axios.post(url, data);
-  const response = checkStatus(fetchResponse.data);
-  return parseJSON(response);
+  //@ts-ignore
+  const response = await checkStatus(fetchResponse);
+  return response;
 }

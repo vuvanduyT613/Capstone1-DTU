@@ -18,6 +18,7 @@ const SignUpStepper = () => {
   const { /*email, phoneNumber,*/ step } = useSelector(
     (state: rootState) => state.authenReducer.signUp,
   );
+
   const dispatch = useDispatch();
   const refToFrontCard = useRef<HTMLInputElement>(null);
   const refToBackCard = useRef<HTMLInputElement>(null);
@@ -106,10 +107,19 @@ const SignUpStepper = () => {
     }
     e.stopPropagation();
   };
+
+  const handlerChangeNumber = e => {
+    console.log(e.target.value);
+  };
+
   return (
     <div className={classes.wrapperSignUp}>
       {step === 1 ? (
-        <CustomInput typeInput="number" iconLeft={Images.icPhone.default} />
+        <CustomInput
+          typeInput="number"
+          iconLeft={Images.icPhone.default}
+          handlerChange={handlerChangeNumber}
+        />
       ) : step === 2 ? (
         <>
           <ReactCodeInput

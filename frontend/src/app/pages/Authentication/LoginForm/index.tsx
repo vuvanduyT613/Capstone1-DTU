@@ -6,6 +6,7 @@ import { Grid } from '@material-ui/core';
 import { requestPostLogin } from 'utils/request';
 import { Redirect } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
+import { useSnackbar } from 'notistack';
 export interface loginFormInterface {
   handleTosignUp: Function;
 }
@@ -20,19 +21,38 @@ const LoginForm = (props: loginFormInterface) => {
   const [role, setRole] = useState('');
   const [cookies, setCookies] = useCookies(['JWT']);
   const [showPass, setShowPass] = useState(false);
-  const signIn = async () => {
-    //@ts-ignore
-    const { data } = await requestPostLogin(
-      `${process.env.REACT_APP_API_ENDPOINT}/auth/login`,
-      isLoginForm,
-    );
+  const { enqueueSnackbar } = useSnackbar();
 
-    let expires = new Date();
-    //@ts-ignore
-    setCookies('access_token', data.tokens.access.token);
-    setCookies('access_refresh', data.tokens.refresh.token);
-    //@ts-ignore
-    setRole(data.user.role);
+  const signIn = async () => {
+    try {
+      //@ts-ignore
+      const { data } = await requestPostLogin(
+        `${process.env.REACT_APP_API_ENDPOINT}/auth/login`,
+        isLoginForm,
+      );
+      //@ts-ignore
+      setCookies('access_token', data.tokens.access.token);
+      setCookies('access_refresh', data.tokens.refresh.token);
+      enqueueSnackbar('SignIn Success !', {
+        variant: 'success',
+        anchorOrigin: {
+          vertical: 'top',
+          horizontal: 'right',
+        },
+        autoHideDuration: 2000,
+      });
+      //@ts-ignore
+      setRole(data.user.role);
+    } catch (err) {
+      enqueueSnackbar('SignIn Fail !', {
+        variant: 'error',
+        anchorOrigin: {
+          vertical: 'top',
+          horizontal: 'right',
+        },
+        autoHideDuration: 2000,
+      });
+    }
   };
 
   const handlerChange = e => {

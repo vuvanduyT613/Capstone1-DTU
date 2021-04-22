@@ -4,7 +4,6 @@
  *
  */
 import * as React from 'react';
-import styled from 'styled-components/macro';
 import Cookies from 'js-cookie';
 import { Redirect } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';

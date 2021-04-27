@@ -7,6 +7,7 @@ import useStyles from './styles';
 //import classes from '*.module.css';
 
 interface customInputProps {
+  defaultvalue?: string;
   typeInput?: string;
   iconLeft?: any;
   iconRight?: any;
@@ -25,10 +26,12 @@ const CustomInput = (props: customInputProps) => {
     handleClickRightIcon = undefined,
     handlerChange = undefined,
     placeholder = '',
+    defaultvalue = '',
   } = props;
   const classes = useStyles();
   return (
     <TextField
+      value={defaultvalue}
       name={name}
       classes={{ root: classes.inputCustom }}
       variant="outlined"

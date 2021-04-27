@@ -1,5 +1,5 @@
 import produce from 'immer';
-import { UPDATE_FIELD_SIGN_UP, UPDATE_FIELD_SIGN_IN } from './actionTypes';
+import { UPDATE_FIELD_SIGN_UP } from './actionTypes';
 
 export interface signupInterface {
   email: string;

@@ -1,6 +1,4 @@
-import { combineReducers } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { useHistory } from 'react-router-dom';
 export class ResponseError extends Error {
   public response: Response;
 

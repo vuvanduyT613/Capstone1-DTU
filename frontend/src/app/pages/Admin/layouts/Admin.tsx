@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 
 // components
 
@@ -15,8 +16,23 @@ import Settings from '../views/admin/Settings';
 import Tables from '../views/admin/Tables';
 
 export default function Admin() {
+  useEffect(() => {
+    toast.success(' ✘ sign in success!');
+  }, []);
+
   return (
     <>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <Sidebar />
       <div className="relative md:ml-64 bg-blueGray-100">
         <AdminNavbar />

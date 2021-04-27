@@ -13,6 +13,7 @@ import useStyles from './styles';
 import { rootState } from '../../../store/reducers';
 import LoginForm from './LoginForm';
 import SignUpStepper from './SignUpStepper';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface Props {}
 

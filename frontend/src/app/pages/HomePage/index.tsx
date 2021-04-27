@@ -1,8 +1,9 @@
 import * as React from 'react';
+import Cookies from 'js-cookie';
+import { Redirect } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { NavBar } from 'app/components/NavBar';
 import { Masthead } from './Masthead';
-import { Features } from './Features';
 import { PageWrapper } from 'app/components/PageWrapper';
 
 export function HomePage() {
@@ -10,15 +11,11 @@ export function HomePage() {
     <>
       <Helmet>
         <title>Home Page</title>
-        <meta
-          name="description"
-          content="A React Boilerplate application homepage"
-        />
+        <meta name="description" content="Homepage" />
       </Helmet>
       <NavBar />
       <PageWrapper>
-        <Masthead />
-        <Features />
+        {Cookies.get('access_token') ? <></> : <Redirect to="/auth" />}
       </PageWrapper>
     </>
   );

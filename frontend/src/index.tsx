@@ -5,7 +5,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import FontFaceObserver from 'fontfaceobserver';
-import { SnackbarProvider } from 'notistack';
+
 // Use consistent styling
 import 'sanitize.css/sanitize.css';
 
@@ -18,8 +18,6 @@ import { configureAppStore } from 'store/configureStore';
 import { ThemeProvider } from 'styles/theme/ThemeProvider';
 
 import reportWebVitals from 'reportWebVitals';
-
-import 'react-notifications/lib/notifications.css';
 
 // Initialize languages
 import './locales/i18n';
@@ -41,9 +39,7 @@ ReactDOM.render(
     <ThemeProvider>
       <HelmetProvider>
         <React.StrictMode>
-          <SnackbarProvider>
-            <App />
-          </SnackbarProvider>
+          <App />
         </React.StrictMode>
       </HelmetProvider>
     </ThemeProvider>

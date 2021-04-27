@@ -5,8 +5,9 @@ import useStyles from './styles';
 import { Grid } from '@material-ui/core';
 import { requestPostLogin } from 'utils/request';
 import { Redirect } from 'react-router-dom';
-import { useCookies } from 'react-cookie';
-import { useSnackbar } from 'notistack';
+import { ToastContainer, toast } from 'react-toastify';
+import Cookies from 'js-cookie';
+
 export interface loginFormInterface {
   handleTosignUp: Function;
 }
@@ -15,13 +16,11 @@ const LoginForm = (props: loginFormInterface) => {
   const { handleTosignUp } = props;
   const classes = useStyles();
   const [isLoginForm, setIsLoginForm] = useState({
-    email: '',
-    password: '',
+    email: Cookies.get('email') ? Cookies.get('email') : '',
+    password: Cookies.get('password') ? Cookies.get('password') : '',
   });
   const [role, setRole] = useState('');
-  const [cookies, setCookies] = useCookies(['JWT']);
   const [showPass, setShowPass] = useState(false);
-  const { enqueueSnackbar } = useSnackbar();
 
   const signIn = async () => {
     try {
@@ -30,28 +29,15 @@ const LoginForm = (props: loginFormInterface) => {
         `${process.env.REACT_APP_API_ENDPOINT}/auth/login`,
         isLoginForm,
       );
-      //@ts-ignore
-      setCookies('access_token', data.tokens.access.token);
-      setCookies('access_refresh', data.tokens.refresh.token);
-      enqueueSnackbar('SignIn Success !', {
-        variant: 'success',
-        anchorOrigin: {
-          vertical: 'top',
-          horizontal: 'right',
-        },
-        autoHideDuration: 2000,
-      });
+
+      Cookies.set('email', isLoginForm.email);
+      Cookies.set('password', isLoginForm.password);
+      Cookies.set('access_token', data.tokens.access.token);
+      Cookies.set('access_refresh', data.tokens.refresh.token);
       //@ts-ignore
       setRole(data.user.role);
     } catch (err) {
-      enqueueSnackbar('SignIn Fail !', {
-        variant: 'error',
-        anchorOrigin: {
-          vertical: 'top',
-          horizontal: 'right',
-        },
-        autoHideDuration: 2000,
-      });
+      toast.error(' ✘ email and password incorrect!');
     }
   };
 
@@ -68,11 +54,23 @@ const LoginForm = (props: loginFormInterface) => {
       {role === 'admin' ? (
         <Redirect to="/admin" />
       ) : role === 'user' ? (
-        <Redirect to="/admin" />
+        <Redirect to="/" />
       ) : (
         <></>
       )}
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <CustomInput
+        defaultvalue={isLoginForm.email}
         typeInput="email"
         name="email"
         placeholder="Email"
@@ -80,6 +78,7 @@ const LoginForm = (props: loginFormInterface) => {
         iconLeft={Images.icMail.default}
       />
       <CustomInput
+        defaultvalue={isLoginForm.password}
         typeInput={showPass ? 'text' : 'password'}
         placeholder="Mật khẩu"
         name="password"

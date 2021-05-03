@@ -57,8 +57,7 @@ const WrapperBottom = styled.div`
 const Div = styled.div`
   width: 50%;
   p {
-    margin-left: 14px;
-    margin-top: 0px !important;
+    margin: 0px 0px 0px 5%;
     font-family: IBM Plex Sans;
     font-style: normal;
     font-weight: normal;
@@ -86,5 +85,5 @@ const Img = styled.img`
   width: 70px;
   height: 70px;
   border-radius: 50%;
-  margin-left: 65px;
+  margin-left: 10%;
 `;

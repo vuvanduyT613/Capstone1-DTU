@@ -29,7 +29,6 @@ const LoginForm = (props: loginFormInterface) => {
         `${process.env.REACT_APP_API_ENDPOINT}/auth/login`,
         isLoginForm,
       );
-
       Cookies.set('email', isLoginForm.email);
       Cookies.set('password', isLoginForm.password);
       Cookies.set('access_token', data.tokens.access.token);

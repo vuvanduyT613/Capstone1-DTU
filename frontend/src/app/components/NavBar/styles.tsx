@@ -12,8 +12,9 @@ const useStyles = makeStyles((theme: Theme) =>
       boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
     },
     wrapperNavbar: {
-      width: '200px',
-      height: '100vh',
+      position: 'absolute',
+      width: '15%',
+      height: '900px',
       background: '#FDFDFD',
     },
   }),

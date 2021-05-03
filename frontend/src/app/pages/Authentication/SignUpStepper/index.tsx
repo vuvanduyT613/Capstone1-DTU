@@ -116,7 +116,7 @@ const SignUpStepper = () => {
     <div className={classes.wrapperSignUp}>
       {step === 1 ? (
         <CustomInput
-          typeInput="number"
+          typeInput="email"
           iconLeft={Images.icPhone.default}
           handlerChange={handlerChangeNumber}
         />

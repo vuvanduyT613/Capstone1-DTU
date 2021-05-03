@@ -180,13 +180,12 @@ const Div = styled.div`
 const DivContent = styled.div`
   display: flex;
   margin-left: 15px;
-  min-width: 160px;
+  min-width: 95%;
   height: 51px;
   background: #00358e;
   border-radius: 4px;
-
   svg {
-    margin: auto 9px auto 40px;
+    margin: auto 9px auto 30%;
   }
 
   p {
@@ -209,12 +208,12 @@ const DivContent = styled.div`
 const DivContentNone = styled.div`
   display: flex;
   margin-left: 5px;
-  width: 100%;
+  width: 95%;
   height: 51px;
   border-radius: 4px;
 
   svg {
-    margin: auto 9px auto 40px;
+    margin: auto 9px auto 30%;
   }
 
   p {
@@ -279,7 +278,7 @@ const ItemExit = styled.a`
   }
 
   div {
-    width: 160px;
+    width: 100%;
     height: 40px;
     /* #00358E */
 
@@ -287,9 +286,10 @@ const ItemExit = styled.a`
     opacity: 0.2;
     border-radius: 4px;
     display: flex;
+    justify-content: center;
 
     svg {
-      margin: auto 9px auto 40px;
+      margin: auto 9px auto 0px;
     }
 
     p {

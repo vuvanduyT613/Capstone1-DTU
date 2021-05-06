@@ -45,7 +45,7 @@ function checkStatus(response: Response) {
  *
  * @return {object}           The response data
  */
-export async function request(
+export async function GET(
   url: string,
 ): Promise<{} | { err: ResponseError }> {
   const fetchResponse = await axios.get(url);
@@ -53,7 +53,7 @@ export async function request(
   return parseJSON(response);
 }
 
-export async function requestPostLogin(
+export async function POST(
   url: string,
   data?: Object,
 ): Promise<{} | { err: ResponseError }> {

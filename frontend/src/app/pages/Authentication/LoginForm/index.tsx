@@ -1,108 +1,103 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import CustomInput from '../components/CustomInput';
 import Images from '../../../asset/image';
 import useStyles from './styles';
 import { Grid } from '@material-ui/core';
-import { requestPostLogin } from 'utils/request';
+import { rootState } from 'store/reducers';
+import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import Cookies from 'js-cookie';
-
+import { Formik, Form } from 'formik';
 export interface loginFormInterface {
   handleTosignUp: Function;
 }
 
 const LoginForm = (props: loginFormInterface) => {
+  const { role } = useSelector(
+    (state: rootState) => state.authenReducer.signIn,
+  );
+  const dispatch = useDispatch();
   const { handleTosignUp } = props;
   const classes = useStyles();
-  const [isLoginForm, setIsLoginForm] = useState({
-    email: Cookies.get('email') ? Cookies.get('email') : '',
-    password: Cookies.get('password') ? Cookies.get('password') : '',
-  });
-  const [role, setRole] = useState('');
   const [showPass, setShowPass] = useState(false);
 
-  const signIn = async () => {
-    try {
-      //@ts-ignore
-      const { data } = await requestPostLogin(
-        `${process.env.REACT_APP_API_ENDPOINT}/auth/login`,
-        isLoginForm,
-      );
-      Cookies.set('email', isLoginForm.email);
-      Cookies.set('password', isLoginForm.password);
-      Cookies.set('access_token', data.tokens.access.token);
-      Cookies.set('access_refresh', data.tokens.refresh.token);
-      //@ts-ignore
-      setRole(data.user.role);
-    } catch (err) {
-      toast.error(' ✘ email and password incorrect!');
-    }
-  };
-
-  const handlerChange = e => {
-    const name = e.target.name;
-    setIsLoginForm({
-      ...isLoginForm,
-      [name]: e.target.value,
+  const signIn = async values => {
+    dispatch({
+      type: 'UPDATE_FIELD_SIGN_IN',
+      payload: {
+        email: values.email,
+        password: values.password,
+      },
     });
   };
 
   return (
-    <>
-      {role === 'admin' ? (
-        <Redirect to="/admin" />
-      ) : role === 'user' ? (
-        <Redirect to="/" />
-      ) : (
-        <></>
+    <Formik
+      enableReinitialize={true}
+      initialValues={{
+        email: Cookies.get('email') ? Cookies.get('email') : '',
+        password: Cookies.get('password') ? Cookies.get('password') : '',
+      }}
+      onSubmit={signIn}
+    >
+      {({ handleChange, values, handleSubmit }) => (
+        <Form>
+          {role === 'admin' ? (
+            <Redirect to="/admin" />
+          ) : role === 'user' ? (
+            <Redirect to="/" />
+          ) : (
+            <></>
+          )}
+          <ToastContainer
+            position="top-right"
+            autoClose={3000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+          />
+          <CustomInput
+            defaultvalue={values.email}
+            typeInput="email"
+            name="email"
+            placeholder="Email"
+            handlerChange={e => handleChange(e)}
+            iconLeft={Images.icMail.default}
+          />
+          <CustomInput
+            defaultvalue={values.password}
+            typeInput={showPass ? 'text' : 'password'}
+            placeholder="Mật khẩu"
+            name="password"
+            iconLeft={Images.iconPass.default}
+            iconRight={Images.iconOpenPass.default}
+            handlerChange={e => handleChange(e)}
+            handleClickRightIcon={() => setShowPass(!showPass)}
+          />
+          <div className={classes.forgotPass}> Forgot password? </div>
+          <Grid container spacing={3}>
+            <Grid container item xs={12} sm={6}>
+              <button
+                className={classes.btnCreate}
+                onClick={() => handleTosignUp()}
+              >
+                Sign up
+              </button>
+            </Grid>
+            <Grid container item xs={12} sm={6}>
+              <button className={classes.btnLogin} onClick={() => handleSubmit}>
+                Sign in
+              </button>
+            </Grid>
+          </Grid>
+        </Form>
       )}
-      <ToastContainer
-        position="top-right"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
-      <CustomInput
-        defaultvalue={isLoginForm.email}
-        typeInput="email"
-        name="email"
-        placeholder="Email"
-        handlerChange={handlerChange}
-        iconLeft={Images.icMail.default}
-      />
-      <CustomInput
-        defaultvalue={isLoginForm.password}
-        typeInput={showPass ? 'text' : 'password'}
-        placeholder="Mật khẩu"
-        name="password"
-        iconLeft={Images.iconPass.default}
-        iconRight={Images.iconOpenPass.default}
-        handlerChange={handlerChange}
-        handleClickRightIcon={() => setShowPass(!showPass)}
-      />
-      <div className={classes.forgotPass}> Forgot password? </div>
-      <Grid container spacing={3}>
-        <Grid container item xs={12} sm={6}>
-          <button
-            className={classes.btnCreate}
-            onClick={() => handleTosignUp()}
-          >
-            Sign up
-          </button>
-        </Grid>
-        <Grid container item xs={12} sm={6}>
-          <button className={classes.btnLogin} onClick={signIn}>
-            Sign in
-          </button>
-        </Grid>
-      </Grid>
-    </>
+    </Formik>
   );
 };
 

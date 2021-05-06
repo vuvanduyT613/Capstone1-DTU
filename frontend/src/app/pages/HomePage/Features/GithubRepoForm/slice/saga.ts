@@ -1,5 +1,5 @@
 import { call, put, select, takeLatest, delay } from 'redux-saga/effects';
-import { request } from 'utils/request';
+import { GET } from 'utils/axiosService';
 import { selectUsername } from './selectors';
 import { githubRepoFormActions as actions } from '.';
 import { Repo } from 'types/Repo';
@@ -20,7 +20,7 @@ export function* getRepos() {
 
   try {
     // Call our request helper (see 'utils/request')
-    const repos: Repo[] = yield call(request, requestURL);
+    const repos: Repo[] = yield call(GET, requestURL);
     if (repos?.length > 0) {
       yield put(actions.reposLoaded(repos));
     } else {

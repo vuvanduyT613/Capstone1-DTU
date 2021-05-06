@@ -108,6 +108,7 @@
     "axios": "0.21.1",
     "chart.js": "3.1.1",
     "fontfaceobserver": "2.1.0",
+    "formik": "2.2.6",
     "google-maps": "4.3.3",
     "gulp": "4.0.2",
     "gulp-append-prepend": "1.0.9",
@@ -132,7 +133,8 @@
     "socket.io-client": "4.0.1",
     "styled-components": "5.1.0",
     "tailwindcss": "2.1.1",
-    "web-vitals": "0.2.4"
+    "web-vitals": "0.2.4",
+    "yup": "0.32.9"
   },
   "devDependencies": {
     "@commitlint/cli": "9.1.2",

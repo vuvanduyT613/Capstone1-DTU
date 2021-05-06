@@ -1,7 +1,7 @@
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import { createInjectorsEnhancer } from 'redux-injectors';
 import createSagaMiddleware from 'redux-saga';
-
+import rootSaga from 'sagas/';
 import { createReducer } from './reducers';
 
 export function configureAppStore() {
@@ -28,6 +28,8 @@ export function configureAppStore() {
       process.env.PUBLIC_URL.length > 0,
     enhancers,
   });
+
+  runSaga(rootSaga);
 
   return store;
 }

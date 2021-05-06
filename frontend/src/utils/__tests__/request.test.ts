@@ -3,7 +3,7 @@
  */
 
 import 'whatwg-fetch';
-import { request } from '../request';
+import { request } from '../axiosService';
 
 declare let window: { fetch: jest.Mock };
 

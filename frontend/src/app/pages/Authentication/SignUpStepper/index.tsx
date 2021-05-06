@@ -2,8 +2,6 @@ import React, { useState, useRef } from 'react';
 import CustomInput from '../components/CustomInput';
 import Images from '../../../asset/image';
 import ReactCodeInput from 'react-verification-code-input';
-// import { useSelector } from 'react-redux'
-// import { Grid, Typography, Dialog, IconButton } from '@material-ui/core';
 import useStyles from './styles';
 import { rootState } from 'store/reducers';
 import { Box } from '@material-ui/core';

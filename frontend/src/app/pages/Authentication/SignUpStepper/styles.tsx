@@ -7,6 +7,9 @@ const useStyles = makeStyles((theme: Theme) =>
       width: '100%',
       textAlign: 'center',
     },
+    wrapperForm: {
+      width: '100%',
+    },
     prevBtn: {
       width: '100%',
       border: 'none',

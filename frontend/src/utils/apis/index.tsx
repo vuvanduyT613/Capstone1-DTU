@@ -7,3 +7,9 @@ export const authenticationSignIn = payload => {
   //@ts-ignore
   return POST(`${ENDPOINT}/auth/login`, payload);
 };
+
+// Authentication
+export const authenticationSendEmail = payload => {
+  //@ts-ignore
+  return POST(`${ENDPOINT}/nodemail/send`, payload);
+};

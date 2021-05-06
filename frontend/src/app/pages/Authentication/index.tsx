@@ -47,7 +47,7 @@ export function Authentication(props: Props) {
             {isLoginForm
               ? 'Sign in'
               : signUp.step === 1
-              ? "Let's start with your phone number"
+              ? "Let's start with your Email"
               : signUp.step === 2
               ? 'Enter the verification code number sent to you'
               : signUp.step === 3

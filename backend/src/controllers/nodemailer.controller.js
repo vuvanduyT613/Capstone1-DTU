@@ -4,7 +4,7 @@ const randomNumber = require('random');
 
 const sendMail = catchAsync(async (req, res) => {
   const { email } = req.body;
-  const randomCode = randomNumber.int((min = 1000), (max = 99999));
+  const randomCode = randomNumber.int((min = 1000), (max = 9999));
   const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
     port: 465,

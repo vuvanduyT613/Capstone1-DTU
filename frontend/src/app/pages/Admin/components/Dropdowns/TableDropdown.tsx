@@ -1,5 +1,6 @@
 import React from 'react';
 import { createPopper } from '@popperjs/core';
+import Dialog from '@material-ui/core/Dialog';
 
 const NotificationDropdown = () => {
   // dropdown props
@@ -16,8 +17,26 @@ const NotificationDropdown = () => {
   const closeDropdownPopover = () => {
     setDropdownPopoverShow(false);
   };
+  const [open, setOpen] = React.useState(false);
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
     <>
+      <Dialog
+        fullWidth={true}
+        maxWidth={'sm'}
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="max-width-dialog-title"
+      >
+        Vu van duy
+      </Dialog>
       <a
         className="text-blueGray-500 py-1 px-3"
         href="#pablo"
@@ -45,25 +64,16 @@ const NotificationDropdown = () => {
           }
           onClick={e => e.preventDefault()}
         >
-          Action
+          Delete
         </a>
         <a
           href="#pablo"
           className={
             'text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700'
           }
-          onClick={e => e.preventDefault()}
+          onClick={e => handleClickOpen()}
         >
-          Another action
-        </a>
-        <a
-          href="#pablo"
-          className={
-            'text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700'
-          }
-          onClick={e => e.preventDefault()}
-        >
-          Something else here
+          Update
         </a>
       </div>
     </>

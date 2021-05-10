@@ -1,10 +1,8 @@
 const mongoose = require('mongoose');
-const validator = require('validator');
-const bcrypt = require('bcryptjs');
 const { toJSON, paginate } = require('../plugins');
 
 const reviewSchema = mongoose.Schema({
-  userAccountId: {
+  userId: {
     type: mongoose.SchemaTypes.ObjectId,
     ref: 'User',
     require: true,
@@ -41,6 +39,6 @@ const reviewSchema = mongoose.Schema({
 reviewSchema.plugin(toJSON);
 reviewSchema.plugin(paginate);
 
-const userReviewSchema = mongoose.model('Review', reviewSchema);
+const Review = mongoose.model('Review', reviewSchema);
 
-module.exports = userReviewSchema;
+module.exports = Review;

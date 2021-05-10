@@ -32,7 +32,7 @@ export function HomePage() {
 
 const Content = styled.div`
   position: absolute;
-  right: 10%;
+  right: 5%;
   top: 300px;
 `;
 

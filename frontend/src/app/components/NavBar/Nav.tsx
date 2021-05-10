@@ -1,5 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components/macro';
+import Cookies from 'js-cookie';
 
 export function Nav() {
   return (
@@ -123,7 +124,14 @@ export function Nav() {
         </Item>
       </Wrapper>
       <WrapperExit>
-        <ItemExit>
+        <ItemExit
+          href="/"
+          onClick={() => {
+            Cookies.remove('access_refresh');
+            Cookies.remove('access_token');
+            Cookies.remove('role');
+          }}
+        >
           <div>
             <svg
               width="16"

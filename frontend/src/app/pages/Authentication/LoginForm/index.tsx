@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import CustomInput from '../components/CustomInput';
 import Images from '../../../asset/image';
 import useStyles from './styles';
 import { Grid } from '@material-ui/core';
-import { rootState } from 'store/reducers';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
 import Cookies from 'js-cookie';
 import { Formik, Form } from 'formik';
 export interface loginFormInterface {
@@ -14,9 +12,6 @@ export interface loginFormInterface {
 }
 
 const LoginForm = (props: loginFormInterface) => {
-  const { role } = useSelector(
-    (state: rootState) => state.authenReducer.signIn,
-  );
   const dispatch = useDispatch();
   const { handleTosignUp } = props;
   const classes = useStyles();
@@ -43,24 +38,13 @@ const LoginForm = (props: loginFormInterface) => {
     >
       {({ handleChange, values, handleSubmit }) => (
         <Form>
-          {role === 'admin' ? (
+          {Cookies.get('role') === 'admin' ? (
             <Redirect to="/admin" />
-          ) : role === 'user' ? (
+          ) : Cookies.get('role') === 'user' ? (
             <Redirect to="/" />
           ) : (
             <></>
           )}
-          <ToastContainer
-            position="top-right"
-            autoClose={3000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-          />
           <CustomInput
             defaultvalue={values.email}
             typeInput="email"
@@ -72,7 +56,7 @@ const LoginForm = (props: loginFormInterface) => {
           <CustomInput
             defaultvalue={values.password}
             typeInput={showPass ? 'text' : 'password'}
-            placeholder="Mật khẩu"
+            placeholder="password"
             name="password"
             iconLeft={Images.iconPass.default}
             iconRight={Images.iconOpenPass.default}

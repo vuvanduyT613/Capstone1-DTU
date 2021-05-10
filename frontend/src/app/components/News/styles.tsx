@@ -5,7 +5,7 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: '0px 32px 0px 32px',
     },
     wrapperNews: {
-      width: '48vw',
+      width: '56.5%',
       height: '520px',
       background: '#FDFDFD',
       borderEadius: '4px',
@@ -52,12 +52,13 @@ const useStyles = makeStyles((theme: Theme) =>
       flexWrap: 'wrap',
     },
     contentItemNews: {
-      width: '400px',
+      width: '50%',
       height: '184px',
-      margin: ' 20px 20px 0px 0px',
+      padding: '10px',
+      //margin: ' 20px 20px 0px 0px',
     },
     imageItemNews: {
-      width: '400px',
+      width: '100%',
       height: '100px',
       display: 'flex',
       justifyContent: 'center',

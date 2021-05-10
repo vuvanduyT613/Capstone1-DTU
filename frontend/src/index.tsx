@@ -5,7 +5,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import FontFaceObserver from 'fontfaceobserver';
-
+import { ToastContainer } from 'react-toastify';
 // Use consistent styling
 import 'sanitize.css/sanitize.css';
 
@@ -40,6 +40,17 @@ ReactDOM.render(
       <HelmetProvider>
         <React.StrictMode>
           <App />
+          <ToastContainer
+            position="top-right"
+            autoClose={3000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+          />
         </React.StrictMode>
       </HelmetProvider>
     </ThemeProvider>

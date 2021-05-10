@@ -7,6 +7,7 @@ import useStyles from './styles';
 //import classes from '*.module.css';
 
 interface customInputProps {
+  off?: boolean;
   defaultvalue?: string;
   typeInput?: string;
   iconLeft?: any;
@@ -27,6 +28,7 @@ const CustomInput = (props: customInputProps) => {
     handlerChange = undefined,
     placeholder = '',
     defaultvalue = '',
+    off = false,
   } = props;
   const classes = useStyles();
   return (
@@ -34,6 +36,7 @@ const CustomInput = (props: customInputProps) => {
       value={defaultvalue}
       name={name}
       classes={{ root: classes.inputCustom }}
+      disabled={off}
       variant="outlined"
       InputProps={{
         startAdornment: iconLeft ? (

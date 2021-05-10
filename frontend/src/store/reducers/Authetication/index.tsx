@@ -8,7 +8,7 @@ import {
 
 export interface signupInterface {
   email: string;
-  phoneNumber: string;
+  password: string;
   step: number;
 }
 
@@ -38,7 +38,7 @@ export interface authenInterface {
 // init state
 const initialSignUp: signupInterface = {
   email: '',
-  phoneNumber: '',
+  password: '',
   step: 1,
 };
 

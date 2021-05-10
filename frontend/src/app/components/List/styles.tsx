@@ -4,7 +4,7 @@ import { right } from 'inquirer/lib/utils/readline';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     wrapperList: {
-      width: '400px',
+      width: '86%',
 
       background: '#FDFDFD',
       borderRadius: '4px',

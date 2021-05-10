@@ -18,7 +18,6 @@ function parseJSON(response: Response) {
   if (response.status === 204 || response.status === 205) {
     return null;
   }
-  console.log(response);
   return response.json();
 }
 
@@ -45,12 +44,27 @@ function checkStatus(response: Response) {
  *
  * @return {object}           The response data
  */
-export async function GET(
-  url: string,
-): Promise<{} | { err: ResponseError }> {
+export async function GET(url: string): Promise<{} | { err: ResponseError }> {
   const fetchResponse = await axios.get(url);
   const response = checkStatus(fetchResponse.data);
   return parseJSON(response);
+}
+
+/**
+ * Requests a URL, returning a promise
+ *
+ * @param  {string} url       The URL we want to request
+ *@param {object} config
+ * @return {object}           The response data
+ */
+export async function GET_TOKEN(
+  url: string,
+  config: object,
+): Promise<{} | { err: ResponseError }> {
+  const fetchResponse = await axios.get(url, config);
+  //@ts-ignore
+  const response = checkStatus(fetchResponse);
+  return response;
 }
 
 export async function POST(

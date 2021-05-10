@@ -55,7 +55,7 @@ export function Authentication(props: Props) {
               : signUp.step === 4
               ? 'Now set your password'
               : signUp.step === 5
-              ? 'Add your profile picture'
+              ? 'Back to sign in'
               : ''}
           </div>
         </Grid>

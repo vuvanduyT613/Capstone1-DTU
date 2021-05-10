@@ -3,7 +3,10 @@ const { mailerController } = require('../../controllers');
 
 const router = express.Router();
 
-router.post('/send', mailerController.sendMail).get('/');
+router
+  .post('/send', mailerController.sendMail)
+  .post('/reset', mailerController.sendResetPassword)
+  .post('verification', mailerController.sendVerificationEmail);
 
 module.exports = router;
 

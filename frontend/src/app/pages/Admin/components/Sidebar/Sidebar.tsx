@@ -106,29 +106,6 @@ export default function Sidebar() {
                   Dashboard
                 </Link>
               </li>
-
-              <li className="items-center">
-                <Link
-                  className={
-                    'text-xs uppercase py-3 font-bold block ' +
-                    (window.location.href.indexOf('/admin/settings') !== -1
-                      ? 'text-lightBlue-500 hover:text-lightBlue-600'
-                      : 'text-blueGray-700 hover:text-blueGray-500')
-                  }
-                  to="/admin/settings"
-                >
-                  <i
-                    className={
-                      'fas fa-tools mr-2 text-sm ' +
-                      (window.location.href.indexOf('/admin/settings') !== -1
-                        ? 'opacity-75'
-                        : 'text-blueGray-300')
-                    }
-                  ></i>{' '}
-                  Settings
-                </Link>
-              </li>
-
               <li className="items-center">
                 <Link
                   className={
@@ -190,10 +167,11 @@ export default function Sidebar() {
               <li className="items-center">
                 <Link
                   className="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
-                  to="/"
+                  to="/auth"
                   onClick={() => {
                     Cookies.remove('access_refresh');
                     Cookies.remove('access_token');
+                    Cookies.remove('role');
                   }}
                 >
                   <i className="fas fa-newspaper text-blueGray-400 mr-2 text-sm"></i>{' '}

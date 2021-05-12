@@ -3,7 +3,7 @@ const { toJSON, paginate } = require('../plugins');
 
 const doctorSchema = mongoose.Schema(
   {
-    finstName: {
+    fistName: {
       type: String,
       required: true,
       trim: true,

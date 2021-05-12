@@ -20,14 +20,6 @@ const hospitalSchema = mongoose.Schema(
       minlength: 8,
       private: true, // used by the toJSON plugin
     },
-    startDate: {
-      type: Date,
-      default: Date.now(),
-    },
-    endDate: {
-      type: Date,
-      default: Date.now(),
-    },
     country: {
       type: String,
       default: 'user',

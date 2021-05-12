@@ -10,7 +10,7 @@ router
   .post('/register', validate(authValidation.register), authController.register)
   .post('/login', validate(authValidation.login), authController.login)
   .post('/logout', validate(authValidation.logout), authController.logout)
-  .post('/refresh-t3okens', validate(authValidation.refreshTokens), authController.refreshTokens)
+  .post('/refresh-tokens', validate(authValidation.refreshTokens), authController.refreshTokens)
   .post('/forgot-password', validate(authValidation.forgotPassword), authController.forgotPassword)
   .post('/reset-password', validate(authValidation.resetPassword), authController.resetPassword)
   .post('/send-verification-email', auth(), authController.sendVerificationEmail)

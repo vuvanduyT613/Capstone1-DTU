@@ -8,23 +8,19 @@ const { switchModel } = require('../utils/switchModel');
  * @param {Object} body
  * @returns {Promise<User>}
  */
-const createObject = async (action, body) => {
+const create = async (action, body) => {
   const response = await switchModel(action).create(body);
   return response;
 };
 
 /**
  * Query for record
- * @param {Object} filter - Mongo filter
- * @param {Object} options - Query options
- * @param {string} [options.sortBy] - Sort option in the format: sortField:(desc|asc)
- * @param {number} [options.limit] - Maximum number of results per page (default = 10)
- * @param {number} [options.page] - Current page (default = 1)
+ * @param {String} action - Current page (default = 1)
  * @returns {Promise<QueryResult>}
  */
-const queryObject = async (filter, options) => {
-  const users = await User.paginate(filter, options);
-  return users;
+const query = async (action) => {
+  const response = await switchModel(action).find({});
+  return response;
 };
 
 /**
@@ -33,8 +29,9 @@ const queryObject = async (filter, options) => {
  * @param {ObjectId} objectId
  * @returns {Promise<User>}
  */
-const getObjectById = async (action, objectId) => {
-  return switchModel(action).findById(objectId);
+const getById = async (action, objectId) => {
+  const response = switchModel(action).findById(objectId);
+  return response;
 };
 
 /**
@@ -44,8 +41,9 @@ const getObjectById = async (action, objectId) => {
  * @param {Object} updateBody
  * @returns {Promise<User>}
  */
-const updateObjectById = async (action, objectId, updateBody) => {
-  const data = await getObjectById(action, objectId);
+
+const updateById = async (action, objectId, updateBody) => {
+  const data = await getById(action, objectId);
   if (!data) {
     throw new ApiError(httpStatus.NOT_FOUND, ' Not found');
   }
@@ -60,8 +58,9 @@ const updateObjectById = async (action, objectId, updateBody) => {
  * @param {ObjectId} objectId
  * @returns {Promise<User>}
  */
-const deleteObjectById = async (action, objectId) => {
-  const data = await getUserById(objectId);
+
+const deleteById = async (action, objectId) => {
+  const data = await getById(objectId);
   if (!data) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Not found');
   }
@@ -70,9 +69,9 @@ const deleteObjectById = async (action, objectId) => {
 };
 
 module.exports = {
-  createObject,
-  queryObject,
-  getObjectById,
-  updateObjectById,
-  deleteObjectById,
+  create,
+  query,
+  getById,
+  updateById,
+  deleteById,
 };

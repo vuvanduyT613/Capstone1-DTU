@@ -52,7 +52,17 @@ const switchModel = (action) => {
 };
 
 const validateRoute = (to) => {
-  const arr = [`doctor-specizalization`, `specizalization`, `hospital`, `qualification`, `v1`];
+  const arr = [
+    `doctor-specizalization`,
+    `specizalization`,
+    `hospital`,
+    `qualification`,
+    `v1`,
+    `network-insurance`,
+    `office-doctor`,
+    `appointment-status`,
+    `booking`,
+  ];
   return arr.indexOf(to);
 };
 
@@ -73,20 +83,20 @@ const handlerObject = (before, to, action, query, body) => {
   }
   if (validateRoute(to ? to : ``) !== -1 && before('offices')) {
     switch (to) {
-      case `doctor-specizalization`:
-        return action(`DoctorSpecizalization`, query ? query : ``, body ? body : ``);
-      case `specizalization`:
-        return action(`Specizalization`, query ? query : ``, body ? body : ``);
+      case `network-insurance`:
+        return action(`NetworkInsurance`, query ? query : ``, body ? body : ``);
+      case `office-doctor`:
+        return action(`OfficeDoctor`, query ? query : ``, body ? body : ``);
       case `v1`:
-        return action(`Doctor`, query ? query : ``, body ? body : ``);
+        return action(`Office`, query ? query : ``, body ? body : ``);
     }
   }
   if (validateRoute(to ? to : ``) !== -1 && before('appointments')) {
     switch (to) {
-      case `doctor-specizalization`:
-        return action(`DoctorSpecizalization`, query ? query : ``, body ? body : ``);
-      case `specizalization`:
-        return action(`Specizalization`, query ? query : ``, body ? body : ``);
+      case `appointment-status`:
+        return action(`AppointmentStatus`, query ? query : ``, body ? body : ``);
+      case `booking`:
+        return action(`Booking`, query ? query : ``, body ? body : ``);
       case `v1`:
         return action(`Doctor`, query ? query : ``, body ? body : ``);
     }

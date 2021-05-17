@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { rootState } from 'store/reducers';
 import Pagination from '@material-ui/lab/Pagination';
 import Cookies from 'js-cookie';
+import { FormDialog } from '../Dialog';
 // components
 
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -20,10 +21,12 @@ import {
 
 export default function CardTable({ color }) {
   const [open, setOpen] = React.useState(false);
+  const [formDialog, setFormDialog] = React.useState(false);
   const dispatch = useDispatch();
   const { data } = useSelector(
     (state: rootState) => state.userReducer.getAllUser,
   );
+
   useEffect(() => {
     dispatch({
       type: 'GET_ALL_USER_API',
@@ -31,18 +34,47 @@ export default function CardTable({ color }) {
         token: Cookies.get('access_token'),
       },
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
 
   const handleClose = () => {
     setOpen(false);
+    setFormDialog(false);
   };
 
   return (
     <>
+      <Dialog
+        open={formDialog}
+        onClose={handleClose}
+        maxWidth="md"
+        fullWidth
+        aria-labelledby="max-width-dialog-title"
+      >
+        <DialogContentText
+          id="alert-dialog-description"
+          style={{
+            textAlign: 'center',
+            marginTop: '50px',
+            fontWeight: 'bold',
+          }}
+        >
+          <h1> {`UPDATE`}</h1>
+        </DialogContentText>
+        <DialogContent>
+          <FormDialog></FormDialog>
+        </DialogContent>
+        <Button
+          style={{
+            height: '50px',
+          }}
+          variant="contained"
+          color="primary"
+        >
+          Save
+        </Button>
+      </Dialog>
+
       <Dialog
         open={open}
         onClose={handleClose}
@@ -230,12 +262,19 @@ export default function CardTable({ color }) {
                       </td>
                       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-right">
                         <Grid>
-                          <IconButton color="primary">
+                          <IconButton
+                            color="primary"
+                            onClick={() => {
+                              setFormDialog(true);
+                            }}
+                          >
                             <EditIcon />
                           </IconButton>
                           <IconButton
                             color="secondary"
-                            onClick={() => handleClickOpen()}
+                            onClick={() => {
+                              setOpen(true);
+                            }}
                           >
                             <DeleteIcon />
                           </IconButton>

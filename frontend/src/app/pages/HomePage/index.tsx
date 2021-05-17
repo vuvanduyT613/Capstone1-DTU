@@ -19,12 +19,15 @@ export function HomePage() {
       <Content>
         <List />
       </Content>
-
       <ContentNews>
         <News />
       </ContentNews>
       <PageWrapper>
-        {Cookies.get('access_token') ? <></> : <Redirect to="/auth" />}
+        {Cookies.get('access_token') && Cookies.get('role') === 'user' ? (
+          <></>
+        ) : (
+          <Redirect to="/auth" />
+        )}
       </PageWrapper>
     </>
   );

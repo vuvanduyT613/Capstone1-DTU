@@ -1,4 +1,4 @@
-import { GET, GET_TOKEN, POST } from '../axiosService';
+import { /*GET*/ GET_TOKEN, POST } from '../axiosService';
 
 const ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
 
@@ -20,5 +20,5 @@ export const userGetAll = payload => {
   const config = {
     headers: { Authorization: `Bearer ${payload.token}` },
   };
-  return GET_TOKEN(`${ENDPOINT}/user`, config);
+  return GET_TOKEN(`${ENDPOINT}/users`, config);
 };

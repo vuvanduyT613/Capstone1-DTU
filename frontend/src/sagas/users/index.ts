@@ -1,7 +1,7 @@
 import { call, put } from 'redux-saga/effects';
 import { GET_ALL_USER, ERROR } from 'store/reducers/Users/actionTypes';
 import { userGetAll } from 'utils/apis';
-import { toast } from 'react-toastify';
+//import { toast } from 'react-toastify';
 
 export function* getAll(action) {
   try {

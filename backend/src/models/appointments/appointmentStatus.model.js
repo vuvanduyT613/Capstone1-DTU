@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { toJSON, paginate } = require('../plugins');
 
 const appointmentSchema = mongoose.Schema(
   {
@@ -29,7 +30,12 @@ const appointmentSchema = mongoose.Schema(
 );
 
 // add plugin that converts mongoose to json
+appointmentSchema.plugin(toJSON);
+appointmentSchema.plugin(paginate);
 
+/**
+ * @typedef Appointment
+ */
 const Appointment = mongoose.model('appointments', appointmentSchema);
 
 module.exports = Appointment;

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { toJSON, paginate } = require('../plugins');
 
 const doctorSpecizalizationSchema = mongoose.Schema(
   {
@@ -18,7 +19,9 @@ const doctorSpecizalizationSchema = mongoose.Schema(
   }
 );
 
-// add plugin that converts mongoose to json;
+// add plugin that converts mongoose to json
+doctorSpecizalizationSchema.plugin(toJSON);
+doctorSpecizalizationSchema.plugin(paginate);
 
 /**
  * @typedef DoctorSpecizalization

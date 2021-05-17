@@ -41,10 +41,6 @@ export function* signIn(action) {
     });
   }
 }
-//refresh token when 10 minute
-setTimeout(()=> {
-        
-}, 600000)
 
 export function* signUp(action) {
   try {

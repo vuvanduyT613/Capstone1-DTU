@@ -10,6 +10,8 @@ const {
   Office,
   NetworkInsurance,
   OfficeDoctor,
+  ChatRoom,
+  Message,
 } = require('../models');
 const httpStatus = require('http-status');
 const ApiError = require('../utils/ApiError');
@@ -48,6 +50,12 @@ const switchModel = (action) => {
 
     case `OfficeDoctor`:
       return OfficeDoctor;
+
+    case `ChatRoom`:
+      return ChatRoom;
+
+    case `Message`:
+      return Message;
   }
 };
 
@@ -62,43 +70,55 @@ const validateRoute = (to) => {
     `office-doctor`,
     `appointment-status`,
     `booking`,
+    `chat-room`,
+    `message`,
   ];
   return arr.indexOf(to);
 };
 
-const handlerObject = (before, to, action, query, body) => {
-  if (validateRoute(to ? to : ``) !== -1 && before('doctors')) {
+const handlerObject = (before, to, action, option) => {
+  if (validateRoute(to ? to : ``) !== -1 && before === 'doctors') {
     switch (to) {
       case `doctor-specizalization`:
-        return action(`DoctorSpecizalization`, query ? query : ``, body ? body : ``);
+        return action(`DoctorSpecizalization`, option);
       case `specizalization`:
-        return action(`Specizalization`, query ? query : ``, body ? body : ``);
+        return action(`Specizalization`, option);
       case `hospital`:
-        return action(`HospitalAffiliation`, query ? query : ``, body ? body : ``);
+        return action(`HospitalAffilia tion`, option);
       case `qualification`:
-        return action(`Qualification`, query ? query : ``, body ? body : ``);
+        return action(`Qualification`, option);
       case `v1`:
-        return action(`Doctor`, query ? query : ``, body ? body : ``);
+        return action(`Doctor`, option);
     }
   }
-  if (validateRoute(to ? to : ``) !== -1 && before('offices')) {
+  if (validateRoute(to ? to : ``) !== -1 && before === 'offices') {
     switch (to) {
       case `network-insurance`:
-        return action(`NetworkInsurance`, query ? query : ``, body ? body : ``);
+        return action(`NetworkInsurance`, option);
       case `office-doctor`:
-        return action(`OfficeDoctor`, query ? query : ``, body ? body : ``);
+        return action(`OfficeDoctor`, option);
       case `v1`:
-        return action(`Office`, query ? query : ``, body ? body : ``);
+        return action(`Office`, option);
     }
   }
-  if (validateRoute(to ? to : ``) !== -1 && before('appointments')) {
+  if (validateRoute(to ? to : ``) !== -1 && before === 'appointments') {
     switch (to) {
       case `appointment-status`:
-        return action(`AppointmentStatus`, query ? query : ``, body ? body : ``);
+        return action(`AppointmentStatus`, option);
       case `booking`:
-        return action(`Booking`, query ? query : ``, body ? body : ``);
+        return action(`Booking`, option);
       case `v1`:
-        return action(`Doctor`, query ? query : ``, body ? body : ``);
+        return action(`Doctor`, option);
+    }
+  }
+  if (validateRoute(to ? to : ``) !== -1 && before === 'chats') {
+    switch (to) {
+      case `chat-room`:
+        return action(`ChatRoom`, option);
+      case `message`:
+        return action(`Message`, option);
+      case `v1`:
+        return action(`Doctor`, option);
     }
   }
   throw new ApiError(httpStatus.NOT_FOUND, 'Not Found');

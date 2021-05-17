@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import CustomInput from '../components/CustomInput';
 import Images from '../../../asset/image';
 import ReactCodeInput from 'react-verification-code-input';

@@ -127,10 +127,3 @@ const Divsvg = styled.div`
     color: #00358e;
   }
 `;
-
-const Img = styled.img`
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  margin-left: 65px;
-`;

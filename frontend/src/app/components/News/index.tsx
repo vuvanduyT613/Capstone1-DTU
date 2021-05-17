@@ -51,28 +51,28 @@ export function News(props: Props) {
         <div className={classes.contentNews}>
           <div className={classes.contentItemNews}>
             <div className={classes.imageItemNews}>
-              <img src={Test} className={classes.image} />
+              <img src={Test} className={classes.image} alt="image1" />
             </div>
             <p>5 triệu chứng ung thư phổi có thể bạn không nhận ra</p>
             <p className={classes.timeItemNews}>00:09, 06/04/2021</p>
           </div>
           <div className={classes.contentItemNews}>
             <div className={classes.imageItemNews}>
-              <img src={Test} className={classes.image} />
+              <img src={Test} className={classes.image} alt="image1" />
             </div>
             <p>5 triệu chứng ung thư phổi có thể bạn không nhận ra</p>
             <p className={classes.timeItemNews}>00:09, 06/04/2021</p>
           </div>
           <div className={classes.contentItemNews}>
             <div className={classes.imageItemNews}>
-              <img src={Test} className={classes.image} />
+              <img src={Test} className={classes.image} alt="image1" />
             </div>
             <p>5 triệu chứng ung thư phổi có thể bạn không nhận ra</p>
             <p className={classes.timeItemNews}>00:09, 06/04/2021</p>
           </div>
           <div className={classes.contentItemNews}>
             <div className={classes.imageItemNews}>
-              <img src={Test} className={classes.image} />
+              <img src={Test} className={classes.image} alt="image1" />
             </div>
             <p>5 triệu chứng ung thư phổi có thể bạn không nhận ra</p>
             <p className={classes.timeItemNews}>00:09, 06/04/2021</p>

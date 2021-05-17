@@ -1,20 +1,30 @@
 const express = require('express');
+const auth = require('../../middlewares/auth');
 const validate = require('../../middlewares/validate');
 const authValidation = require('../../validations/auth.validation');
 const { authController } = require('../../controllers');
-const auth = require('../../middlewares/auth');
+const {
+  register,
+  login,
+  logout,
+  refreshTokens,
+  forgotPassword,
+  resetPassword,
+  sendVerificationEmail,
+  verifyEmail,
+} = authController;
 
 const router = express.Router();
 
 router
-  .post('/register', validate(authValidation.register), authController.register)
-  .post('/login', validate(authValidation.login), authController.login)
-  .post('/logout', validate(authValidation.logout), authController.logout)
-  .post('/refresh-tokens', validate(authValidation.refreshTokens), authController.refreshTokens)
-  .post('/forgot-password', validate(authValidation.forgotPassword), authController.forgotPassword)
-  .post('/reset-password', validate(authValidation.resetPassword), authController.resetPassword)
+  .post('/register', validate(authValidation.register), register)
+  .post('/login', validate(authValidation.login), login)
+  .post('/logout', validate(authValidation.logout), logout)
+  .post('/refresh-tokens', validate(authValidation.refreshTokens), refreshTokens)
+  .post('/forgot-password', validate(authValidation.forgotPassword), forgotPassword)
+  .post('/reset-password', validate(authValidation.resetPassword), resetPassword)
   .post('/send-verification-email', auth(), authController.sendVerificationEmail)
-  .post('/verify-email', validate(authValidation.verifyEmail), authController.verifyEmail);
+  .post('/verify-email', validate(authValidation.verifyEmail), verifyEmail);
 
 module.exports = router;
 

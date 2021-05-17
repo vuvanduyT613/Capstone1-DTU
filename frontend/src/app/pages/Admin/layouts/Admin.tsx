@@ -1,15 +1,13 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
-// components
 
+// components
 import AdminNavbar from '../components/Navbars/AdminNavbar';
 import Sidebar from '../components/Sidebar/Sidebar';
 import HeaderStats from '../components/Headers/HeaderStats';
 import FooterAdmin from '../components/Footers/FooterAdmin';
 
 // views
-
 import Dashboard from '../views/admin/Dashboard';
 import Tables from '../views/admin/Tables';
 

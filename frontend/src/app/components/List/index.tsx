@@ -5,7 +5,7 @@
  */
 import * as React from 'react';
 import { ItemDoctor } from './components/ItemDoctor';
-import { useTranslation } from 'react-i18next';
+//import { useTranslation } from 'react-i18next';
 import useStyles from './styles';
 
 interface Props {}

@@ -20,3 +20,7 @@ module.exports.Booking = require(`./appointments/booking.nodel`);
 module.exports.Office = require(`./offices/office.model`);
 module.exports.NetworkInsurance = require(`./offices/networkInsurance.model`);
 module.exports.OfficeDoctor = require(`./offices/officeDoctor.model`);
+
+//chat
+module.exports.ChatRoom = require('./chat/chatRoom.model');
+module.exports.Message = require('./chat/messages.model');

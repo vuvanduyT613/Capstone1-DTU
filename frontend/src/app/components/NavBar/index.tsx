@@ -2,7 +2,6 @@ import * as React from 'react';
 import { Header } from './Header';
 import useStyles from './styles';
 import { Nav } from './Nav';
-import { PageWrapper } from '../PageWrapper';
 
 export function NavBar() {
   const classes = useStyles();

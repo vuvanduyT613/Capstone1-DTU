@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { toJSON, paginate } = require('../plugins');
 
 const insuranceSchema = mongoose.Schema({
   officeID: {
@@ -14,6 +15,8 @@ const insuranceSchema = mongoose.Schema({
 });
 
 // add plugin that converts mongoose to json
+insuranceSchema.plugin(toJSON);
+insuranceSchema.plugin(paginate);
 
 const Insurance = mongoose.model('insurances', insuranceSchema);
 

@@ -16,25 +16,9 @@ const createOffice = {
   }),
 };
 
-const getOffice = {
-  query: Joi.object().keys({
-    name: Joi.string(),
-    role: Joi.string(),
-    sortBy: Joi.string(),
-    limit: Joi.number().integer(),
-    page: Joi.number().integer(),
-  }),
-};
-
-const getOffice = {
-  params: Joi.object().keys({
-    userId: Joi.string().custom(objectId),
-  }),
-};
-
 const updateOffice = {
-  params: Joi.object().keys({
-    userId: Joi.required().custom(objectId),
+  query: Joi.object().keys({
+    id: Joi.required().custom(objectId),
   }),
   body: Joi.object()
     .keys({
@@ -52,16 +36,7 @@ const updateOffice = {
     .min(1),
 };
 
-const deleteOffice = {
-  params: Joi.object().keys({
-    userId: Joi.string().custom(objectId),
-  }),
-};
-
 module.exports = {
   createOffice,
-  getOffice,
-  getOffice,
   updateOffice,
-  deleteOffice,
 };

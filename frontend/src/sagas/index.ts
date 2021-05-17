@@ -1,4 +1,4 @@
-import { all, takeLatest, takeEvery, takeLeading } from 'redux-saga/effects';
+import { all, takeLatest, /*takeEvery*/ takeLeading } from 'redux-saga/effects';
 import { signIn, sendEmail, signUp } from './Authentication';
 import { getAll } from './users';
 

@@ -68,6 +68,7 @@
     "passport-jwt": "^4.0.0",
     "pm2": "^4.1.2",
     "random": "^3.0.6",
+    "sharp": "^0.28.2",
     "socket.io": "^4.0.2",
     "swagger-jsdoc": "^6.0.8",
     "swagger-ui-express": "^4.1.6",

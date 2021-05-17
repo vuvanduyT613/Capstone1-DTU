@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { toJSON, paginate } = require('../plugins');
 
 const hospitalSchema = mongoose.Schema(
   {
@@ -11,18 +12,20 @@ const hospitalSchema = mongoose.Schema(
       type: String,
       required: true,
       unique: true,
+      max: 50,
       trim: true,
     },
     city: {
       type: String,
       required: true,
       trim: true,
-      minlength: 8,
+      min: 8,
+      max: 50,
       private: true, // used by the toJSON plugin
     },
     country: {
       type: String,
-      default: 'user',
+      default: 'Countrys',
     },
   },
   {
@@ -30,7 +33,9 @@ const hospitalSchema = mongoose.Schema(
   }
 );
 
-// add plugin that converts mongoose to json;
+// add plugin that converts mongoose to json
+hospitalSchema.plugin(toJSON);
+hospitalSchema.plugin(paginate);
 
 /**
  * @typedef Hospital

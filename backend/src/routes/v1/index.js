@@ -6,6 +6,7 @@ const docsRoute = require('./docs.route');
 const doctorRoute = require('./doctor.route');
 const officeRoute = require('./office.route');
 const appointmentRoute = require('./appointment.route');
+const chatRoute = require('./chat.route');
 const config = require('../../config/config');
 
 const router = express.Router();
@@ -35,10 +36,14 @@ const defaultRoutes = [
     path: '/appointments',
     route: appointmentRoute,
   },
+  {
+    path: '/chats',
+    route: chatRoute,
+  },
 ];
 
+// routes available only in development mode
 const devRoutes = [
-  // routes available only in development mode
   {
     path: '/docs',
     route: docsRoute,

@@ -15,7 +15,7 @@ export function ItemDoctor(props: Props) {
     <>
       <div className={classes.wrapperItem}>
         <div className={classes.wrapperItemImage}>
-          <img className={classes.imageItem} src={Image} />
+          <img className={classes.imageItem} src={Image} alt={`profile`} />
         </div>
         <div className={classes.contentItem}>
           <p className={classes.name}> Nguyễn Duy Hưng </p>

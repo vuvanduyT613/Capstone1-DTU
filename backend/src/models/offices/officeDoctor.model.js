@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { toJSON, paginate } = require('../plugins');
 
 const officeDoctorSchema = mongoose.Schema(
   {
@@ -32,7 +33,12 @@ const officeDoctorSchema = mongoose.Schema(
 );
 
 // add plugin that converts mongoose to json
+officeDoctorSchema.plugin(toJSON);
+officeDoctorSchema.plugin(paginate);
 
+/**
+ * @typedef OfficeDoctor
+ */
 const OfficeDoctor = mongoose.model('officeDoctor', officeDoctorSchema);
 
 module.exports = OfficeDoctor;

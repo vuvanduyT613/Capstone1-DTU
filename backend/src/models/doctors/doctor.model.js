@@ -6,19 +6,21 @@ const doctorSchema = mongoose.Schema(
     fistName: {
       type: String,
       required: true,
+      max: 25,
       trim: true,
     },
     lastName: {
       type: String,
       required: true,
-      unique: true,
+      max: 25,
       trim: true,
     },
     professionalStateme: {
       type: String,
       required: true,
       trim: true,
-      minlength: 8,
+      min: 8,
+      max: 50,
       private: true, // used by the toJSON plugin
     },
     practicingFrom: {

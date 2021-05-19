@@ -1,30 +1,33 @@
-const express = require('express');
-const auth = require('../../middlewares/auth');
-const validate = require('../../middlewares/validate');
-const authValidation = require('../../validations/auth.validation');
-const { authController } = require('../../controllers');
+const express = require("express");
+const auth = require("../../middlewares/auth");
+const validate = require("../../middlewares/validate");
+const authValidation = require("../../validations/auth.validation");
+const { authController } = require("../../controllers");
+const uploadCloud = require("../../config/cloudinary");
+const { assign } = require("../../middlewares/assign");
+
 const {
-  register,
-  login,
-  logout,
-  refreshTokens,
-  forgotPassword,
-  resetPassword,
-  sendVerificationEmail,
-  verifyEmail,
+	register,
+	login,
+	logout,
+	refreshTokens,
+	forgotPassword,
+	resetPassword,
+	sendVerificationEmail,
+	verifyEmail,
 } = authController;
 
 const router = express.Router();
 
 router
-  .post('/register', validate(authValidation.register), register)
-  .post('/login', validate(authValidation.login), login)
-  .post('/logout', validate(authValidation.logout), logout)
-  .post('/refresh-tokens', validate(authValidation.refreshTokens), refreshTokens)
-  .post('/forgot-password', validate(authValidation.forgotPassword), forgotPassword)
-  .post('/reset-password', validate(authValidation.resetPassword), resetPassword)
-  .post('/send-verification-email', auth(), authController.sendVerificationEmail)
-  .post('/verify-email', validate(authValidation.verifyEmail), verifyEmail);
+	.post("/register", uploadCloud.single("avatar"), assign("avatar"), validate(authValidation.register), register)
+	.post("/login", validate(authValidation.login), login)
+	.post("/logout", validate(authValidation.logout), logout)
+	.post("/refresh-tokens", validate(authValidation.refreshTokens), refreshTokens)
+	.post("/forgot-password", validate(authValidation.forgotPassword), forgotPassword)
+	.post("/reset-password", validate(authValidation.resetPassword), resetPassword)
+	.post("/send-verification-email", auth(), sendVerificationEmail)
+	.post("/verify-email", validate(authValidation.verifyEmail), verifyEmail);
 
 module.exports = router;
 

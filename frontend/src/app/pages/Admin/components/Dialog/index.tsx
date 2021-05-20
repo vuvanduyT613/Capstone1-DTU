@@ -3,29 +3,29 @@
  * Dialog
  *
  */
-import * as React from "react";
-import { Grid, TextField } from "@material-ui/core";
-import { DropzoneArea } from "material-ui-dropzone";
-import useStyles from "./styles";
-import { Formik, Form } from "formik";
+import * as React from 'react';
+import { Grid, TextField } from '@material-ui/core';
+import { DropzoneArea } from 'material-ui-dropzone';
+import useStyles from './styles';
+import { Formik, Form } from 'formik';
 
 interface Props {}
 
 export function FormDialog(props: Props) {
   const classes = useStyles();
 
-  const submit = async (values) => {};
+  const submit = async values => {};
 
   return (
     <Formik
       enableReinitialize={true}
       initialValues={{
-        name: "",
-        email: "",
-        password: "",
-        role: "",
-        isEmailVerified: "",
-        avatar: "",
+        name: '',
+        email: '',
+        password: '',
+        role: '',
+        isEmailVerified: '',
+        avatar: '',
       }}
       onSubmit={submit}
     >

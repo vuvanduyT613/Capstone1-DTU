@@ -46,15 +46,32 @@ function checkStatus(response: Response) {
  */
 export async function GET(url: string): Promise<{} | { err: ResponseError }> {
   const fetchResponse = await axios.get(url);
-  const response = checkStatus(fetchResponse.data);
-  return parseJSON(response);
+  //@ts-ignore
+  const response = checkStatus(fetchResponse);
+  return response;
 }
 
 /**
  * Requests a URL, returning a promise
  *
  * @param  {string} url       The URL we want to request
- *@param {object} config
+ * @return {object}           The response data
+ */
+export async function POST(
+  url: string,
+  data?: Object,
+): Promise<{} | { err: ResponseError }> {
+  const fetchResponse = await axios.post(url, data);
+  //@ts-ignore
+  const response = await checkStatus(fetchResponse);
+  return response;
+}
+
+/**
+ * Requests a URL, returning a promise
+ *
+ * @param  {string} url       The URL we want to request
+ * @param {object} config
  * @return {object}           The response data
  */
 export async function GET_TOKEN(
@@ -67,11 +84,19 @@ export async function GET_TOKEN(
   return response;
 }
 
-export async function POST(
+/**
+ * Requests a URL, returning a promise
+ *
+ * @param  {string} url       The URL we want to request
+ * @param {object} config
+ * @return {object}           The response data
+ */
+export async function POST_TOKEN(
   url: string,
   data?: Object,
+  config?: Object,
 ): Promise<{} | { err: ResponseError }> {
-  const fetchResponse = await axios.post(url, data);
+  const fetchResponse = await axios.post(url, data, config);
   //@ts-ignore
   const response = await checkStatus(fetchResponse);
   return response;

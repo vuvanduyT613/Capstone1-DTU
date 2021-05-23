@@ -15,6 +15,7 @@ const {
 	resetPassword,
 	sendVerificationEmail,
 	verifyEmail,
+	routeResetPassword,
 } = authController;
 
 const router = express.Router();
@@ -27,8 +28,8 @@ router
 	.post("/forgot-password", validate(authValidation.forgotPassword), forgotPassword)
 	.post("/reset-password", validate(authValidation.resetPassword), resetPassword)
 	.post("/send-verification-email", auth(), sendVerificationEmail)
-	.post("/verify-email", validate(authValidation.verifyEmail), verifyEmail);
-
+	.post("/verify-email", validate(authValidation.verifyEmail), verifyEmail)
+	.get("/reset-password", routeResetPassword);
 module.exports = router;
 
 /**

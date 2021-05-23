@@ -6,19 +6,9 @@ const useStyles = makeStyles((theme: Theme) =>
     righticon: {
       cursor: 'pointer',
     },
-    lefticon: {
-      cursor: 'pointer',
-      width: '14px',
-      height: '14px',
-      color: 'rgba(0, 53, 142, 0.8)',
-      '::last-child': {
-        color: 'red',
-      },
-    },
     inputCustom: {
       width: '100%',
       marginTop: 18,
-      borderRadius: '5px',
       background: color.white,
 
       '& fieldset': {
@@ -34,6 +24,28 @@ const useStyles = makeStyles((theme: Theme) =>
       '& .MuiOutlinedInput-adornedStart': {
         paddingLeft: 30,
       },
+    },
+    status: {
+      backgroundColor: '#ccc',
+      borderRadius: '50%',
+      display: 'inline-block',
+      height: '10px',
+      width: '10px',
+    },
+    online: {
+      position: 'absolute',
+      bottom: '18px',
+      right: '57px',
+      height: '10px',
+      width: '10px',
+      borderRadius: '50%',
+      backgroundColor: '#55ce63',
+    },
+    offline: {
+      backgroundColor: '#f62d51',
+    },
+    away: {
+      backgroundColor: '#faa937',
     },
   }),
 );

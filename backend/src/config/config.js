@@ -59,7 +59,7 @@ module.exports = {
 			host: envVars.SMTP_HOST,
 			port: envVars.SMTP_PORT,
 			tls: {
-				rejectUnauthorized: false,
+				rejectUnauthorized: true,
 			},
 			auth: {
 				user: envVars.SMTP_USERNAME,

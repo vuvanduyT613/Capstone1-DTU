@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef, forwardRef } from 'react';
 import CustomInput from '../components/CustomInput';
 import Images from '../../../asset/image';
 import ReactCodeInput from 'react-verification-code-input';
@@ -9,7 +9,11 @@ import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import { ToastContainer, toast } from 'react-toastify';
 import Countdown from 'react-countdown';
-
+import { Grid } from '@material-ui/core';
+import DatePicker from 'react-datepicker';
+import { ReactComponent as Calendar } from 'app/asset/image/ic-calendar.svg';
+import { Redirect } from 'react-router-dom';
+import 'react-datepicker/dist/react-datepicker.css';
 export interface loginFormInterface {
   handleTosignUp: Function;
 }
@@ -21,11 +25,36 @@ const SignUpStepper = () => {
   const { code, email } = useSelector(
     (state: rootState) => state.authenReducer.email,
   );
+  const refToAvatar = useRef<HTMLInputElement>(null);
   const dispatch = useDispatch();
   const [codeEnter, setCodeEnter] = useState({ code: 0 });
   const [showPass, setShowPass] = useState(false);
   const [showPassConfirm, setShowPassConfirm] = useState(false);
+  const [location, setLocation] = useState(false);
   const classes = useStyles();
+
+  useEffect(() => {
+    if (step === 0) setLocation(true);
+  }, [step]);
+
+  const CustomInputDatePicker = forwardRef((props: any, ref) => {
+    return (
+      <input
+        style={{
+          border: '0px',
+          height: '50px',
+          width: '396px',
+          outline: 'none',
+          fontSize: '15px',
+          '&:active': {
+            border: '0px',
+          },
+        }}
+        {...props}
+        ref={ref}
+      />
+    );
+  });
 
   const handleStep = moveStep => {
     if (moveStep < 0) {
@@ -37,7 +66,7 @@ const SignUpStepper = () => {
           },
         });
     } else {
-      step < 4 &&
+      step < 6 &&
         dispatch({
           type: 'UPDATE_FIELD_SIGN_UP',
           payload: {
@@ -49,7 +78,7 @@ const SignUpStepper = () => {
 
   const sendEmail = email => {
     if (email) {
-      toast.success(`Success step ${step}/4 !`);
+      toast.success(`Success step ${step}/5 !`);
       handleStep(1);
       dispatch({
         type: 'UPDATE_FIELD_SIGN_UP_SEND_EMAIL',
@@ -62,166 +91,332 @@ const SignUpStepper = () => {
 
   const codeEmail = () => {
     if (codeEnter.code === code) {
-      toast.success(`Success step ${step}/4 !`);
+      toast.success(`Success step ${step}/5 !`);
       handleStep(1);
     } else toast.error('Authentication code is incorrect.!');
   };
 
-  const check = err => {
-    err
-      ? toast.error(err)
-      : toast.success(`Success step ${step}/4 !`) && handleStep(1);
+  const checkField = err => {
+    err.fistName ||
+    err.lastName ||
+    err.dateOfBirth ||
+    err.country ||
+    err.city ||
+    err.province ||
+    err.postalCode ||
+    err.phone
+      ? toast.error('Please check field.!')
+      : toast.success(`Success step ${step}/5 !`) && handleStep(1);
+  };
+
+  const checkAuth = err => {
+    err.changepassword
+      ? toast.error(err.changepassword)
+      : toast.success(`Success step ${step}/5 !`) && handleStep(1);
+  };
+
+  const checkAvatar = (err, values) => {
+    err.avatar
+      ? toast.error(err.avatar)
+      : toast.success(`Success step ${step}/5 !`) &&
+        signUp(values) &&
+        handleStep(1);
+  };
+
+  const handleChooseAvatar = () => {
+    if (refToAvatar.current !== null) {
+      refToAvatar.current.click();
+    }
   };
 
   const signUp = values => {
     dispatch({
       type: 'UPDATE_FIELD_SIGN_UP_API',
-      payload: {
-        name: values.name,
-        email: values.email,
-        password: values.password,
-      },
+      payload: values,
     });
   };
 
   return (
-    <Formik
-      initialValues={{
-        email: email,
-        name: '',
-        password: '',
-        changepassword: '',
-        avatar: '',
-      }}
-      validationSchema={Schema}
-      onSubmit={signUp}
-    >
-      {({ handleChange, values, handleSubmit, errors }) => (
-        <Form className={classes.wrapperForm}>
-          <ToastContainer
-            position="top-right"
-            autoClose={3000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-          />
-          <div className={classes.wrapperSignUp}>
-            {step === 1 ? (
-              <CustomInput
-                defaultvalue={values.email}
-                name="email"
-                typeInput="email"
-                iconLeft={Images.icMail.default}
-                handlerChange={e => handleChange(e)}
+    <>
+      {location === false ? (
+        <Formik
+          initialValues={{
+            email: email,
+            fistName: '',
+            lastName: '',
+            dateOfBirth: new Date(),
+            password: '',
+            changepassword: '',
+            country: '',
+            city: '',
+            province: '',
+            postalCode: '',
+            phone: '',
+            avatar: '',
+          }}
+          validationSchema={Schema}
+          onSubmit={signUp}
+        >
+          {({ handleChange, values, setFieldValue, errors }) => (
+            <Form className={classes.wrapperForm}>
+              <ToastContainer
+                position="top-right"
+                autoClose={3000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
               />
-            ) : step === 2 ? (
-              <>
-                <ReactCodeInput
-                  className={classes.otpCode}
-                  type="number"
-                  onChange={e => setCodeEnter({ code: Number(e) })}
-                  fields={4}
-                />
-                <div className={classes.sentCode}>
-                  Resend code in{' '}
-                  <span className={classes.time}>
-                    <Countdown date={Date.now() + 220000} />
-                  </span>
-                </div>
-              </>
-            ) : step === 3 ? (
-              <>
-                <CustomInput
-                  off={true}
-                  defaultvalue={values.email}
-                  typeInput="email"
-                  iconLeft={Images.icMail.default}
-                />
-                <CustomInput
-                  defaultvalue={values.name}
-                  name="name"
-                  iconLeft={Images.icPerson.default}
-                  handlerChange={e => handleChange(e)}
-                />
-              </>
-            ) : step === 4 ? (
-              <>
-                <CustomInput
-                  name="password"
-                  defaultvalue={values.password}
-                  typeInput={showPass ? 'text' : 'password'}
-                  placeholder="Password"
-                  iconLeft={Images.iconPass.default}
-                  iconRight={Images.iconOpenPass.default}
-                  handlerChange={e => handleChange(e)}
-                  handleClickRightIcon={() => setShowPass(!showPass)}
-                />
-                <CustomInput
-                  name="changepassword"
-                  defaultvalue={values.changepassword}
-                  typeInput={showPassConfirm ? 'text' : 'password'}
-                  placeholder="changepassword"
-                  iconLeft={Images.iconPass.default}
-                  iconRight={Images.iconOpenPass.default}
-                  handlerChange={e => handleChange(e)}
-                  handleClickRightIcon={() =>
-                    setShowPassConfirm(!showPassConfirm)
+              <div className={classes.wrapperSignUp}>
+                {step === 1 ? (
+                  <CustomInput
+                    defaultvalue={values.email}
+                    name="email"
+                    typeInput="email"
+                    iconLeft={Images.icMail.default}
+                    placeholder={'Email your email address'}
+                    handlerChange={e => handleChange(e)}
+                  />
+                ) : step === 2 ? (
+                  <>
+                    <ReactCodeInput
+                      className={classes.otpCode}
+                      type="number"
+                      onChange={e => setCodeEnter({ code: Number(e) })}
+                      fields={4}
+                    />
+                    <div className={classes.sentCode}>
+                      Resend code in{' '}
+                      <span className={classes.time}>
+                        <Countdown date={Date.now() + 220000} />
+                      </span>
+                    </div>
+                  </>
+                ) : step === 3 ? (
+                  <>
+                    <Grid direction="row" container>
+                      <CustomInput
+                        defaultvalue={values.phone}
+                        name="phone"
+                        iconLeft={Images.icPhone.default}
+                        handlerChange={e => handleChange(e)}
+                        placeholder={'Phone Number'}
+                      />
+                      <Grid xs={6}>
+                        <CustomInput
+                          defaultvalue={values.fistName}
+                          name="fistName"
+                          iconLeft={Images.icPerson.default}
+                          handlerChange={e => handleChange(e)}
+                          placeholder={'Fist name'}
+                        />
+                      </Grid>
+                      <Grid xs={1} />
+                      <Grid xs={5}>
+                        <CustomInput
+                          defaultvalue={values.lastName}
+                          name="lastName"
+                          handlerChange={e => handleChange(e)}
+                          placeholder={'Last Name'}
+                        />
+                      </Grid>
+                    </Grid>
+                    <Grid xs={12} className={classes.datePicker}>
+                      <Calendar className={classes.date} />
+                      <DatePicker
+                        selected={values.dateOfBirth}
+                        onChange={date => {
+                          setFieldValue('dateOfBirth', date);
+                        }}
+                        isClearable={true}
+                        placeholderText="Date Time"
+                        customInput={<CustomInputDatePicker />}
+                      />
+                    </Grid>
+                    <CustomInput
+                      defaultvalue={values.country}
+                      name="country"
+                      iconLeft={Images.isCountry.default}
+                      handlerChange={e => handleChange(e)}
+                      placeholder={'Country'}
+                    />
+                    <CustomInput
+                      defaultvalue={values.city}
+                      name="city"
+                      iconLeft={Images.isCity.default}
+                      handlerChange={e => handleChange(e)}
+                      placeholder={'City'}
+                    />
+                    <CustomInput
+                      defaultvalue={values.province}
+                      name="province"
+                      iconLeft={Images.isAddress.default}
+                      handlerChange={e => handleChange(e)}
+                      placeholder={'Province'}
+                    />
+                    <CustomInput
+                      defaultvalue={values.postalCode}
+                      name="postalCode"
+                      iconLeft={Images.isPostcode.default}
+                      handlerChange={e => handleChange(e)}
+                      placeholder={'Postal Code'}
+                    />
+                  </>
+                ) : step === 4 ? (
+                  <>
+                    <CustomInput
+                      name="password"
+                      defaultvalue={values.password}
+                      typeInput={showPass ? 'text' : 'password'}
+                      placeholder="Password"
+                      iconLeft={Images.iconPass.default}
+                      iconRight={Images.iconOpenPass.default}
+                      handlerChange={e => handleChange(e)}
+                      handleClickRightIcon={() => setShowPass(!showPass)}
+                    />
+                    <CustomInput
+                      name="changepassword"
+                      defaultvalue={values.changepassword}
+                      typeInput={showPassConfirm ? 'text' : 'password'}
+                      placeholder="changepassword"
+                      iconLeft={Images.iconPass.default}
+                      handlerChange={e => handleChange(e)}
+                      handleClickRightIcon={() =>
+                        setShowPassConfirm(!showPassConfirm)
+                      }
+                    />
+                  </>
+                ) : step === 5 ? (
+                  <>
+                    <input
+                      hidden
+                      type="file"
+                      accept="image/*"
+                      name="avatar"
+                      onChange={e => {
+                        //@ts-ignore
+
+                        const file = e.target.files[0];
+                        setFieldValue('avatar', file);
+                      }}
+                      ref={refToAvatar}
+                    />
+                    {values.avatar ? (
+                      <>
+                        <img
+                          src={URL.createObjectURL(values.avatar)}
+                          className={classes.avatar}
+                        />
+                        <div
+                          onClick={handleChooseAvatar}
+                          className={classes.changeImage}
+                        >
+                          Change image
+                        </div>
+                      </>
+                    ) : (
+                      <div
+                        className={classes.areaUploadAvatar}
+                        onClick={handleChooseAvatar}
+                      >
+                        <img src={Images.iconAdd.default} />
+                      </div>
+                    )}
+                  </>
+                ) : (
+                  <> </>
+                )}
+                <button
+                  className={classes.continueBtn}
+                  onClick={() =>
+                    step === 1
+                      ? sendEmail(values.email)
+                      : step === 2
+                      ? codeEmail()
+                      : step === 3
+                      ? checkField(errors)
+                      : step === 4
+                      ? checkAuth(errors)
+                      : step === 5
+                      ? checkAvatar(errors, values)
+                      : null
                   }
-                />
-              </>
-            ) : (
-              <> </>
-            )}
-            <button
-              className={classes.continueBtn}
-              onClick={() => {
-                switch (step) {
-                  case 1:
-                    sendEmail(values.email);
-                    break;
-                  case 2:
-                    codeEmail();
-                    break;
-                  case 3:
-                    check(errors.name);
-                    break;
-                  case 4:
-                    check(errors.changepassword);
-                    break;
-                }
-              }}
-            >
-              {step < 4 ? 'Next' : 'Sign up'}
-              <div className={classes.step}>Step {step}/4</div>
-            </button>
-            {step !== 1 ? (
-              <button
-                className={classes.prevBtn}
-                onClick={() => handleStep(-1)}
-              >
-                Back to
-              </button>
-            ) : (
-              ''
-            )}
-          </div>
-        </Form>
+                >
+                  {step < 5 ? 'Next' : 'Sign up'}
+                  <div className={classes.step}>Step {step}/5</div>
+                </button>
+                {step !== 1 ? (
+                  <button
+                    className={classes.prevBtn}
+                    onClick={() => handleStep(-1)}
+                  >
+                    Back to
+                  </button>
+                ) : (
+                  ''
+                )}
+              </div>
+            </Form>
+          )}
+        </Formik>
+      ) : (
+        window.location.reload()
       )}
-    </Formik>
+    </>
   );
 };
 
 const Schema = Yup.object().shape({
-  name: Yup.string()
+  email: Yup.string()
     .trim()
     .matches(/^[A-Za-z 0-9]*$/, 'Please enter valid name.!')
-    .min(2, 'Too Short !')
+    .min(10, 'Too Short !')
+    .max(13, 'Too Long !')
+    .required('Please enter phone.!'),
+  fistName: Yup.string()
+    .matches(/^[A-Za-z 0-9]*$/, 'Please enter valid fist name.!')
+    .min(0, 'Too Short !')
+    .max(15, 'Too Long !')
+    .required('Please enter fist name.!'),
+  lastName: Yup.string()
+    .matches(/^[A-Za-z 0-9]*$/, 'Please enter valid last name.!')
+    .min(0, 'Too Short !')
+    .max(10, 'Too Long !')
+    .required('Please enter last name.!'),
+  dateOfBirth: Yup.string()
+    .min(0, 'Too Short !')
+    .max(100, 'Too Long !')
+    .required('Please enter phone.!'),
+  country: Yup.string()
+    .matches(/^[A-Za-z 0-9]*$/, 'Please enter valid last date of birth.!')
+    .min(0, 'Too Short !')
     .max(50, 'Too Long !')
-    .required('Please enter name.!'),
+    .required('Please enter date of birth.!'),
+  city: Yup.string()
+    .min(0, 'Too Short !')
+    .max(50, 'Too Long !')
+    .required('Please enter city.!'),
+  province: Yup.string()
+    .min(0, 'Too Short !')
+    .max(10, 'Too Long !')
+    .required('Please enter province.!'),
+  postalCode: Yup.string()
+    .min(0, 'Too Short !')
+    .max(10, 'Too Long !')
+    .required('Please enter postal code.!'),
+  phone: Yup.string()
+    .trim()
+    .min(0, 'Too Short !')
+    .max(10, 'Too Long !')
+    .required('Please enter phone.!'),
+  avatar: Yup.string()
+    .trim()
+    .min(0, 'Too Short !')
+    .max(250, 'Too Long !')
+    .required('Please enter avatar.!'),
   password: Yup.string().required('This field is required.!'),
   changepassword: Yup.string()
     .required('This field is required.!')

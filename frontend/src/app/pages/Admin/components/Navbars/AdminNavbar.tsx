@@ -1,6 +1,9 @@
 import React from 'react';
+import UserDropdown from '../../components/Dropdowns/UserDropdown';
+import useStyles from './styles';
 
 export default function Navbar() {
+  const classes = useStyles();
   return (
     <>
       {/* Navbar */}
@@ -14,6 +17,12 @@ export default function Navbar() {
           >
             Dashboard Admin
           </a>
+
+          {/* User */}
+          <ul className="flex-col md:flex-row list-none items-center hidden md:flex">
+            <span className={classes.online}></span>
+            <UserDropdown />
+          </ul>
         </div>
       </nav>
       {/* End Navbar */}

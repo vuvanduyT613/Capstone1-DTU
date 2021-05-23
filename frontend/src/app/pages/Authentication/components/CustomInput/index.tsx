@@ -41,7 +41,7 @@ const CustomInput = (props: customInputProps) => {
       InputProps={{
         startAdornment: iconLeft ? (
           <InputAdornment position="start">
-            <img alt={'img1'} src={iconLeft} />
+            <img alt={'img1'} src={iconLeft} className={classes.lefticon} />
           </InputAdornment>
         ) : undefined,
         endAdornment: iconRight ? (

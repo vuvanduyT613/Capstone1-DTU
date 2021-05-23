@@ -25,6 +25,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     continueBtn: {
       width: '100%',
+      height: '50px',
       marginTop: 30,
       border: 'unset',
       borderRadius: 4,
@@ -44,7 +45,7 @@ const useStyles = makeStyles((theme: Theme) =>
       fontSize: 14,
       color: color.otherWhite,
       opacity: 0.5,
-      right: 14,
+      right: 140,
       top: 15,
     },
     otpCode: {
@@ -174,6 +175,16 @@ const useStyles = makeStyles((theme: Theme) =>
       height: '14px',
       color: ' rgba(0, 53, 142, 0.8)',
       margin: '18px -26px auto auto',
+    },
+    captCha: {
+      display: 'flex',
+      width: '460px',
+      height: '200px',
+      marginTop: '18px',
+      background: '#f9f9f9',
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderRadius: '5px',
     },
   }),
 );

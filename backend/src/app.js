@@ -13,13 +13,16 @@ const { authLimiter } = require("./middlewares/rateLimiter");
 const routes = require("./routes/v1");
 const { errorConverter, errorHandler } = require("./middlewares/error");
 const ApiError = require("./utils/ApiError");
-
+const cookieParser = require("cookie-parser");
 const app = express();
 
 if (config.env !== "test") {
 	app.use(morgan.successHandler);
 	app.use(morgan.errorHandler);
 }
+
+//cookie
+app.use(cookieParser());
 
 // set security HTTP headers
 app.use(helmet());

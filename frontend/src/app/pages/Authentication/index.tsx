@@ -4,8 +4,7 @@
  *
  */
 import * as React from 'react';
-// import styled from 'styled-components/macro';
-import { useTranslation } from 'react-i18next';
+import Cookies from 'js-cookie';
 import Images from '../../asset/image';
 import { useSelector } from 'react-redux';
 import { Grid } from '@material-ui/core';
@@ -13,17 +12,16 @@ import useStyles from './styles';
 import { rootState } from '../../../store/reducers';
 import LoginForm from './LoginForm';
 import SignUpStepper from './SignUpStepper';
+import Forgot from './Forgot';
+import ForgotLast from './ForgotLast';
 import 'react-toastify/dist/ReactToastify.css';
 
 interface Props {}
 
 export function Authentication(props: Props) {
   const classes = useStyles();
-  const [isLoginForm, setIsLoginForm] = React.useState(true);
+  const [isLoginForm, setIsLoginForm] = React.useState(1);
   const { signUp } = useSelector((state: rootState) => state.authenReducer);
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { t, i18n } = useTranslation();
 
   return (
     <Grid container className={classes.wrapperAuthen}>
@@ -44,8 +42,12 @@ export function Authentication(props: Props) {
             className={classes.logo}
           />
           <div className={classes.title}>
-            {isLoginForm
+            {Cookies.get('forgot_token')
+              ? 'Change password'
+              : isLoginForm === 1
               ? 'Sign in'
+              : isLoginForm === 3
+              ? 'Reset your password'
               : signUp.step === 1
               ? "Let's start with your Email"
               : signUp.step === 2
@@ -55,6 +57,8 @@ export function Authentication(props: Props) {
               : signUp.step === 4
               ? 'Now set your password'
               : signUp.step === 5
+              ? 'Add to avatar profile'
+              : signUp.step === 6
               ? 'Back to sign in'
               : ''}
           </div>
@@ -65,10 +69,16 @@ export function Authentication(props: Props) {
           className={classes.innerContent}
           direction="column"
         >
-          {isLoginForm ? (
-            <LoginForm handleTosignUp={() => setIsLoginForm(false)} />
-          ) : (
+          {Cookies.get('forgot_token') ? (
+            <ForgotLast />
+          ) : isLoginForm === 1 ? (
+            <LoginForm handleTosignUp={value => setIsLoginForm(value)} />
+          ) : isLoginForm === 2 ? (
             <SignUpStepper />
+          ) : isLoginForm === 3 ? (
+            <Forgot />
+          ) : (
+            <></>
           )}
         </Grid>
       </Grid>

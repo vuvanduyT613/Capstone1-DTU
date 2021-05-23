@@ -6,10 +6,23 @@ const { roles } = require("../../config/roles");
 
 const userSchema = mongoose.Schema(
 	{
-		name: {
+		fistName: {
+			type: String,
+			required: true,
+			maxlength: 20,
+			trim: true,
+		},
+		lastName: {
+			type: String,
+			required: true,
+			maxlength: 10,
+			trim: true,
+		},
+		userName: {
 			type: String,
 			required: true,
 			trim: true,
+			maxlength: 20,
 		},
 		email: {
 			type: String,
@@ -35,9 +48,39 @@ const userSchema = mongoose.Schema(
 			},
 			private: true, // used by the toJSON plugin
 		},
+		dateOfBirth: {
+			type: Date,
+			require: true,
+		},
+		coutry: {
+			type: String,
+			require: true,
+			maxlength: 10,
+		},
+		city: {
+			type: String,
+			require: true,
+			maxlength: 15,
+		},
+		province: {
+			type: String,
+			require: true,
+			maxlength: 10,
+		},
+		postalCode: {
+			type: String,
+			require: true,
+			maxlength: 10,
+		},
 		role: {
 			type: String,
 			default: "user",
+			maxlength: 5,
+		},
+		Phone: {
+			type: String,
+			require: true,
+			maxlength: 13,
 		},
 		isEmailVerified: {
 			type: Boolean,

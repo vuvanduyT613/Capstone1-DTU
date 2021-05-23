@@ -63,12 +63,15 @@ const LoginForm = (props: loginFormInterface) => {
             handlerChange={e => handleChange(e)}
             handleClickRightIcon={() => setShowPass(!showPass)}
           />
-          <div className={classes.forgotPass}> Forgot password? </div>
+          <div className={classes.forgotPass} onClick={() => handleTosignUp(3)}>
+            {' '}
+            Forgot password?{' '}
+          </div>
           <Grid container spacing={3}>
             <Grid container item xs={12} sm={6}>
               <button
                 className={classes.btnCreate}
-                onClick={() => handleTosignUp()}
+                onClick={() => handleTosignUp(2)}
               >
                 Sign up
               </button>

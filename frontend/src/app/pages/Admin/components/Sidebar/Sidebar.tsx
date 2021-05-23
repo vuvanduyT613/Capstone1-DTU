@@ -110,21 +110,65 @@ export default function Sidebar() {
                 <Link
                   className={
                     'text-xs uppercase py-3 font-bold block ' +
-                    (window.location.href.indexOf('/admin/tables') !== -1
+                    (window.location.href.indexOf('/admin/doctor') !== -1
                       ? 'text-lightBlue-500 hover:text-lightBlue-600'
                       : 'text-blueGray-700 hover:text-blueGray-500')
                   }
-                  to="/admin/tables"
+                  to="/admin/doctor"
                 >
                   <i
                     className={
-                      'fas fa-table mr-2 text-sm ' +
-                      (window.location.href.indexOf('/admin/tables') !== -1
+                      'fa fa-user-md mr-2 text-sm ' +
+                      (window.location.href.indexOf('/admin/doctor') !== -1
                         ? 'opacity-75'
                         : 'text-blueGray-300')
                     }
                   ></i>{' '}
-                  Tables
+                  Doctor
+                </Link>
+              </li>
+
+              <li className="items-center">
+                <Link
+                  className={
+                    'text-xs uppercase py-3 font-bold block ' +
+                    (window.location.href.indexOf('/admin/patient') !== -1
+                      ? 'text-lightBlue-500 hover:text-lightBlue-600'
+                      : 'text-blueGray-700 hover:text-blueGray-500')
+                  }
+                  to="/admin/patient"
+                >
+                  <i
+                    className={
+                      'fa fa-wheelchair mr-2 text-sm ' +
+                      (window.location.href.indexOf('/admin/patient') !== -1
+                        ? 'opacity-75'
+                        : 'text-blueGray-300')
+                    }
+                  ></i>{' '}
+                  Patients
+                </Link>
+              </li>
+
+              <li className="items-center">
+                <Link
+                  className={
+                    'text-xs uppercase py-3 font-bold block ' +
+                    (window.location.href.indexOf('/admin/appointment') !== -1
+                      ? 'text-lightBlue-500 hover:text-lightBlue-600'
+                      : 'text-blueGray-700 hover:text-blueGray-500')
+                  }
+                  to="/admin/appointment"
+                >
+                  <i
+                    className={
+                      'fa fa-calendar mr-2 text-sm ' +
+                      (window.location.href.indexOf('/admin/appointment') !== -1
+                        ? 'opacity-75'
+                        : 'text-blueGray-300')
+                    }
+                  ></i>{' '}
+                  Appointments
                 </Link>
               </li>
             </ul>

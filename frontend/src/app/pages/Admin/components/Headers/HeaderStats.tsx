@@ -15,50 +15,50 @@ export default function HeaderStats() {
             <div className="flex flex-wrap">
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
-                  statSubtitle="TRAFFIC"
+                  statSubtitle="Doctors"
                   statTitle="350,897"
                   statArrow="up"
                   statPercent="3.48"
                   statPercentColor="text-emerald-500"
                   statDescripiron="Since last month"
-                  statIconName="far fa-chart-bar"
-                  statIconColor="bg-red-500"
+                  statIconName="fa fa-stethoscope"
+                  statIconColor="bg-lightBlue-500"
                 />
               </div>
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
-                  statSubtitle="NEW USERS"
+                  statSubtitle="Patients"
                   statTitle="2,356"
                   statArrow="down"
                   statPercent="3.48"
                   statPercentColor="text-red-500"
                   statDescripiron="Since last week"
-                  statIconName="fas fa-chart-pie"
-                  statIconColor="bg-orange-500"
-                />
-              </div>
-              <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
-                <CardStats
-                  statSubtitle="SALES"
-                  statTitle="924"
-                  statArrow="down"
-                  statPercent="1.10"
-                  statPercentColor="text-orange-500"
-                  statDescripiron="Since yesterday"
-                  statIconName="fas fa-users"
+                  statIconName="fa fa-user"
                   statIconColor="bg-pink-500"
                 />
               </div>
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
-                  statSubtitle="PERFORMANCE"
+                  statSubtitle="Attend"
+                  statTitle="924"
+                  statArrow="down"
+                  statPercent="1.10"
+                  statPercentColor="text-orange-500"
+                  statDescripiron="Since yesterday"
+                  statIconName="fa fa-user-md"
+                  statIconColor="bg-purple-200"
+                />
+              </div>
+              <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
+                <CardStats
+                  statSubtitle="Pending"
                   statTitle="49,65%"
                   statArrow="up"
                   statPercent="12"
                   statPercentColor="text-emerald-500"
                   statDescripiron="Since last month"
-                  statIconName="fas fa-percent"
-                  statIconColor="bg-lightBlue-500"
+                  statIconName="fa fa-heartbeat"
+                  statIconColor="bg-orange-500"
                 />
               </div>
             </div>

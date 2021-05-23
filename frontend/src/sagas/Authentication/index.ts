@@ -4,24 +4,32 @@ import {
   UPDATE_FIELD_SIGN_UP_SEND_EMAIL,
   UPDATE_FIELD_SIGN_IN_ERROR,
   UPDATE_FIELD_SIGN_UP,
+  GET_COUNTRY,
 } from 'store/reducers/Authetication/actionTypes';
 import Cookies from 'js-cookie';
 import {
   authenticationSignIn,
   authenticationSendEmail,
   authenticationSignUp,
+  countryAll,
+  authenticationForgot,
+  authenticationReset,
 } from 'utils/apis';
 import { toast } from 'react-toastify';
+
+import { useHistory } from 'react-router-dom';
+const expires = process.env.REACT_APP_EXPIRES_COOKIE;
 
 export function* signIn(action) {
   try {
     const { status, data } = yield call(authenticationSignIn, action.payload);
+
     if (status === 200) {
-      Cookies.set('role', data.user.role);
-      Cookies.set('email', action.payload.email);
-      Cookies.set('password', action.payload.password);
+      Cookies.set('role', data.user.role, expires);
+      Cookies.set('email', action.payload.email, expires);
+      Cookies.set('password', action.payload.password, expires);
       Cookies.set('access_token', data.tokens.access.token);
-      Cookies.set('access_refresh', data.tokens.refresh.token);
+      Cookies.set('refresh_token', data.tokens.refresh.token, expires);
       yield put({
         type: UPDATE_FIELD_SIGN_IN,
         payload: {
@@ -44,20 +52,40 @@ export function* signIn(action) {
 
 export function* signUp(action) {
   try {
-    const { status } = yield call(authenticationSignUp, action.payload);
-    if (status === 200) {
+    const userName = `${action.payload.fistName}${action.payload.lastName}`;
+    const form = new FormData();
+    form.append('userName', userName);
+    form.append('email', action.payload.email);
+    form.append('password', action.payload.changepassword);
+    form.append('fistName', action.payload.fistName);
+    form.append('lastName', action.payload.lastName);
+    form.append('dateOfBirth', action.payload.dateOfBirth);
+    form.append('country', action.payload.country);
+    form.append('city', action.payload.city);
+    form.append('province', action.payload.province);
+    form.append('postalCode', action.payload.postalCode);
+    form.append('phone', action.payload.phone);
+    form.append('avatar', action.payload.avatar);
+
+    const { data, status } = yield call(authenticationSignUp, form);
+    console.log(status);
+    console.log(data);
+    if (status === 201) {
+      Cookies.set('email', action.payload.email, expires);
+      Cookies.set('password', action.payload.password, expires);
       yield put({
         type: UPDATE_FIELD_SIGN_UP,
         payload: {
           email: action.payload.email,
           password: action.payload.password,
+          step: 0,
         },
       });
     }
   } catch (err) {
     toast.error('Email already in use.!');
     yield put({
-      type: 'UPDATE_FIELD_SIGN_UP',
+      type: UPDATE_FIELD_SIGN_UP,
       payload: {
         step: 1,
       },
@@ -79,6 +107,53 @@ export function* sendEmail(action) {
           code: data.code,
         },
       });
+    }
+  } catch (err) {
+    yield put({
+      type: UPDATE_FIELD_SIGN_IN_ERROR,
+      payload: err,
+    });
+  }
+}
+
+export function* getCountry() {
+  try {
+    const { data } = yield call(countryAll);
+    yield put({
+      type: GET_COUNTRY,
+      payload: data,
+    });
+  } catch (err) {
+    yield put({
+      type: UPDATE_FIELD_SIGN_IN_ERROR,
+      payload: err,
+    });
+  }
+}
+
+export function* forgot(action) {
+  try {
+    const { status } = yield call(authenticationForgot, action.payload);
+    if (status === 204) {
+      window.location.reload();
+    }
+  } catch (err) {
+    yield put({
+      type: UPDATE_FIELD_SIGN_IN_ERROR,
+      payload: err,
+    });
+  }
+}
+
+export function* reset(action) {
+  try {
+    const { status } = yield call(authenticationReset, {
+      token: Cookies.get('forgot_token'),
+      password: action.payload.password,
+    });
+    if (status === 204) {
+      Cookies.remove('forgot_token');
+      window.location.reload();
     }
   } catch (err) {
     yield put({

@@ -36,6 +36,12 @@ const resetPassword = catchAsync(async (req, res) => {
 	res.status(httpStatus.NO_CONTENT).send();
 });
 
+const routeResetPassword = catchAsync(async (req, res) => {
+	res.cookie("forgot_token", req.query.token).redirect(
+		`http://localhost:3000/auth/?token=${req.query.token}`
+	);
+});
+
 const sendVerificationEmail = catchAsync(async (req, res) => {
 	const verifyEmailToken = await tokenService.generateVerifyEmailToken(req.user);
 	await emailService.sendVerificationEmail(req.user.email, verifyEmailToken);
@@ -56,4 +62,5 @@ module.exports = {
 	resetPassword,
 	sendVerificationEmail,
 	verifyEmail,
+	routeResetPassword,
 };

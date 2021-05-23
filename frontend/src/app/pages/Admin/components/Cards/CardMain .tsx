@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import { rootState } from 'store/reducers';
 import Pagination from '@material-ui/lab/Pagination';
@@ -9,6 +8,7 @@ import { FormDialog } from '../Dialog';
 
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
+import AddIcon from '@material-ui/icons/Add';
 import {
   Grid,
   IconButton,
@@ -19,7 +19,7 @@ import {
   Button,
 } from '@material-ui/core';
 
-export default function CardTable({ color }) {
+export default function CardTable(props) {
   const [open, setOpen] = React.useState(false);
   const [formDialog, setFormDialog] = React.useState(false);
   const dispatch = useDispatch();
@@ -126,79 +126,41 @@ export default function CardTable({ color }) {
       </Dialog>
 
       <div
+        style={{
+          width: '100%',
+          display: 'flex',
+          justifyContent: 'flex-end',
+          marginBottom: '10px',
+        }}
+      >
+        <Button variant="contained">
+          {' '}
+          <AddIcon /> {props.button}
+        </Button>
+      </div>
+      <div
         className={
           'relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded ' +
-          (color === 'light' ? 'bg-white' : 'bg-lightBlue-900 text-white')
+          (props.color === 'light' ? 'bg-white' : 'bg-lightBlue-900 text-white')
         }
       >
-        <div className="rounded-t mb-0 px-4 py-3 border-0">
-          <div className="flex flex-wrap items-center">
-            <div className="relative w-full px-4 max-w-full flex-grow flex-1">
-              <h3
-                className={
-                  'font-semibold text-lg ' +
-                  (color === 'light' ? 'text-blueGray-700' : 'text-white')
-                }
-              >
-                Doctor Tables
-              </h3>
-            </div>
-          </div>
-        </div>
         <div className="block w-full overflow-x-auto">
           {/* Projects table */}
           <table className="items-center w-full bg-transparent border-collapse">
             <thead>
               <tr>
-                <th
-                  className={
-                    'px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left ' +
-                    (color === 'light'
-                      ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
-                      : 'bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700')
-                  }
-                >
-                  Name
-                </th>
-                <th
-                  className={
-                    'px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left ' +
-                    (color === 'light'
-                      ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
-                      : 'bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700')
-                  }
-                >
-                  ADDRESS
-                </th>
-                <th
-                  className={
-                    'px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left ' +
-                    (color === 'light'
-                      ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
-                      : 'bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700')
-                  }
-                >
-                  Status
-                </th>
-
-                <th
-                  className={
-                    'px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left ' +
-                    (color === 'light'
-                      ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
-                      : 'bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700')
-                  }
-                >
-                  Roles
-                </th>
-                <th
-                  className={
-                    'px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left ' +
-                    (color === 'light'
-                      ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
-                      : 'bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700')
-                  }
-                ></th>
+                {props.column.map((value, key) => (
+                  <th
+                    className={
+                      'px-6  text-left align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold ' +
+                      (props.color === 'light'
+                        ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
+                        : 'bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700')
+                    }
+                  >
+                    {value}
+                  </th>
+                ))}
               </tr>
             </thead>
             <tbody>
@@ -219,7 +181,7 @@ export default function CardTable({ color }) {
                         <span
                           className={
                             'ml-3 font-bold ' +
-                            +(color === 'light'
+                            +(props.color === 'light'
                               ? 'text-blueGray-600'
                               : 'text-white')
                           }
@@ -228,19 +190,23 @@ export default function CardTable({ color }) {
                         </span>
                       </th>
                       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                        {value.email}
-                      </td>
-                      <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                        <i className="fas fa-circle text-orange-500 mr-2"></i>{' '}
-                        pending
+                        18
                       </td>
 
                       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                         <div className="flex items-center">
-                          <span className="mr-2">{value.role}</span>
+                          <span className="mr-2">Krong Buk, Dak Lak</span>
                         </div>
                       </td>
-                      <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-right">
+
+                      <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                        0335209131
+                      </td>
+
+                      <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                        {value.email}
+                      </td>
+                      <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
                         <Grid>
                           <IconButton
                             color="primary"
@@ -268,12 +234,17 @@ export default function CardTable({ color }) {
               }
             </tbody>
           </table>
-          <div
-            style={{ width: '100%', display: 'flex', justifyContent: 'center' }}
-          >
-            <Pagination count={10} color="primary" />
-          </div>
         </div>
+      </div>
+      <div
+        style={{
+          width: '100%',
+          display: 'flex',
+          justifyContent: 'flex-end',
+          marginBottom: '2px',
+        }}
+      >
+        <Pagination count={10} variant="outlined" shape="rounded" />
       </div>
     </>
   );
@@ -281,8 +252,4 @@ export default function CardTable({ color }) {
 
 CardTable.defaultProps = {
   color: 'light',
-};
-
-CardTable.propTypes = {
-  color: PropTypes.oneOf(['light', 'dark']),
 };

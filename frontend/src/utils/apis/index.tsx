@@ -17,6 +17,10 @@ export const authenticationSignUp = payload => {
   return POST(`${ENDPOINT}/auth/register`, payload);
 };
 
+export const authenticationSignUpDoctor = payload => {
+  return POST(`${ENDPOINT}/doctors/v1`, payload);
+};
+
 export const authenticationRefreshToken = payload => {
   const config = {
     headers: { Authorization: `Bearer ${payload.token}` },
@@ -51,7 +55,16 @@ export const userGetAll = payload => {
   const config = {
     headers: { Authorization: `Bearer ${payload.token}` },
   };
-  return GET_TOKEN(`${ENDPOINT}/users`, config);
+  return GET_TOKEN(`${ENDPOINT}/users?limit=5&page=${payload.page}`, config);
+};
+
+// Doctor
+export const doctorGetAll = payload => {
+  console.log(payload);
+  const config = {
+    headers: { Authorization: `Bearer ${payload.token}` },
+  };
+  return GET_TOKEN(`${ENDPOINT}/doctors/v1?limit=5&page=${payload.page}`, config);
 };
 
 //get country

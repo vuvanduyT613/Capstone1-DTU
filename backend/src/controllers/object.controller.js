@@ -3,12 +3,13 @@ const ApiError = require("../utils/ApiError");
 const pick = require("../utils/pick");
 const catchAsync = require("../utils/catchAsync");
 const { handlerObject } = require("../utils/switchModel");
-const { objectService } = require("../services");
+const { objectService, tokenService } = require("../services");
 const { create, query, getById, updateById, deleteById } = objectService;
 
 const createObject = catchAsync(async (req, res) => {
 	const result = await handlerObject(res.locals.redirect, req.params.slug, create, { body: req.body });
-	res.status(httpStatus.CREATED).send(result);
+	const tokens = await tokenService.generateAuthTokens(result);
+	res.status(httpStatus.CREATED).send({ result, tokens });
 });
 
 const getObject = catchAsync(async (req, res) => {

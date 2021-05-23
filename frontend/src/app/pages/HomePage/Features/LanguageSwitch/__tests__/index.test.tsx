@@ -26,18 +26,14 @@ describe('<LanguageSwitch />', () => {
     i18next.changeLanguage('en');
 
     let languageSwitch = renderLanguageSwitch();
-    let label = languageSwitch.queryByText(
-      t(translations.i18nFeature.selectLanguage) as string,
-    );
+    let label = languageSwitch.queryByText(t(translations.i18nFeature.selectLanguage) as string);
     expect(label).toBeInTheDocument();
 
     languageSwitch.unmount();
     i18next.changeLanguage('de');
 
     languageSwitch = renderLanguageSwitch();
-    label = languageSwitch.queryByText(
-      t(translations.i18nFeature.selectLanguage) as string,
-    );
+    label = languageSwitch.queryByText(t(translations.i18nFeature.selectLanguage) as string);
     expect(label).toBeInTheDocument();
   });
 

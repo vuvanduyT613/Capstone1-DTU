@@ -14,12 +14,8 @@ describe('<P />', () => {
 
   it('should use theme from props', () => {
     let p = renderWithTheme(themes.light);
-    expect(p.container.firstChild).toHaveStyle(
-      `color: ${themes.light.textSecondary}`,
-    );
+    expect(p.container.firstChild).toHaveStyle(`color: ${themes.light.textSecondary}`);
     p = renderWithTheme(themes.dark);
-    expect(p.container.firstChild).toHaveStyle(
-      `color: ${themes.dark.textSecondary}`,
-    );
+    expect(p.container.firstChild).toHaveStyle(`color: ${themes.dark.textSecondary}`);
   });
 });

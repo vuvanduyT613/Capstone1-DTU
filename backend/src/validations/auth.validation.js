@@ -11,7 +11,7 @@ const register = {
 		dateOfBirth: Joi.date().required(),
 		country: Joi.string().required(),
 		city: Joi.string().required(),
-		province: Joi.string().required(),
+		address: Joi.string().required(),
 		postalCode: Joi.string().required(),
 		phone: Joi.string().required(),
 		avatar: Joi.string().required(),

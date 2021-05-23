@@ -14,10 +14,10 @@ import {
   countryAll,
   authenticationForgot,
   authenticationReset,
+  authenticationSignUpDoctor,
 } from 'utils/apis';
 import { toast } from 'react-toastify';
 
-import { useHistory } from 'react-router-dom';
 const expires = process.env.REACT_APP_EXPIRES_COOKIE;
 
 export function* signIn(action) {
@@ -62,12 +62,15 @@ export function* signUp(action) {
     form.append('dateOfBirth', action.payload.dateOfBirth);
     form.append('country', action.payload.country);
     form.append('city', action.payload.city);
-    form.append('province', action.payload.province);
+    form.append('address', action.payload.address);
     form.append('postalCode', action.payload.postalCode);
     form.append('phone', action.payload.phone);
     form.append('avatar', action.payload.avatar);
+    const { data, status } = yield call(
+      action.payload.role.value === 'user' ? authenticationSignUp : authenticationSignUpDoctor,
+      form,
+    );
 
-    const { data, status } = yield call(authenticationSignUp, form);
     console.log(status);
     console.log(data);
     if (status === 201) {
@@ -95,10 +98,7 @@ export function* signUp(action) {
 
 export function* sendEmail(action) {
   try {
-    const { status, data } = yield call(
-      authenticationSendEmail,
-      action.payload,
-    );
+    const { status, data } = yield call(authenticationSendEmail, action.payload);
     if (status === 200) {
       yield put({
         type: UPDATE_FIELD_SIGN_UP_SEND_EMAIL,
@@ -135,6 +135,7 @@ export function* forgot(action) {
   try {
     const { status } = yield call(authenticationForgot, action.payload);
     if (status === 204) {
+      Cookies.set('forgot_email', action.payload.email);
       window.location.reload();
     }
   } catch (err) {

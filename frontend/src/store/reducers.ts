@@ -8,11 +8,11 @@ import { InjectedReducersType } from 'utils/types/injector-typings';
 
 import { authenReducer } from './reducers/Authetication';
 
-import { userReducer } from './reducers/Users';
+import { userReducer } from './reducers/Admin';
 
 import { authenInterface } from './reducers/Authetication';
 
-import { userInterface } from './reducers/Users';
+import { userInterface } from './reducers/Admin';
 /**
  * Merges the main reducer with the router state and dynamically injected reducers
  */

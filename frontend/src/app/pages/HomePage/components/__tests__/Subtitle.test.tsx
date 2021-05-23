@@ -4,8 +4,7 @@ import { DefaultTheme } from 'styled-components';
 import { themes } from 'styles/theme/themes';
 import { SubTitle } from '../SubTitle';
 
-const renderWithTheme = (theme: DefaultTheme) =>
-  render(<SubTitle theme={theme} />);
+const renderWithTheme = (theme: DefaultTheme) => render(<SubTitle theme={theme} />);
 
 describe('<Subtitle />', () => {
   it('should render and match the snapshot', () => {
@@ -15,9 +14,7 @@ describe('<Subtitle />', () => {
 
   it('should use theme from props', () => {
     let comp = renderWithTheme(themes.light);
-    expect(comp.container.firstChild).toHaveStyle(
-      `color: ${themes.light.text}`,
-    );
+    expect(comp.container.firstChild).toHaveStyle(`color: ${themes.light.text}`);
     comp = renderWithTheme(themes.dark);
     expect(comp.container.firstChild).toHaveStyle(`color: ${themes.dark.text}`);
   });

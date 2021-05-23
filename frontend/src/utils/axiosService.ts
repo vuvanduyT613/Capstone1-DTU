@@ -57,10 +57,7 @@ export async function GET(url: string): Promise<{} | { err: ResponseError }> {
  * @param  {string} url       The URL we want to request
  * @return {object}           The response data
  */
-export async function POST(
-  url: string,
-  data?: Object,
-): Promise<{} | { err: ResponseError }> {
+export async function POST(url: string, data?: Object): Promise<{} | { err: ResponseError }> {
   const fetchResponse = await axios.post(url, data);
   //@ts-ignore
   const response = await checkStatus(fetchResponse);
@@ -74,10 +71,7 @@ export async function POST(
  * @param {object} config
  * @return {object}           The response data
  */
-export async function GET_TOKEN(
-  url: string,
-  config: object,
-): Promise<{} | { err: ResponseError }> {
+export async function GET_TOKEN(url: string, config: object): Promise<{} | { err: ResponseError }> {
   const fetchResponse = await axios.get(url, config);
   //@ts-ignore
   const response = checkStatus(fetchResponse);

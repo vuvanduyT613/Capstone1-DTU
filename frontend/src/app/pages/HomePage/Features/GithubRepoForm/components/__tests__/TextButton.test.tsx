@@ -16,8 +16,6 @@ describe('<TextButton />', () => {
 
   it('should have theme', () => {
     const button = renderWithTheme();
-    expect(button.container.firstChild).toHaveStyle(
-      `color: ${themes.light.primary}`,
-    );
+    expect(button.container.firstChild).toHaveStyle(`color: ${themes.light.primary}`);
   });
 });

@@ -36,7 +36,7 @@ const Forgot = () => {
           validationSchema={Schema}
           onSubmit={signUp}
         >
-          {({ handleChange, values, errors }) => (
+          {({ handleChange, values, errors, handleSubmit }) => (
             <Form className={classes.wrapperForm}>
               <div className={classes.wrapperSignUp}>
                 <CustomInput
@@ -48,18 +48,11 @@ const Forgot = () => {
                   handlerChange={e => handleChange(e)}
                 />
                 <div className={classes.captCha}>
-                  <ReCAPTCHA
-                    sitekey="Your client site key"
-                    ref={recaptchaRef}
-                  />
-                  ,
+                  <ReCAPTCHA sitekey="Your client site key" ref={recaptchaRef} />,
                 </div>
                 <button
                   className={classes.continueBtn}
-                  onClick={() => {
-                    errors && toast.error(errors.email);
-                    signUp(values);
-                  }}
+                  onClick={() => (errors ? toast.error(errors.email) : handleSubmit)}
                 >
                   Send password rest email
                 </button>
@@ -75,10 +68,7 @@ const Forgot = () => {
 };
 
 const Schema = Yup.object().shape({
-  email: Yup.string()
-    .trim()
-    .max(50, 'Too Long !')
-    .required('Please enter email.!'),
+  email: Yup.string().trim().max(50, 'Too Long !').required('Please enter email.!'),
 });
 
 export default Forgot;

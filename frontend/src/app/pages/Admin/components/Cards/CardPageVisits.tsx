@@ -9,9 +9,7 @@ export default function CardPageVisits() {
         <div className="rounded-t mb-0 px-4 py-3 border-0">
           <div className="flex flex-wrap items-center">
             <div className="relative w-full px-4 max-w-full flex-grow flex-1">
-              <h3 className="font-semibold text-base text-blueGray-700">
-                Upcoming Appointments
-              </h3>
+              <h3 className="font-semibold text-base text-blueGray-700">Upcoming Appointments</h3>
             </div>
             <div className="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
               <button
@@ -36,10 +34,7 @@ export default function CardPageVisits() {
             <tbody>
               <tr>
                 <th className="flex border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                  <img
-                    className="h-16 rounded-full"
-                    src="../../assets/img/angular.jpg"
-                  />
+                  <img className="h-16 rounded-full" src="../../assets/img/angular.jpg" />
                   <div className="items-content m-4">
                     <p>Mr. Duy vu</p>
                     <p className="text-lightBlue-600">New York, USA</p>
@@ -68,10 +63,7 @@ export default function CardPageVisits() {
               </tr>
               <tr>
                 <th className="flex border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                  <img
-                    className="h-16 rounded-full"
-                    src="../../assets/img/angular.jpg"
-                  />
+                  <img className="h-16 rounded-full" src="../../assets/img/angular.jpg" />
                   <div className="items-content m-4">
                     <p>Mr. Duy vu</p>
                     <p className="text-lightBlue-600">New York, USA</p>
@@ -100,10 +92,7 @@ export default function CardPageVisits() {
               </tr>
               <tr>
                 <th className="flex border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                  <img
-                    className="h-16 rounded-full"
-                    src="../../assets/img/angular.jpg"
-                  />
+                  <img className="h-16 rounded-full" src="../../assets/img/angular.jpg" />
                   <div className="items-content m-4">
                     <p>Mr. Duy vu</p>
                     <p className="text-lightBlue-600">New York, USA</p>
@@ -132,10 +121,7 @@ export default function CardPageVisits() {
               </tr>
               <tr>
                 <th className="flex border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                  <img
-                    className="h-16 rounded-full"
-                    src="../../assets/img/angular.jpg"
-                  />
+                  <img className="h-16 rounded-full" src="../../assets/img/angular.jpg" />
                   <div className="items-content m-4">
                     <p>Mr. Duy vu</p>
                     <p className="text-lightBlue-600">New York, USA</p>
@@ -164,10 +150,7 @@ export default function CardPageVisits() {
               </tr>
               <tr>
                 <th className="flex border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                  <img
-                    className="h-16 rounded-full"
-                    src="../../assets/img/angular.jpg"
-                  />
+                  <img className="h-16 rounded-full" src="../../assets/img/angular.jpg" />
                   <div className="items-content m-4">
                     <p>Mr. Duy vu</p>
                     <p className="text-lightBlue-600">New York, USA</p>

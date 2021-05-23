@@ -9,9 +9,7 @@ export default function CardSocialTraffic() {
         <div className="rounded-t mb-0 px-4 py-3 border-0">
           <div className="flex flex-wrap items-center">
             <div className="relative w-full px-4 max-w-full flex-grow flex-1">
-              <h3 className="font-semibold text-base text-blueGray-700">
-                Doctors
-              </h3>
+              <h3 className="font-semibold text-base text-blueGray-700">Doctors</h3>
             </div>
           </div>
         </div>
@@ -33,10 +31,7 @@ export default function CardSocialTraffic() {
             <tbody>
               <tr>
                 <th className=" flex border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                  <img
-                    className="h-16 rounded-full"
-                    src="../../assets/img/team-3-800x800.jpg"
-                  />
+                  <img className="h-16 rounded-full" src="../../assets/img/team-3-800x800.jpg" />
                   <div className="items-content m-4">
                     <p>Mr. Duy vu</p>
                     <p className="text-lightBlue-600">New York, USA</p>
@@ -62,10 +57,7 @@ export default function CardSocialTraffic() {
 
               <tr>
                 <th className=" flex border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                  <img
-                    className="h-16 rounded-full"
-                    src="../../assets/img/team-3-800x800.jpg"
-                  />
+                  <img className="h-16 rounded-full" src="../../assets/img/team-3-800x800.jpg" />
                   <div className="items-content m-4">
                     <p>Mr. Duy vu</p>
                     <p className="text-lightBlue-600">New York, USA</p>
@@ -91,10 +83,7 @@ export default function CardSocialTraffic() {
 
               <tr>
                 <th className=" flex border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                  <img
-                    className="h-16 rounded-full"
-                    src="../../assets/img/team-3-800x800.jpg"
-                  />
+                  <img className="h-16 rounded-full" src="../../assets/img/team-3-800x800.jpg" />
                   <div className="items-content m-4">
                     <p>Mr. Duy vu</p>
                     <p className="text-lightBlue-600">New York, USA</p>
@@ -120,10 +109,7 @@ export default function CardSocialTraffic() {
 
               <tr>
                 <th className=" flex border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                  <img
-                    className="h-16 rounded-full"
-                    src="../../assets/img/team-3-800x800.jpg"
-                  />
+                  <img className="h-16 rounded-full" src="../../assets/img/team-3-800x800.jpg" />
                   <div className="items-content m-4">
                     <p>Mr. Duy vu</p>
                     <p className="text-lightBlue-600">New York, USA</p>
@@ -149,10 +135,7 @@ export default function CardSocialTraffic() {
 
               <tr>
                 <th className=" flex border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                  <img
-                    className="h-16 rounded-full"
-                    src="../../assets/img/team-3-800x800.jpg"
-                  />
+                  <img className="h-16 rounded-full" src="../../assets/img/team-3-800x800.jpg" />
                   <div className="items-content m-4">
                     <p>Mr. Duy vu</p>
                     <p className="text-lightBlue-600">New York, USA</p>

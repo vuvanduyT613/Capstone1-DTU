@@ -16,8 +16,6 @@ describe('<FormLabel />', () => {
 
   it('should have theme', () => {
     const a = renderWithTheme();
-    expect(a.container.firstChild).toHaveStyle(
-      `color: ${themes.light.textSecondary}`,
-    );
+    expect(a.container.firstChild).toHaveStyle(`color: ${themes.light.textSecondary}`);
   });
 });

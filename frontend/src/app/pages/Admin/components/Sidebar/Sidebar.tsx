@@ -10,7 +10,10 @@ export default function Sidebar() {
   const [collapseShow, setCollapseShow] = React.useState('hidden');
   return (
     <>
-      <nav className="md:left-0 md:block md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-nowrap md:overflow-hidden shadow-xl bg-white flex flex-wrap items-center justify-between relative md:w-64 z-10 py-4 px-6">
+      <nav
+        style={{ display: 'hidden' }}
+        className="md:left-0 md:block md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-nowrap md:overflow-hidden shadow-xl bg-white flex flex-wrap items-center justify-between relative md:w-64 z-10 py-4 px-6"
+      >
         <div className="md:flex-col md:items-stretch md:min-h-full md:flex-nowrap px-0 flex flex-wrap items-center justify-between w-full mx-auto">
           {/* Toggler */}
           <button
@@ -187,8 +190,7 @@ export default function Sidebar() {
                   className="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
                   to="/admin/auth/login"
                 >
-                  <i className="fas fa-fingerprint text-blueGray-400 mr-2 text-sm"></i>{' '}
-                  Login
+                  <i className="fas fa-fingerprint text-blueGray-400 mr-2 text-sm"></i> Login
                 </Link>
               </li>
 
@@ -197,8 +199,7 @@ export default function Sidebar() {
                   className="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
                   to="/admin/auth/register"
                 >
-                  <i className="fas fa-clipboard-list text-blueGray-300 mr-2 text-sm"></i>{' '}
-                  Register
+                  <i className="fas fa-clipboard-list text-blueGray-300 mr-2 text-sm"></i> Register
                 </Link>
               </li>
             </ul>
@@ -218,8 +219,7 @@ export default function Sidebar() {
                     Cookies.remove('role');
                   }}
                 >
-                  <i className="fas fa-newspaper text-blueGray-400 mr-2 text-sm"></i>{' '}
-                  EXIT
+                  <i className="fas fa-newspaper text-blueGray-400 mr-2 text-sm"></i> EXIT
                 </Link>
               </li>
             </ul>

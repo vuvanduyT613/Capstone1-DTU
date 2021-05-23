@@ -12,6 +12,7 @@ import Dashboard from '../views/admin/Dashboard';
 import Doctor from '../views/admin/Doctor';
 import Patient from '../views/admin/Patients';
 import Appointment from '../views/admin/Appointment';
+import Add from '../views/admin/Add';
 
 export default function Admin() {
   return (
@@ -27,6 +28,7 @@ export default function Admin() {
             <Route path="/admin/doctor" exact component={Doctor} />
             <Route path="/admin/patient" exact component={Patient} />
             <Route path="/admin/appointment" exact component={Appointment} />
+            <Route path="/admin/add" exact component={Add} />
             <Redirect from="/admin" to="/admin/dashboard" />
           </Switch>
           <FooterAdmin />

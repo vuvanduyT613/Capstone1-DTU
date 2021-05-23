@@ -36,14 +36,10 @@ export function Authentication(props: Props) {
         direction="column"
       >
         <Grid container alignItems="center" direction="column">
-          <img
-            alt={'img1'}
-            src={Images.logo.default}
-            className={classes.logo}
-          />
+          <img alt={'img1'} src={Images.logo.default} className={classes.logo} />
           <div className={classes.title}>
             {Cookies.get('forgot_token')
-              ? 'Change password'
+              ? `Change password for ${Cookies.get('forgot_email')}`
               : isLoginForm === 1
               ? 'Sign in'
               : isLoginForm === 3
@@ -63,12 +59,7 @@ export function Authentication(props: Props) {
               : ''}
           </div>
         </Grid>
-        <Grid
-          container
-          alignItems="center"
-          className={classes.innerContent}
-          direction="column"
-        >
+        <Grid container alignItems="center" className={classes.innerContent} direction="column">
           {Cookies.get('forgot_token') ? (
             <ForgotLast />
           ) : isLoginForm === 1 ? (
@@ -82,19 +73,10 @@ export function Authentication(props: Props) {
           )}
         </Grid>
       </Grid>
-      <Grid
-        container
-        item
-        xs={12}
-        sm={4}
-        className={classes.welcome}
-        direction="column"
-      >
+      <Grid container item xs={12} sm={4} className={classes.welcome} direction="column">
         <div className={classes.welcomeTitle}>Welcome</div>
         <div className={classes.welcomeTitle}>to Medical Schedule</div>
-        <div className={classes.welcomeDescription}>
-          Comprehensive healthcare medical platform.
-        </div>
+        <div className={classes.welcomeDescription}>Comprehensive healthcare medical platform.</div>
       </Grid>
     </Grid>
   );

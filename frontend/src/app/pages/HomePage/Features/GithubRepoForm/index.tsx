@@ -5,12 +5,7 @@ import { FormLabel } from 'app/components/FormLabel';
 import { Input } from './components/Input';
 import { RepoItem } from './RepoItem';
 import { TextButton } from './components/TextButton';
-import {
-  selectUsername,
-  selectRepos,
-  selectLoading,
-  selectError,
-} from './slice/selectors';
+import { selectUsername, selectRepos, selectLoading, selectError } from './slice/selectors';
 import { LoadingIndicator } from 'app/components/LoadingIndicator';
 import { RepoErrorType } from './slice/types';
 import { useGithubRepoFormSlice } from './slice';

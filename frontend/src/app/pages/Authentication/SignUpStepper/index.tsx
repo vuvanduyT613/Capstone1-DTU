@@ -11,8 +11,9 @@ import { ToastContainer, toast } from 'react-toastify';
 import Countdown from 'react-countdown';
 import { Grid } from '@material-ui/core';
 import DatePicker from 'react-datepicker';
+import Select from 'react-select';
 import { ReactComponent as Calendar } from 'app/asset/image/ic-calendar.svg';
-import { Redirect } from 'react-router-dom';
+import { ReactComponent as Role } from 'app/asset/image/ic-role.svg';
 import 'react-datepicker/dist/react-datepicker.css';
 export interface loginFormInterface {
   handleTosignUp: Function;
@@ -22,9 +23,7 @@ const SignUpStepper = () => {
   const { /*email, phoneNumber,*/ step } = useSelector(
     (state: rootState) => state.authenReducer.signUp,
   );
-  const { code, email } = useSelector(
-    (state: rootState) => state.authenReducer.email,
-  );
+  const { code, email } = useSelector((state: rootState) => state.authenReducer.email);
   const refToAvatar = useRef<HTMLInputElement>(null);
   const dispatch = useDispatch();
   const [codeEnter, setCodeEnter] = useState({ code: 0 });
@@ -102,7 +101,7 @@ const SignUpStepper = () => {
     err.dateOfBirth ||
     err.country ||
     err.city ||
-    err.province ||
+    err.address ||
     err.postalCode ||
     err.phone
       ? toast.error('Please check field.!')
@@ -118,9 +117,7 @@ const SignUpStepper = () => {
   const checkAvatar = (err, values) => {
     err.avatar
       ? toast.error(err.avatar)
-      : toast.success(`Success step ${step}/5 !`) &&
-        signUp(values) &&
-        handleStep(1);
+      : toast.success(`Success step ${step}/5 !`) && signUp(values) && handleStep(1);
   };
 
   const handleChooseAvatar = () => {
@@ -144,12 +141,14 @@ const SignUpStepper = () => {
             email: email,
             fistName: '',
             lastName: '',
+            gender: '',
+            role: { value: 'user', label: 'User' },
             dateOfBirth: new Date(),
             password: '',
             changepassword: '',
             country: '',
             city: '',
-            province: '',
+            address: '',
             postalCode: '',
             phone: '',
             avatar: '',
@@ -172,14 +171,71 @@ const SignUpStepper = () => {
               />
               <div className={classes.wrapperSignUp}>
                 {step === 1 ? (
-                  <CustomInput
-                    defaultvalue={values.email}
-                    name="email"
-                    typeInput="email"
-                    iconLeft={Images.icMail.default}
-                    placeholder={'Email your email address'}
-                    handlerChange={e => handleChange(e)}
-                  />
+                  <>
+                    <CustomInput
+                      defaultvalue={values.email}
+                      name="email"
+                      typeInput="email"
+                      iconLeft={Images.icMail.default}
+                      placeholder={'Email your email address'}
+                      handlerChange={e => handleChange(e)}
+                    />
+                    <div className={classes.addressIcon}>
+                      <Role className={classes.address} />
+                    </div>
+                    <Select
+                      value={values.role}
+                      onChange={e => setFieldValue('role', e)}
+                      options={[
+                        { value: 'user', label: 'User' },
+                        { value: 'doctor', label: 'Doctor' },
+                      ]}
+                      styles={{
+                        container: base => ({
+                          ...base,
+                          backgroundColor: '#fff',
+                          borderRadius: '5px',
+                          marginTop: '18px',
+                          height: '50px',
+                        }),
+                        control: provided => ({
+                          ...provided,
+                          height: '50px',
+                          padding: 10,
+                          marginLeft: 0,
+                          border: '0px solid black',
+                          fontSize: 16,
+                          backgroundColor: 'white',
+                          outline: 'none',
+                          textALign: 'center',
+                        }),
+                        singleValue: base => ({
+                          ...base,
+                          padding: 47,
+                          fontSize: '15px',
+                          borderRadius: 5,
+                          color: '#000',
+                          background: '#fff',
+                          display: 'flex',
+                        }),
+                        placeholder: base => ({
+                          ...base,
+                          padding: 47,
+                          fontSize: '15px',
+                          color: '#c8c8c8',
+                        }),
+                        option: base => ({
+                          ...base,
+                          height: '100%',
+                        }),
+                        loadingMessage: base => ({
+                          ...base,
+                          backgroundColor: '#000',
+                          color: 'white',
+                        }),
+                      }}
+                    />
+                  </>
                 ) : step === 2 ? (
                   <>
                     <ReactCodeInput
@@ -251,11 +307,11 @@ const SignUpStepper = () => {
                       placeholder={'City'}
                     />
                     <CustomInput
-                      defaultvalue={values.province}
-                      name="province"
+                      defaultvalue={values.address}
+                      name="address"
                       iconLeft={Images.isAddress.default}
                       handlerChange={e => handleChange(e)}
-                      placeholder={'Province'}
+                      placeholder={'address'}
                     />
                     <CustomInput
                       defaultvalue={values.postalCode}
@@ -284,9 +340,7 @@ const SignUpStepper = () => {
                       placeholder="changepassword"
                       iconLeft={Images.iconPass.default}
                       handlerChange={e => handleChange(e)}
-                      handleClickRightIcon={() =>
-                        setShowPassConfirm(!showPassConfirm)
-                      }
+                      handleClickRightIcon={() => setShowPassConfirm(!showPassConfirm)}
                     />
                   </>
                 ) : step === 5 ? (
@@ -306,22 +360,13 @@ const SignUpStepper = () => {
                     />
                     {values.avatar ? (
                       <>
-                        <img
-                          src={URL.createObjectURL(values.avatar)}
-                          className={classes.avatar}
-                        />
-                        <div
-                          onClick={handleChooseAvatar}
-                          className={classes.changeImage}
-                        >
+                        <img src={URL.createObjectURL(values.avatar)} className={classes.avatar} />
+                        <div onClick={handleChooseAvatar} className={classes.changeImage}>
                           Change image
                         </div>
                       </>
                     ) : (
-                      <div
-                        className={classes.areaUploadAvatar}
-                        onClick={handleChooseAvatar}
-                      >
+                      <div className={classes.areaUploadAvatar} onClick={handleChooseAvatar}>
                         <img src={Images.iconAdd.default} />
                       </div>
                     )}
@@ -349,10 +394,7 @@ const SignUpStepper = () => {
                   <div className={classes.step}>Step {step}/5</div>
                 </button>
                 {step !== 1 ? (
-                  <button
-                    className={classes.prevBtn}
-                    onClick={() => handleStep(-1)}
-                  >
+                  <button className={classes.prevBtn} onClick={() => handleStep(-1)}>
                     Back to
                   </button>
                 ) : (
@@ -395,14 +437,11 @@ const Schema = Yup.object().shape({
     .min(0, 'Too Short !')
     .max(50, 'Too Long !')
     .required('Please enter date of birth.!'),
-  city: Yup.string()
-    .min(0, 'Too Short !')
-    .max(50, 'Too Long !')
-    .required('Please enter city.!'),
-  province: Yup.string()
+  city: Yup.string().min(0, 'Too Short !').max(50, 'Too Long !').required('Please enter city.!'),
+  address: Yup.string()
     .min(0, 'Too Short !')
     .max(10, 'Too Long !')
-    .required('Please enter province.!'),
+    .required('Please enter address.!'),
   postalCode: Yup.string()
     .min(0, 'Too Short !')
     .max(10, 'Too Long !')
@@ -422,10 +461,7 @@ const Schema = Yup.object().shape({
     .required('This field is required.!')
     .when('password', {
       is: val => (val && val.length > 0 ? true : false),
-      then: Yup.string().oneOf(
-        [Yup.ref('password')],
-        'Both password need to be the same',
-      ),
+      then: Yup.string().oneOf([Yup.ref('password')], 'Both password need to be the same'),
     }),
 });
 

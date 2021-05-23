@@ -24,9 +24,7 @@ describe('<Link />', () => {
 
   it('should have theme', () => {
     const link = renderWithTheme();
-    expect(link.container.firstChild).toHaveStyle(
-      `color: ${themes.light.primary}`,
-    );
+    expect(link.container.firstChild).toHaveStyle(`color: ${themes.light.primary}`);
   });
 
   it('should have a class attribute', () => {

@@ -160,11 +160,9 @@ const useStyles = makeStyles((theme: Theme) =>
       margin: 'auto 20px auto auto',
     },
     addressIcon: {
-      position: 'absolute',
-      width: '50px',
-      height: '50px',
       zIndex: 1,
-      margin: 'auto -15px auto auto',
+      position: 'absolute',
+      margin: '36px 0px 0px 30px ',
     },
     addressContent: {
       width: '100%',
@@ -173,7 +171,6 @@ const useStyles = makeStyles((theme: Theme) =>
       width: '14px',
       height: '14px',
       color: ' rgba(0, 53, 142, 0.8)',
-      margin: '18px -26px auto auto',
     },
   }),
 );

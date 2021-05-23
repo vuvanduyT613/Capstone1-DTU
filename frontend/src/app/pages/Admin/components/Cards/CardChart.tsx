@@ -21,23 +21,13 @@ export default function CarcdChart() {
   return (
     <>
       <ResponsiveContainer className="chart">
-        <LineChart
-          width={600}
-          height={300}
-          data={data}
-          margin={{ top: 20, right: 0, left: 5, bottom: 5 }}
-        >
+        <LineChart width={600} height={100} data={data}>
           <XAxis dataKey="name" />
           <YAxis />
           <CartesianGrid strokeDasharray="3 3" />
           <Tooltip />
           <Legend />
-          <Line
-            type="monotone"
-            dataKey="pv"
-            stroke="#8884d8"
-            activeDot={{ r: 8 }}
-          />
+          <Line type="monotone" dataKey="pv" stroke="#8884d8" activeDot={{ r: 8 }} />
           <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
         </LineChart>
       </ResponsiveContainer>

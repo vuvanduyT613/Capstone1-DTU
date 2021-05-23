@@ -14,12 +14,7 @@ export function App() {
     let element;
     if (routes.length > 0) {
       element = routes.map((value, index) => (
-        <Route
-          key={index}
-          exact={value.exact}
-          path={value.path}
-          component={value.main()}
-        />
+        <Route key={index} exact={value.exact} path={value.path} component={value.main()} />
       ));
     }
     return element;

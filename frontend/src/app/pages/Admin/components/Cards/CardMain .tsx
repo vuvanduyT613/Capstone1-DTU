@@ -1,11 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { rootState } from 'store/reducers';
 import Pagination from '@material-ui/lab/Pagination';
-import Cookies from 'js-cookie';
 import { FormDialog } from '../Dialog';
-// components
-
+import { Link } from 'react-router-dom';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import AddIcon from '@material-ui/icons/Add';
@@ -22,20 +20,8 @@ import {
 export default function CardTable(props) {
   const [open, setOpen] = React.useState(false);
   const [formDialog, setFormDialog] = React.useState(false);
-  const dispatch = useDispatch();
-  const { data } = useSelector(
-    (state: rootState) => state.userReducer.getAllUser,
-  );
 
-  useEffect(() => {
-    dispatch({
-      type: 'GET_ALL_USER_API',
-      payload: {
-        token: Cookies.get('access_token'),
-      },
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const { data } = useSelector((state: rootState) => state.userReducer.getAllUser);
 
   const handleClose = () => {
     setOpen(false);
@@ -47,8 +33,8 @@ export default function CardTable(props) {
       <Dialog
         open={formDialog}
         onClose={handleClose}
-        maxWidth="md"
         fullWidth
+        maxWidth="lg"
         aria-labelledby="max-width-dialog-title"
       >
         <DialogContentText
@@ -133,10 +119,12 @@ export default function CardTable(props) {
           marginBottom: '10px',
         }}
       >
-        <Button variant="contained">
-          {' '}
-          <AddIcon /> {props.button}
-        </Button>
+        <Link to="/admin/add">
+          <Button variant="contained" style={{ background: '#fff', outline: 0 }}>
+            <AddIcon />
+            {`  ${props.button}`}
+          </Button>
+        </Link>
       </div>
       <div
         className={
@@ -168,66 +156,72 @@ export default function CardTable(props) {
                 //@ts-ignore
                 data.results ? (
                   //@ts-ignore
-                  data.results.map((value, index) => (
-                    <tr>
-                      <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left flex items-center">
-                        <img
-                          src={
-                            require('../../assets/img/bootstrap.jpg').default
-                          }
-                          className="h-12 w-12 bg-white rounded-full border"
-                          alt="..."
-                        ></img>{' '}
-                        <span
-                          className={
-                            'ml-3 font-bold ' +
-                            +(props.color === 'light'
-                              ? 'text-blueGray-600'
-                              : 'text-white')
-                          }
-                        >
-                          {value.name}
-                        </span>
-                      </th>
-                      <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                        18
-                      </td>
-
-                      <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                        <div className="flex items-center">
-                          <span className="mr-2">Krong Buk, Dak Lak</span>
-                        </div>
-                      </td>
-
-                      <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                        0335209131
-                      </td>
-
-                      <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                        {value.email}
-                      </td>
-                      <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
-                        <Grid>
-                          <IconButton
-                            color="primary"
-                            onClick={() => {
-                              setFormDialog(true);
-                            }}
+                  data.results.map((value, index) =>
+                    value?.role === 'doctor' || value?.role === 'user' ? (
+                      <tr>
+                        <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left flex items-center">
+                          <img
+                            src={value.avatar}
+                            className="h-12 w-12 bg-white rounded-full border"
+                            alt="..."
+                          ></img>{' '}
+                          <span
+                            className={
+                              'ml-3 font-bold ' +
+                              +(props.color === 'light' ? 'text-blueGray-600' : 'text-white')
+                            }
                           >
-                            <EditIcon />
-                          </IconButton>
-                          <IconButton
-                            color="secondary"
-                            onClick={() => {
-                              setOpen(true);
-                            }}
-                          >
-                            <DeleteIcon />
-                          </IconButton>
-                        </Grid>
-                      </td>
-                    </tr>
-                  ))
+                            {`${value.fistName} ${value.lastName}`}
+                          </span>
+                        </th>
+                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                          {value.dateOfBirth}
+                        </td>
+
+                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                          <div className="flex items-center">
+                            <span className="mr-2">{` ${
+                              value.country ? value.country : 'Viet Nam'
+                            }, ${value.city}, ${value.address}.`}</span>
+                          </div>
+                        </td>
+
+                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                          {value.phone
+                            ? `(+84) ${value.phone.substring(1, 13)}`
+                            : '(+84) 335209131'}
+                        </td>
+
+                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                          {value.email}
+                        </td>
+                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
+                          <Grid>
+                            <IconButton
+                              color="primary"
+                              style={{ outline: 0 }}
+                              onClick={() => {
+                                setFormDialog(true);
+                              }}
+                            >
+                              <EditIcon />
+                            </IconButton>
+                            <IconButton
+                              color="secondary"
+                              style={{ outline: 0 }}
+                              onClick={() => {
+                                setOpen(true);
+                              }}
+                            >
+                              <DeleteIcon />
+                            </IconButton>
+                          </Grid>
+                        </td>
+                      </tr>
+                    ) : (
+                      <></>
+                    ),
+                  )
                 ) : (
                   <></>
                 )
@@ -244,7 +238,15 @@ export default function CardTable(props) {
           marginBottom: '2px',
         }}
       >
-        <Pagination count={10} variant="outlined" shape="rounded" />
+        <Pagination
+          onChange={(e, values) => {
+            props.fucPage(values);
+          }}
+          //@ts-ignore
+          count={data.totalPages}
+          variant="outlined"
+          shape="rounded"
+        />
       </div>
     </>
   );

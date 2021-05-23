@@ -17,9 +17,9 @@ describe('theme slice', () => {
   });
 
   it('should changeTheme', () => {
-    expect(
-      slice.reducer(state, slice.themeActions.changeTheme('dark')),
-    ).toEqual<ThemeState>({ selected: 'dark' });
+    expect(slice.reducer(state, slice.themeActions.changeTheme('dark'))).toEqual<ThemeState>({
+      selected: 'dark',
+    });
   });
 
   describe('selectors', () => {
@@ -39,16 +39,12 @@ describe('theme slice', () => {
 
     it('selectThemeKey', () => {
       let state: RootState = {};
-      expect(selectThemeKey(state)).toEqual<ThemeKeyType>(
-        slice.initialState.selected,
-      );
+      expect(selectThemeKey(state)).toEqual<ThemeKeyType>(slice.initialState.selected);
 
       state = {
         theme: { selected: 'system' },
       };
-      expect(selectThemeKey(state)).toEqual<ThemeKeyType>(
-        state.theme!.selected,
-      );
+      expect(selectThemeKey(state)).toEqual<ThemeKeyType>(state.theme!.selected);
     });
   });
 });

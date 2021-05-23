@@ -1,12 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { useSelector, useDispatch } from 'react-redux';
-import { rootState } from 'store/reducers';
 import Pagination from '@material-ui/lab/Pagination';
-import Cookies from 'js-cookie';
 import { FormDialog } from '../Dialog';
-// components
-
+import { useSelector } from 'react-redux';
+import { rootState } from 'store/reducers';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import {
@@ -22,20 +19,7 @@ import {
 export default function CardTable({ color }) {
   const [open, setOpen] = React.useState(false);
   const [formDialog, setFormDialog] = React.useState(false);
-  const dispatch = useDispatch();
-  const { data } = useSelector(
-    (state: rootState) => state.userReducer.getAllUser,
-  );
-
-  useEffect(() => {
-    dispatch({
-      type: 'GET_ALL_USER_API',
-      payload: {
-        token: Cookies.get('access_token'),
-      },
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const { data } = useSelector((state: rootState) => state.userReducer.getAllUser);
 
   const handleClose = () => {
     setOpen(false);
@@ -210,18 +194,14 @@ export default function CardTable({ color }) {
                     <tr>
                       <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left flex items-center">
                         <img
-                          src={
-                            require('../../assets/img/bootstrap.jpg').default
-                          }
+                          src={require('../../assets/img/bootstrap.jpg').default}
                           className="h-12 w-12 bg-white rounded-full border"
                           alt="..."
                         ></img>{' '}
                         <span
                           className={
                             'ml-3 font-bold ' +
-                            +(color === 'light'
-                              ? 'text-blueGray-600'
-                              : 'text-white')
+                            +(color === 'light' ? 'text-blueGray-600' : 'text-white')
                           }
                         >
                           {value.name}
@@ -231,8 +211,7 @@ export default function CardTable({ color }) {
                         {value.email}
                       </td>
                       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                        <i className="fas fa-circle text-orange-500 mr-2"></i>{' '}
-                        pending
+                        <i className="fas fa-circle text-orange-500 mr-2"></i> pending
                       </td>
 
                       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
@@ -268,9 +247,7 @@ export default function CardTable({ color }) {
               }
             </tbody>
           </table>
-          <div
-            style={{ width: '100%', display: 'flex', justifyContent: 'center' }}
-          >
+          <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
             <Pagination count={10} color="primary" />
           </div>
         </div>

@@ -16,9 +16,5 @@ import Adminlayout from './layouts/Admin';
 interface Props {}
 
 export function Admin(props: Props) {
-  return (
-    <>
-      {Cookies.get('access_token') ? <Adminlayout /> : <Redirect to="/auth" />}
-    </>
-  );
+  return <>{Cookies.get('access_token') ? <Adminlayout /> : <Redirect to="/auth" />}</>;
 }

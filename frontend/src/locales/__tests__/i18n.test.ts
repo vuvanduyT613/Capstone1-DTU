@@ -9,8 +9,6 @@ describe('i18n', () => {
 
   it('should initiate i18n with translations', async () => {
     const t = await i18n;
-    expect(t(translations.feedbackFeature.description).length).toBeGreaterThan(
-      0,
-    );
+    expect(t(translations.feedbackFeature.description).length).toBeGreaterThan(0);
   });
 });

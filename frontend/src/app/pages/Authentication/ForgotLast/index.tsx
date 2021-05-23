@@ -59,9 +59,7 @@ const ForgotLast = () => {
                   iconLeft={Images.iconPass.default}
                   iconRight={Images.iconOpenPass.default}
                   handlerChange={e => handleChange(e)}
-                  handleClickRightIcon={() =>
-                    setShowPassConfirm(!showPassConfirm)
-                  }
+                  handleClickRightIcon={() => setShowPassConfirm(!showPassConfirm)}
                 />
                 <p
                   style={{
@@ -72,14 +70,13 @@ const ForgotLast = () => {
                     margin: '18 10 0 10',
                   }}
                 >
-                  Make sure it's at least 15 characters OR at least 8 characters
-                  including a number and a lowercase letter.
+                  Make sure it's at least 15 characters OR at least 8 characters including a number
+                  and a lowercase letter.
                 </p>
                 <button
                   className={classes.continueBtn}
                   onClick={() => {
-                    errors && toast.error(errors.changepassword);
-                    signUp(values);
+                    errors ? toast.error(errors.changepassword) : signUp(values);
                   }}
                 >
                   Change Password
@@ -101,10 +98,7 @@ const Schema = Yup.object().shape({
     .required('This field is required.!')
     .when('password', {
       is: val => (val && val.length > 0 ? true : false),
-      then: Yup.string().oneOf(
-        [Yup.ref('password')],
-        'Both password need to be the same',
-      ),
+      then: Yup.string().oneOf([Yup.ref('password')], 'Both password need to be the same'),
     }),
 });
 

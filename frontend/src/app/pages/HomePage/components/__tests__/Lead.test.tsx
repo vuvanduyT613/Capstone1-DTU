@@ -14,12 +14,8 @@ describe('<Lead />', () => {
 
   it('should use theme from props', () => {
     let lead = renderWithTheme(themes.light);
-    expect(lead.container.firstChild).toHaveStyle(
-      `color: ${themes.light.textSecondary}`,
-    );
+    expect(lead.container.firstChild).toHaveStyle(`color: ${themes.light.textSecondary}`);
     lead = renderWithTheme(themes.dark);
-    expect(lead.container.firstChild).toHaveStyle(
-      `color: ${themes.dark.textSecondary}`,
-    );
+    expect(lead.container.firstChild).toHaveStyle(`color: ${themes.dark.textSecondary}`);
   });
 });

@@ -5,8 +5,7 @@ import { A } from '../index';
 import { themes } from 'styles/theme/themes';
 import { DefaultTheme } from 'styled-components';
 
-const renderWithTheme = (theme?: DefaultTheme) =>
-  render(<A theme={theme || themes.light} />);
+const renderWithTheme = (theme?: DefaultTheme) => render(<A theme={theme || themes.light} />);
 
 describe('<A />', () => {
   it('should render an <a> tag', () => {
@@ -16,8 +15,6 @@ describe('<A />', () => {
 
   it('should have theme', () => {
     const a = renderWithTheme();
-    expect(a.container.firstChild).toHaveStyle(
-      `color: ${themes.light.primary}`,
-    );
+    expect(a.container.firstChild).toHaveStyle(`color: ${themes.light.primary}`);
   });
 });

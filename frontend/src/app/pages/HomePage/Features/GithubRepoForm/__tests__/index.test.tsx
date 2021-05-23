@@ -78,9 +78,7 @@ describe('<GithubRepoForm />', () => {
 
   it('should display list when repos not empty', () => {
     const repoName = 'testRepo';
-    store.dispatch(
-      actions.reposLoaded([{ id: 'test', name: repoName } as any]),
-    );
+    store.dispatch(actions.reposLoaded([{ id: 'test', name: repoName } as any]));
     expect(component.queryByText(repoName)).toBeInTheDocument();
   });
 

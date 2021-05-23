@@ -1,6 +1,6 @@
-const httpStatus = require('http-status');
-const ApiError = require('../utils/ApiError');
-const { switchModel } = require('../utils/switchModel');
+const httpStatus = require("http-status");
+const ApiError = require("../utils/ApiError");
+const { switchModel } = require("../utils/switchModel");
 
 /**
  * Create a record a database of doctor
@@ -9,8 +9,11 @@ const { switchModel } = require('../utils/switchModel');
  * @returns {Promise<User>}
  */
 const create = async (action, option) => {
-  const response = await switchModel(action).create(option.body);
-  return response;
+	if (await switchModel(action).isEmailTaken(option.body.email)) {
+		throw new ApiError(httpStatus.BAD_REQUEST, "Email already taken");
+	}
+	const response = await switchModel(action).create(option.body);
+	return response;
 };
 
 /**
@@ -24,9 +27,9 @@ const create = async (action, option) => {
 * @returns {Promise<QueryResult>}
  */
 const query = async (action, option) => {
-  const { filter, options } = option;
-  const response = await switchModel(action).paginate(filter, options);
-  return response;
+	const { filter, options } = option;
+	const response = await switchModel(action).paginate(filter, options);
+	return response;
 };
 
 /**
@@ -36,8 +39,8 @@ const query = async (action, option) => {
  * @returns {Promise<User>}
  */
 const getById = async (action, option) => {
-  const response = switchModel(action).findById(option.id);
-  return response;
+	const response = switchModel(action).findById(option.id);
+	return response;
 };
 
 /**
@@ -48,14 +51,14 @@ const getById = async (action, option) => {
  */
 
 const updateById = async (action, option) => {
-  const { id, body } = option;
-  const data = await getById(action, id);
-  if (!data) {
-    throw new ApiError(httpStatus.NOT_FOUND, ' Not found');
-  }
-  Object.assign(data, body);
-  await data.save();
-  return data;
+	const { id, body } = option;
+	const data = await getById(action, id);
+	if (!data) {
+		throw new ApiError(httpStatus.NOT_FOUND, " Not found");
+	}
+	Object.assign(data, body);
+	await data.save();
+	return data;
 };
 
 /**
@@ -66,18 +69,23 @@ const updateById = async (action, option) => {
  */
 
 const deleteById = async (action, option) => {
-  const data = await getById(action, option.id);
-  if (!data) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'Not found');
-  }
-  await data.remove();
-  return data;
+	const data = await getById(action, option.id);
+	if (!data) {
+		throw new ApiError(httpStatus.NOT_FOUND, "Not found");
+	}
+	await data.remove();
+	return data;
 };
 
+/**
+ * Get user by email
+ * @param {string} email
+ * @returns {Promise<User>}
+ */
 module.exports = {
-  create,
-  query,
-  getById,
-  updateById,
-  deleteById,
+	create,
+	query,
+	getById,
+	updateById,
+	deleteById,
 };

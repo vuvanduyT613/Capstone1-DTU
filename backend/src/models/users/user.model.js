@@ -52,7 +52,7 @@ const userSchema = mongoose.Schema(
 			type: Date,
 			require: true,
 		},
-		coutry: {
+		country: {
 			type: String,
 			require: true,
 			maxlength: 10,
@@ -62,7 +62,7 @@ const userSchema = mongoose.Schema(
 			require: true,
 			maxlength: 15,
 		},
-		province: {
+		address: {
 			type: String,
 			require: true,
 			maxlength: 10,
@@ -77,7 +77,7 @@ const userSchema = mongoose.Schema(
 			default: "user",
 			maxlength: 5,
 		},
-		Phone: {
+		phone: {
 			type: String,
 			require: true,
 			maxlength: 13,

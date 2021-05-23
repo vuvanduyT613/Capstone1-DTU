@@ -30,9 +30,7 @@ describe('<ThemeSwitch />', () => {
 
   it('should switch theme on click', () => {
     const languageSwitch = renderThemeSwitch(store);
-    const radioButtons = languageSwitch.queryAllByRole(
-      'radio',
-    ) as HTMLInputElement[];
+    const radioButtons = languageSwitch.queryAllByRole('radio') as HTMLInputElement[];
 
     expect(radioButtons[0].checked).toBe(true);
 

@@ -69,10 +69,7 @@ const LoginForm = (props: loginFormInterface) => {
           </div>
           <Grid container spacing={3}>
             <Grid container item xs={12} sm={6}>
-              <button
-                className={classes.btnCreate}
-                onClick={() => handleTosignUp(2)}
-              >
+              <button className={classes.btnCreate} onClick={() => handleTosignUp(2)}>
                 Sign up
               </button>
             </Grid>

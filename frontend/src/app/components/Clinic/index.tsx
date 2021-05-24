@@ -7,7 +7,7 @@ import * as React from 'react';
 import useStyles from './styles';
 import Test from './assets/test.jpg';
 
-interface Props {}
+interface Props { }
 
 export function News(props: Props) {
   const classes = useStyles();
@@ -15,12 +15,9 @@ export function News(props: Props) {
     <div className={classes.wrapperNews}>
       <div className={classes.wrapperSize}>
         <div className={classes.navNews}>
-          <p  className={classes.navNewsName}>Phòng Khám</p>
-          {/* <p className={classes.p}> View all</p> */}
-          <nav className="navbar navbar-light bg-light col-9"><form className="form-inline col-8"><input className="form-control  col-8" type="search" placeholder="Search" aria-label="Search" /><button className="btn btn-outline-success col-4" type="submit">Search</button></form></nav>
-
-
-          {/* <div className={classes.pagination}>
+          <p className={classes.navNewsName}>Recent news</p>
+          <p className={classes.p}> View all</p>
+          <div className={classes.pagination}>
             <div>
               <svg
                 width="20"
@@ -49,41 +46,43 @@ export function News(props: Props) {
                 />
               </svg>
             </div>
-          </div> */}
+          </div>
         </div>
-        <ul className="col-1">
-            <li style={{listStyle:"none"}}>
-              <i className="bi bi-heart d-inline"/>
-            <p className="d-inline">Phòng khám quan tâm</p>
-            </li>
-          </ul>
         <div className={classes.contentNews}>
           <div className={classes.contentItemNews}>
             <div className={classes.imageItemNews}>
-              <img src={Test} className={classes.image} alt="image1" />
+              <img src={"https://gocnhineva.info/wp-content/uploads/2020/05/benh-vien-dai-hoc-y-duoc-1.jpg"} className={classes.image} alt="image1" />
             </div>
-            <p>5 triệu chứng ung thư phổi có thể bạn không nhận ra</p>
+            <p>GIÁ GÓI: 1.800.000đ - 2.450.000đ</p>
+            <p> Phòng khám Bệnh viện Đại học Y Dược 1 </p>
+            <p> 20-22 Dương Quang Trung, Phường 12, Quận 10, Tp. HCM </p>
             <p className={classes.timeItemNews}>00:09, 06/04/2021</p>
           </div>
           <div className={classes.contentItemNews}>
             <div className={classes.imageItemNews}>
-              <img src={Test} className={classes.image} alt="image1" />
+              <img src={"https://plasmakare.vn/wp-content/uploads/2020/11/Phong-kham-da-khoa-Hoang-Long---Cong-Ty-TNHH-Vu-Long-Hoa-Binh-1606296759.jpeg"} className={classes.image} alt="image1" />
             </div>
-            <p>5 triệu chứng ung thư phổi có thể bạn không nhận ra</p>
+            <p> GIÁ GÓI: 1.800.000đ - 2.450.000đ </p>
+            <p> Phòng Khám Đa Khoa Hoàng Long </p>
+            <p> Tầng 10, Tòa tháp VCCI, Số 9 phố Đào Duy Anh, Quận Đống Đa, Hà Nội </p>
             <p className={classes.timeItemNews}>00:09, 06/04/2021</p>
           </div>
           <div className={classes.contentItemNews}>
             <div className={classes.imageItemNews}>
-              <img src={Test} className={classes.image} alt="image1" />
+              <img src={"https://finizz.com/uploads/photo/picture/13274/avatar.jpg"} className={classes.image} alt="image1" />
             </div>
-            <p>5 triệu chứng ung thư phổi có thể bạn không nhận ra</p>
+            <p> GIÁ GÓI: 1.800.000đ - 2.450.000đ </p>
+            <p> Phòng khám Đa khoa Quốc tế Exson </p>
+            <p> Số 722 Sư Vạn Hạnh, phường 12, Quận 10, Tp. Hồ Chí Minh </p>
             <p className={classes.timeItemNews}>00:09, 06/04/2021</p>
           </div>
           <div className={classes.contentItemNews}>
             <div className={classes.imageItemNews}>
-              <img src={Test} className={classes.image} alt="image1" />
+              <img src={"https://baovietonline.com/wp-content/uploads/2018/07/b%E1%BB%87nh-vi%E1%BB%87n-b%E1%BA%A3o-l%C3%A3nh-thanh-to%C3%A1n-c%E1%BB%A7a-b%E1%BA%A3o-vi%E1%BB%87t.png"} className={classes.image} alt="image1" />
             </div>
-            <p>5 triệu chứng ung thư phổi có thể bạn không nhận ra</p>
+            <p> GIÁ GÓI: 1.800.000đ - 2.450.000đ </p>
+            <p> Phòng khám Đa khoa Quốc tế Exson </p>
+            <p> Số 722 Sư Vạn Hạnh, phường 12, Quận 10, Tp. Hồ Chí Minh </p>
             <p className={classes.timeItemNews}>00:09, 06/04/2021</p>
           </div>
         </div>

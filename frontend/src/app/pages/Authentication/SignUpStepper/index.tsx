@@ -98,13 +98,13 @@ const SignUpStepper = () => {
 
   const checkField = err => {
     err.fistName ||
-    err.lastName ||
-    err.dateOfBirth ||
-    err.country ||
-    err.city ||
-    err.province ||
-    err.postalCode ||
-    err.phone
+      err.lastName ||
+      err.dateOfBirth ||
+      err.country ||
+      err.city ||
+      err.province ||
+      err.postalCode ||
+      err.phone
       ? toast.error('Please check field.!')
       : toast.success(`Success step ${step}/5 !`) && handleStep(1);
   };
@@ -119,8 +119,8 @@ const SignUpStepper = () => {
     err.avatar
       ? toast.error(err.avatar)
       : toast.success(`Success step ${step}/5 !`) &&
-        signUp(values) &&
-        handleStep(1);
+      signUp(values) &&
+      handleStep(1);
   };
 
   const handleChooseAvatar = () => {
@@ -335,14 +335,14 @@ const SignUpStepper = () => {
                     step === 1
                       ? sendEmail(values.email)
                       : step === 2
-                      ? codeEmail()
-                      : step === 3
-                      ? checkField(errors)
-                      : step === 4
-                      ? checkAuth(errors)
-                      : step === 5
-                      ? checkAvatar(errors, values)
-                      : null
+                        ? codeEmail()
+                        : step === 3
+                          ? checkField(errors)
+                          : step === 4
+                            ? checkAuth(errors)
+                            : step === 5
+                              ? checkAvatar(errors, values)
+                              : null
                   }
                 >
                   {step < 5 ? 'Next' : 'Sign up'}

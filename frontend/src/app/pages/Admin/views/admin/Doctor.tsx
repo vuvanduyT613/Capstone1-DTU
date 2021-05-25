@@ -15,6 +15,12 @@ export default function Tables() {
         page: page,
       },
     });
+    dispatch({
+      type: 'UPDATE_FIELD_SIGN_UP',
+      payload: {
+        step: 1,
+      },
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -29,6 +35,20 @@ export default function Tables() {
     });
   };
 
+  const actionDelete = values => {
+    dispatch({
+      type: 'DELETE_BY_ID',
+      payload: values,
+    });
+    dispatch({
+      type: 'GET_ALL_DOCTOR_API',
+      payload: {
+        token: Cookies.get('access_token'),
+        page: 1,
+      },
+    });
+  };
+
   return (
     <>
       <div className="flex flex-wrap mt-4">
@@ -38,6 +58,8 @@ export default function Tables() {
             column={['Name', 'Age', 'Address', 'Phone', 'Email', 'Action']}
             index={5}
             fucPage={actionPage}
+            fucDelete={actionDelete}
+            to="/admin/add/doctor"
           />
         </div>
       </div>

@@ -1,8 +1,8 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { rootState } from 'store/reducers';
+import Cookies from 'js-cookie';
 import Pagination from '@material-ui/lab/Pagination';
-import { FormDialog } from '../Dialog';
 import { Link } from 'react-router-dom';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
@@ -20,6 +20,7 @@ import {
 export default function CardTable(props) {
   const [open, setOpen] = React.useState(false);
   const [formDialog, setFormDialog] = React.useState(false);
+  const [id, setId] = React.useState({ id: '', role: '', token: Cookies.get('access_token') });
 
   const { data } = useSelector((state: rootState) => state.userReducer.getAllUser);
 
@@ -30,37 +31,6 @@ export default function CardTable(props) {
 
   return (
     <>
-      <Dialog
-        open={formDialog}
-        onClose={handleClose}
-        fullWidth
-        maxWidth="lg"
-        aria-labelledby="max-width-dialog-title"
-      >
-        <DialogContentText
-          id="alert-dialog-description"
-          style={{
-            textAlign: 'center',
-            marginTop: '50px',
-            fontWeight: 'bold',
-          }}
-        >
-          <h1> {`UPDATE`}</h1>
-        </DialogContentText>
-        <DialogContent>
-          <FormDialog></FormDialog>
-        </DialogContent>
-        <Button
-          style={{
-            height: '50px',
-          }}
-          variant="contained"
-          color="primary"
-        >
-          Save
-        </Button>
-      </Dialog>
-
       <Dialog
         open={open}
         onClose={handleClose}
@@ -101,9 +71,24 @@ export default function CardTable(props) {
               style={{
                 textAlign: 'center',
                 backgroundColor: 'rgb(230, 230, 230)',
+                outline: 0,
+                border: 0,
               }}
             >
-              <Button onClick={() => {}} color="primary" autoFocus>
+              <Button
+                onClick={() => {
+                  handleClose();
+                  props.fucDelete(id);
+                }}
+                color="primary"
+                autoFocus
+                style={{
+                  textAlign: 'center',
+                  backgroundColor: 'rgb(230, 230, 230)',
+                  outline: 0,
+                  border: 0,
+                }}
+              >
                 Yes
               </Button>
             </Grid>
@@ -119,7 +104,7 @@ export default function CardTable(props) {
           marginBottom: '10px',
         }}
       >
-        <Link to="/admin/add">
+        <Link to={props.to}>
           <Button variant="contained" style={{ background: '#fff', outline: 0 }}>
             <AddIcon />
             {`  ${props.button}`}
@@ -140,7 +125,9 @@ export default function CardTable(props) {
                 {props.column.map((value, key) => (
                   <th
                     className={
-                      'px-6  text-left align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold ' +
+                      'px-6 ' +
+                      (value === 'Action' ? 'text-center' : 'text-left') +
+                      ' align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold ' +
                       (props.color === 'light'
                         ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
                         : 'bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700')
@@ -196,21 +183,22 @@ export default function CardTable(props) {
                           {value.email}
                         </td>
                         <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
-                          <Grid>
-                            <IconButton
-                              color="primary"
-                              style={{ outline: 0 }}
-                              onClick={() => {
-                                setFormDialog(true);
-                              }}
+                          <Grid style={{ textAlign: 'center' }}>
+                            <Link
+                              to={`${props.to}?id=${value.id}&avatar=${value.avatar}&city=${value.city}&dateOfBirth=${value.dateOfBirth}&email=${value.email}&fistName=${value.fistName}&lastName=${value.lastName}&postalCode=${value.postalCode}&address=${value.address}&role=${value.role}&userName=${value.userName}&country=${value.country}&phone=${value.phone}`}
                             >
-                              <EditIcon />
-                            </IconButton>
+                              <IconButton color="primary" style={{ outline: 0 }}>
+                                <EditIcon />
+                              </IconButton>
+                            </Link>
+
                             <IconButton
                               color="secondary"
                               style={{ outline: 0 }}
                               onClick={() => {
                                 setOpen(true);
+                                //@ts-ignore
+                                setId({ ...id, id: value.id, role: value.role });
                               }}
                             >
                               <DeleteIcon />

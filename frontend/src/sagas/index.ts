@@ -2,6 +2,7 @@ import { all, takeLatest, /*takeEvery*/ takeLeading } from 'redux-saga/effects';
 import { signIn, sendEmail, signUp, getCountry, forgot, reset } from './authentication';
 import { getAll } from './users';
 import { getAllDoctor } from './doctors';
+import { getByIdUtil, updateById, deleteById } from './util';
 
 //@ts-ignore
 function* rootSaga() {
@@ -14,6 +15,9 @@ function* rootSaga() {
     takeLeading('GET_COUNTRY', getCountry),
     takeLeading('FORGOT_SIGN_IN', forgot),
     takeLeading('RESET_SIGN_IN', reset),
+    takeLeading('GET_BY_ID', getByIdUtil),
+    takeLeading('UPDATE_BY_ID', updateById),
+    takeLeading('DELETE_BY_ID', deleteById),
   ]);
 }
 

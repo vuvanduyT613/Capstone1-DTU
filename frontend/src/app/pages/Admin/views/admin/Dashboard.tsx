@@ -1,10 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import Cookies from 'js-cookie';
 import CardPageVisits from '../../components/Cards/CardPageVisits';
 import CardSocialTraffic from '../../components/Cards/CardSocialTraffic';
 import CradLineChat from '../../components/Cards/CardLineChart.js';
 import CardBarChart from '../../components/Cards/CardBarChart.js';
 
 export default function Dashboard() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch({
+      type: 'GET_ALL_DOCTOR_API',
+      payload: {
+        token: Cookies.get('access_token'),
+        page: 1,
+      },
+    });
+  }, []);
+
   return (
     <>
       <div className="flex flex-wrap mt-4">

@@ -54,7 +54,7 @@ export function* signUp(action) {
   try {
     const userName = `${action.payload.fistName}${action.payload.lastName}`;
     const form = new FormData();
-    form.append('userName', userName);
+    form.append('userName', action.payload.userName ? action.payload.userName : userName);
     form.append('email', action.payload.email);
     form.append('password', action.payload.changepassword);
     form.append('fistName', action.payload.fistName);
@@ -70,12 +70,10 @@ export function* signUp(action) {
       action.payload.role.value === 'user' ? authenticationSignUp : authenticationSignUpDoctor,
       form,
     );
-
-    console.log(status);
-    console.log(data);
     if (status === 201) {
       Cookies.set('email', action.payload.email, expires);
       Cookies.set('password', action.payload.password, expires);
+      toast.success(`Add ${action.payload.role.value} success.!`);
       yield put({
         type: UPDATE_FIELD_SIGN_UP,
         payload: {

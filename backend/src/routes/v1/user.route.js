@@ -1,21 +1,28 @@
-const express = require('express');
-const auth = require('../../middlewares/auth');
-const validate = require('../../middlewares/validate');
-const userValidation = require('../../validations/user.validation');
-const userController = require('../../controllers/user.controller');
+const express = require("express");
+const auth = require("../../middlewares/auth");
+const uploadCloud = require("../../config/cloudinary");
+const { assign } = require("../../middlewares/assign");
+const validate = require("../../middlewares/validate");
+const userValidation = require("../../validations/user.validation");
+const userController = require("../../controllers/user.controller");
 
 const router = express.Router();
 
 router
-  .route('/')
-  .post(validate(userValidation.createUser), userController.createUser)
-  .get(auth(), validate(userValidation.getUsers), userController.getUsers);
+	.route("/")
+	.post(validate(userValidation.createUser), userController.createUser)
+	.get(auth(), validate(userValidation.getUsers), userController.getUsers);
 
 router
-  .route('/:userId')
-  .get(auth('getUsers'), validate(userValidation.getUser), userController.getUser)
-  .patch(auth('manageUsers'), validate(userValidation.updateUser), userController.updateUser)
-  .delete(auth('manageUsers'), validate(userValidation.deleteUser), userController.deleteUser);
+	.route("/:userId")
+	.get(auth("getUsers"), validate(userValidation.getUser), userController.getUser)
+	.patch(
+		auth("manageUsers"),
+		/*validate(userValidation.updateUser)*/ uploadCloud.single("avatar"),
+		assign("avatar"),
+		userController.updateUser
+	)
+	.delete(auth("manageUsers"), validate(userValidation.deleteUser), userController.deleteUser);
 
 module.exports = router;
 

@@ -95,3 +95,38 @@ export async function POST_TOKEN(
   const response = await checkStatus(fetchResponse);
   return response;
 }
+
+/**
+ * Requests a URL, returning a promise
+ *
+ * @param  {string} url       The URL we want to request
+ * @param {object} config
+ * @return {object}           The response data
+ */
+export async function PATH_TOKEN(
+  url: string,
+  data?: Object,
+  config?: Object,
+): Promise<{} | { err: ResponseError }> {
+  const fetchResponse = await axios.patch(url, data, config);
+  //@ts-ignore
+  const response = await checkStatus(fetchResponse);
+  return response;
+}
+
+/**
+ * Requests a URL, returning a promise
+ *
+ * @param  {string} url       The URL we want to request
+ * @param {object} config
+ * @return {object}           The response data
+ */
+export async function DELETE_TOKEN(
+  url: string,
+  config?: Object,
+): Promise<{} | { err: ResponseError }> {
+  const fetchResponse = await axios.delete(url, config);
+  //@ts-ignore
+  const response = await checkStatus(fetchResponse);
+  return response;
+}

@@ -28,7 +28,7 @@ export default function Admin() {
             <Route path="/admin/doctor" exact component={Doctor} />
             <Route path="/admin/patient" exact component={Patient} />
             <Route path="/admin/appointment" exact component={Appointment} />
-            <Route path="/admin/add" exact component={Add} />
+            <Route path="/admin/add/:slug" exact component={({ match }) => <Add match={match} />} />
             <Redirect from="/admin" to="/admin/dashboard" />
           </Switch>
           <FooterAdmin />

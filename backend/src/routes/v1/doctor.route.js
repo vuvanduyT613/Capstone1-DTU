@@ -13,8 +13,14 @@ const router = express.Router();
 router
 	.route("/:slug")
 	.get(auth(), validate(getValidation), switchRoute, getObject)
-	.post(validate(register), uploadCloud.single("avatar"), assign("avatar"), switchRoute, createObject)
-	.put(auth(), validate(updateValidation), switchRoute, updateObject)
+	.post(validate(register), switchRoute, createObject)
+	.patch(
+		auth(),
+		/*validate(updateValidation),*/ uploadCloud.single("avatar"),
+		assign("avatar"),
+		switchRoute,
+		updateObject
+	)
 	.delete(auth(), validate(deleteValidation), switchRoute, deleteObject);
 
 module.exports = router;

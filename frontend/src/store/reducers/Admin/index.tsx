@@ -32,7 +32,6 @@ export const userReducer = (state: userInterface = initial, action) =>
   produce(state, draft => {
     switch (action.type) {
       case GET_ALL_USER: {
-        console.log(action.payload);
         draft['getAllUser'] = { ...state.getAllUser, ...action.payload };
         break;
       }

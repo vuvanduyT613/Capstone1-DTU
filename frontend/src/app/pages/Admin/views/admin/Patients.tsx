@@ -15,6 +15,12 @@ export default function Tables() {
         page: page,
       },
     });
+    dispatch({
+      type: 'UPDATE_FIELD_SIGN_UP',
+      payload: {
+        step: 1,
+      },
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -29,15 +35,31 @@ export default function Tables() {
     });
   };
 
+  const actionDelete = values => {
+    dispatch({
+      type: 'DELETE_BY_ID',
+      payload: values,
+    });
+    dispatch({
+      type: 'GET_ALL_USER_API',
+      payload: {
+        token: Cookies.get('access_token'),
+        page: page,
+      },
+    });
+  };
+
   return (
     <>
       <div className="flex flex-wrap mt-4">
         <div className="w-full mb-12 px-4">
           <CardPatient
             button={'ADD PATIENT'}
-            column={['Name', 'Age', 'Address', 'Phone', 'Email', 'action']}
+            column={['Name', 'Age', 'Address', 'Phone', 'Email', 'Action']}
             index={5}
             fucPage={actionPage}
+            fucDelete={actionDelete}
+            to="/admin/add/patient"
           />
         </div>
       </div>

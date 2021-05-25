@@ -1,4 +1,4 @@
-import { GET, GET_TOKEN, POST, POST_TOKEN } from '../axiosService';
+import { GET, GET_TOKEN, POST, POST_TOKEN, PATH_TOKEN, DELETE_TOKEN } from '../axiosService';
 
 const ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
 const COUNTRY = process.env.REACT_APP_API_ADDRESS;
@@ -58,16 +58,52 @@ export const userGetAll = payload => {
   return GET_TOKEN(`${ENDPOINT}/users?limit=5&page=${payload.page}`, config);
 };
 
+export const userUpdateById = payload => {
+  const config = {
+    headers: { Authorization: `Bearer ${payload.token}` },
+  };
+  return PATH_TOKEN(`${ENDPOINT}/users/${payload.id}`, payload.data, config);
+};
+
+export const userDeleteById = payload => {
+  const config = {
+    headers: { Authorization: `Bearer ${payload.token}` },
+  };
+  return DELETE_TOKEN(`${ENDPOINT}/users/${payload.id}`, config);
+};
+
 // Doctor
 export const doctorGetAll = payload => {
-  console.log(payload);
   const config = {
     headers: { Authorization: `Bearer ${payload.token}` },
   };
   return GET_TOKEN(`${ENDPOINT}/doctors/v1?limit=5&page=${payload.page}`, config);
 };
 
+export const doctorUpdateById = payload => {
+  const config = {
+    headers: { Authorization: `Bearer ${payload.token}` },
+  };
+  return PATH_TOKEN(`${ENDPOINT}/doctors/v1?id=${payload.id}`, payload.data, config);
+};
+
+export const doctorDeleteById = payload => {
+  const config = {
+    headers: { Authorization: `Bearer ${payload.token}` },
+  };
+  return DELETE_TOKEN(`${ENDPOINT}/doctors/v1?id=${payload.id}`, config);
+};
+
 //get country
 export const countryAll = () => {
   return GET(`${COUNTRY}`);
+};
+
+//utils
+export const getById = payload => {
+  console.log(payload);
+  const config = {
+    headers: { Authorization: `Bearer ${payload.token}` },
+  };
+  return GET_TOKEN(`${ENDPOINT}/doctors/v1?id=${payload.id}`, config);
 };

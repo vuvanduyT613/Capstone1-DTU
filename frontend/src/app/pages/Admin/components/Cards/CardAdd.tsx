@@ -1,12 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { rootState } from 'store/reducers';
-import Pagination from '@material-ui/lab/Pagination';
-import { FormDialog } from '../Dialog';
-import { Link } from 'react-router-dom';
-import DeleteIcon from '@material-ui/icons/Delete';
-import EditIcon from '@material-ui/icons/Edit';
-import AddIcon from '@material-ui/icons/Add';
 import { Formik, Form } from 'formik';
 import { Container, Grid, TextField } from '@material-ui/core';
 

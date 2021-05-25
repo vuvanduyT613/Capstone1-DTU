@@ -19,9 +19,6 @@ export function HomePage() {
       <Content>
         <List />
       </Content>
-      <ContentNews>
-        <News />
-      </ContentNews>
       <PageWrapper>
         {Cookies.get('access_token') && Cookies.get('role') === 'user' ? (
           <></>
@@ -35,12 +32,10 @@ export function HomePage() {
 
 const Content = styled.div`
   position: absolute;
-  right: 5%;
-  top: 300px;
-`;
+  left: 17%;
+  top: 11%;
+  width: 82%;
 
-const ContentNews = styled.div`
-  position: absolute;
-  left: 20%;
-  top: 300px;
+  background: #fdfdfd;
+  border-radius: 4px;
 `;

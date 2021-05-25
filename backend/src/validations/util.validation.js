@@ -89,7 +89,7 @@ const getValidation = {
 
 const deleteValidation = {
 	query: Joi.object().keys({
-		userId: Joi.string().custom(objectId),
+		id: Joi.string().custom(objectId),
 	}),
 };
 

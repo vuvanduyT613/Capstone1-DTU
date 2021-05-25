@@ -1,20 +1,39 @@
-const mongoose = require('mongoose');
-const { toJSON, paginate } = require('../plugins');
+const mongoose = require("mongoose");
+const { toJSON, paginate } = require("../plugins");
 
-const appointmentStatusSchema = mongoose.Schema({
-  status: {
-    type: String,
-    require: true,
-  },
-});
+const appointmentSchema = mongoose.Schema(
+	{
+		userId: {
+			type: mongoose.SchemaTypes.ObjectId,
+			ref: "User",
+			require: true,
+		},
+		doctorID: {
+			type: mongoose.SchemaTypes.ObjectId,
+			ref: "office",
+			require: true,
+		},
+		time: {
+			type: Date,
+			require: true,
+		},
+		status: {
+			type: String,
+			require: true,
+		},
+	},
+	{
+		timestamps: true,
+	}
+);
 
 // add plugin that converts mongoose to json
-appointmentStatusSchema.plugin(toJSON);
-appointmentStatusSchema.plugin(paginate);
+appointmentSchema.plugin(toJSON);
+appointmentSchema.plugin(paginate);
 
 /**
- * @typedef Doctor
+ * @typedef Appointment
  */
-const AppointmentStatus = mongoose.model('appointmentStatus', appointmentStatusSchema);
+const Appointment = mongoose.model("appointments", appointmentSchema);
 
-module.exports = AppointmentStatus;
+module.exports = Appointment;

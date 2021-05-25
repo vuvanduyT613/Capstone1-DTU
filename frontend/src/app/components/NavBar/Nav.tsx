@@ -27,7 +27,7 @@ export function Nav() {
               />
             </svg>
 
-            <p> Home</p>
+            <p> Doctor</p>
           </DivContent>
         </Item>
         <Item

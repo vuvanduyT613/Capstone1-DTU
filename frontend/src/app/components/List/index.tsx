@@ -5,29 +5,32 @@
  */
 import * as React from 'react';
 import { ItemDoctor } from './components/ItemDoctor';
+import { Header } from './components/Header';
 //import { useTranslation } from 'react-i18next';
-import useStyles from './styles';
-
+import styled from 'styled-components/macro';
 interface Props {}
 
 export function List(props: Props) {
-  const classes = useStyles();
   return (
     <>
-      <div className={classes.wrapperList}>
-        <div className={classes.wrapperSize}>
-          <div className={classes.header}>
-            <p className={classes.left}>Doctor last week</p>
-            <p className={classes.right}> View all</p>
-          </div>
-          <div>
-            <ItemDoctor />
-            <ItemDoctor />
-            <ItemDoctor />
-            <ItemDoctor />
-          </div>{' '}
-        </div>
+      <div>
+        <Header />
+        <WrapperList>
+          <ItemDoctor />
+          <ItemDoctor />
+          <ItemDoctor />
+          <ItemDoctor />
+        </WrapperList>
       </div>
     </>
   );
 }
+
+const WrapperList = styled.div`
+  width: 86%;
+  background: #FDFDFD;
+  border-radius: 4px,
+  top: 20px;
+  padding: 30px;
+  display: flex;
+  `;

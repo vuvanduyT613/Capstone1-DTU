@@ -39,7 +39,7 @@ const query = async (action, option) => {
  * @returns {Promise<User>}
  */
 const getById = async (action, option) => {
-	const response = switchModel(action).findById(option.id);
+	const response = await switchModel(action).findById(option.id);
 	return response;
 };
 
@@ -51,8 +51,8 @@ const getById = async (action, option) => {
  */
 
 const updateById = async (action, option) => {
-	const { id, body } = option;
-	const data = await getById(action, id);
+	const { body } = option;
+	const data = await getById(action, option);
 	if (!data) {
 		throw new ApiError(httpStatus.NOT_FOUND, " Not found");
 	}
@@ -69,7 +69,7 @@ const updateById = async (action, option) => {
  */
 
 const deleteById = async (action, option) => {
-	const data = await getById(action, option.id);
+	const data = await getById(action, option);
 	if (!data) {
 		throw new ApiError(httpStatus.NOT_FOUND, "Not found");
 	}

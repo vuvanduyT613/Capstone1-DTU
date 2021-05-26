@@ -7,8 +7,9 @@ const { objectService, tokenService } = require("../services");
 const { create, query, getById, updateById, deleteById } = objectService;
 
 const createObject = catchAsync(async (req, res) => {
+	console.log(req.body);
 	const result = await handlerObject(res.locals.redirect, req.params.slug, create, { body: req.body });
-	const tokens = await tokenService.generateAuthTokens(result);
+	const tokens = res.locals.redirect === "appointments" ? "null" : await tokenService.generateAuthTokens(result);
 	res.status(httpStatus.CREATED).send({ result, tokens });
 });
 

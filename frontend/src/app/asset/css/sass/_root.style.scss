@@ -1,0 +1,133 @@
+// ** body
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url('/assets/font/SFProDisplay/SFProDisplay-Regular.ttf');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url('/assets/font/SFProDisplay/SFProDisplay-Medium.ttf');
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url('/assets/font/SFProDisplay/SFProDisplay-Bold.ttf');
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: 'Segoe UI';
+  src: url('/assets/font/SegoeUI/segoeui.ttf');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Segoe UI';
+  src: url('/assets/font/SegoeUI/segoeuib.ttf');
+  font-weight: 700;
+}
+
+body {
+  background-color: #f6f9fa !important;
+  font-size: 16px !important;
+  font-family: 'SF Pro Display', sans-serif;
+}
+#root {
+  height: 100vh;
+  overflow-x: hidden;
+}
+img {
+  width: 100%;
+}
+a {
+  &:hover {
+    text-decoration: none;
+  }
+}
+// * background
+// **VARIABLE - COLOR**
+
+// 1.loading
+$loading-color: #4116ff;
+$info-color: #3195a5;
+$success-color: #3e884f;
+$warning-color: #b69329;
+$error-color: #c43d4b;
+$breakpoints: (
+  xxs: 420px,
+  xs: 576px,
+  sm: 768px,
+  md: 992px,
+  lg: 1200px,
+  xl: 1440px,
+);
+
+a {
+  color: #4a4a4a !important;
+}
+
+// 1.loading
+.loading {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  border: 2px solid rgba($loading-color, 0.2);
+  border-radius: 50%;
+  border-top-color: $loading-color;
+  animation: spin 1s ease-in-out infinite;
+  -webkit-animation: spin 1s ease-in-out infinite;
+  left: calc(50% - 15px);
+  top: calc(50% - 15px);
+  position: fixed;
+  z-index: 1;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.flex-center {
+  display: flex !important;
+  align-items: center;
+}
+.flex-align-center {
+  display: flex !important;
+  justify-content: center;
+}
+
+@keyframes spin {
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@-webkit-keyframes spin {
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 100%, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.fadeInUp {
+  -webkit-animation-name: fadeInUp;
+  animation-name: fadeInUp
+}
+
+@import "./_background.style.scss";
+@import "./_components.style.scss";
+@import "./_common.style.scss";

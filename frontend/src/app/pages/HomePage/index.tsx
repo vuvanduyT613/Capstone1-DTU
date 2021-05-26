@@ -5,7 +5,6 @@ import { Helmet } from 'react-helmet-async';
 import { NavBar } from 'app/components/NavBar';
 import { PageWrapper } from 'app/components/PageWrapper';
 import { List } from 'app/components/List';
-import { News } from 'app/components/News';
 import styled from 'styled-components/macro';
 
 export function HomePage() {

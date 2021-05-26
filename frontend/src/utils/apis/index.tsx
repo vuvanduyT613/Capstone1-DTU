@@ -94,6 +94,54 @@ export const doctorDeleteById = payload => {
   return DELETE_TOKEN(`${ENDPOINT}/doctors/v1?id=${payload.id}`, config);
 };
 
+//Appointment
+export const appointmentGetById = payload => {
+  const config = {
+    headers: { Authorization: `Bearer ${payload.token}` },
+  };
+  return GET_TOKEN(`${ENDPOINT}/appointments/v1?limit=5&page=${payload.page}`, config);
+};
+
+export const appointmentCreate = payload => {
+  console.log(payload);
+  const config = {
+    headers: { Authorization: `Bearer ${payload.token}` },
+  };
+  return POST_TOKEN(
+    `${ENDPOINT}/appointments/v1`,
+    {
+      userID: payload.userID,
+      doctorID: payload.doctorID,
+      time: payload.time,
+      status: payload.status,
+    },
+    config,
+  );
+};
+
+export const appointmentUpdateById = payload => {
+  const config = {
+    headers: { Authorization: `Bearer ${payload.token}` },
+  };
+  return PATH_TOKEN(
+    `${ENDPOINT}/appointments/v1?id=${payload.id}`,
+    {
+      userID: payload.userID,
+      doctorID: payload.doctorID,
+      time: payload.time,
+      status: payload.status,
+    },
+    config,
+  );
+};
+
+export const appointmentDeleteById = payload => {
+  const config = {
+    headers: { Authorization: `Bearer ${payload.token}` },
+  };
+  return DELETE_TOKEN(`${ENDPOINT}/appointments/v1?id=${payload.id}`, config);
+};
+
 //get country
 export const countryAll = () => {
   return GET(`${COUNTRY}`);

@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch /*connect,*/ } from 'react-redux';
 import Cookies from 'js-cookie';
-import CardPageVisits from '../../components/Cards/CardPageVisits';
-import CardSocialTraffic from '../../components/Cards/CardSocialTraffic';
 import CradLineChat from '../../components/Cards/CardLineChart.js';
 import CardBarChart from '../../components/Cards/CardBarChart.js';
 
@@ -11,7 +9,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     dispatch({
-      type: 'GET_ALL_DOCTOR_API',
+      type: 'ADMIN_STATUS',
       payload: {
         token: Cookies.get('access_token'),
         page: 1,
@@ -27,12 +25,6 @@ export default function Dashboard() {
         </div>
         <div className="w-full  xl:w-4/12 mb-12 xl:mb-0 px-4">
           <CardBarChart />
-        </div>
-        <div className="w-full xl:w-8/12 mb-12 xl:mb-0 px-4">
-          <CardPageVisits />
-        </div>
-        <div className="w-full xl:w-4/12 mb-12 xl:mb-0 px-4">
-          <CardSocialTraffic />
         </div>
       </div>
     </>

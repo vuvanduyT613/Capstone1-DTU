@@ -21,6 +21,13 @@ export default function Tables() {
         step: 1,
       },
     });
+    dispatch({
+      type: 'ADMIN_STATUS',
+      payload: {
+        token: Cookies.get('access_token'),
+        page: 1,
+      },
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -39,13 +46,6 @@ export default function Tables() {
     dispatch({
       type: 'DELETE_BY_ID',
       payload: values,
-    });
-    dispatch({
-      type: 'GET_ALL_USER_API',
-      payload: {
-        token: Cookies.get('access_token'),
-        page: page,
-      },
     });
   };
 

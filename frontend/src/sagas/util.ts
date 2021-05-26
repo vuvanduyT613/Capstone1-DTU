@@ -1,6 +1,6 @@
 import { toast } from 'react-toastify';
 import { call, put } from 'redux-saga/effects';
-import { GET_ALL_USER, ERROR } from 'store/reducers/Admin/actionTypes';
+import { GET_ALL_USER, ERROR, STATUS } from 'store/reducers/Admin/actionTypes';
 import { UPDATE_FIELD_SIGN_UP } from 'store/reducers/Authetication/actionTypes';
 import {
   getById,
@@ -8,6 +8,9 @@ import {
   doctorUpdateById,
   userDeleteById,
   doctorDeleteById,
+  doctorGetAll,
+  userGetAll,
+  appointmentGetById,
 } from 'utils/apis';
 
 export function* getByIdUtil(action) {
@@ -78,16 +81,46 @@ export function* deleteById(action) {
     );
     if (status === 204) {
       toast.success(`Delete ${action.payload.role} success.!`);
+      window.location.reload();
+    }
+    return;
+  } catch (err) {
+    toast.error(`Delete ${action.payload.role} fail.!`);
+    yield put({
+      type: ERROR,
+      payload: { data: err },
+    });
+  }
+}
+
+export function* adminStatus(action) {
+  try {
+    let attend = 0,
+      pedding = 0;
+    const dataDoctor = yield call(doctorGetAll, action.payload);
+    const dataUser = yield call(userGetAll, action.payload);
+    const dataAppointment = yield call(appointmentGetById, action.payload);
+    dataAppointment.data.results.map(value => {
+      if (value.status === 'Active') {
+        ++pedding;
+      }
+      if (value.status === 'Inactive') {
+        ++attend;
+      }
+    });
+    if (dataDoctor.status === 201 && dataUser.status === 200) {
       yield put({
-        type: UPDATE_FIELD_SIGN_UP,
+        type: STATUS,
         payload: {
-          step: 0,
+          doctor: dataDoctor.data.totalResults,
+          patient: dataUser.data.totalResults,
+          attend: attend,
+          pedding: pedding,
         },
       });
     }
     return;
   } catch (err) {
-    toast.error(`Delete ${action.payload.role} fail.!`);
     yield put({
       type: ERROR,
       payload: { data: err },

@@ -3,14 +3,14 @@ const { toJSON, paginate } = require("../plugins");
 
 const appointmentSchema = mongoose.Schema(
 	{
-		userId: {
+		userID: {
 			type: mongoose.SchemaTypes.ObjectId,
 			ref: "User",
 			require: true,
 		},
 		doctorID: {
 			type: mongoose.SchemaTypes.ObjectId,
-			ref: "office",
+			ref: "Doctor",
 			require: true,
 		},
 		time: {
@@ -19,7 +19,7 @@ const appointmentSchema = mongoose.Schema(
 		},
 		status: {
 			type: String,
-			require: true,
+			default: "active",
 		},
 	},
 	{

@@ -9,7 +9,7 @@ const { switchModel } = require("../utils/switchModel");
  * @returns {Promise<User>}
  */
 const create = async (action, option) => {
-	if (await switchModel(action).isEmailTaken(option.body.email)) {
+	if (action === "Appointment" ? null : await switchModel(action).isEmailTaken(option.body.email)) {
 		throw new ApiError(httpStatus.BAD_REQUEST, "Email already taken");
 	}
 	const response = await switchModel(action).create(option.body);

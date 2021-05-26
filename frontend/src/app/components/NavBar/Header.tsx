@@ -31,7 +31,7 @@ const Wrapper = styled.div`
 
 const WrapperLeft = styled.div`
   display: block;
-  width: 17.6%;
+  width: 15%;
   height: 200px;
   background: #00358e;
 `;

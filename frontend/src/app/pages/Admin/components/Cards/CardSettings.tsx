@@ -18,8 +18,6 @@ export default function CardSettings(props) {
     }
   };
 
-  console.log(props.slug);
-
   const CustomInputDatePicker = forwardRef((props: any, ref) => {
     return (
       <div>
@@ -457,10 +455,9 @@ const Schema = Yup.object().shape({
     .min(0, 'Avatar too Short !')
     .max(250, 'Avatar too Long !')
     .required('Please enter avatar !'),
-  password: Yup.string().required('Please enter password !').min(8),
+  password: Yup.string().min(8),
   changepassword: Yup.string()
     .min(8)
-    .required('Please enter confirm password !')
     .when('password', {
       is: val => (val && val.length > 0 ? true : false),
       then: Yup.string().oneOf([Yup.ref('password')], 'Both password need to be the same'),

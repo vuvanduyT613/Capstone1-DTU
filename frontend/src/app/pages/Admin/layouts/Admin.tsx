@@ -13,7 +13,7 @@ import Doctor from '../views/admin/Doctor';
 import Patient from '../views/admin/Patients';
 import Appointment from '../views/admin/Appointment';
 import Add from '../views/admin/Add';
-
+import AddApointment from '../views/admin/AddAppointment';
 export default function Admin() {
   return (
     <>
@@ -29,6 +29,12 @@ export default function Admin() {
             <Route path="/admin/patient" exact component={Patient} />
             <Route path="/admin/appointment" exact component={Appointment} />
             <Route path="/admin/add/:slug" exact component={({ match }) => <Add match={match} />} />
+            <Route
+              path="/admin/ap/add/:slug"
+              exact
+              component={({ match }) => <AddApointment match={match} />}
+            />
+
             <Redirect from="/admin" to="/admin/dashboard" />
           </Switch>
           <FooterAdmin />

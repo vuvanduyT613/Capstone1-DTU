@@ -2,7 +2,13 @@ import { all, takeLatest, /*takeEvery*/ takeLeading } from 'redux-saga/effects';
 import { signIn, sendEmail, signUp, getCountry, forgot, reset } from './authentication';
 import { getAll } from './users';
 import { getAllDoctor } from './doctors';
-import { getByIdUtil, updateById, deleteById } from './util';
+import {
+  getAllAppointment,
+  createAppointment,
+  updateAppointment,
+  deleteAppointment,
+} from './appointments';
+import { getByIdUtil, updateById, deleteById, adminStatus } from './util';
 
 //@ts-ignore
 function* rootSaga() {
@@ -18,6 +24,11 @@ function* rootSaga() {
     takeLeading('GET_BY_ID', getByIdUtil),
     takeLeading('UPDATE_BY_ID', updateById),
     takeLeading('DELETE_BY_ID', deleteById),
+    takeLeading('GET_ALL_APPOINTMENT_API', getAllAppointment),
+    takeLeading('CREATE_ALL_APPOINTMENT_API', createAppointment),
+    takeLeading('UPDATE_ALL_APPOINTMENT_API', updateAppointment),
+    takeLeading('DELETE_ALL_APPOINTMENT_API', deleteAppointment),
+    takeLeading('ADMIN_STATUS', adminStatus),
   ]);
 }
 

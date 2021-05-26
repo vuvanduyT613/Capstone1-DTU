@@ -66,7 +66,7 @@ export function* signUp(action) {
     form.append('postalCode', action.payload.postalCode);
     form.append('phone', action.payload.phone);
     form.append('avatar', action.payload.avatar);
-    const { data, status } = yield call(
+    const { status } = yield call(
       action.payload.role.value === 'user' ? authenticationSignUp : authenticationSignUpDoctor,
       form,
     );

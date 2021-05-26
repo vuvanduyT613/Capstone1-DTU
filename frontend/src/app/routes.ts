@@ -19,6 +19,7 @@ const routes = [
     exact: false,
     main: () => Authentication,
   },
+
   {
     path: '*',
     exact: true,

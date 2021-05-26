@@ -1,0 +1,110 @@
+.notification-container {
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 999999;
+  width: 320px;
+  padding: 0px 15px;
+  max-height: calc(100% - 30px);
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+  background: white;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #00358E;
+}
+
+.px-20 {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.px-30 {
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.py-15 {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.p20 {
+  padding: 20px;
+}
+
+.py-30 {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+.success {
+  color: #07BC0B;
+}
+.danger {
+  color: #FF3232;
+}
+.warning {
+  color: #FF9832;
+}
+.m20 {
+  margin: 20px;
+}
+.bg-blu {
+  background: #00358E;
+}
+.bg-white {
+  background: #FDFDFD;
+  box-shadow: 8px 8px 10px rgba(0, 53, 142, 0.3);
+}
+.cursor-pointer {
+  cursor: pointer;
+}
+.text-blu {
+  color: #315df7;
+}
+.text-gray {
+  color: #727A8E;
+}
+.text-title-blue {
+   color: #00358E !important;
+}
+.text-orange {
+  color: orange
+}
+.bdr-5 {
+  border-radius: 5px;
+}
+
+.border-none {
+  border: none;
+}
+.fwb {
+  font-weight: bold;
+}
+.fwn {
+  font-weight: normal;
+}
+
+.h-70 {
+  height: 70px !important;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  transition: top 0.6s;
+}
+
+.opacity-dot6 {
+  opacity: 0.6;
+}
+
+.blue-hover {
+	&:hover {
+		color: #315DF7
+	}
+}

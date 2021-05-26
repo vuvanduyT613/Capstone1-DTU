@@ -13,7 +13,7 @@ const router = express.Router();
 router
 	.route("/:slug")
 	.get(auth(), validate(getValidation), switchRoute, getObject)
-	.post(validate(register), switchRoute, createObject)
+	.post(validate(register), uploadCloud.single("avatar"), assign("avatar"), switchRoute, createObject)
 	.patch(
 		auth(),
 		/*validate(updateValidation),*/ uploadCloud.single("avatar"),

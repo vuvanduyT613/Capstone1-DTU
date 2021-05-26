@@ -5,15 +5,9 @@ const createValidation = {
 	//
 	body: Joi.object().keys({
 		doctorID: Joi.string().required().custom(objectId),
-		hospitalID: Joi.string().required().custom(objectId),
-		timeSlotPerUser: Joi.number().required(),
-		fistConsultationFree: Joi.number().required(),
-		followupConsultationFree: Joi.number().required(),
-		streetAddress: Joi.string().required(),
-		city: Joi.string().required(),
-		state: Joi.string().required(),
-		country: Joi.string().required(),
-		zip: Joi.string().required(),
+		userID: Joi.string().required().custom(objectId),
+		time: Joi.date(),
+		status: Joi.string(),
 	}),
 };
 
@@ -64,14 +58,6 @@ const updateValidation = {
 			//
 			doctorID: Joi.string().custom(objectId),
 			hospitalID: Joi.string().custom(objectId),
-			timeSlotPerUser: Joi.number(),
-			fistConsultationFree: Joi.number(),
-			followupConsultationFree: Joi.number(),
-			streetAddress: Joi.string(),
-			city: Joi.string(),
-			state: Joi.string(),
-			country: Joi.string(),
-			zip: Joi.string(),
 		})
 		.min(1),
 };

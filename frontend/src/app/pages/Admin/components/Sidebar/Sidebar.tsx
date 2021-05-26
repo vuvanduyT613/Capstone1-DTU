@@ -188,18 +188,13 @@ export default function Sidebar() {
               <li className="items-center">
                 <Link
                   className="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
-                  to="/admin/auth/login"
+                  to="/auth/"
+                  onClick={() => {
+                    Cookies.set('role', 'user');
+                  }}
                 >
-                  <i className="fas fa-fingerprint text-blueGray-400 mr-2 text-sm"></i> Login
-                </Link>
-              </li>
-
-              <li className="items-center">
-                <Link
-                  className="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
-                  to="/admin/auth/register"
-                >
-                  <i className="fas fa-clipboard-list text-blueGray-300 mr-2 text-sm"></i> Register
+                  <i className="fas fa-clipboard-list text-blueGray-300 mr-2 text-sm"></i> LANDING
+                  PAGE
                 </Link>
               </li>
             </ul>

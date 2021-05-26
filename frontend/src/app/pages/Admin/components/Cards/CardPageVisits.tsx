@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 // components
 
 export default function CardPageVisits() {
@@ -12,12 +12,14 @@ export default function CardPageVisits() {
               <h3 className="font-semibold text-base text-blueGray-700">Upcoming Appointments</h3>
             </div>
             <div className="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
-              <button
-                className="bg-lightBlue-500 h-10 text-white active:bg-lightBlue-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                type="button"
-              >
-                View all
-              </button>
+              <Link to="/admin/appointment">
+                <button
+                  className="bg-lightBlue-500 h-10 text-white active:bg-lightBlue-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                  type="button"
+                >
+                  View all
+                </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -49,16 +51,18 @@ export default function CardPageVisits() {
                   <p className="text-lightBlue-600">7.00 PM</p>
                 </td>
                 <td className=" border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-right">
-                  <button
-                    className="bg-white h-10 mr-4 hover:bg--blueGray-800 text-white text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-mx-auto mb-1 ease-linear transition-all duration-150"
-                    style={{
-                      border: '1px solid  rgba(14, 165, 233) ',
-                      color: 'rgba(14, 165, 233)',
-                    }}
-                    type="button"
-                  >
-                    Take up
-                  </button>
+                  <Link to="/admin/appointment">
+                    <button
+                      className="bg-white h-10 mr-4 hover:bg--blueGray-800 text-white text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-mx-auto mb-1 ease-linear transition-all duration-150"
+                      style={{
+                        border: '1px solid  rgba(14, 165, 233) ',
+                        color: 'rgba(14, 165, 233)',
+                      }}
+                      type="button"
+                    >
+                      Take up
+                    </button>
+                  </Link>
                 </td>
               </tr>
               <tr>

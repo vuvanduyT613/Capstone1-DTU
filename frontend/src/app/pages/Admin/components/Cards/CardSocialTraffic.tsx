@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { rootState } from 'store/reducers';
 export default function CardSocialTraffic() {
   const { data } = useSelector((state: rootState) => state.userReducer.getAllUser);
@@ -13,12 +14,14 @@ export default function CardSocialTraffic() {
               <h3 className="font-semibold text-base text-blueGray-700">Doctors</h3>
             </div>
             <div className="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
-              <button
-                className="bg-lightBlue-500 h-10 text-white active:bg-lightBlue-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                type="button"
-              >
-                View all
-              </button>
+              <Link to="/admin/doctor">
+                <button
+                  className="bg-lightBlue-500 h-10 text-white active:bg-lightBlue-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                  type="button"
+                >
+                  View all
+                </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -37,7 +40,7 @@ export default function CardSocialTraffic() {
                   data.results.map((value, index) => (
                     <tr>
                       <th className=" flex border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                        <img className="h-16 rounded-full" src={value.avatar} />
+                        <img className="h-16 w-16 rounded-full" src={value.avatar} />
                         <div className="items-content m-4">
                           <p>Mr. {value.userName}</p>
                           <p className="text-lightBlue-600">

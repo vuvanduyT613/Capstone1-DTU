@@ -13,12 +13,6 @@ module.exports.Qualification = require(`./doctors/qualification.model`);
 
 // appointment
 module.exports.Appointment = require(`./appointments/appointment.model`);
-module.exports.Booking = require(`./appointments/booking.nodel`);
-
-//office
-module.exports.Office = require(`./offices/office.model`);
-module.exports.NetworkInsurance = require(`./offices/networkInsurance.model`);
-module.exports.OfficeDoctor = require(`./offices/officeDoctor.model`);
 
 //chat
 module.exports.ChatRoom = require("./chat/chatRoom.model");

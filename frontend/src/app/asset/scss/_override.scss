@@ -1,0 +1,144 @@
+.h-un-nav {
+  height: calc(100% - 160px);
+}
+
+.img-cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.radius-4 {
+  border-radius: 4px;
+}
+
+.table {
+  td,
+  th {
+    line-height: 1.4;
+  }
+
+  &-header-nowrap {
+    th {
+      white-space: nowrap;
+    }
+  }
+}
+
+.table {
+  th {
+    background: $blue4;
+  }
+
+  td, th {
+    border: 0 !important;
+    color: $dark;
+    font-weight: 400;
+    font-size: $size-base;
+  }
+}
+
+.table-middle {
+  td,
+  th {
+    vertical-align: middle !important;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+}
+
+.ant-table-thead {
+  > tr > th {
+    vertical-align: middle !important;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+    background: $blue4;
+    color: $dark;
+  }
+}
+
+.ant-table-tbody {
+  td {
+    text-align: center;
+  }
+
+  > tr > td {
+    border-bottom: 0;
+  }
+}
+
+.ant-table-tbody > tr.ant-table-row:hover > td {
+  background-color: rgba($blue4, .16);
+}
+
+.ant-table-row {
+  &:nth-of-type(odd) {
+    background-color: white;
+  }
+
+  &:nth-of-type(even) {
+    background-color: rgba($blue4, .16);
+  }
+}
+
+.table-striped tbody {
+  tr {
+    &:nth-of-type(odd) {
+      background-color: white;
+    }
+
+    &:nth-of-type(even) {
+      background-color: rgba($blue4, .16);
+    }
+  }
+}
+
+.ant-modal-close-x {
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  transform: translate(-10px, 10px);
+}
+
+.ant-modal-body {
+  padding: 40px;
+}
+
+.modal-medium {
+  width: 620px !important;
+}
+
+.modal-lg {
+  width: 775px !important;
+}
+
+.ant-picker {
+  border-radius: 4px;
+  height: 43px;
+}
+
+.ant-picker-suffix, .ant-select-arrow {
+  color: #315DF7;
+}
+
+.ant-select-single:not(.ant-select-customize-input) .ant-select-selector {
+  height: 43px;
+  border-radius: 4px;
+}
+
+.ant-select-single .ant-select-selector .ant-select-selection-item, .ant-select-single .ant-select-selector .ant-select-selection-placeholder {
+  line-height: 43px;
+}
+
+.ant-select-single:not(.ant-select-customize-input) .ant-select-selector .ant-select-selection-search-input {
+  height: 43px;
+}
+
+.ant-upload {
+  width: 100%;
+
+  label {
+    width: 100%;
+  }
+}

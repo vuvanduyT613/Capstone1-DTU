@@ -20,7 +20,7 @@ import {
 export default function CardTable(props) {
   const [open, setOpen] = React.useState(false);
   const [formDialog, setFormDialog] = React.useState(false);
-  const [id, setId] = React.useState({ id: '', role: '', token: Cookies.get('access_token') });
+  const [id, setId] = React.useState({ id: '', token: Cookies.get('access_token') });
 
   const { data } = useSelector((state: rootState) => state.userReducer.getAllUser);
 
@@ -144,7 +144,91 @@ export default function CardTable(props) {
                 data.results ? (
                   //@ts-ignore
                   data.results.map((value, index) =>
-                    value?.role === 'doctor' || value?.role === 'user' ? (
+                    props.whoew === true ? (
+                      <tr>
+                        <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left flex items-center">
+                          <span
+                            className={
+                              'ml-3 font-bold ' +
+                              +(props.color === 'light' ? 'text-blueGray-600' : 'text-white')
+                            }
+                          >
+                            {`${value.id}`}
+                          </span>
+                        </th>
+                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                          {`${value.userID}`}
+                        </td>
+
+                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                          <div className="flex items-center">
+                            <span className="mr-2">{` ${value.doctorID}`}</span>
+                          </div>
+                        </td>
+
+                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                          {` ${value.time}`}
+                        </td>
+                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                          {value.status === 'active' || value.status === 'Active' ? (
+                            <div
+                              style={{
+                                backgroundColor: '#e5faf3',
+                                border: '1px solid #00ce7c',
+                                color: '#00ce7c',
+                                borderRadius: '4px',
+                                display: 'inline-block',
+                                fontSize: '12px',
+                                minWidth: '95px',
+                                padding: '1px 10px',
+                                textAlign: 'center',
+                              }}
+                            >
+                              ACTIVE
+                            </div>
+                          ) : (
+                            <div
+                              style={{
+                                backgroundColor: '#ffe5e6',
+                                border: '1px solid #fe0000',
+                                color: '#fe0000',
+                                borderRadius: '4px',
+                                display: 'inline-block',
+                                fontSize: '12px',
+                                minWidth: '95px',
+                                padding: '1px 10px',
+                                textAlign: 'center',
+                              }}
+                            >
+                              IN ACTIVE
+                            </div>
+                          )}
+                        </td>
+                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
+                          <Grid style={{ textAlign: 'center' }}>
+                            <Link
+                              to={`${props.to}?id=${value.id}&userID=${value.userID}&doctorID=${value.doctorID}&time=${value.time}&status=${value.status} `}
+                            >
+                              <IconButton color="primary" style={{ outline: 0 }}>
+                                <EditIcon />
+                              </IconButton>
+                            </Link>
+
+                            <IconButton
+                              color="secondary"
+                              style={{ outline: 0 }}
+                              onClick={() => {
+                                setOpen(true);
+                                //@ts-ignore
+                                setId({ ...id, id: value.id });
+                              }}
+                            >
+                              <DeleteIcon />
+                            </IconButton>
+                          </Grid>
+                        </td>
+                      </tr>
+                    ) : value?.role === 'doctor' || value?.role === 'user' ? (
                       <tr>
                         <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left flex items-center">
                           <img

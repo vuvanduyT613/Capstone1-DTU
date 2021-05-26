@@ -1,10 +1,14 @@
 import React from 'react';
-
+import { rootState } from 'store/reducers';
+import { useDispatch, /*connect,*/ useSelector } from 'react-redux';
 // components
 
 import CardStats from '../Cards/CardStats';
 
 export default function HeaderStats() {
+  const { /*email, phoneNumber,*/ doctor, patient, attend, pedding } = useSelector(
+    (state: rootState) => state.userReducer.status,
+  );
   return (
     <>
       {/* Header */}
@@ -16,7 +20,7 @@ export default function HeaderStats() {
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
                   statSubtitle="Doctors"
-                  statTitle="350,897"
+                  statTitle={`${doctor}`}
                   statArrow="up"
                   statPercent="3.48"
                   statPercentColor="text-emerald-500"
@@ -28,7 +32,7 @@ export default function HeaderStats() {
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
                   statSubtitle="Patients"
-                  statTitle="2,356"
+                  statTitle={`${patient}`}
                   statArrow="down"
                   statPercent="3.48"
                   statPercentColor="text-red-500"
@@ -40,7 +44,7 @@ export default function HeaderStats() {
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
                   statSubtitle="Attend"
-                  statTitle="924"
+                  statTitle={`${attend}`}
                   statArrow="down"
                   statPercent="1.10"
                   statPercentColor="text-orange-500"
@@ -52,7 +56,7 @@ export default function HeaderStats() {
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
                   statSubtitle="Pending"
-                  statTitle="49,65%"
+                  statTitle={`${pedding}`}
                   statArrow="up"
                   statPercent="12"
                   statPercentColor="text-emerald-500"

@@ -1,127 +1,122 @@
 import * as React from 'react';
 import styled from 'styled-components/macro';
 import Cookies from 'js-cookie';
+import { Route, Link } from 'react-router-dom';
+import { ReactComponent as Doctor } from './assets/ic_doctor.svg';
+import { ReactComponent as Delivery } from './assets/ic_delivery.svg';
+import { ReactComponent as Clinic } from './assets/ic_clinic.svg';
+import { ReactComponent as Mail } from './assets/ic_mail.svg';
+import { ReactComponent as Person } from './assets/ic_person.svg';
+import { ReactComponent as DoctorWhite } from './assets/ic_doctor_white.svg';
+import { ReactComponent as DeliveryWhite } from './assets/ic_delivery_white.svg';
+import { ReactComponent as ClinicWhite } from './assets/ic_clinic_white.svg';
+import { ReactComponent as MailWhite } from './assets/ic_mail_white.svg';
+import { ReactComponent as PersonWhite } from './assets/ic_person_white.svg';
 
 export function Nav() {
+  const Menus = [
+    {
+      name: 'Doctor',
+      to: '/doctor',
+      exact: false,
+    },
+    {
+      name: 'Clinic',
+      to: '/clinic',
+      exact: false,
+    },
+    {
+      name: 'Delivery',
+      to: '/delivery',
+      exact: false,
+    },
+    {
+      name: 'Mailbox',
+      to: '/mailbox',
+      exact: false,
+    },
+    {
+      name: 'Personal',
+      to: '/personal',
+      exact: false,
+    },
+  ];
+
+  const MenuLink = ({ Label, to, activeOnlyWhenActive, index }) => {
+    return (
+      <Route
+        path={to}
+        exact={activeOnlyWhenActive}
+        children={({ match }) => {
+          const active = match ? true : false;
+          return (
+            <Link
+              to={to}
+              style={{
+                cursor: 'pointer',
+                textDecoration: 'none',
+                display: 'flex',
+                padding: '0.25rem 1rem',
+                fontSize: '0.875rem',
+                fontWeight: 500,
+                alignItems: 'center',
+              }}
+            >
+              {active === true ? (
+                <>
+                  <Div />
+                  <DivContent>
+                    {index === 0 ? (
+                      <DoctorWhite />
+                    ) : index === 1 ? (
+                      <ClinicWhite />
+                    ) : index === 2 ? (
+                      <DeliveryWhite />
+                    ) : index === 3 ? (
+                      <MailWhite />
+                    ) : (
+                      <PersonWhite />
+                    )}
+                    <p> {Label}</p>
+                  </DivContent>{' '}
+                </>
+              ) : (
+                <>
+                  <DivContentNone>
+                    {index === 0 ? (
+                      <Doctor style={{ color: '#000' }} />
+                    ) : index === 1 ? (
+                      <Clinic />
+                    ) : index === 2 ? (
+                      <Delivery />
+                    ) : index === 3 ? (
+                      <Mail />
+                    ) : (
+                      <Person />
+                    )}
+                    <p> {Label}</p>
+                  </DivContentNone>
+                </>
+              )}
+            </Link>
+          );
+        }}
+      />
+    );
+  };
+
   return (
     <>
       <Wrapper>
-        <Item
-          href="https://cansahin.gitbook.io/react-boilerplate-cra-template/"
-          target="_blank"
-          title="Documentation Page"
-          rel="noopener noreferrer"
-        >
-          <Div />
-          <DivContent>
-            <svg
-              width="18"
-              height="18"
-              viewBox="0 0 18 18"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M15 3H3V4.5H15V3ZM15.75 10.5V9L15 5.25H3L2.25 9V10.5H3V15H10.5V10.5H13.5V15H15V10.5H15.75ZM9 13.5H4.5V10.5H9V13.5Z"
-                fill="#FDFDFD"
-              />
-            </svg>
-
-            <p> Doctor</p>
-          </DivContent>
-        </Item>
-        <Item
-          href="https://cansahin.gitbook.io/react-boilerplate-cra-template/"
-          target="_blank"
-          title="Documentation Page"
-          rel="noopener noreferrer"
-        >
-          <DivContentNone>
-            <svg
-              width="18"
-              height="18"
-              viewBox="0 0 18 18"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M11.25 8.25V3.75L9 1.5L6.75 3.75V5.25H2.25V15.75H15.75V8.25H11.25ZM5.25 14.25H3.75V12.75H5.25V14.25ZM5.25 11.25H3.75V9.75H5.25V11.25ZM5.25 8.25H3.75V6.75H5.25V8.25ZM9.75 14.25H8.25V12.75H9.75V14.25ZM9.75 11.25H8.25V9.75H9.75V11.25ZM9.75 8.25H8.25V6.75H9.75V8.25ZM9.75 5.25H8.25V3.75H9.75V5.25ZM14.25 14.25H12.75V12.75H14.25V14.25ZM14.25 11.25H12.75V9.75H14.25V11.25Z"
-                fill="#333333"
-              />
-            </svg>
-
-            <p> Clinic</p>
-          </DivContentNone>
-        </Item>
-        <Item
-          href="https://cansahin.gitbook.io/react-boilerplate-cra-template/"
-          target="_blank"
-          title="Documentation Page"
-          rel="noopener noreferrer"
-        >
-          <DivContentNone>
-            <svg
-              width="18"
-              height="18"
-              viewBox="0 0 18 18"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M15 3.00001H3.00001C2.80324 2.99951 2.60832 3.03802 2.42652 3.11332C2.24473 3.18861 2.07967 3.2992 1.94088 3.43869C1.80209 3.57818 1.69233 3.74379 1.61794 3.92596C1.54356 4.10813 1.50602 4.30324 1.50751 4.50001L1.50001 13.5C1.49932 13.6972 1.53764 13.8926 1.61278 14.0749C1.68791 14.2572 1.79838 14.4228 1.9378 14.5622C2.07723 14.7016 2.24286 14.8121 2.42516 14.8872C2.60747 14.9624 2.80283 15.0007 3.00001 15H15C15.1972 15.0007 15.3926 14.9624 15.5749 14.8872C15.7572 14.8121 15.9228 14.7016 16.0622 14.5622C16.2016 14.4228 16.3121 14.2572 16.3872 14.0749C16.4624 13.8926 16.5007 13.6972 16.5 13.5V4.50001C16.5007 4.30283 16.4624 4.10747 16.3872 3.92516C16.3121 3.74286 16.2016 3.57723 16.0622 3.4378C15.9228 3.29838 15.7572 3.18791 15.5749 3.11278C15.3926 3.03764 15.1972 2.99932 15 3.00001ZM15 13.5H3.00001V9.00001H15V13.5ZM15 6.00001H3.00001V4.50001H15V6.00001Z"
-                fill="#333333"
-              />
-            </svg>
-
-            <p> Delivery</p>
-          </DivContentNone>
-        </Item>
-        <Item
-          href="https://cansahin.gitbook.io/react-boilerplate-cra-template/"
-          target="_blank"
-          title="Documentation Page"
-          rel="noopener noreferrer"
-        >
-          <DivContentNone>
-            <svg
-              width="18"
-              height="18"
-              viewBox="0 0 18 18"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M15 3H3C2.60348 3.00198 2.22387 3.16089 1.94418 3.44198C1.6645 3.72307 1.5075 4.10347 1.5075 4.5L1.5 13.5C1.50119 13.8975 1.6596 14.2783 1.94065 14.5593C2.2217 14.8404 2.60254 14.9988 3 15H15C15.3975 14.9988 15.7783 14.8404 16.0594 14.5593C16.3404 14.2783 16.4988 13.8975 16.5 13.5V4.5C16.4988 4.10254 16.3404 3.7217 16.0594 3.44065C15.7783 3.1596 15.3975 3.00119 15 3ZM15 6L9 9.75L3 6V4.5L9 8.25L15 4.5V6Z"
-                fill="#333333"
-              />
-            </svg>
-
-            <p> Mailbox</p>
-          </DivContentNone>
-        </Item>
-        <Item
-          href="https://cansahin.gitbook.io/react-boilerplate-cra-template/"
-          target="_blank"
-          title="Documentation Page"
-          rel="noopener noreferrer"
-        >
-          <DivContentNone>
-            <svg
-              width="18"
-              height="18"
-              viewBox="0 0 18 18"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M1.5 11.625V13.125H16.5V11.625H1.5ZM1.5 7.875V9.375H16.5V7.875H1.5ZM1.5 4.125V5.625H16.5V4.125H1.5Z"
-                fill="#333333"
-              />
-            </svg>
-
-            <p> Personal</p>
-          </DivContentNone>
-        </Item>
+        {Menus.map((value, index) => (
+          <MenuLink
+            key={index}
+            Label={value.name}
+            to={value.to}
+            activeOnlyWhenActive={value.exact}
+            index={index}
+          />
+        ))}
       </Wrapper>
       <WrapperExit>
         <ItemExit

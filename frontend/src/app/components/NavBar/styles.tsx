@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme: Theme) =>
     wrapperNavbar: {
       position: 'absolute',
       width: '13%',
-      height: '900px',
+      height: '79vh',
       background: '#FDFDFD',
     },
   }),

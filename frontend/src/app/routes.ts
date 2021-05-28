@@ -2,12 +2,28 @@ import { HomePage } from './pages/HomePage/Loadable';
 import { Admin } from './pages/Admin/Loadable';
 import { NotFoundPage } from './pages/NotFoundPage/Loadable';
 import { Authentication } from './pages/Authentication/Loadable';
+import { ClinicPage } from './pages/ClinicPage/Loadable';
+import { RedirectTo } from './pages/Redirect';
+import { Detail } from './pages/Detail';
+import { Delivery } from './pages/Delivery';
+import { Personal } from './pages/Personal';
+import { DetailClinic } from './pages/DetailClinic';
 
 const routes = [
   {
     path: '/',
     exact: true,
+    main: () => RedirectTo,
+  },
+  {
+    path: '/doctor',
+    exact: true,
     main: () => HomePage,
+  },
+  {
+    path: '/doctor/detail',
+    exact: false,
+    main: () => Detail,
   },
   {
     path: '/admin',
@@ -19,7 +35,26 @@ const routes = [
     exact: false,
     main: () => Authentication,
   },
-
+  {
+    path: '/clinic',
+    exact: true,
+    main: () => ClinicPage,
+  },
+  {
+    path: '/clinic/detail',
+    exact: false,
+    main: () => DetailClinic,
+  },
+  {
+    path: '/delivery',
+    exact: true,
+    main: () => Delivery,
+  },
+  {
+    path: '/personal',
+    exact: true,
+    main: () => Personal,
+  },
   {
     path: '*',
     exact: true,

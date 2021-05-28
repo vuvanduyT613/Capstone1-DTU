@@ -1,6 +1,6 @@
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 //import Images from '../../../../asset/image';
-import { color } from '../../../../asset/constant/color';
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     righticon: {
@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme: Theme) =>
       width: '100%',
       marginTop: 18,
       borderRadius: '5px',
-      background: color.white,
+      background: '#fff',
 
       '& fieldset': {
         border: 'none',

@@ -207,7 +207,7 @@ export default function CardTable(props) {
                         <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
                           <Grid style={{ textAlign: 'center' }}>
                             <Link
-                              to={`${props.to}?id=${value.id}&userID=${value.userID}&doctorID=${value.doctorID}&time=${value.time}&status=${value.status} `}
+                              to={`${props.to}?id=${value.id}&userID=${value.userID}&doctorID=${value.doctorID}&time=${value.time}&status=${value.status}&level=${value.level}&price=${value.price}&detail=${value.detail}&specialize=${value.specialize}`}
                             >
                               <IconButton color="primary" style={{ outline: 0 }}>
                                 <EditIcon />
@@ -269,7 +269,7 @@ export default function CardTable(props) {
                         <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
                           <Grid style={{ textAlign: 'center' }}>
                             <Link
-                              to={`${props.to}?id=${value.id}&avatar=${value.avatar}&city=${value.city}&dateOfBirth=${value.dateOfBirth}&email=${value.email}&fistName=${value.fistName}&lastName=${value.lastName}&postalCode=${value.postalCode}&address=${value.address}&role=${value.role}&userName=${value.userName}&country=${value.country}&phone=${value.phone}`}
+                              to={`${props.to}?id=${value.id}&avatar=${value.avatar}&city=${value.city}&dateOfBirth=${value.dateOfBirth}&email=${value.email}&fistName=${value.fistName}&lastName=${value.lastName}&postalCode=${value.postalCode}&address=${value.address}&role=${value.role}&userName=${value.userName}&country=${value.country}&phone=${value.phone}&price=${value.price}&level=${value.level}&detail=${value.detail}&specialize=${value.specialize}`}
                             >
                               <IconButton color="primary" style={{ outline: 0 }}>
                                 <EditIcon />

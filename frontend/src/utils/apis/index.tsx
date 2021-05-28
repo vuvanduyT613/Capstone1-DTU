@@ -77,7 +77,10 @@ export const doctorGetAll = payload => {
   const config = {
     headers: { Authorization: `Bearer ${payload.token}` },
   };
-  return GET_TOKEN(`${ENDPOINT}/doctors/v1?limit=5&page=${payload.page}`, config);
+  return GET_TOKEN(
+    `${ENDPOINT}/doctors/v1?limit=${payload.limit ? payload.limit : 5} &page=${payload.page}`,
+    config,
+  );
 };
 
 export const doctorUpdateById = payload => {

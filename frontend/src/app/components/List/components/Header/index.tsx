@@ -6,6 +6,7 @@
 import * as React from 'react';
 import Image from '../../assets/test.jpg';
 import styled from 'styled-components/macro';
+import Select from 'react-select';
 
 interface Props {}
 
@@ -16,7 +17,7 @@ export function Header(props: Props) {
         <Title>
           <p>Looking for a doctor </p>
           <WrapperInput>
-            <div style={{ display: 'flex' }}>
+            <div style={{ display: 'flex', marginRight: '15px' }}>
               <Input />
               <Icon>
                 <svg
@@ -33,10 +34,71 @@ export function Header(props: Props) {
                 </svg>
               </Icon>
             </div>
-            <Select>
-              <Option value="specialize"> specialize </Option>
-              <Option value="doctor"> doctor </Option>
-            </Select>
+            <Select
+              //value={}
+              //onChange={e => setFieldValue('status', e.value)}
+              placeholder={'Doctor'}
+              options={[
+                { value: 'Doctor', label: 'Doctor' },
+                { value: 'Specialize', label: 'Specialize' },
+              ]}
+              components={{
+                IndicatorSeparator: () => null,
+              }}
+              styles={{
+                container: base => ({
+                  ...base,
+                  width: '150px',
+                  borderRadius: '5px',
+                  height: '40px',
+                  padding: '10px',
+                }),
+                control: provided => ({
+                  ...provided,
+                  height: '44px',
+                  padding: 10,
+                  marginLeft: 0,
+                  border: '0px solid black',
+                  fontSize: '0.875rem',
+                  outline: 'none',
+                  textALign: 'center',
+                  color: 'rgb(71, 85, 105)',
+                  borderRadius: '0.25rem',
+                  lineHeight: '1.25rem',
+                  boxShadow: 'rgb(0 0 0 / 10%) 0px 1px 3px 0px, rgb(0 0 0 / 6%) 0px 1px 2px 0px',
+                }),
+                indicatorsContainer: () => ({
+                  '.myDropDown': {
+                    '&__dropdown-indicator': {
+                      marginTop: '-5px', // <--- Color of your choice
+                    },
+                  },
+                }),
+                indicatorSeparator: base => ({
+                  ...base,
+                  display: 'none',
+                }),
+                dropdownIndicator: base => ({
+                  ...base,
+                  color: ' #315DF7',
+                  marginTop: '-5px', // Custom colour
+                }),
+                singleValue: base => ({
+                  ...base,
+                }),
+                valueContainer: base => ({
+                  ...base,
+                  color: 'white',
+                  marginTop: '-4px',
+                  marginLeft: '-8px',
+                  width: '100%',
+                }),
+                option: base => ({
+                  ...base,
+                  height: '100%',
+                }),
+              }}
+            />
           </WrapperInput>
         </Title>
       </WrapperHeader>
@@ -72,7 +134,7 @@ const WrapperInput = styled.div`
 
 const Input = styled.input`
   width: 400px;
-  height: 34px;
+  height: 40px;
   text-indent: 8px;
   margin: auto 0px auto auto;
   background: #fdfdfd;
@@ -92,14 +154,27 @@ const Icon = styled.div`
     margin-left: 5px;
   }
 `;
-
+/*
 const Select = styled.select`
   width: 120px;
-  height: 34px;
+  height: 40px;
   margin: auto 0px auto 10px;
+  border-radius: 5px;
+
+  &:focus {
+    outline: 1px;
+    border: 1px;
+  }
+  &:hover {
+    outline: 1px;
+    border: 1px;
+  }
 `;
 const Option = styled.option`
   border: 1px solid #333333;
   box-sizing: border-box;
   border-radius: 4px;
+  width: 120px;
+  height: 92px;
 `;
+*/

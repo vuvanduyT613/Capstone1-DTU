@@ -7,6 +7,7 @@ import {
   createAppointment,
   updateAppointment,
   deleteAppointment,
+  createAppointmentClient,
 } from './appointments';
 import { getByIdUtil, updateById, deleteById, adminStatus } from './util';
 
@@ -26,6 +27,7 @@ function* rootSaga() {
     takeLeading('DELETE_BY_ID', deleteById),
     takeLeading('GET_ALL_APPOINTMENT_API', getAllAppointment),
     takeLeading('CREATE_ALL_APPOINTMENT_API', createAppointment),
+    takeLeading('CREATE_ALL_APPOINTMENT_CLIENT_API', createAppointmentClient),
     takeLeading('UPDATE_ALL_APPOINTMENT_API', updateAppointment),
     takeLeading('DELETE_ALL_APPOINTMENT_API', deleteAppointment),
     takeLeading('ADMIN_STATUS', adminStatus),

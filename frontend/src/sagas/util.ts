@@ -48,6 +48,12 @@ export function* updateById(action) {
     form.append('postalCode', action.payload.postalCode);
     form.append('phone', action.payload.phone);
     form.append('avatar', action.payload.avatar);
+    if (action.payload.role.value !== 'user') {
+      form.append('level', action.payload.level);
+      form.append('price', action.payload.price);
+      form.append('detail', action.payload.detail);
+      form.append('specialize', action.payload.specialize);
+    }
     const { status } = yield call(
       action.payload.role.value === 'user' ? userUpdateById : doctorUpdateById,
       { token: action.payload.token, id: action.payload.id, data: form },

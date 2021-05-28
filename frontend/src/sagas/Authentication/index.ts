@@ -23,6 +23,7 @@ const expires = process.env.REACT_APP_EXPIRES_COOKIE;
 export function* signIn(action) {
   try {
     const { status, data } = yield call(authenticationSignIn, action.payload);
+    console.log(data);
 
     if (status === 200) {
       Cookies.set('role', data.user.role, expires);
@@ -30,6 +31,11 @@ export function* signIn(action) {
       Cookies.set('password', action.payload.password, expires);
       Cookies.set('access_token', data.tokens.access.token);
       Cookies.set('refresh_token', data.tokens.refresh.token, expires);
+      Cookies.set('user_name', `${data.user.fistName} ${data.user.lastName}`, expires);
+      Cookies.set('user_id', `${data.user.id}`, expires);
+      Cookies.set('user_phone', `${data.user.phone}`, expires);
+      Cookies.set('user_date', `${data.user.dateOfBirth}`, expires);
+      Cookies.set('user_avatar', `${data.user.avatar}`, expires);
       yield put({
         type: UPDATE_FIELD_SIGN_IN,
         payload: {
@@ -51,6 +57,8 @@ export function* signIn(action) {
 }
 
 export function* signUp(action) {
+  console.log(action);
+
   try {
     const userName = `${action.payload.fistName}${action.payload.lastName}`;
     const form = new FormData();
@@ -66,6 +74,12 @@ export function* signUp(action) {
     form.append('postalCode', action.payload.postalCode);
     form.append('phone', action.payload.phone);
     form.append('avatar', action.payload.avatar);
+    if (action.payload.role.value !== 'user') {
+      form.append('level', action.payload.level);
+      form.append('price', action.payload.price);
+      form.append('detail', action.payload.detail);
+      form.append('specialize', action.payload.specialize);
+    }
     const { status } = yield call(
       action.payload.role.value === 'user' ? authenticationSignUp : authenticationSignUpDoctor,
       form,

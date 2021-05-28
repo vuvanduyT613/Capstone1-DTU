@@ -51,6 +51,28 @@ export function* createAppointment(action) {
   }
 }
 
+export function* createAppointmentClient(action) {
+  try {
+    const { status } = yield call(appointmentCreate, action.payload);
+    if (status === 201 || status === 200) {
+      toast.success(`Medical Register success.!`);
+      yield put({
+        type: UPDATE_FIELD_SIGN_UP,
+        payload: {
+          email: action.payload.doctor_name,
+          step: 0,
+        },
+      });
+    }
+    return;
+  } catch (err) {
+    toast.error(`Medical Register check time.!`);
+    yield put({
+      type: ERROR,
+      payload: { data: err },
+    });
+  }
+}
 export function* updateAppointment(action) {
   try {
     const { status } = yield call(appointmentUpdateById, action.payload);

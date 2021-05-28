@@ -77,9 +77,23 @@ const doctorSchema = mongoose.Schema(
 		avatar: {
 			type: String,
 		},
+		level: {
+			type: String,
+		},
 		status: {
 			type: String,
 			default: "alive",
+		},
+		specialize: {
+			type: String,
+			default: "Mat",
+		},
+		price: {
+			type: String,
+		},
+		detail: {
+			type: String,
+			maxlength: 1000,
 		},
 	},
 	{

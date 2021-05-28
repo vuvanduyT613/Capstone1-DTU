@@ -69,6 +69,10 @@ export default function CardSettings(props) {
           phone: data && data.phone !== 'undefined' ? data.phone : '',
           avatar: data && data.avatar !== 'undefined' ? data.avatar : '',
           avatarLocal: data && data.avatar !== 'undefined' ? data.avatar : '',
+          detail: data && data.detail !== 'undefined' ? data.detail : '',
+          price: data && data.price !== 'undefined' ? data.price : '',
+          level: data && data.level !== 'undefined' ? data.level : '',
+          specialize: data && data.specialize !== 'undefined' ? data.specialize : '',
           token: Cookies.get('access_token'),
         }}
         validationSchema={Schema}
@@ -379,6 +383,95 @@ export default function CardSettings(props) {
                         </p>
                       </div>
                     </div>
+                    {props.slug === 'doctor' ? (
+                      <>
+                        <div className="w-full lg:w-6/12 px-4">
+                          <div className="relative w-full mb-3">
+                            <label
+                              className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                              htmlFor="grid-password"
+                            >
+                              Price
+                            </label>
+                            <input
+                              name="price"
+                              type="text"
+                              value={values.price}
+                              onChange={handleChange}
+                              placeholder="Enter price your "
+                              className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                              defaultValue="United States"
+                            />
+                            <p className={classes.err}>{Boolean(errors.price) && errors.price}</p>
+                          </div>
+                        </div>
+                        <div className="w-full lg:w-6/12 px-4">
+                          <div className="relative w-full mb-3">
+                            <label
+                              className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                              htmlFor="grid-password"
+                            >
+                              Level
+                            </label>
+                            <input
+                              name="level"
+                              type="text"
+                              value={values.level}
+                              onChange={handleChange}
+                              placeholder="Enter level your "
+                              className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                              defaultValue="Postal Code"
+                            />
+                            <p className={classes.err}>{Boolean(errors.level) && errors.level}</p>
+                          </div>
+                        </div>
+                        <div className="w-full lg:w-4/12 px-4">
+                          <div className="relative w-full mb-3">
+                            <label
+                              className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                              htmlFor="grid-password"
+                            >
+                              Specialize
+                            </label>
+                            <input
+                              name="specialize"
+                              type="text"
+                              value={values.specialize}
+                              onChange={handleChange}
+                              placeholder="Enter specialize your "
+                              className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                              defaultValue="Postal Code"
+                            />
+                            <p className={classes.err}>
+                              {Boolean(errors.specialize) && errors.specialize}
+                            </p>
+                          </div>
+                        </div>
+
+                        <div className="w-full h-100 lg:w-8/12 px-4">
+                          <div className="relative w-full mb-3">
+                            <label
+                              className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                              htmlFor="grid-password"
+                            >
+                              Detail ( down the line = "/", )
+                            </label>
+                            <input
+                              name="detail"
+                              type="text"
+                              value={values.detail}
+                              onChange={handleChange}
+                              placeholder="Enter detail your "
+                              className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                              defaultValue="Postal Code"
+                            />
+                            <p className={classes.err}>{Boolean(errors.detail) && errors.detail}</p>
+                          </div>
+                        </div>
+                      </>
+                    ) : (
+                      <></>
+                    )}
                   </div>
                 </form>
               </div>

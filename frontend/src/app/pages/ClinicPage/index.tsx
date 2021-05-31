@@ -22,6 +22,10 @@ export function ClinicPage(props: Props) {
 
   const [textSearch, setTextSearch] = React.useState('');
 
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <>
       <Helmet>

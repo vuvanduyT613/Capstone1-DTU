@@ -82,9 +82,21 @@ const Input = styled.input`
   text-indent: 8px;
   margin: auto 0px auto auto;
   background: #fdfdfd;
+  box-shadow: rgb(0 0 0 / 10%) 0px 1px 3px 0px, rgb(0 0 0 / 6%) 0px 1px 2px 0px;
   border: 1px solid rgba(114, 122, 142, 0.3);
   box-sizing: border-box;
   border-radius: 4px;
+
+  &:focus {
+    border-radius: 4px;
+    border: 1px solid #00358e;
+    outline: 0px;
+  }
+
+  &:hover {
+    border-radius: 4px;
+    outline: 0px;
+  }
 `;
 
 const Icon = styled.div`
@@ -115,7 +127,7 @@ const WrappperAction = styled.div`
     font-family: Segoe UI;
     font-style: normal;
     font-weight: normal;
-    font-size: 15px;
+    font-size: 13px;
     line-height: 24px;
     /* identical to box height, or 200% */
     width: 70%;

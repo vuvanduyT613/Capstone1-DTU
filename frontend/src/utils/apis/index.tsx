@@ -78,7 +78,21 @@ export const doctorGetAll = payload => {
     headers: { Authorization: `Bearer ${payload.token}` },
   };
   return GET_TOKEN(
-    `${ENDPOINT}/doctors/v1?limit=${payload.limit ? payload.limit : 5} &page=${payload.page}`,
+    `${ENDPOINT}/doctors/v1?userName=${payload.userName ? payload.userName : ' '}&limit=${
+      payload.limit ? payload.limit : 5
+    } &page=${payload.page}`,
+    config,
+  );
+};
+
+export const doctorGetSpecialize = payload => {
+  const config = {
+    headers: { Authorization: `Bearer ${payload.token}` },
+  };
+  return GET_TOKEN(
+    `${ENDPOINT}/doctors/v1?specialize=${payload.userName ? payload.userName : ' '}&limit=${
+      payload.limit ? payload.limit : 5
+    } &page=${payload.page}`,
     config,
   );
 };
@@ -117,6 +131,7 @@ export const appointmentCreate = payload => {
       doctorID: payload.doctorID,
       time: payload.time,
       status: payload.status,
+      price: payload.price,
     },
     config,
   );
@@ -143,6 +158,21 @@ export const appointmentDeleteById = payload => {
     headers: { Authorization: `Bearer ${payload.token}` },
   };
   return DELETE_TOKEN(`${ENDPOINT}/appointments/v1?id=${payload.id}`, config);
+};
+
+export const appointmentEmail = payload => {
+  return POST(`${ENDPOINT}/nodemail/appointment`, payload);
+};
+
+//get delivery
+export const deliveryGetByUserId = payload => {
+  const config = {
+    headers: { Authorization: `Bearer ${payload.token}` },
+  };
+  return GET_TOKEN(
+    `${ENDPOINT}/appointments/v1?userID=${payload.userID}&limit=5&page=${payload.page}`,
+    config,
+  );
 };
 
 //get country

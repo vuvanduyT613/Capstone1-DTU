@@ -17,6 +17,9 @@ const appointmentSchema = mongoose.Schema(
 			type: Date,
 			require: true,
 		},
+		price: {
+			type: Number,
+		},
 		status: {
 			type: String,
 			default: "active",

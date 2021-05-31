@@ -7,12 +7,7 @@ const useStyles = makeStyles((theme: Theme) =>
       height: '200px',
       display: 'flex',
     },
-    wrapperNavbar: {
-      position: 'absolute',
-      width: '13%',
-      height: '79vh',
-      background: '#FDFDFD',
-    },
+    wrapperNavbar: { position: 'fixed', width: '13%', height: '79vh', background: '#FDFDFD' },
   }),
 );
 

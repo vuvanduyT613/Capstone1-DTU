@@ -4,7 +4,7 @@
  *
  */
 import * as React from 'react';
-import Image from '../../assets/test.jpg';
+import { ReactComponent as Find } from '../../assets/ic_find.svg';
 
 import styled from 'styled-components/macro';
 interface Props {
@@ -25,6 +25,7 @@ export function ItemDoctor(props: Props) {
             borderRadius: '5px',
           }}
         >
+          <Find />
           <Img src={props.avatar} alt={`profile`} />
         </WrapperImage>
         <WrapperContent>
@@ -45,8 +46,14 @@ const Wrapper = styled.div`
   justify-content: center;
 `;
 const WrapperImage = styled.div`
+  svg {
+    display: none;
+  }
   &:hover {
     border: 2px solid #00358e;
+    rgba(255, 255, 255, 0.2) svg {
+      display: flex;
+    }
   }
 `;
 const WrapperContent = styled.div`

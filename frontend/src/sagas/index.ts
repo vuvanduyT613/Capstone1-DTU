@@ -9,6 +9,7 @@ import {
   deleteAppointment,
   createAppointmentClient,
 } from './appointments';
+import { getAllDelivery } from './delivery';
 import { getByIdUtil, updateById, deleteById, adminStatus } from './util';
 
 //@ts-ignore
@@ -31,6 +32,7 @@ function* rootSaga() {
     takeLeading('UPDATE_ALL_APPOINTMENT_API', updateAppointment),
     takeLeading('DELETE_ALL_APPOINTMENT_API', deleteAppointment),
     takeLeading('ADMIN_STATUS', adminStatus),
+    takeLeading('GET_ALL_DELIVERY_API', getAllDelivery),
   ]);
 }
 

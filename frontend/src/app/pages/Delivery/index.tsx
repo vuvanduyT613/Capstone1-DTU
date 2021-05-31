@@ -13,12 +13,27 @@ import ListTranfer from './components/Tranfer';
 import { NavBar } from 'app/components/NavBar';
 import { messages } from './messages';
 import { PageWrapper } from 'app/components/PageWrapper';
+import { useDispatch, useSelector } from 'react-redux';
 
 interface Props {}
 
 export function Delivery(props: Props) {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { t, i18n } = useTranslation();
+  const dispatch = useDispatch();
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  React.useEffect(() => {
+    dispatch({
+      type: 'GET_ALL_DELIVERY_API',
+      payload: {
+        token: Cookies.get('access_token'),
+        page: 1,
+        limit: 9,
+        userID: Cookies.get('user_id'),
+      },
+    });
+  });
 
   return (
     <>

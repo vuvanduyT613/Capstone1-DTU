@@ -1,6 +1,7 @@
 const httpStatus = require("http-status");
 const ApiError = require("../utils/ApiError");
 const pick = require("../utils/pick");
+const pickSearch = require("../utils/pickSearch");
 const catchAsync = require("../utils/catchAsync");
 const { handlerObject } = require("../utils/switchModel");
 const { objectService, tokenService } = require("../services");
@@ -14,7 +15,7 @@ const createObject = catchAsync(async (req, res) => {
 });
 
 const getObject = catchAsync(async (req, res) => {
-	const filter = pick(req.query, ["name", "role"]);
+	const filter = req.query.userID ? pick(req.query, ["userID"]) : pickSearch(req.query, ["userName", "specialize"]);
 	const options = pick(req.query, ["sortBy", "limit", "page"]);
 	const result = req.query.id
 		? await handlerObject(res.locals.redirect, req.params.slug, getById, { id: req.query.id })

@@ -8,6 +8,7 @@ const createValidation = {
 		userID: Joi.string().required().custom(objectId),
 		time: Joi.date(),
 		status: Joi.string(),
+		price: Joi.number(),
 	}),
 };
 
@@ -64,9 +65,12 @@ const updateValidation = {
 
 const getValidation = {
 	query: Joi.object().keys({
-		name: Joi.string(),
+		userName: Joi.string(),
+		specialize: Joi.string(),
+		userID: Joi.string(),
 		role: Joi.string(),
 		sortBy: Joi.string(),
+		key: Joi.string(),
 		limit: Joi.number().integer(),
 		page: Joi.number().integer(),
 		id: Joi.string().custom(objectId),

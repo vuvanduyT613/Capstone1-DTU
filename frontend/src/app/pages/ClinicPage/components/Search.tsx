@@ -1,24 +1,31 @@
 import React /* useEffect, useState */ from 'react';
 import styled from 'styled-components/macro';
 import _get from 'lodash/get';
-
+import Checkbox from 'rc-checkbox';
 import Select from 'react-select';
 
-import Checkbox from '@material-ui/core/Checkbox';
 import { Grid } from '@material-ui/core';
 
 interface customInputProps {}
 
 const ListProduct = (props: customInputProps) => {
-  const [textSearch, setTextSearch] = React.useState('');
-  const fucPagination = value => {
-    console.log(value);
-  };
+  const [isChecked, setChecked] = React.useState(false);
+
   return (
     <Wrapper>
       <Header>
         <p>Search clinic</p>
-        <a> Unchecked </a>
+        <a
+          style={{
+            cursor: 'pointer',
+          }}
+          onClick={() => {
+            setChecked(false);
+          }}
+        >
+          {' '}
+          Unchecked{' '}
+        </a>
       </Header>
       <WrapperContent>
         <Content>
@@ -155,7 +162,7 @@ const ListProduct = (props: customInputProps) => {
       <WrapperContent style={{ paddingTop: '80px' }}>
         <Content>
           <p>Price segment</p>{' '}
-          <Grid container>
+          <Grid container style={{ padding: '0px 10px' }}>
             <Grid
               xs={6}
               style={{
@@ -170,12 +177,8 @@ const ListProduct = (props: customInputProps) => {
                 color: '#333333',
               }}
             >
-              <Checkbox
-                defaultChecked
-                color="primary"
-                inputProps={{ 'aria-label': 'secondary checkbox' }}
-              />
-              Under 10 million
+              <Checkbox defaultChecked={isChecked} style={{ width: '14px', height: '14px' }} />
+              <P>Under 10 million</P>
             </Grid>
             <Grid
               xs={6}
@@ -191,12 +194,7 @@ const ListProduct = (props: customInputProps) => {
                 color: '#333333',
               }}
             >
-              <Checkbox
-                defaultChecked
-                color="primary"
-                inputProps={{ 'aria-label': 'secondary checkbox' }}
-              />
-              5 - less than 8 million
+              <Checkbox defaultChecked={isChecked} /> <P> 5 - less than 8 million</P>
             </Grid>
             <Grid
               xs={6}
@@ -212,12 +210,7 @@ const ListProduct = (props: customInputProps) => {
                 color: '#333333',
               }}
             >
-              <Checkbox
-                defaultChecked
-                color="primary"
-                inputProps={{ 'aria-label': 'secondary checkbox' }}
-              />
-              1 - less than 3 million
+              <Checkbox defaultChecked={isChecked} /> <P>1 - less than 3 million</P>
             </Grid>
             <Grid
               xs={6}
@@ -233,12 +226,7 @@ const ListProduct = (props: customInputProps) => {
                 color: '#333333',
               }}
             >
-              <Checkbox
-                defaultChecked
-                color="primary"
-                inputProps={{ 'aria-label': 'secondary checkbox' }}
-              />
-              8 - 10 million won
+              <Checkbox defaultChecked={isChecked} /> <P> 8 - 10 million won</P>
             </Grid>
             <Grid
               xs={6}
@@ -254,12 +242,8 @@ const ListProduct = (props: customInputProps) => {
                 color: '#333333',
               }}
             >
-              <Checkbox
-                defaultChecked
-                color="primary"
-                inputProps={{ 'aria-label': 'secondary checkbox' }}
-              />
-              3 - less than 5 million
+              <Checkbox defaultChecked={isChecked} />
+              <P>3 - less than 5 million</P>
             </Grid>
             <Grid
               xs={6}
@@ -275,12 +259,8 @@ const ListProduct = (props: customInputProps) => {
                 color: '#333333',
               }}
             >
-              <Checkbox
-                defaultChecked
-                color="primary"
-                inputProps={{ 'aria-label': 'secondary checkbox' }}
-              />
-              Over 10 million won
+              <Checkbox defaultChecked={isChecked} />
+              <P>Over 10 million won</P>
             </Grid>
           </Grid>
         </Content>
@@ -303,7 +283,7 @@ const Wrapper = styled.div`
   background: #fdfdfd;
   position: absolute;
   right: 0px;
-  top: 60px;
+  top: 200px;
   border-radius: 4px;
 `;
 
@@ -316,7 +296,7 @@ const Header = styled.div`
   width: 100%;
   padding: 30px;
   display: flex;
-
+  margin-top: 100px;
   p {
     font-family: Abhaya Libre Medium;
     font-style: normal;
@@ -385,7 +365,7 @@ const Content = styled.div`
 `;
 
 const WrapperButton = styled.div`
-  padding-top: 200px;
+  padding-top: 100px;
 `;
 const ItemExit = styled.a`
   cursor: pointer;
@@ -446,5 +426,21 @@ const ItemExit = styled.a`
 
 const Label = styled.label`
   padding: 30px 0px 0px 13px;
+`;
+
+const P = styled.p`
+  padding: 0px 0px 0px 10px !important;
+  font-family: Segoe UI;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 21px;
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.02em;
+
+  /* Title-Body text */
+
+  color: #333333;
 `;
 export default ListProduct;

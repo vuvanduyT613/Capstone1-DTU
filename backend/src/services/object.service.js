@@ -28,6 +28,7 @@ const create = async (action, option) => {
  */
 const query = async (action, option) => {
 	const { filter, options } = option;
+	console.log(filter);
 	const response = await switchModel(action).paginate(filter, options);
 	return response;
 };

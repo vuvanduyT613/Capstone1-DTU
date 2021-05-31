@@ -23,6 +23,10 @@ export function Detail(props: Props) {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { t, i18n } = useTranslation();
 
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -33,6 +37,11 @@ export function Detail(props: Props) {
 
   const { search } = useLocation();
   const data = queryString.parse(search);
+
+  const pay = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(
+    //@ts-ignore
+    data.price,
+  );
 
   return (
     <>
@@ -62,14 +71,13 @@ export function Detail(props: Props) {
               <div style={{ display: 'flex' }}>
                 {' '}
                 <h4>Giá Khám : </h4>
-                <p style={{ margin: 'auto 0px auto 9px' }}>{`${data.price}`} </p>
+                <p style={{ margin: 'auto 0px auto 9px' }}>{`${pay}`} </p>
               </div>
               <p>
                 <h4>Giới thiệu bác sĩ</h4>
               </p>
               <p>{`${data.detail}`}</p>
             </ContentText>
-            <WrapperButton></WrapperButton>
             <ItemExit
               onClick={() => {
                 handleClickOpen();
@@ -96,10 +104,10 @@ export function Detail(props: Props) {
 }
 
 const Content = styled.div`
-  width: 82%;
+  width: 76%;
   height: 900px;
-  margin-left: 16%;
-  margin-top: 0%;
+  margin-left: 19%;
+  margin-top: 6%;
   background: #fdfdfd;
   border-radius: 4px;
 `;
@@ -112,7 +120,7 @@ const ContentOutline = styled.div`
 `;
 
 const ContentText = styled.div`
-  width: 82%;
+  width: 50%;
   margin: 50px auto auto auto;
 `;
 const Img = styled.img`
@@ -135,7 +143,7 @@ const ItemExit = styled.a`
   font-weight: 500;
   align-items: center;
   justify-content: center;
-  margin-top: 7%;
+  margin-top: 2%;
 
   &:hover {
     opacity: 0.8;

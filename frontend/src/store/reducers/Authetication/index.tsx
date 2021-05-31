@@ -5,6 +5,7 @@ import {
   UPDATE_FIELD_SIGN_IN_ERROR,
   UPDATE_FIELD_SIGN_UP_SEND_EMAIL,
   GET_COUNTRY,
+  GET_DOCTOR,
 } from './actionTypes';
 
 export interface signupInterface {
@@ -25,6 +26,10 @@ export interface signupSendEmanilInterface {
   code: number;
 }
 
+export interface pageOption {
+  page: number;
+  option: string;
+}
 export interface country {
   data: object;
 }
@@ -39,6 +44,7 @@ export interface authenInterface {
   email: signupSendEmanilInterface;
   country: country;
   error: signError;
+  pageOption: pageOption;
 }
 
 // init state
@@ -68,12 +74,18 @@ const initialError: signError = {
   error: '',
 };
 
+const initialPageOption: pageOption = {
+  page: 1,
+  option: '',
+};
+
 const initial: authenInterface = {
   signUp: initialSignUp,
   signIn: initialSignIn,
   email: initialSendEmail,
   country: initialCountry,
   error: initialError,
+  pageOption: initialPageOption,
 };
 
 export const authenReducer = (state: authenInterface = initial, action) =>
@@ -93,6 +105,10 @@ export const authenReducer = (state: authenInterface = initial, action) =>
       }
       case GET_COUNTRY: {
         draft['country'] = { ...state.error, ...action.payload };
+        break;
+      }
+      case GET_DOCTOR: {
+        draft['pageOption'] = { ...state.error, ...action.payload };
         break;
       }
       case UPDATE_FIELD_SIGN_IN_ERROR: {

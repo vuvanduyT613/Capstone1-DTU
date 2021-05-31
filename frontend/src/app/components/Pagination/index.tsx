@@ -30,9 +30,9 @@ export function Pagination(props: Props) {
     <Div>
       <S.Wrapper>
         <S.Label>
-          <span>Kết quả:</span> {fromPostIndex} - {lastPostIndex}
+          <span>Result :</span> {fromPostIndex} - {lastPostIndex}
         </S.Label>
-        <span>tổng {total}</span>
+        <span>total {total}</span>
       </S.Wrapper>
       <WrapperPagination>
         <PaginationMaterial

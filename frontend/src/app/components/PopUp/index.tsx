@@ -17,6 +17,7 @@ import { rootState } from 'store/reducers';
 import queryString from 'query-string';
 import { useLocation, Redirect } from 'react-router-dom';
 import Cookies from 'js-cookie';
+
 interface Props {}
 
 export function PopUp(props: Props) {
@@ -30,6 +31,11 @@ export function PopUp(props: Props) {
   const [ladingPage, setLadingPage] = React.useState(1);
   const { search } = useLocation();
   const data = queryString.parse(search);
+
+  const pay = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(
+    //@ts-ignore
+    data.price,
+  );
 
   const CustomInputDatePicker = React.forwardRef((props: any, ref) => {
     return (
@@ -45,7 +51,7 @@ export function PopUp(props: Props) {
             fontSize: '0.875rem',
             lineHeight: '1.25rem',
             border: '1px solid #000',
-            //boxShadow: ' 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
+            boxShadow: ' 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
             '&:hover': {
               outline: 20,
               boreder: '1px solid #000',
@@ -86,36 +92,6 @@ export function PopUp(props: Props) {
             MEDIAL REGISTER
           </DialogTitle>
           <WrapperContent>
-            <TextField
-              id="outlined-multiline-flexible"
-              label="Fist name and last name"
-              defaultValue={Cookies.get('user_name')}
-              disabled
-              multiline
-              style={{ width: '400px', margin: '30px auto 30px auto', display: 'flex' }}
-              onChange={() => {}}
-              variant="outlined"
-            />
-            <TextField
-              id="outlined-multiline-flexible"
-              disabled
-              label="Phone number"
-              defaultValue={Cookies.get('user_phone')}
-              style={{ width: '400px', margin: '30px auto 30px auto', display: 'flex' }}
-              multiline
-              onChange={() => {}}
-              variant="outlined"
-            />
-            <TextField
-              id="outlined-multiline-flexible"
-              label="Email"
-              disabled
-              defaultValue={Cookies.get('email')}
-              style={{ width: '400px', margin: '30px auto 30px auto', display: 'flex' }}
-              multiline
-              onChange={() => {}}
-              variant="outlined"
-            />
             <WrapperDatePicker>
               <DatePicker
                 wrapperClassName={classes.wrapper}
@@ -130,6 +106,33 @@ export function PopUp(props: Props) {
                 dateFormat="MMMM d, yyyy h:mm"
               />
             </WrapperDatePicker>
+            <TextField
+              id="outlined-multiline-flexible"
+              defaultValue={Cookies.get('user_name')}
+              disabled
+              multiline
+              style={{ width: '400px', margin: '30px auto 30px auto', display: 'flex' }}
+              onChange={() => {}}
+              variant="outlined"
+            />
+            <TextField
+              id="outlined-multiline-flexible"
+              disabled
+              defaultValue={Cookies.get('user_phone')}
+              style={{ width: '400px', margin: '30px auto 30px auto', display: 'flex' }}
+              multiline
+              onChange={() => {}}
+              variant="outlined"
+            />
+            <TextField
+              id="outlined-multiline-flexible"
+              disabled
+              defaultValue={Cookies.get('email')}
+              style={{ width: '400px', margin: '30px auto 30px auto', display: 'flex' }}
+              multiline
+              onChange={() => {}}
+              variant="outlined"
+            />
 
             <ItemExit
               onClick={() => {
@@ -166,9 +169,9 @@ export function PopUp(props: Props) {
           </WrapperContentW2>
           <WrapperPrice>
             <span>Price does not include VAT</span>
-            <p>{`${data.price}`}</p>
+            <p>{`${pay}`}</p>
             <span>Price includes VAT</span>
-            <p>{`${data.price}`}</p>
+            <p>{`${pay}`}</p>
           </WrapperPrice>
           <WrapperAction>
             <ItemExit
@@ -179,6 +182,7 @@ export function PopUp(props: Props) {
                     doctorID: data.id,
                     userID: Cookies.get('user_id'),
                     time: time,
+                    price: data.price,
                     status: 'Inactive',
                     doctor_name: data.name,
                     token: Cookies.get('access_token'),
@@ -201,12 +205,12 @@ export function PopUp(props: Props) {
 }
 
 const Div = styled.div`
-  height: 600px;
+  height: 550px;
 `;
 
 const WrapperAction = styled.div`
   width: 100%;
-  height: 43%;
+  height: 37.7%;
   background: rgba(255, 152, 50, 0.2);
   border-radius: 0px 0px 4px 4px;
   display: grid;
@@ -242,7 +246,6 @@ const WrapperDatePicker = styled.div`
   justify-content: center;
   width: 400px;
   margin: auto;
-  padding-bottom: 50px;
 `;
 
 const ItemExit = styled.a`

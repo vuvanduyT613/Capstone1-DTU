@@ -4,21 +4,27 @@ import styled from 'styled-components/macro';
 import Header from './Header';
 import ListItem from './List';
 import { Pagination } from 'app/components/Pagination';
+import { useSelector } from 'react-redux';
+import { rootState } from 'store/reducers';
 import _get from 'lodash/get';
 interface Tranfer {}
 
 const ListTranfer = (props: Tranfer) => {
-  const [textSearch, setTextSearch] = React.useState('');
+  const { data } = useSelector((state: rootState) => state.userReducer.getAllUser);
   const fucPagination = value => {
     console.log(value);
   };
+  console.log(data);
   return (
     <Wrapper>
       <Header />
       <WrapperList>
-        <ListItem isStatus={true} />
-        <br></br>
-        <ListItem isStatus={false} />
+        {Object.keys(data).length > 0 ? (
+          //@ts-ignore
+          data.results.map(value => <ListItem data={value} isStatus={false} />)
+        ) : (
+          <></>
+        )}
       </WrapperList>
       <Pagination current={1} total={2} fucPagination={fucPagination} pageSize={2} />
     </Wrapper>
@@ -26,11 +32,11 @@ const ListTranfer = (props: Tranfer) => {
 };
 
 const Wrapper = styled.div`
-  width: 60%;
+  width: 70%;
   height: 900px;
   background: #fdfdfd;
-  margin-left: 16%;
-  margin-top: -5%;
+  margin-left: 19%;
+  margin-top: 7%;
   border-radius: 4px;
 `;
 const WrapperList = styled.div`

@@ -27,11 +27,14 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
+  z-index: 10;
+  background: #00358e;
 `;
 
 const WrapperLeft = styled.div`
   display: block;
-  width: 15%;
+  width: 13%;
+  position: fixed;
   height: 200px;
   background: #00358e;
 `;
@@ -39,6 +42,8 @@ const WrapperLeft = styled.div`
 const WrapperRight = styled.div`
   display: flex;
   width: 100%;
+  margin-left: 12%;
+  position: fixed;
   height: 60px;
   margin-top: -141px;
   background: #00358e;

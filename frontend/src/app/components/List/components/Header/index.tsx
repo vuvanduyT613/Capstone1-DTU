@@ -5,12 +5,37 @@
  */
 import * as React from 'react';
 import Image from '../../assets/test.jpg';
+import Cookies from 'js-cookie';
 import styled from 'styled-components/macro';
 import Select from 'react-select';
+import { useDispatch, useSelector } from 'react-redux';
+import { rootState } from 'store/reducers';
+import { debounce } from 'lodash';
 
 interface Props {}
 
 export function Header(props: Props) {
+  const { page, option } = useSelector((state: rootState) => state.authenReducer.pageOption);
+  const dispatch = useDispatch();
+
+  const search = value => {
+    dispatch({
+      type: 'GET_ALL_DOCTOR_API',
+      payload: {
+        token: Cookies.get('access_token'),
+        page: page,
+        limit: 9,
+        userName: value,
+        option: option,
+      },
+    });
+  };
+
+  const Debounce = React.useCallback(
+    debounce(nextValue => search(nextValue), 1000),
+    [],
+  );
+
   return (
     <>
       <WrapperHeader>
@@ -18,7 +43,7 @@ export function Header(props: Props) {
           <p>Looking for a doctor </p>
           <WrapperInput>
             <div style={{ display: 'flex', marginRight: '15px' }}>
-              <Input />
+              <Input onChange={e => Debounce(e.target.value)} />
               <Icon>
                 <svg
                   width="16"
@@ -37,7 +62,16 @@ export function Header(props: Props) {
             <Select
               //value={}
               //onChange={e => setFieldValue('status', e.value)}
-              placeholder={'Doctor'}
+              placeholder={'Option'}
+              onChange={e => {
+                dispatch({
+                  type: 'GET_DOCTOR',
+                  payload: {
+                    page: 1,
+                    option: e.value,
+                  },
+                });
+              }}
               options={[
                 { value: 'Doctor', label: 'Doctor' },
                 { value: 'Specialize', label: 'Specialize' },
@@ -138,9 +172,21 @@ const Input = styled.input`
   text-indent: 8px;
   margin: auto 0px auto auto;
   background: #fdfdfd;
+  box-shadow: rgb(0 0 0 / 10%) 0px 1px 3px 0px, rgb(0 0 0 / 6%) 0px 1px 2px 0px;
   border: 1px solid rgba(114, 122, 142, 0.3);
   box-sizing: border-box;
   border-radius: 4px;
+
+  &:focus {
+    border-radius: 4px;
+    border: 1px solid #00358e;
+    outline: 0px;
+  }
+
+  &:hover {
+    border-radius: 4px;
+    outline: 0px;
+  }
 `;
 
 const Icon = styled.div`

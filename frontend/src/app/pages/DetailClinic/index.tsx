@@ -31,6 +31,10 @@ export function DetailClinic(props: Props) {
   const { search } = useLocation();
   const data = queryString.parse(search);
 
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <>
       <Helmet>
@@ -113,18 +117,18 @@ export function DetailClinic(props: Props) {
 const Div = styled.div``;
 
 const Content = styled.div`
-  width: 82%;
+  width: 76%;
   height: 640px;
-  margin-left: 16%;
+  margin-left: 19%;
   margin-top: 1%;
   background: #fdfdfd;
   border-radius: 4px;
 `;
 
 const ContentOutline = styled.div`
-  width: 82%;
-  margin-left: 16%;
-  margin-top: -5%;
+  width: 77%;
+  margin-left: 19%;
+  margin-top: 7%;
   border-radius: 4px;
   display: flex;
 `;

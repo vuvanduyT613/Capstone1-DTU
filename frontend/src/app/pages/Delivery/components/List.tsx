@@ -1,29 +1,42 @@
 import React /* useEffect, useState */ from 'react';
 import styled from 'styled-components/macro';
 import { Grid } from '@material-ui/core';
+import Cookies from 'js-cookie';
 import _get from 'lodash/get';
 interface Tranfer {
   isStatus: Boolean;
+  data: Object;
 }
 
 const List = (props: Tranfer) => {
+  //@ts-ignore
+  const { id, userID, time } = props.data;
   return (
     <WrapperList>
-      <WrapperInfo>
-        <p>Phòng khám Đa khoa Quốc tế Exson</p>
-        <p>Nguyễn Thành Danh</p>
-      </WrapperInfo>
-      <WrapperTranfer>
-        <p>MGD: SLK481653</p>
-      </WrapperTranfer>
-      <WrapperStatus>
-        <Code>B2-0701</Code>
-        {props.isStatus ? (
-          <Status>Đã thanh toán</Status>
-        ) : (
-          <OffStatus>Hủy bỏ 17:20 - 02/03/2020</OffStatus>
-        )}
-      </WrapperStatus>
+      {Object.keys(props.data).length > 0 ? (
+        <>
+          <WrapperInfo>
+            <p>Phòng khám Đa khoa Quốc tế Exson</p>
+            <p>{Cookies.get('user_name')}</p>
+          </WrapperInfo>
+          <WrapperTranfer>
+            <p>MGD: {id}</p>
+          </WrapperTranfer>
+          <WrapperStatus>
+            <Code>{userID}</Code>
+            {props.isStatus ? (
+              <Status>Đã thanh toán</Status>
+            ) : (
+              <OffStatus>
+                Cancel: {new Date(time).getHours()} H - {new Date(time).getDate()} /{' '}
+                {new Date(time).getMonth()} / {new Date(time).getFullYear()}
+              </OffStatus>
+            )}
+          </WrapperStatus>
+        </>
+      ) : (
+        <></>
+      )}
     </WrapperList>
   );
 };
@@ -31,6 +44,7 @@ const List = (props: Tranfer) => {
 const WrapperList = styled.div`
   width: 100%;
   height: 92px;
+  margin-bottom: 20px;
   padding: 2px 50px;
   background: rgba(184, 204, 255, 0.16);
   border-radius: 4px;

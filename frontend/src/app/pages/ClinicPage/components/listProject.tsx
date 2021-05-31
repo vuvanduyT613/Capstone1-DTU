@@ -22,11 +22,11 @@ const ListProduct = (props: customInputProps) => {
 };
 
 const Wrapper = styled.div`
-  width: 60%;
+  width: 55%;
+  height: 900px;
   background: #fdfdfd;
-  margin-left: 16%;
-  margin-top: -5%;
-
+  margin-left: 19%;
+  margin-top: 7%;
   border-radius: 4px;
 `;
 

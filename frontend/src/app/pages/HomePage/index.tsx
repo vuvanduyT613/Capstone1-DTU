@@ -19,12 +19,17 @@ export function HomePage() {
   const [open, setOpen] = React.useState(false);
 
   React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  React.useEffect(() => {
     dispatch({
       type: 'GET_ALL_DOCTOR_API',
       payload: {
         token: Cookies.get('access_token'),
         page: page,
         limit: 9,
+        option: 'Doctor',
       },
     });
     if (step === 0 && email) {
@@ -45,6 +50,7 @@ export function HomePage() {
         token: Cookies.get('access_token'),
         page: values,
         limit: 9,
+        option: 'Doctor',
       },
     });
   };
@@ -135,9 +141,10 @@ export function HomePage() {
 }
 
 const Content = styled.div`
-  width: 82%;
-  margin-left: 16%;
-  margin-top: -5%;
+  width: 76%;
+  height: 900px;
+  margin-left: 19%;
+  margin-top: 7%;
   background: #fdfdfd;
   border-radius: 4px;
 `;

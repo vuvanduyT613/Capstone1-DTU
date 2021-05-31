@@ -28,17 +28,12 @@ const ListPersonal = (props: Tranfer) => {
           width: '100% ',
           textIndent: '2px',
           outline: 'none',
-
           padding: '15.5px 14px',
           fontFamily: 'Segoe UI',
           fontStyle: 'normal',
           fontWeight: 'normal',
           fontSize: '14px',
           lineHeight: '21px',
-          /* identical to box height, or 150% */
-
-          /* Title-Body text */
-
           color: '#333333',
           '&:active': {
             border: '0px',
@@ -289,8 +284,8 @@ const Wrapper = styled.div`
   width: 60%;
   height: 600px;
   background: #fdfdfd;
-  margin-left: 16%;
-  margin-top: -5%;
+  margin-left: 19%;
+  margin-top: 7%;
   border-radius: 4px;
 `;
 

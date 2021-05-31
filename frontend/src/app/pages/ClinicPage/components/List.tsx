@@ -76,7 +76,7 @@ const WrapperAction = styled.div`
 
 const WrapperSVG = styled.div`
   position: absolute;
-  margin: 10% 0px auto 23%;
+  margin: 9% 0px auto 20%;
 `;
 const Img = styled.img`
   width: 100%;

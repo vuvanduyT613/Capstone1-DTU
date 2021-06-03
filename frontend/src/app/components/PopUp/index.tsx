@@ -17,6 +17,7 @@ import { rootState } from 'store/reducers';
 import queryString from 'query-string';
 import { useLocation, Redirect } from 'react-router-dom';
 import Cookies from 'js-cookie';
+import CustomInput from './components/CustomInput';
 
 interface Props {}
 
@@ -106,33 +107,9 @@ export function PopUp(props: Props) {
                 dateFormat="MMMM d, yyyy h:mm"
               />
             </WrapperDatePicker>
-            <TextField
-              id="outlined-multiline-flexible"
-              defaultValue={Cookies.get('user_name')}
-              disabled
-              multiline
-              style={{ width: '400px', margin: '30px auto 30px auto', display: 'flex' }}
-              onChange={() => {}}
-              variant="outlined"
-            />
-            <TextField
-              id="outlined-multiline-flexible"
-              disabled
-              defaultValue={Cookies.get('user_phone')}
-              style={{ width: '400px', margin: '30px auto 30px auto', display: 'flex' }}
-              multiline
-              onChange={() => {}}
-              variant="outlined"
-            />
-            <TextField
-              id="outlined-multiline-flexible"
-              disabled
-              defaultValue={Cookies.get('email')}
-              style={{ width: '400px', margin: '30px auto 30px auto', display: 'flex' }}
-              multiline
-              onChange={() => {}}
-              variant="outlined"
-            />
+            <CustomInput defaultvalue={Cookies.get('user_name')} off={true}></CustomInput>
+            <CustomInput defaultvalue={Cookies.get('user_phone')} off={true}></CustomInput>
+            <CustomInput defaultvalue={Cookies.get('email')} off={true}></CustomInput>
 
             <ItemExit
               onClick={() => {
@@ -148,22 +125,22 @@ export function PopUp(props: Props) {
       ) : ladingPage === 2 ? (
         <>
           <WrapperContentW2>
-            <table style={{ width: '100%' }}>
+            <table style={{ width: '90%' }}>
               <tr>
-                <th>Code doctor</th>
                 <th>Room</th>
                 <th>Zone</th>
                 <th>Floor</th>
                 <th>Time</th>
               </tr>
               <tr>
-                <td style={{ textAlign: 'center' }}>{`${data.id}`}</td>
                 <td style={{ textAlign: 'center' }}>403</td>
                 <td style={{ textAlign: 'center' }}>B</td>
                 <td style={{ textAlign: 'center' }}>4</td>
                 <td
                   style={{ textAlign: 'center' }}
-                >{`${time.getHours()} : ${time.getMinutes()}`}</td>
+                >{`${time.getHours()}:${time.getMinutes()} - ${time.getHours()}:${
+                  time.getMinutes() + 29
+                } ${time.getHours() <= 12 ? ' AM' : 'PM'}`}</td>
               </tr>
             </table>
           </WrapperContentW2>
@@ -205,19 +182,21 @@ export function PopUp(props: Props) {
 }
 
 const Div = styled.div`
-  height: 550px;
+  height: 450px;
 `;
 
 const WrapperAction = styled.div`
   width: 100%;
-  height: 37.7%;
+  height: 27%;
   background: rgba(255, 152, 50, 0.2);
   border-radius: 0px 0px 4px 4px;
   display: grid;
 `;
 const WrapperContentW2 = styled.div`
-  width: 95%;
-  margin-top: 50px;
+  width: 90%;
+  margin-top: 35px;
+  display: flex;
+  justify-content: center;
 `;
 const WrapperContent = styled.div``;
 
@@ -272,7 +251,8 @@ const ItemExit = styled.a`
 
   div {
     width: 35%;
-    height: 40px;
+    height: 44px;
+    margin-top: 20px;
     /* #00358E */
     background: #00358e;
     opacity: 1;

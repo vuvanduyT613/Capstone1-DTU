@@ -17,3 +17,6 @@ module.exports.Appointment = require(`./appointments/appointment.model`);
 //chat
 module.exports.ChatRoom = require("./chat/chatRoom.model");
 module.exports.Message = require("./chat/messages.model");
+
+//clinic
+module.exports.Clinic = require("./clinic/clinic.model");

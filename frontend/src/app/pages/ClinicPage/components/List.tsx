@@ -1,32 +1,61 @@
 import React /* useEffect, useState */ from 'react';
 import styled from 'styled-components/macro';
-import Demo from '../assets/demo.png';
-import { Grid } from '@material-ui/core';
+import Lazyload from 'react-lazyload';
+import Skeleton from 'react-loading-skeleton';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { ReactComponent as Heart } from '../assets/ic_heart.svg';
 import { Link } from 'react-router-dom';
-interface customInputProps {}
+import 'react-lazy-load-image-component/src/effects/blur.css';
+interface ListProps {
+  price?: number;
+  name?: string;
+  address?: string;
+  district?: string;
+  city?: string;
+  image?: string;
+}
 
-const List = (props: customInputProps) => {
+const List = (props: ListProps) => {
+  const pay = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(
+    //@ts-ignore
+    props.price,
+  );
+
   return (
     <Wrapper>
       <Link to="/clinic/detail" style={{ textDecoration: 'none' }}>
-        <Grid container spacing={2}>
-          <Grid style={{ display: 'block' }} item xs={6} justify={'center'}>
-            <WrapperAction>
+        <WrapperAction>
+          <WrapperImage>
+            <WrapperSVG>
+              <Heart />
+            </WrapperSVG>
+            <Lazyload once={true}>
               <WrapperImage>
-                <WrapperSVG>
-                  <Heart />
-                </WrapperSVG>
-                <Img src={Demo}></Img>
-                <WrapperPrice>
-                  <p>GIÁ GÓI: 1.800.000đ - 2.450.000đ</p>
-                </WrapperPrice>
+                <LazyLoadImage
+                  src={props.image}
+                  effect="blur"
+                  alt={`profile`}
+                  width={'100%'}
+                  height={'10%'}
+                />
               </WrapperImage>
-              <P1>Phòng khám Bệnh viện Đại học Y Dược 1</P1>
-              <P2>20-22 Dương Quang Trung, Phường 12, Quận 10, Tp. HCM</P2>
-            </WrapperAction>
-          </Grid>
-        </Grid>
+            </Lazyload>
+          </WrapperImage>
+          <WrapperPrice>
+            <p>PRICE: {`${pay ? pay || <Skeleton /> : ''}`}</p>
+          </WrapperPrice>
+          <P1>{`${
+            props.name ? props.name || <Skeleton /> : 'Phòng khám Bệnh viện Đại học Y Dược 1'
+          }`}</P1>
+          <P2>
+            {' '}
+            {`${
+              props.address ? props.address || <Skeleton /> : ' 20-22 Dương Quang Trung, Phường 12'
+            }, ${props.district ? props.district || <Skeleton /> : 'Quận 10'}, ${
+              props.city ? props.city || <Skeleton /> : 'Tp. HCM'
+            }`}
+          </P2>
+        </WrapperAction>
       </Link>
     </Wrapper>
   );
@@ -34,6 +63,7 @@ const List = (props: customInputProps) => {
 
 const Wrapper = styled.div`
   padding: 30px;
+  width: 100%;
 `;
 
 const WrapperPrice = styled.div`
@@ -67,6 +97,7 @@ const WrapperPrice = styled.div`
 const WrapperAction = styled.div`
   width: 100%;
   height: 100%;
+  padding: 10px;
 
   &:hover {
     border: 1px solid #00358e;
@@ -76,6 +107,7 @@ const WrapperAction = styled.div`
 
 const WrapperSVG = styled.div`
   position: absolute;
+  z-index: 5;
   margin: 9% 0px auto 20%;
 `;
 const Img = styled.img`
@@ -84,9 +116,9 @@ const Img = styled.img`
 `;
 
 const WrapperImage = styled.div`
-  width: 100%;
-  border-radius: 10px;
-  padding: 10px;
+  max-height: 220px;
+  border-radius: 10px 10px 0px 0px;
+  overflow: hidden;
 `;
 
 const P1 = styled.p`

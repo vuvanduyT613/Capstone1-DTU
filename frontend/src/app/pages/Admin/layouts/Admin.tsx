@@ -14,6 +14,9 @@ import Patient from '../views/admin/Patients';
 import Appointment from '../views/admin/Appointment';
 import Add from '../views/admin/Add';
 import AddApointment from '../views/admin/AddAppointment';
+import Clinic from '../views/admin/Clinic';
+import CardClinic from '../views/admin/AddClinic';
+
 export default function Admin() {
   return (
     <>
@@ -29,6 +32,12 @@ export default function Admin() {
             <Route path="/admin/patient" exact component={Patient} />
             <Route path="/admin/appointment" exact component={Appointment} />
             <Route path="/admin/add/:slug" exact component={({ match }) => <Add match={match} />} />
+            <Route path="/admin/clinic" exact component={Clinic} />
+            <Route
+              path="/admin/clinic/add/:slug"
+              exact
+              component={({ match }) => <CardClinic match={match} />}
+            />
             <Route
               path="/admin/ap/add/:slug"
               exact

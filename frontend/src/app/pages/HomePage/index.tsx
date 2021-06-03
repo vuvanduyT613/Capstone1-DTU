@@ -112,22 +112,24 @@ export function HomePage() {
       <Content>
         <List data={data} />
 
-        <Pagination
-          current={1}
-          total={
-            Object.keys(data).length > 0
-              ? //@ts-ignore
-                data.totalResults
-              : 12
-          }
-          fucPagination={fucPagination}
-          pageSize={
-            Object.keys(data).length > 0
-              ? //@ts-ignore
-                data.totalPages
-              : 10
-          }
-        />
+        <WrapperPage>
+          <Pagination
+            current={1}
+            total={
+              Object.keys(data).length > 0
+                ? //@ts-ignore
+                  data.totalResults
+                : 12
+            }
+            fucPagination={fucPagination}
+            pageSize={
+              Object.keys(data).length > 0
+                ? //@ts-ignore
+                  data.totalPages
+                : 10
+            }
+          />
+        </WrapperPage>
       </Content>
       <PageWrapper>
         {Cookies.get('access_token') && Cookies.get('role') === 'user' ? (
@@ -147,6 +149,10 @@ const Content = styled.div`
   margin-top: 7%;
   background: #fdfdfd;
   border-radius: 4px;
+`;
+
+const WrapperPage = styled.div`
+  padding: 10px 40px 0px 45px;
 `;
 
 const WrapperContent = styled.div`

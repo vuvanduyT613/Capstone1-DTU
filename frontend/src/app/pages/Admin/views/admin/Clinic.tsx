@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import Cookies from 'js-cookie';
-import CardPatient from '../../components/Cards/CardMain ';
+import CardDoctor from '../../components/Cards/CardMain ';
 
 export default function Tables() {
   const dispatch = useDispatch();
@@ -9,7 +9,7 @@ export default function Tables() {
 
   useEffect(() => {
     dispatch({
-      type: 'GET_ALL_USER_API',
+      type: 'GET_ALL_CLINIC_API',
       payload: {
         token: Cookies.get('access_token'),
         page: page,
@@ -34,7 +34,7 @@ export default function Tables() {
   const actionPage = page => {
     setPage(page);
     dispatch({
-      type: 'GET_ALL_DOCTOR_API',
+      type: 'GET_ALL_CLINIC_API',
       payload: {
         token: Cookies.get('access_token'),
         page: page,
@@ -44,7 +44,7 @@ export default function Tables() {
 
   const actionDelete = values => {
     dispatch({
-      type: 'DELETE_BY_ID',
+      type: 'DELETE_ALL_CLINIC_API',
       payload: values,
     });
   };
@@ -53,13 +53,14 @@ export default function Tables() {
     <>
       <div className="flex flex-wrap mt-4">
         <div className="w-full mb-12 px-4">
-          <CardPatient
-            button={'ADD PATIENT'}
-            column={['', 'Name', 'Age', 'Address', 'Phone', 'Email', 'Action']}
+          <CardDoctor
+            button={'ADD CLINIC'}
+            column={['Image', 'Address', 'Price', 'Google Map', 'Time Working', 'Doctor', 'Action']}
             index={5}
+            whoew={2}
             fucPage={actionPage}
             fucDelete={actionDelete}
-            to="/admin/add/patient"
+            to="/admin/clinic/add/clinic"
           />
         </div>
       </div>

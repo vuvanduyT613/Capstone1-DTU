@@ -49,7 +49,7 @@ export function Detail(props: Props) {
         <>
           <Dialog
             fullWidth={true}
-            maxWidth="sm"
+            maxWidth="xs"
             open={open}
             onClose={handleClose}
             aria-labelledby="max-width-dialog-title"
@@ -62,7 +62,7 @@ export function Detail(props: Props) {
           </Helmet>
           <NavBar />
           <ContentOutline>
-            <h2>Phó Giáo sư, Tiến sĩ, Bác sĩ cao cấp {`${data.name}`}</h2>
+            <h2>Associate Professor Ph.D {`${data.name}`}</h2>
           </ContentOutline>
           <Content>
             <br></br>
@@ -70,13 +70,15 @@ export function Detail(props: Props) {
             <ContentText>
               <div style={{ display: 'flex' }}>
                 {' '}
-                <h4>Giá Khám : </h4>
+                <h4>Medical examination price : </h4>
                 <p style={{ margin: 'auto 0px auto 9px' }}>{`${pay}`} </p>
               </div>
               <p>
-                <h4>Giới thiệu bác sĩ</h4>
+                <h4>Doctor's Introduction</h4>
               </p>
-              <p>{`${data.detail}`}</p>
+              <p
+                style={{ border: '1px solid rgba(114,122,142,0.3)', padding: '10px' }}
+              >{`${data.detail}`}</p>
             </ContentText>
             <ItemExit
               onClick={() => {
@@ -107,20 +109,20 @@ const Content = styled.div`
   width: 76%;
   height: 900px;
   margin-left: 19%;
-  margin-top: 6%;
+  margin-top: 1%;
   background: #fdfdfd;
   border-radius: 4px;
 `;
 
 const ContentOutline = styled.div`
   width: 82%;
-  margin-left: 16%;
-  margin-top: -5%;
+  margin-left: 19%;
+  margin-top: 7%;
   border-radius: 4px;
 `;
 
 const ContentText = styled.div`
-  width: 50%;
+  width: 80%;
   margin: 50px auto auto auto;
 `;
 const Img = styled.img`
@@ -159,7 +161,7 @@ const ItemExit = styled.a`
 
   div {
     width: 15%;
-    height: 40px;
+    height: 45px;
     /* #00358E */
 
     background: #00358e;

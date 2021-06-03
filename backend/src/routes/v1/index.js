@@ -6,6 +6,8 @@ const docsRoute = require("./docs.route");
 const doctorRoute = require("./doctor.route");
 const officeRoute = require("./office.route");
 const appointmentRoute = require("./appointment.route");
+const clinic = require("./clinic.route");
+const analysis = require("./analysis.route");
 const chatRoute = require("./chat.route");
 const config = require("../../config/config");
 
@@ -35,6 +37,14 @@ const defaultRoutes = [
 	{
 		path: "/appointments",
 		route: appointmentRoute,
+	},
+	{
+		path: "/clinics",
+		route: clinic,
+	},
+	{
+		path: "/analysis",
+		route: analysis,
 	},
 	{
 		path: "/chats",

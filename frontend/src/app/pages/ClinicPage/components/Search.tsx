@@ -3,7 +3,7 @@ import styled from 'styled-components/macro';
 import _get from 'lodash/get';
 import Checkbox from 'rc-checkbox';
 import Select from 'react-select';
-
+import Data from 'utils/static/data';
 import { Grid } from '@material-ui/core';
 
 interface customInputProps {}
@@ -35,10 +35,7 @@ const ListProduct = (props: customInputProps) => {
               //value={}
               //onChange={e => setFieldValue('status', e.value)}
               placeholder={'Choose your status'}
-              options={[
-                { value: 'Active', label: 'Active' },
-                { value: 'Inactive', label: 'Inactive' },
-              ]}
+              options={Data}
               components={{
                 IndicatorSeparator: () => null,
               }}

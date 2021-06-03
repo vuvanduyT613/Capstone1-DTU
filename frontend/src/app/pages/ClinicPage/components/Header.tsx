@@ -58,15 +58,19 @@ const Title = styled.div`
 
   p {
     width: 55%;
-    font-family: Alata;
+
+    font-family: SF Pro Display;
     font-style: normal;
-    font-weight: normal;
+    font-weight: bold;
     font-size: 20px;
     line-height: 30px;
     /* identical to box height, or 150% */
 
     display: flex;
     align-items: center;
+
+    /* #00358E */
+
     color: #00358e;
   }
 `;

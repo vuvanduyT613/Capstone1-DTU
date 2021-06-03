@@ -4,9 +4,6 @@ import { rootState } from 'store/reducers';
 import Cookies from 'js-cookie';
 import Pagination from '@material-ui/lab/Pagination';
 import { Link } from 'react-router-dom';
-import DeleteIcon from '@material-ui/icons/Delete';
-import EditIcon from '@material-ui/icons/Edit';
-import AddIcon from '@material-ui/icons/Add';
 import {
   Grid,
   IconButton,
@@ -16,19 +13,56 @@ import {
   DialogContentText,
   Button,
 } from '@material-ui/core';
-
+import Skeleton from 'react-loading-skeleton';
+import Lazyload from 'react-lazyload';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
+import { ReactComponent as Edit } from '../../assets/img/ic_edit.svg';
+import { ReactComponent as Cancel } from '../../assets/img/ic_cancel.svg';
+import styled from 'styled-components/macro';
+import { css } from 'styled-components';
+import Checkbox from 'rc-checkbox';
+import 'rc-checkbox/assets/index.css';
+import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 export default function CardTable(props) {
   const [open, setOpen] = React.useState(false);
   const [formDialog, setFormDialog] = React.useState(false);
   const [id, setId] = React.useState({ id: '', token: Cookies.get('access_token') });
+  const [arrDelete, setArrDelete] = React.useState([]);
 
   const { data } = useSelector((state: rootState) => state.userReducer.getAllUser);
+
+  const onChange = (e, value) => {
+    console.log(e.target.checked, value);
+    if (e.target.checked === true) {
+      //@ts-ignore
+      setArrDelete([...arrDelete, value]);
+    }
+    if (e.target.checked === false) {
+      //@ts-ignore
+      setArrDelete(arrDelete.filter(item => item !== value));
+    }
+  };
 
   const handleClose = () => {
     setOpen(false);
     setFormDialog(false);
   };
 
+  const Status = styled.div`
+    background-color: #fff;
+    border: 1px solid ${props => props.color};
+    color: ${props => props.color};
+    border-radius: 4px;
+    display: inline-block;
+    font-size: 12px;
+    min-width: 95px;
+    padding: 1px 10px;
+    text-align: center;
+  `;
+
+  console.log(arrDelete);
   return (
     <>
       <Dialog
@@ -104,12 +138,29 @@ export default function CardTable(props) {
           marginBottom: '10px',
         }}
       >
-        <Link to={props.to}>
-          <Button variant="contained" style={{ background: '#fff', outline: 0 }}>
-            <AddIcon />
-            {`  ${props.button}`}
-          </Button>
-        </Link>
+        {arrDelete.length > 0 ? (
+          <Link to={props.to}>
+            <Button
+              variant="contained"
+              style={{
+                background: '#f44336',
+                outline: 0,
+                color: '#fff',
+                transitionDelay: '0.2s',
+              }}
+            >
+              <DeleteOutlineIcon style={{ marginRight: '10px' }} />
+              {` DELETE ALL`}
+            </Button>
+          </Link>
+        ) : (
+          <Link to={props.to}>
+            <Button variant="contained" style={{ background: '#fff', outline: 0 }}>
+              <AddCircleOutlineIcon style={{ marginRight: '10px' }} />
+              {`  ${props.button}`}
+            </Button>
+          </Link>
+        )}
       </div>
       <div
         className={
@@ -144,9 +195,12 @@ export default function CardTable(props) {
                 data.results ? (
                   //@ts-ignore
                   data.results.map((value, index) =>
-                    props.whoew === true ? (
-                      <tr>
-                        <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left flex items-center">
+                    props.whoew === 1 ? (
+                      <tr className={index % 2 == 0 ? '' : 'bg-blueGray-50 '}>
+                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                          <Checkbox onChange={e => onChange(e, value.id)}></Checkbox>
+                        </td>
+                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
                           <span
                             className={
                               'ml-3 font-bold ' +
@@ -155,7 +209,8 @@ export default function CardTable(props) {
                           >
                             {`${value.id}`}
                           </span>
-                        </th>
+                        </td>
+
                         <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                           {`${value.userID}`}
                         </td>
@@ -171,37 +226,25 @@ export default function CardTable(props) {
                         </td>
                         <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                           {value.status === 'active' || value.status === 'Active' ? (
-                            <div
-                              style={{
-                                backgroundColor: '#e5faf3',
-                                border: '1px solid #00ce7c',
-                                color: '#00ce7c',
-                                borderRadius: '4px',
-                                display: 'inline-block',
-                                fontSize: '12px',
-                                minWidth: '95px',
-                                padding: '1px 10px',
-                                textAlign: 'center',
-                              }}
-                            >
-                              ACTIVE
-                            </div>
+                            <Status color={'#00ce7c'}>ACTIVE</Status>
                           ) : (
-                            <div
-                              style={{
-                                backgroundColor: '#ffe5e6',
-                                border: '1px solid #fe0000',
-                                color: '#fe0000',
-                                borderRadius: '4px',
-                                display: 'inline-block',
-                                fontSize: '12px',
-                                minWidth: '95px',
-                                padding: '1px 10px',
-                                textAlign: 'center',
-                              }}
-                            >
-                              IN ACTIVE
-                            </div>
+                            <Status color={'#fe0000'}>IN ACTIVE</Status>
+                          )}
+                        </td>
+
+                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                          {value.status === 'Unpaid' ? (
+                            <Status color={'#f0ad4e'}> UNPAID</Status>
+                          ) : value.status === 'Failled' ? (
+                            <Status color={'#d9534f'}> FAILLED</Status>
+                          ) : value.status === 'Paid' ? (
+                            <Status color={'#5cb85c'}> PAID</Status>
+                          ) : value.status === 'Refunding' ? (
+                            <Status color={'#008edd'}> REFUNDING</Status>
+                          ) : value.status === 'Refunded' ? (
+                            <Status color={'#008edd'}> REFUNDED</Status>
+                          ) : (
+                            <Status color={'#000'}> EXPIRED</Status>
                           )}
                         </td>
                         <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
@@ -210,7 +253,7 @@ export default function CardTable(props) {
                               to={`${props.to}?id=${value.id}&userID=${value.userID}&doctorID=${value.doctorID}&time=${value.time}&status=${value.status}&level=${value.level}&price=${value.price}&detail=${value.detail}&specialize=${value.specialize}`}
                             >
                               <IconButton color="primary" style={{ outline: 0 }}>
-                                <EditIcon />
+                                <Edit />
                               </IconButton>
                             </Link>
 
@@ -223,48 +266,164 @@ export default function CardTable(props) {
                                 setId({ ...id, id: value.id });
                               }}
                             >
-                              <DeleteIcon />
+                              <Cancel />
+                            </IconButton>
+                          </Grid>
+                        </td>
+                      </tr>
+                    ) : props.whoew === 2 ? (
+                      <tr className={index % 2 == 0 ? '' : 'bg-blueGray-50 '}>
+                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                          <Checkbox></Checkbox>
+                        </td>
+                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left flex items-center">
+                          <div
+                            style={{
+                              width: '300px',
+                              height: '168px',
+                              overflow: 'hidden',
+                              objectFit: 'cover',
+                              borderRadius: '10px',
+                              background: 'rgba(2, 132, 121, 0.1)',
+                              display: 'flex',
+                              justifyContent: 'center',
+                            }}
+                          >
+                            <LazyLoadImage
+                              src={value.image}
+                              effect="blur"
+                              width={'auto'}
+                              height={'100%'}
+                            ></LazyLoadImage>
+                          </div>
+                        </td>
+                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                          {`${value.address}, ${value.city}, ${value.country}`}
+                        </td>
+
+                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                          <div className="flex items-center">
+                            <span className="mr-2">{` ${value.price}`}</span>
+                          </div>
+                        </td>
+
+                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                          {` ${value.postionMap}`}
+                        </td>
+                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                          <div
+                            style={{
+                              border: '1px solid #00ce7c',
+                              color: '#00ce7c',
+                              borderRadius: '4px 0px 0px 4px',
+                              display: 'inline-block',
+                              fontSize: '12px',
+                              padding: '10px 10px',
+                              textAlign: 'center',
+                            }}
+                          >
+                            {`${new Date(value.timeWorkStart).getHours()} ${
+                              new Date(value.timeWorkStart).getHours() < 12 ? 'AM' : 'PM'
+                            }`}
+                          </div>
+
+                          <div
+                            style={{
+                              border: '1px solid #fe0000',
+                              color: '#fe0000',
+                              borderRadius: '0px 4px 4px 0px',
+                              display: 'inline-block',
+                              fontSize: '12px',
+                              padding: '10px 10px',
+                              textAlign: 'center',
+                              marginLeft: '2px',
+                            }}
+                          >
+                            {`${new Date(value.timeWorkEnd).getHours()} ${
+                              new Date(value.timeWorkEnd).getHours() < 12 ? 'AM' : 'PM'
+                            } `}
+                          </div>
+                        </td>
+                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                          {` ${value.doctor && Object.keys(value.doctor).length}`}
+                        </td>
+                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
+                          <Grid style={{ textAlign: 'center' }}>
+                            <Link
+                              onClick={() => Cookies.set('doctor_clinic', value.doctor)}
+                              to={`${props.to}?id=${value.id}&nameClinic=${value.nameClinic}&address=${value.address}&city=${value.city}&country=${value.country}&overview=${value.overview}&timeWorkStart=${value.timeWorkStart}&timeWorkEnd=${value.timeWorkEnd}&price=${value.price}&image=${value.image}`}
+                            >
+                              <IconButton color="primary" style={{ outline: 0 }}>
+                                <Edit />
+                              </IconButton>
+                            </Link>
+
+                            <IconButton
+                              color="secondary"
+                              style={{ outline: 0 }}
+                              onClick={() => {
+                                setOpen(true);
+                                //@ts-ignore
+                                setId({ ...id, id: value.id });
+                              }}
+                            >
+                              <Cancel />
                             </IconButton>
                           </Grid>
                         </td>
                       </tr>
                     ) : value?.role === 'doctor' || value?.role === 'user' ? (
-                      <tr>
+                      <tr className={index % 2 == 0 ? '' : 'bg-blueGray-50 '}>
+                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                          <Checkbox></Checkbox>
+                        </td>
                         <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left flex items-center">
-                          <img
-                            src={value.avatar}
-                            className="h-12 w-12 bg-white rounded-full border"
-                            alt="..."
-                          ></img>{' '}
+                          <Lazyload once={true}>
+                            <div
+                              style={{ overflow: 'hidden' }}
+                              className="h-12 w-12 bg-white rounded-full border"
+                            >
+                              <LazyLoadImage
+                                src={value.avatar}
+                                effect="blur"
+                                alt={`profile`}
+                                width={'100%'}
+                                height={'100%'}
+                              />
+                            </div>
+                          </Lazyload>
+
                           <span
                             className={
                               'ml-3 font-bold ' +
                               +(props.color === 'light' ? 'text-blueGray-600' : 'text-white')
                             }
                           >
-                            {`${value.fistName} ${value.lastName}`}
+                            {`${value.fistName || <Skeleton />} ${value.lastName || <Skeleton />}`}
                           </span>
                         </th>
                         <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                          {value.dateOfBirth}
+                          {value.dateOfBirth || <Skeleton />}
                         </td>
 
                         <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                           <div className="flex items-center">
                             <span className="mr-2">{` ${
-                              value.country ? value.country : 'Viet Nam'
-                            }, ${value.city}, ${value.address}.`}</span>
+                              value.country ? value.country || <Skeleton /> : 'Viet Nam'
+                            }, ${value.city || <Skeleton />}, ${
+                              value.address || <Skeleton />
+                            }.`}</span>
                           </div>
                         </td>
 
                         <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                           {value.phone
-                            ? `(+84) ${value.phone.substring(1, 13)}`
+                            ? `(+84) ${value.phone.substring(1, 13)}` || <Skeleton />
                             : '(+84) 335209131'}
                         </td>
 
                         <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                          {value.email}
+                          {value.email || <Skeleton />}
                         </td>
                         <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
                           <Grid style={{ textAlign: 'center' }}>
@@ -272,7 +431,7 @@ export default function CardTable(props) {
                               to={`${props.to}?id=${value.id}&avatar=${value.avatar}&city=${value.city}&dateOfBirth=${value.dateOfBirth}&email=${value.email}&fistName=${value.fistName}&lastName=${value.lastName}&postalCode=${value.postalCode}&address=${value.address}&role=${value.role}&userName=${value.userName}&country=${value.country}&phone=${value.phone}&price=${value.price}&level=${value.level}&detail=${value.detail}&specialize=${value.specialize}`}
                             >
                               <IconButton color="primary" style={{ outline: 0 }}>
-                                <EditIcon />
+                                <Edit />
                               </IconButton>
                             </Link>
 
@@ -285,7 +444,7 @@ export default function CardTable(props) {
                                 setId({ ...id, id: value.id, role: value.role });
                               }}
                             >
-                              <DeleteIcon />
+                              <Cancel />
                             </IconButton>
                           </Grid>
                         </td>

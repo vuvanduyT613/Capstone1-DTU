@@ -1,18 +1,54 @@
 import React from 'react';
 import Chart from 'chart.js';
+import moment from 'moment';
+import { useSelector } from 'react-redux';
 
+const generateMonth = () => {
+  const newMonth = [];
+  const nowMonth = new Date().getMonth();
+  for (let i = 0; i <= nowMonth; i++) {
+    newMonth.push(moment().month(i).format('MMMM'));
+  }
+  return newMonth;
+};
+
+const generateDefault = () => {
+  const newMonth = [];
+  const nowMonth = new Date().getMonth();
+  for (let i = 0; i <= nowMonth; i++) {
+    newMonth.push(0);
+  }
+  return newMonth;
+};
+
+const defineMonth = data => {
+  const genMonth = generateMonth();
+  const genDefault = generateDefault();
+  const checkIndex = data.map(value => {
+    return genMonth.indexOf(value.month);
+  });
+  checkIndex.map((value, index) => {
+    genDefault[value] = data[index].numberofdocuments;
+  });
+
+  return genDefault;
+};
 export default function CardLineChart() {
+  const genData = generateMonth();
+  const { data } = useSelector(state => state.userReducer.chartJS);
+
   React.useEffect(() => {
+    const genDefineData = data.result ? defineMonth(data.result) : null;
     var config = {
       type: 'line',
       data: {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        labels: genData,
         datasets: [
           {
             label: new Date().getFullYear(),
             backgroundColor: '#4c51bf',
             borderColor: '#4c51bf',
-            data: [65, 78, 66, 44, 56, 67, 75],
+            data: genDefineData ? genDefineData : null,
             fill: false,
           },
           {
@@ -105,7 +141,7 @@ export default function CardLineChart() {
           <div className="flex flex-wrap items-center">
             <div className="relative w-full max-w-full flex-grow flex-1">
               <h6 className="uppercase text-blueGray-100 mb-1 text-xs font-semibold">Overview</h6>
-              <h2 className="text-white text-xl font-semibold">Patient Total</h2>
+              <h2 className="text-white text-xl font-semibold">Appointment Total</h2>
             </div>
           </div>
         </div>

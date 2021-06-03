@@ -55,7 +55,7 @@ export default function Tables() {
         <div className="w-full mb-12 px-4">
           <CardDoctor
             button={'ADD DOCTOR'}
-            column={['Name', 'Age', 'Address', 'Phone', 'Email', 'Action']}
+            column={['', 'Name', 'Age', 'Address', 'Phone', 'Email', 'Action']}
             index={5}
             fucPage={actionPage}
             fucDelete={actionDelete}

@@ -7,7 +7,7 @@ import * as React from 'react';
 import Image from '../../assets/test.jpg';
 import Cookies from 'js-cookie';
 import styled from 'styled-components/macro';
-import Select from 'react-select';
+import Select, { components } from 'react-select';
 import { useDispatch, useSelector } from 'react-redux';
 import { rootState } from 'store/reducers';
 import { debounce } from 'lodash';
@@ -76,9 +76,6 @@ export function Header(props: Props) {
                 { value: 'Doctor', label: 'Doctor' },
                 { value: 'Specialize', label: 'Specialize' },
               ]}
-              components={{
-                IndicatorSeparator: () => null,
-              }}
               styles={{
                 container: base => ({
                   ...base,
@@ -125,11 +122,11 @@ export function Header(props: Props) {
                   color: 'white',
                   marginTop: '-4px',
                   marginLeft: '-8px',
-                  width: '100%',
+                  width: '90%',
                 }),
                 option: base => ({
                   ...base,
-                  height: '100%',
+                  height: '70%',
                 }),
               }}
             />
@@ -141,22 +138,25 @@ export function Header(props: Props) {
 }
 
 const WrapperHeader = styled.div`
-  padding: 0px 30px 0px 30px;
+  padding: 0px 67px 0px 75px;
 `;
 const Title = styled.div`
   display: flex;
 
   p {
     width: 55%;
-    font-family: Alata;
+    font-family: SF Pro Display;
     font-style: normal;
-    font-weight: normal;
+    font-weight: bold;
     font-size: 20px;
     line-height: 30px;
     /* identical to box height, or 150% */
 
     display: flex;
     align-items: center;
+
+    /* #00358E */
+
     color: #00358e;
   }
 `;

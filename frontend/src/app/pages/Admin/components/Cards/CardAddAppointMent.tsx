@@ -38,6 +38,41 @@ export default function CardSettings(props) {
     );
   });
 
+  const CustomSelect = {
+    container: base => ({
+      ...base,
+      borderRadius: '5px',
+      height: '44px',
+    }),
+    control: provided => ({
+      ...provided,
+      height: '44px',
+      padding: 10,
+      marginLeft: 0,
+      border: '0px solid black',
+      fontSize: '0.875rem',
+      outline: 'none',
+      textALign: 'center',
+      color: 'rgb(71, 85, 105)',
+      borderRadius: '0.25rem',
+      lineHeight: '1.25rem',
+      boxShadow: 'rgb(0 0 0 / 10%) 0px 1px 3px 0px, rgb(0 0 0 / 6%) 0px 1px 2px 0px',
+    }),
+    singleValue: base => ({
+      ...base,
+    }),
+    valueContainer: base => ({
+      ...base,
+      color: 'white',
+      marginTop: '-8px',
+      marginLeft: '-8px',
+      width: '100%',
+    }),
+    option: base => ({
+      ...base,
+      height: '100%',
+    }),
+  };
   const signUp = async values => {
     props.onSubmit(values);
   };
@@ -157,42 +192,33 @@ export default function CardSettings(props) {
                             { value: 'Active', label: 'Active' },
                             { value: 'Inactive', label: 'Inactive' },
                           ]}
-                          styles={{
-                            container: base => ({
-                              ...base,
-                              borderRadius: '5px',
-                              height: '44px',
-                            }),
-                            control: provided => ({
-                              ...provided,
-                              height: '44px',
-                              padding: 10,
-                              marginLeft: 0,
-                              border: '0px solid black',
-                              fontSize: '0.875rem',
-                              outline: 'none',
-                              textALign: 'center',
-                              color: 'rgb(71, 85, 105)',
-                              borderRadius: '0.25rem',
-                              lineHeight: '1.25rem',
-                              boxShadow:
-                                'rgb(0 0 0 / 10%) 0px 1px 3px 0px, rgb(0 0 0 / 6%) 0px 1px 2px 0px',
-                            }),
-                            singleValue: base => ({
-                              ...base,
-                            }),
-                            valueContainer: base => ({
-                              ...base,
-                              color: 'white',
-                              marginTop: '-8px',
-                              marginLeft: '-8px',
-                              width: '100%',
-                            }),
-                            option: base => ({
-                              ...base,
-                              height: '100%',
-                            }),
-                          }}
+                          styles={CustomSelect}
+                        />
+                        <p className={classes.err}>{Boolean(errors.status) && errors.status}</p>
+                      </div>
+                    </div>
+
+                    <div className="w-full lg:w-6/12 px-4">
+                      <div className="relative w-full mb-3">
+                        <label
+                          className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                          htmlFor="grid-password"
+                        >
+                          Status
+                        </label>
+                        <Select
+                          value={values.status}
+                          onChange={e => setFieldValue('status', e.value)}
+                          placeholder={values.status === '' ? 'Choose your status' : values.status}
+                          options={[
+                            { value: 'Unpaid', label: 'Unpaid' },
+                            { value: 'Failled', label: 'Failled' },
+                            { value: 'Expired', label: 'Expired' },
+                            { value: 'Paid', label: 'Paid' },
+                            { value: 'Refunding', label: 'Refunding' },
+                            { value: 'Refunded', label: 'Refunded' },
+                          ]}
+                          styles={CustomSelect}
                         />
                         <p className={classes.err}>{Boolean(errors.status) && errors.status}</p>
                       </div>

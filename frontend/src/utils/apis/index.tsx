@@ -112,6 +112,13 @@ export const doctorDeleteById = payload => {
 };
 
 //Appointment
+export const appointmentGetAll = payload => {
+  const config = {
+    headers: { Authorization: `Bearer ${payload.token}` },
+  };
+  return GET_TOKEN(`${ENDPOINT}/appointments/v1?limit=10000`, config);
+};
+
 export const appointmentGetById = payload => {
   const config = {
     headers: { Authorization: `Bearer ${payload.token}` },
@@ -164,7 +171,37 @@ export const appointmentEmail = payload => {
   return POST(`${ENDPOINT}/nodemail/appointment`, payload);
 };
 
-//get delivery
+//clinic
+export const clinicGetById = payload => {
+  const config = {
+    headers: { Authorization: `Bearer ${payload.token}` },
+  };
+  return GET_TOKEN(`${ENDPOINT}/clinics/v1?limit=6&page=${payload.page}`, config);
+};
+
+export const clinicCreate = payload => {
+  const config = {
+    headers: { Authorization: `Bearer ${payload.token}` },
+  };
+  return POST_TOKEN(`${ENDPOINT}/clinics/v1`, payload.data, config);
+};
+
+export const clinicUpdate = payload => {
+  console.log(payload.id);
+  const config = {
+    headers: { Authorization: `Bearer ${payload.token}` },
+  };
+  return PATH_TOKEN(`${ENDPOINT}/clinics/v1?id=${payload.id}`, payload.data, config);
+};
+
+export const clinicDelete = payload => {
+  const config = {
+    headers: { Authorization: `Bearer ${payload.token}` },
+  };
+  return DELETE_TOKEN(`${ENDPOINT}/clinics/v1?id=${payload.id}`, config);
+};
+
+//delivery
 export const deliveryGetByUserId = payload => {
   const config = {
     headers: { Authorization: `Bearer ${payload.token}` },
@@ -187,4 +224,8 @@ export const getById = payload => {
     headers: { Authorization: `Bearer ${payload.token}` },
   };
   return GET_TOKEN(`${ENDPOINT}/doctors/v1?id=${payload.id}`, config);
+};
+
+export const getAnalysis = () => {
+  return GET(`${ENDPOINT}/analysis`);
 };

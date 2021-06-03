@@ -7,13 +7,11 @@ import * as React from 'react';
 import styled from 'styled-components/macro';
 import Cookies from 'js-cookie';
 import { Helmet } from 'react-helmet-async';
-import { useTranslation } from 'react-i18next';
 import { Redirect } from 'react-router-dom';
 import ListTranfer from './components/Tranfer';
 import { NavBar } from 'app/components/NavBar';
-import { messages } from './messages';
 import { PageWrapper } from 'app/components/PageWrapper';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 interface Props {}
 

@@ -55,9 +55,18 @@ export default function Tables() {
         <div className="w-full mb-12 px-4">
           <CardPatient
             button={'ADD APPOINTMENT'}
-            column={['Appointment ID', 'user ID', 'doctor ID', 'Time', 'Status', 'Action']}
+            column={[
+              '',
+              'Appointment ID',
+              'user ID',
+              'doctor ID',
+              'Time',
+              'Status',
+              'Payment',
+              'Action',
+            ]}
             index={5}
-            whoew={true}
+            whoew={1}
             fucPage={actionPage}
             fucDelete={actionDelete}
             to="/admin/ap/add/appointment"

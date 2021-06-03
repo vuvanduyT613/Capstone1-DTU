@@ -9,6 +9,12 @@ export default function Dashboard() {
 
   useEffect(() => {
     dispatch({
+      type: 'GET_ALL_CHARTJS',
+    });
+  }, []);
+
+  useEffect(() => {
+    dispatch({
       type: 'ADMIN_STATUS',
       payload: {
         token: Cookies.get('access_token'),

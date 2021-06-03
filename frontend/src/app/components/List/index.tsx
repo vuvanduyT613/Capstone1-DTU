@@ -16,35 +16,43 @@ interface Props {
 
 export function List(props: Props) {
   const { data } = props;
+  console.log(data);
   return (
     <>
-      <div>
-        <Header />
-        <WrapperList>
-          {Object.keys(data).length > 0 ? (
-            //@ts-ignore
-            data.results.map(value => (
-              <Grid xs={4} justify="center" style={{ marginTop: '35px', marginBottom: '35px' }}>
-                <Link
-                  to={`/doctor/detail?id=${value.id}&name=${value.fistName} ${value.lastName}&avatar=${value.avatar}&price=${value.price}&detail=${value.detail}`}
-                  style={{ textDecoration: 'none' }}
-                >
-                  <ItemDoctor avatar={value.avatar} name={value.userName} />
-                </Link>
-              </Grid>
-            ))
-          ) : (
-            <></>
-          )}
-        </WrapperList>
-      </div>
+      <Header />
+      <WrapperList>
+        {Object.keys(data).length > 0 ? (
+          //@ts-ignore
+          data.results.map(value => (
+            <Grid
+              xs={4}
+              justify="center"
+              style={{ marginTop: '25px', marginBottom: '0px', height: '180px' }}
+            >
+              <Link
+                to={`/doctor/detail?id=${value.id}&name=${value.fistName} ${value.lastName}&avatar=${value.avatar}&price=${value.price}&detail=${value.detail}`}
+                style={{ textDecoration: 'none' }}
+              >
+                <ItemDoctor
+                  avatar={value.avatar}
+                  name={value.userName}
+                  level={value.level}
+                  specialize={value.specialize}
+                  booking={value.booking}
+                />
+              </Link>
+            </Grid>
+          ))
+        ) : (
+          <></>
+        )}
+      </WrapperList>
     </>
   );
 }
 
 const WrapperList = styled.div`
   width: 100%;
-  height: 100%;
   background: #FDFDFD;
   border-radius: 4px,
   top: 20px;

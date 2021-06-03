@@ -1,6 +1,6 @@
 import { toast } from 'react-toastify';
 import { call, put } from 'redux-saga/effects';
-import { GET_ALL_USER, ERROR, STATUS } from 'store/reducers/Admin/actionTypes';
+import { GET_ALL_USER, ERROR, STATUS, GET_ALL_CHARTJS } from 'store/reducers/Admin/actionTypes';
 import { UPDATE_FIELD_SIGN_UP } from 'store/reducers/Authetication/actionTypes';
 import {
   getById,
@@ -11,6 +11,8 @@ import {
   doctorGetAll,
   userGetAll,
   appointmentGetById,
+  appointmentGetAll,
+  getAnalysis,
 } from 'utils/apis';
 
 export function* getByIdUtil(action) {
@@ -105,7 +107,9 @@ export function* adminStatus(action) {
       pedding = 0;
     const dataDoctor = yield call(doctorGetAll, action.payload);
     const dataUser = yield call(userGetAll, action.payload);
-    const dataAppointment = yield call(appointmentGetById, action.payload);
+    const dataAppointment = yield call(appointmentGetAll, action.payload);
+    console.log(dataAppointment);
+
     dataAppointment.data.results.map(value => {
       if (value.status === 'Active') {
         ++pedding;
@@ -123,6 +127,24 @@ export function* adminStatus(action) {
           attend: attend,
           pedding: pedding,
         },
+      });
+    }
+    return;
+  } catch (err) {
+    yield put({
+      type: ERROR,
+      payload: { data: err },
+    });
+  }
+}
+
+export function* chartJS() {
+  try {
+    const { status, data } = yield call(getAnalysis);
+    if (status === 201) {
+      yield put({
+        type: GET_ALL_CHARTJS,
+        payload: { data: data },
       });
     }
     return;

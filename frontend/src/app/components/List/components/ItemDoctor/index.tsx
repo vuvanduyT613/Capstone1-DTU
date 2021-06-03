@@ -4,56 +4,86 @@
  *
  */
 import * as React from 'react';
-import { ReactComponent as Find } from '../../assets/ic_find.svg';
-
+import Skeleton from 'react-loading-skeleton';
+import Lazyload from 'react-lazyload';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import styled from 'styled-components/macro';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 interface Props {
-  avatar: string;
-  name: string;
+  avatar?: string;
+  name?: string;
+  level?: string;
+  specialize?: string;
+  booking?: string;
 }
 
 export function ItemDoctor(props: Props) {
   return (
     <>
-      <Wrapper>
-        <WrapperImage
-          style={{
-            maxWidth: '138px',
-            height: '100%',
-            overflow: 'hidden',
-            boxShadow: '2px 2px 4px rgba(20, 20, 20, 0.04)',
-            borderRadius: '5px',
-          }}
-        >
-          <Find />
-          <Img src={props.avatar} alt={`profile`} />
-        </WrapperImage>
-        <WrapperContent>
-          <p style={{ color: '#FD0D0D' }}> {props.name} </p>
-          <p style={{ color: '#000' }}> Phó Giáo sư, Tiến sĩ</p>
-          <p style={{ color: '#3091BB' }}>Da liễu - Cot Song</p>
-          <p style={{ color: '#727A8E' }}>25 lượt đặt tuần qua</p>
-        </WrapperContent>
-      </Wrapper>
+      <WrapperBorder>
+        <Wrapper>
+          <Lazyload once={true}>
+            <WrapperImage>
+              <LazyLoadImage
+                src={props.avatar}
+                effect="blur"
+                alt={`profile`}
+                width={'100%'}
+                height={'100%'}
+              />
+            </WrapperImage>
+          </Lazyload>
+          <WrapperContent>
+            <p style={{ color: '#00358E' }}> {props.name || <Skeleton />} </p>
+            <p style={{ color: '#000' }}>
+              {' '}
+              {props.level ? props.level || <Skeleton /> : 'Associate Professor Ph.D'}{' '}
+            </p>
+            <p style={{ color: '#3091BB' }}>
+              {' '}
+              {props.specialize ? props.specialize || <Skeleton /> : 'Dermatology'}
+            </p>
+            <p style={{ color: '#727A8E' }}>
+              {props.booking ? props.booking || <Skeleton /> : '25'} bookings
+            </p>
+          </WrapperContent>
+        </Wrapper>
+      </WrapperBorder>
     </>
   );
 }
 
 const Wrapper = styled.div`
-  min-width: 400px;
   height: 136px;
+  margin: auto;
   display: flex;
   justify-content: center;
 `;
+
+const WrapperBorder = styled.div`
+  width: 80%;
+  height: 180px;
+  margin: auto;
+  background: #fdfdfd;
+  border: 1px solid rgba(114, 122, 142, 0.3);
+  box-sizing: border-box;
+  border-radius: 4px;
+  display: flex;
+
+  &:hover {
+    border: 1px solid #00358e;
+    background: rgba(0, 53, 142, 0.1);
+  }
+`;
+
 const WrapperImage = styled.div`
+  max-width: 138px;
+  height: 100%;
+  overflow: hidden;
+  boxshadow: 2px 2px 4px rgba(20, 20, 20, 0.04);
+  border-radius: 5px;
   svg {
     display: none;
-  }
-  &:hover {
-    border: 2px solid #00358e;
-    rgba(255, 255, 255, 0.2) svg {
-      display: flex;
-    }
   }
 `;
 const WrapperContent = styled.div`
@@ -63,7 +93,7 @@ const WrapperContent = styled.div`
     font-family: Alata;
     font-style: normal;
     font-weight: normal;
-    margin-top: 0px;
+    margin-top: -1px;
     font-family: Alata;
     font-style: normal;
     font-weight: normal;

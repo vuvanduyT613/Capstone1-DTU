@@ -1,5 +1,4 @@
 import React /* useEffect, useState */ from 'react';
-import { Grid, TextField, InputAdornment } from '@material-ui/core';
 import styled from 'styled-components/macro';
 import Header from './Header';
 import ListItem from './List';
@@ -14,14 +13,13 @@ const ListTranfer = (props: Tranfer) => {
   const fucPagination = value => {
     console.log(value);
   };
-  console.log(data);
   return (
     <Wrapper>
       <Header />
       <WrapperList>
         {Object.keys(data).length > 0 ? (
           //@ts-ignore
-          data.results.map(value => <ListItem data={value} isStatus={false} />)
+          data.results.map(value => <ListItem data={value} isStatus={value.status} />)
         ) : (
           <></>
         )}

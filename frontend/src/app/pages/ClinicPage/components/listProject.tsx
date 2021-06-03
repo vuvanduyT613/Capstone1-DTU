@@ -4,19 +4,55 @@ import styled from 'styled-components/macro';
 import Header from './Header';
 import List from './List';
 import { Pagination } from 'app/components/Pagination';
+import { useSelector } from 'react-redux';
+import { rootState } from 'store/reducers';
 import _get from 'lodash/get';
 interface customInputProps {}
 
 const ListProduct = (props: customInputProps) => {
-  const [textSearch, setTextSearch] = React.useState('');
+  const { data } = useSelector((state: rootState) => state.userReducer.getAllUser);
+
+  console.log(data);
   const fucPagination = value => {
     console.log(value);
   };
   return (
     <Wrapper>
       <Header />
-      <List />
-      <Pagination current={1} total={2} fucPagination={fucPagination} pageSize={2} />
+      <WrapperClinic>
+        {Object.keys(data).length > 0 ? (
+          //@ts-ignore
+          data.results.map(value => (
+            <List
+              price={value.price}
+              name={value.nameClinic}
+              address={value.address}
+              district={value.district}
+              city={value.city}
+              image={value.image}
+            />
+          ))
+        ) : (
+          <></>
+        )}
+      </WrapperClinic>
+
+      <Pagination
+        current={1}
+        total={
+          Object.keys(data).length > 0
+            ? //@ts-ignore
+              data.totalResults
+            : 6
+        }
+        fucPagination={fucPagination}
+        pageSize={
+          Object.keys(data).length > 0
+            ? //@ts-ignore
+              data.totalPages
+            : 10
+        }
+      />
     </Wrapper>
   );
 };
@@ -30,4 +66,7 @@ const Wrapper = styled.div`
   border-radius: 4px;
 `;
 
+const WrapperClinic = styled.div`
+  display: flex;
+`;
 export default ListProduct;

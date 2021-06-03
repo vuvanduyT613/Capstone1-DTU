@@ -1,18 +1,56 @@
 import React from 'react';
 import Chart from 'chart.js';
+import { date } from 'yup/lib/locale';
+import moment from 'moment';
+import { useSelector } from 'react-redux';
+
+const generateMonth = () => {
+  const newMonth = [];
+  const nowMonth = new Date().getMonth();
+  for (let i = 0; i <= nowMonth; i++) {
+    newMonth.push(moment().month(i).format('MMMM'));
+  }
+  return newMonth;
+};
+
+const generateDefault = () => {
+  const newMonth = [];
+  const nowMonth = new Date().getMonth();
+  for (let i = 0; i <= nowMonth; i++) {
+    newMonth.push(0);
+  }
+  return newMonth;
+};
+
+const defineMonth = data => {
+  const genMonth = generateMonth();
+  const genDefault = generateDefault();
+  const checkIndex = data.map(value => {
+    return genMonth.indexOf(value.month);
+  });
+  checkIndex.map((value, index) => {
+    genDefault[value] = data[index].numberofdocuments;
+  });
+
+  return genDefault;
+};
 
 export default function CardBarChart() {
+  const genData = generateMonth();
+  const { data } = useSelector(state => state.userReducer.chartJS);
+
   React.useEffect(() => {
+    const genDefineData = data.result ? defineMonth(data.result) : null;
     let config = {
       type: 'bar',
       data: {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        labels: genData,
         datasets: [
           {
             label: new Date().getFullYear(),
             backgroundColor: '#ed64a6',
             borderColor: '#ed64a6',
-            data: [30, 78, 56, 34, 100, 45, 13],
+            data: genDefineData ? genDefineData : null,
             fill: false,
             barThickness: 8,
           },
@@ -99,7 +137,7 @@ export default function CardBarChart() {
               <h6 className="uppercase text-blueGray-400 mb-1 text-xs font-semibold">
                 Performance
               </h6>
-              <h2 className="text-blueGray-700 text-xl font-semibold">Patients In</h2>
+              <h2 className="text-blueGray-700 text-xl font-semibold">Appointment In</h2>
             </div>
           </div>
         </div>

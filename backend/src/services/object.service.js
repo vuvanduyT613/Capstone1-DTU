@@ -9,7 +9,11 @@ const { switchModel } = require("../utils/switchModel");
  * @returns {Promise<User>}
  */
 const create = async (action, option) => {
-	if (action === "Appointment" ? null : await switchModel(action).isEmailTaken(option.body.email)) {
+	if (
+		action === "Appointment" || action === "Clinic"
+			? null
+			: await switchModel(action).isEmailTaken(option.body.email)
+	) {
 		throw new ApiError(httpStatus.BAD_REQUEST, "Email already taken");
 	}
 	const response = await switchModel(action).create(option.body);
@@ -28,7 +32,6 @@ const create = async (action, option) => {
  */
 const query = async (action, option) => {
 	const { filter, options } = option;
-	console.log(filter);
 	const response = await switchModel(action).paginate(filter, options);
 	return response;
 };
@@ -57,7 +60,7 @@ const updateById = async (action, option) => {
 	if (!data) {
 		throw new ApiError(httpStatus.NOT_FOUND, " Not found");
 	}
-	Object.assign(data, body);
+	data.doctor && !option.body.image ? Object.assign(data, { ...data.doctor.push(body) }) : Object.assign(data, body);
 	await data.save();
 	return data;
 };

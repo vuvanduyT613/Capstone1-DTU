@@ -24,6 +24,10 @@ const appointmentSchema = mongoose.Schema(
 			type: String,
 			default: "active",
 		},
+		payment: {
+			type: String,
+			default: "Balance",
+		},
 	},
 	{
 		timestamps: true,

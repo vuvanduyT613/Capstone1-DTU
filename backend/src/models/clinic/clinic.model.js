@@ -3,15 +3,29 @@ const { toJSON, paginate } = require("../plugins");
 
 const clinicSchema = mongoose.Schema(
 	{
-		NameClinic: {
-			type: Date,
+		nameClinic: {
+			type: String,
 			require: true,
 		},
-		Address: {
-			type: Date,
+		country: {
+			type: String,
+			require: true,
+			maxlength: 10,
+		},
+		city: {
+			type: String,
+			require: true,
+			maxlength: 15,
+		},
+		address: {
+			type: String,
+			require: true,
+			maxlength: 10,
+		},
+		price: {
+			type: Number,
 			require: true,
 		},
-		price: [],
 		image: {
 			type: String,
 		},
@@ -19,11 +33,11 @@ const clinicSchema = mongoose.Schema(
 			type: String,
 		},
 		timeWorkStart: {
-			type: Date,
+			type: String,
 			require: true,
 		},
 		timeWorkEnd: {
-			type: Date,
+			type: String,
 			require: true,
 		},
 		overview: {
@@ -44,6 +58,6 @@ clinicSchema.plugin(paginate);
 /**
  * @typedef Clinic
  */
-const Clinic = mongoose.model("appointments", clinicSchema);
+const Clinic = mongoose.model("clinics", clinicSchema);
 
 module.exports = Clinic;

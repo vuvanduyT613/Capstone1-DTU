@@ -12,6 +12,7 @@ const {
 	OfficeDoctor,
 	ChatRoom,
 	Message,
+	Clinic,
 } = require("../models");
 const httpStatus = require("http-status");
 const ApiError = require("../utils/ApiError");
@@ -56,6 +57,9 @@ const switchModel = (action) => {
 
 		case `Message`:
 			return Message;
+
+		case `Clinic`:
+			return Clinic;
 	}
 };
 
@@ -119,6 +123,12 @@ const handlerObject = (before, to, action, option) => {
 				return action(`Message`, option);
 			case `v1`:
 				return action(`Doctor`, option);
+		}
+	}
+	if (validateRoute(to ? to : ``) !== -1 && before === "clinics") {
+		switch (to) {
+			case `v1`:
+				return action(`Clinic`, option);
 		}
 	}
 	throw new ApiError(httpStatus.NOT_FOUND, "Not Found");

@@ -60,6 +60,15 @@ const useStyles = makeStyles((theme: Theme) =>
       paddingTop: 45,
       margin: '0 auto',
     },
+    areaUploadAvatar2: {
+      width: 250,
+      height: 150,
+      border: '1px dashed #00358E',
+      cursor: 'pointer',
+      textAlign: 'center',
+      paddingTop: 45,
+      margin: '0 auto',
+    },
     avatar: {
       borderRadius: '50%',
       objectFit: 'cover',
@@ -67,7 +76,21 @@ const useStyles = makeStyles((theme: Theme) =>
       height: 120,
       margin: 'auto',
     },
+    avatar2: {
+      objectFit: 'cover',
+      width: 250,
+      height: 150,
+      margin: 'auto',
+    },
     changeImage: {
+      marginTop: '20px',
+      textAlign: 'center',
+      color: color.blue,
+      fontWeight: 700,
+      fontSize: 16,
+      cursor: 'pointer',
+    },
+    changeImage2: {
       marginTop: '20px',
       textAlign: 'center',
       color: color.blue,

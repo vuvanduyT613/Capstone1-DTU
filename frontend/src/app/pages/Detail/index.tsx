@@ -60,7 +60,7 @@ export function Detail(props: Props) {
             <title>Home Page</title>
             <meta name="description" content="Homepage" />
           </Helmet>
-          <NavBar />
+          <NavBar number={1} />
           <ContentOutline>
             <h2>Associate Professor Ph.D {`${data.name}`}</h2>
           </ContentOutline>
@@ -76,9 +76,7 @@ export function Detail(props: Props) {
               <p>
                 <h4>Doctor's Introduction</h4>
               </p>
-              <p
-                style={{ border: '1px solid rgba(114,122,142,0.3)', padding: '10px' }}
-              >{`${data.detail}`}</p>
+              <p>{`${data.detail}`}</p>
             </ContentText>
             <ItemExit
               onClick={() => {

@@ -1,9 +1,31 @@
 import React /* useEffect, useState */ from 'react';
 import { Grid, TextField, InputAdornment } from '@material-ui/core';
+import { useDispatch, useSelector } from 'react-redux';
+import { rootState } from 'store/reducers';
+import Cookies from 'js-cookie';
 import styled from 'styled-components/macro';
+import { debounce } from 'lodash';
 
 const Header = props => {
-  const [textSearch, setTextSearch] = React.useState('');
+  const dispatch = useDispatch();
+  const { page, option, query } = useSelector((state: rootState) => state.authenReducer.pageOption);
+  const search = value => {
+    dispatch({
+      type: 'GET_ALL_CLINIC_API',
+      payload: {
+        token: Cookies.get('access_token'),
+        page: page,
+        limit: 6,
+        nameClinic: value,
+        query: Cookies.get('condition_clinic'),
+      },
+    });
+  };
+
+  const Debounce = React.useCallback(
+    debounce(nextValue => search(nextValue), 1000),
+    [],
+  );
 
   return (
     <>
@@ -12,7 +34,7 @@ const Header = props => {
           <p>Clinic </p>
           <WrapperInput>
             <div style={{ display: 'flex', marginRight: '15px' }}>
-              <Input />
+              <Input onChange={e => Debounce(e.target.value)} />
               <Icon>
                 <svg
                   width="16"
@@ -51,7 +73,7 @@ const Header = props => {
 };
 
 const WrapperHeader = styled.div`
-  padding: 0px 30px 0px 30px;
+  padding: 0px 68px 0px 68px;
 `;
 const Title = styled.div`
   display: flex;

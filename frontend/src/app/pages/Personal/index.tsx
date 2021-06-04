@@ -29,7 +29,7 @@ export function Personal(props: Props) {
         <title>Delivery Page</title>
         <meta name="description" content="Homepage" />
       </Helmet>
-      <NavBar />
+      <NavBar number={1} />
       <Div>
         <ListPersonal />
       </Div>

@@ -37,9 +37,10 @@ const CustomInput = (props: customInputProps) => {
     <>
       <p
         style={{
-          fontFamily: ' Abhaya Libre Medium',
+          padding: '10px 20px 0px',
+          fontFamily: ' SF Pro Display',
           fontStyle: 'normal',
-          fontWeight: 500,
+          fontWeight: 'bold',
           fontSize: '14px',
           lineHeight: '19px',
           color: '#0B0D31',

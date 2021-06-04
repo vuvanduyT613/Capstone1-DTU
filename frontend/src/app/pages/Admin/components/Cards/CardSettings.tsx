@@ -2,6 +2,7 @@ import React, { useRef, forwardRef } from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import DatePicker from 'react-datepicker';
+import Select from 'react-select';
 import 'react-datepicker/dist/react-datepicker.css';
 import Cookies from 'js-cookie';
 import Images from 'app/asset/image/';
@@ -17,6 +18,10 @@ export default function CardSettings(props) {
       refToAvatar.current.click();
     }
   };
+
+  const slected = JSON.parse(Cookies.get('clinic_data')).map((value, index) => {
+    return { value: value.id, label: value.nameClinic };
+  });
 
   const CustomInputDatePicker = forwardRef((props: any, ref) => {
     return (
@@ -45,6 +50,42 @@ export default function CardSettings(props) {
     );
   });
 
+  const CustomSelect = {
+    container: base => ({
+      ...base,
+      borderRadius: '5px',
+      height: '44px',
+    }),
+    control: provided => ({
+      ...provided,
+      height: '44px',
+      padding: 10,
+      marginLeft: 0,
+      border: '0px solid black',
+      fontSize: '0.875rem',
+      outline: 'none',
+      textALign: 'center',
+      color: 'rgb(71, 85, 105)',
+      borderRadius: '0.25rem',
+      lineHeight: '1.25rem',
+      boxShadow: 'rgb(0 0 0 / 10%) 0px 1px 3px 0px, rgb(0 0 0 / 6%) 0px 1px 2px 0px',
+    }),
+    singleValue: base => ({
+      ...base,
+    }),
+    valueContainer: base => ({
+      ...base,
+      color: 'white',
+      marginTop: '-8px',
+      marginLeft: '-8px',
+      width: '100%',
+    }),
+    option: base => ({
+      ...base,
+      height: '100%',
+    }),
+  };
+
   const signUp = async values => {
     props.onSubmit(values);
   };
@@ -72,6 +113,7 @@ export default function CardSettings(props) {
           detail: data && data.detail !== 'undefined' ? data.detail : '',
           price: data && data.price !== 'undefined' ? data.price : '',
           level: data && data.level !== 'undefined' ? data.level : '',
+          idClinic: data && data.idClinic !== 'undefined' ? data.idClinic : '',
           specialize: data && data.specialize !== 'undefined' ? data.specialize : '',
           token: Cookies.get('access_token'),
         }}
@@ -391,6 +433,28 @@ export default function CardSettings(props) {
                               className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                               htmlFor="grid-password"
                             >
+                              Doctor Working
+                            </label>
+                            <Select
+                              value={values.idClinic}
+                              onChange={e => setFieldValue('idClinic', e.value)}
+                              placeholder={
+                                values.idClinic === '' ? 'Choose your status' : values.idClinic
+                              }
+                              options={slected}
+                              styles={CustomSelect}
+                            />
+                            <p className={classes.err}>
+                              {Boolean(errors.idClinic) && errors.idClinic}
+                            </p>
+                          </div>
+                        </div>
+                        <div className="w-full lg:w-6/12 px-4">
+                          <div className="relative w-full mb-3">
+                            <label
+                              className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                              htmlFor="grid-password"
+                            >
                               Price
                             </label>
                             <input
@@ -425,7 +489,7 @@ export default function CardSettings(props) {
                             <p className={classes.err}>{Boolean(errors.level) && errors.level}</p>
                           </div>
                         </div>
-                        <div className="w-full lg:w-4/12 px-4">
+                        <div className="w-full lg:w-6/12 px-4">
                           <div className="relative w-full mb-3">
                             <label
                               className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
@@ -448,7 +512,7 @@ export default function CardSettings(props) {
                           </div>
                         </div>
 
-                        <div className="w-full h-100 lg:w-8/12 px-4">
+                        <div className="w-full h-100 lg:w-12/12 px-4">
                           <div className="relative w-full mb-3">
                             <label
                               className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
@@ -456,9 +520,8 @@ export default function CardSettings(props) {
                             >
                               Detail ( down the line = "/", )
                             </label>
-                            <input
+                            <textarea
                               name="detail"
-                              type="text"
                               value={values.detail}
                               onChange={handleChange}
                               placeholder="Enter detail your "

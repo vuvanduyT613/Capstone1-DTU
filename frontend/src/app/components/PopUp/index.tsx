@@ -5,6 +5,7 @@
  */
 import * as React from 'react';
 import styled from 'styled-components/macro';
+import { css } from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import { messages } from './messages';
 import DialogTitle from '@material-ui/core/DialogTitle';
@@ -73,10 +74,10 @@ export function PopUp(props: Props) {
 
   const { t, i18n } = useTranslation();
   return (
-    <Div>
+    <>
       {open === true && step === 0 ? <Redirect to="/doctor"></Redirect> : <></>}
       {ladingPage === 1 ? (
-        <>
+        <Div color={`650px`}>
           <DialogTitle
             style={{
               fontFamily: 'Abhaya Libre Medium',
@@ -86,7 +87,7 @@ export function PopUp(props: Props) {
               lineHeight: '36px',
               color: '#00358E',
               textAlign: 'center',
-              marginTop: '50px',
+              marginTop: '10px',
             }}
             id="draggable-dialog-title"
           >
@@ -107,10 +108,35 @@ export function PopUp(props: Props) {
                 dateFormat="MMMM d, yyyy h:mm"
               />
             </WrapperDatePicker>
-            <CustomInput defaultvalue={Cookies.get('user_name')} off={true}></CustomInput>
-            <CustomInput defaultvalue={Cookies.get('user_phone')} off={true}></CustomInput>
-            <CustomInput defaultvalue={Cookies.get('email')} off={true}></CustomInput>
-
+            <CustomInput
+              lablel={'Fist name and last name'}
+              defaultvalue={Cookies.get('user_name')}
+              off={true}
+            ></CustomInput>
+            <CustomInput
+              lablel={'Phone number'}
+              defaultvalue={Cookies.get('user_phone')}
+              off={true}
+            ></CustomInput>
+            <CustomInput
+              lablel={'Email'}
+              defaultvalue={Cookies.get('email')}
+              off={true}
+            ></CustomInput>
+            <p
+              style={{
+                padding: '10px 20px 0px',
+                fontFamily: ' SF Pro Display',
+                fontStyle: 'normal',
+                fontWeight: 'bold',
+                fontSize: '14px',
+                lineHeight: '19px',
+                color: '#0B0D31',
+              }}
+            >
+              Notes (if any)
+            </p>
+            <TextArea></TextArea>
             <ItemExit
               onClick={() => {
                 setLadingPage(2);
@@ -121,11 +147,11 @@ export function PopUp(props: Props) {
               </div>
             </ItemExit>
           </WrapperContent>
-        </>
+        </Div>
       ) : ladingPage === 2 ? (
-        <>
+        <Div color={`450px`}>
           <WrapperContentW2>
-            <table style={{ width: '90%' }}>
+            <table style={{ width: '85%' }}>
               <tr>
                 <th>Room</th>
                 <th>Zone</th>
@@ -151,7 +177,16 @@ export function PopUp(props: Props) {
             <p>{`${pay}`}</p>
           </WrapperPrice>
           <WrapperAction>
-            <ItemExit
+            <ItemBack
+              onClick={() => {
+                setLadingPage(1);
+              }}
+            >
+              <div>
+                <p>Back</p>
+              </div>
+            </ItemBack>
+            <ItemAccept
               onClick={() => {
                 dispatch({
                   type: 'CREATE_ALL_APPOINTMENT_CLIENT_API',
@@ -171,26 +206,26 @@ export function PopUp(props: Props) {
               <div>
                 <p>Reservations</p>
               </div>
-            </ItemExit>
+            </ItemAccept>
           </WrapperAction>
-        </>
+        </Div>
       ) : (
         <></>
       )}
-    </Div>
+    </>
   );
 }
 
 const Div = styled.div`
-  height: 450px;
+  height: ${props => props.color};
 `;
 
 const WrapperAction = styled.div`
   width: 100%;
   height: 27%;
-  background: rgba(255, 152, 50, 0.2);
   border-radius: 0px 0px 4px 4px;
-  display: grid;
+  display: flex;
+  justify-content: center;
 `;
 const WrapperContentW2 = styled.div`
   width: 90%;
@@ -250,7 +285,7 @@ const ItemExit = styled.a`
   }
 
   div {
-    width: 35%;
+    width: 100%;
     height: 44px;
     margin-top: 20px;
     /* #00358E */
@@ -281,4 +316,132 @@ const ItemExit = styled.a`
       color: #fdfdfd;
     }
   }
+`;
+
+const ItemBack = styled.a`
+  cursor: pointer;
+  text-decoration: none;
+  display: flex;
+  width: 181px;
+  padding: 0.25rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &:active {
+    opacity: 0.4;
+  }
+
+  .icon {
+    margin-right: 0.25rem;
+  }
+
+  div {
+    width: 100%;
+    height: 44px;
+    margin-top: 20px;
+    /* #00358E */ /* #00358E */
+    border: 1px solid #00358e;
+    box-sizing: border-box;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+
+    svg {
+      margin: auto 9px auto 0px;
+    }
+
+    p {
+      font-family: Abhaya Libre SemiBold;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 21px;
+      /* identical to box height, or 150% */
+
+      display: flex;
+      align-items: center;
+      text-align: center;
+
+      /* Background White */
+
+      color: #00358e;
+    }
+  }
+`;
+
+const ItemAccept = styled.a`
+  cursor: pointer;
+  text-decoration: none;
+  display: flex;
+  width: 181px;
+  padding: 0.25rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &:active {
+    opacity: 0.4;
+  }
+
+  .icon {
+    margin-right: 0.25rem;
+  }
+
+  div {
+    width: 100%;
+    height: 44px;
+    margin-top: 20px;
+    /* #00358E */
+    background: #00358e;
+    opacity: 1;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+
+    svg {
+      margin: auto 9px auto 0px;
+    }
+
+    p {
+      font-family: Abhaya Libre SemiBold;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 21px;
+      /* identical to box height, or 150% */
+
+      display: flex;
+      align-items: center;
+      text-align: center;
+
+      /* Background White */
+
+      color: #fdfdfd;
+    }
+  }
+`;
+
+const TextArea = styled.textarea`
+  border: 0.75px solid rgba(114, 122, 142, 0.3);
+  padding: 5px 10px;
+  display: flex;
+  height: 58px;
+  width: 90%;
+  margin: auto;
+  font-size: 14px;
+  font-style: normal;
+  font-family: Segoe UI;
+  font-weight: normal;
+  line-height: 21px;
 `;

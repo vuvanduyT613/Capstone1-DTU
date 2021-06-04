@@ -57,8 +57,6 @@ export function* signIn(action) {
 }
 
 export function* signUp(action) {
-  console.log(action);
-
   try {
     const userName = `${action.payload.fistName}${action.payload.lastName}`;
     const form = new FormData();
@@ -78,6 +76,7 @@ export function* signUp(action) {
       form.append('level', action.payload.level);
       form.append('price', action.payload.price);
       form.append('detail', action.payload.detail);
+      form.append('idClinic', action.payload.idClinic);
       form.append('specialize', action.payload.specialize);
     }
     const { status } = yield call(

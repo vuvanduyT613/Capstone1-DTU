@@ -29,6 +29,7 @@ export interface signupSendEmanilInterface {
 export interface pageOption {
   page: number;
   option: string;
+  query: string;
 }
 export interface country {
   data: object;
@@ -77,6 +78,7 @@ const initialError: signError = {
 const initialPageOption: pageOption = {
   page: 1,
   option: '',
+  query: '',
 };
 
 const initial: authenInterface = {
@@ -108,6 +110,7 @@ export const authenReducer = (state: authenInterface = initial, action) =>
         break;
       }
       case GET_DOCTOR: {
+        console.log(action);
         draft['pageOption'] = { ...state.error, ...action.payload };
         break;
       }

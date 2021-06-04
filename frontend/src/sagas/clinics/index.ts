@@ -1,8 +1,9 @@
+import Cookies from 'js-cookie';
 import { toast } from 'react-toastify';
 import { call, put } from 'redux-saga/effects';
 import { GET_ALL_USER, ERROR } from 'store/reducers/Admin/actionTypes';
 import { UPDATE_FIELD_SIGN_UP } from 'store/reducers/Authetication/actionTypes';
-import { clinicGetById, clinicCreate, clinicUpdate, clinicDelete } from 'utils/apis';
+import { clinicGetById, clinicCreate, clinicUpdate, clinicDelete, clinicGetAll } from 'utils/apis';
 
 export function* getAllClinic(action) {
   try {
@@ -104,6 +105,21 @@ export function* deleteClinic(action) {
     return;
   } catch (err) {
     toast.error(`Delete clinic fail.!`);
+    yield put({
+      type: ERROR,
+      payload: { data: err },
+    });
+  }
+}
+
+export function* getClinic(action) {
+  try {
+    const { data, status } = yield call(clinicGetAll, action.payload);
+    if (status === 201) {
+      Cookies.set('clinic_data', data.results);
+    }
+    return;
+  } catch (err) {
     yield put({
       type: ERROR,
       payload: { data: err },

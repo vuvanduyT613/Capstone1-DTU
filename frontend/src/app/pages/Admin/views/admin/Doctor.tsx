@@ -9,6 +9,12 @@ export default function Tables() {
 
   useEffect(() => {
     dispatch({
+      type: 'GET_ALL_CLINIC_DATA_API',
+      payload: {
+        token: Cookies.get('access_token'),
+      },
+    });
+    dispatch({
       type: 'GET_ALL_DOCTOR_API',
       payload: {
         token: Cookies.get('access_token'),

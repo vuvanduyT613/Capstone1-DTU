@@ -3,12 +3,12 @@ import { Header } from './Header';
 import useStyles from './styles';
 import { Nav } from './Nav';
 
-export function NavBar() {
+export function NavBar({ number }) {
   const classes = useStyles();
   return (
     <>
       <div className={classes.wrapper}>
-        <Header />
+        <Header number={number} />
       </div>
       <div className={classes.wrapperNavbar}>
         <Nav />

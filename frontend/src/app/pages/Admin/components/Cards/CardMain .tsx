@@ -34,7 +34,6 @@ export default function CardTable(props) {
   const { data } = useSelector((state: rootState) => state.userReducer.getAllUser);
 
   const onChange = (e, value) => {
-    console.log(e.target.checked, value);
     if (e.target.checked === true) {
       //@ts-ignore
       setArrDelete([...arrDelete, value]);
@@ -62,7 +61,6 @@ export default function CardTable(props) {
     text-align: center;
   `;
 
-  console.log(arrDelete);
   return (
     <>
       <Dialog
@@ -274,7 +272,7 @@ export default function CardTable(props) {
                     ) : props.whoew === 2 ? (
                       <tr className={index % 2 == 0 ? '' : 'bg-blueGray-50 '}>
                         <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                          <Checkbox></Checkbox>
+                          <Checkbox onChange={e => onChange(e, value.id)}></Checkbox>
                         </td>
                         <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left flex items-center">
                           <div
@@ -375,7 +373,7 @@ export default function CardTable(props) {
                     ) : value?.role === 'doctor' || value?.role === 'user' ? (
                       <tr className={index % 2 == 0 ? '' : 'bg-blueGray-50 '}>
                         <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                          <Checkbox></Checkbox>
+                          <Checkbox onChange={e => onChange(e, value.id)}></Checkbox>
                         </td>
                         <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left flex items-center">
                           <Lazyload once={true}>

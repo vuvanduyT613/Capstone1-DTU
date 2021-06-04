@@ -13,6 +13,9 @@ interface ListProps {
   district?: string;
   city?: string;
   image?: string;
+  overview?: string;
+  timeWorkStart?: string;
+  timeWorkEnd?: string;
 }
 
 const List = (props: ListProps) => {
@@ -23,7 +26,10 @@ const List = (props: ListProps) => {
 
   return (
     <Wrapper>
-      <Link to="/clinic/detail" style={{ textDecoration: 'none' }}>
+      <Link
+        to={`/clinic/detail?name=${props.name}&address=${props.address}&city=${props.city}&overview=${props.overview}&timeWorkStart=${props.timeWorkStart}&timeWorkEnd=${props.timeWorkEnd}`}
+        style={{ textDecoration: 'none' }}
+      >
         <WrapperAction>
           <WrapperImage>
             <WrapperSVG>
@@ -63,7 +69,7 @@ const List = (props: ListProps) => {
 
 const Wrapper = styled.div`
   padding: 30px;
-  width: 100%;
+  width: 50%;
 `;
 
 const WrapperPrice = styled.div`
@@ -108,7 +114,7 @@ const WrapperAction = styled.div`
 const WrapperSVG = styled.div`
   position: absolute;
   z-index: 5;
-  margin: 9% 0px auto 20%;
+  margin: 8% 0px auto 18%;
 `;
 const Img = styled.img`
   width: 100%;

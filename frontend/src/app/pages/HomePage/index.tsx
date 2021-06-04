@@ -108,7 +108,7 @@ export function HomePage() {
         <title>Home Page</title>
         <meta name="description" content="Homepage" />
       </Helmet>
-      <NavBar />
+      <NavBar number={1} />
       <Content>
         <List data={data} />
 

@@ -23,7 +23,9 @@ const createObject = catchAsync(async (req, res) => {
 });
 
 const getObject = catchAsync(async (req, res) => {
-	const filter = req.query.userID ? pick(req.query, ["userID"]) : pickSearch(req.query, ["userName", "specialize"]);
+	const filter = req.query.userID
+		? pick(req.query, ["userID"])
+		: pickSearch(req.query, ["userName", "specialize", "nameClinic", "address", "city", "country"]);
 	const options = pick(req.query, ["sortBy", "limit", "page"]);
 	const result = req.query.id
 		? await handlerObject(res.locals.redirect, req.params.slug, getById, { id: req.query.id })

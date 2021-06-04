@@ -73,6 +73,7 @@ export default function CardSettings(props) {
       height: '100%',
     }),
   };
+
   const signUp = async values => {
     props.onSubmit(values);
   };

@@ -3,7 +3,7 @@ import styled from 'styled-components/macro';
 import { SubNav } from './SubNav';
 import logoicon from './assets/logo.png';
 
-export function Header() {
+export function Header({ number }) {
   return (
     <Wrapper>
       <WrapperLeft>
@@ -17,7 +17,7 @@ export function Header() {
         </Div>
       </WrapperLeft>
       <WrapperRight>
-        <SubNav />
+        <SubNav number={number} />
       </WrapperRight>
     </Wrapper>
   );
@@ -26,9 +26,8 @@ export function Header() {
 const Wrapper = styled.div`
   display: flex;
   align-items: center;
-  width: 100%;
+  width: 0%;
   z-index: 10;
-  background: #00358e;
 `;
 
 const WrapperLeft = styled.div`
@@ -43,10 +42,8 @@ const WrapperRight = styled.div`
   display: flex;
   width: 100%;
   margin-left: 12%;
-  position: fixed;
-  height: 60px;
   margin-top: -141px;
-  background: #00358e;
+  position: fixed;
 `;
 
 const Div = styled.div`

@@ -3,13 +3,96 @@ import styled from 'styled-components/macro';
 import _get from 'lodash/get';
 import Checkbox from 'rc-checkbox';
 import Select from 'react-select';
+import Cookies from 'js-cookie';
 import Data from 'utils/static/data';
+import { useDispatch } from 'react-redux';
 import { Grid } from '@material-ui/core';
 
 interface customInputProps {}
 
 const ListProduct = (props: customInputProps) => {
+  const dispatch = useDispatch();
+
   const [isChecked, setChecked] = React.useState(false);
+  const [condition, setCondition] = React.useState({
+    province: ' ',
+    type: ' ',
+    price: ' ',
+  });
+
+  const customSelect = {
+    container: base => ({
+      ...base,
+      borderRadius: '5px',
+      height: '44px',
+      padding: '10px',
+    }),
+    control: provided => ({
+      ...provided,
+      height: '44px',
+      padding: 10,
+      marginLeft: 0,
+      border: '0px solid black',
+      fontSize: '0.875rem',
+      outline: 'none',
+      textALign: 'center',
+      color: 'rgb(71, 85, 105)',
+      borderRadius: '0.25rem',
+      lineHeight: '1.25rem',
+      boxShadow: 'rgb(0 0 0 / 10%) 0px 1px 3px 0px, rgb(0 0 0 / 6%) 0px 1px 2px 0px',
+    }),
+    indicatorsContainer: () => ({
+      '.myDropDown': {
+        '&__dropdown-indicator': {
+          marginTop: '-5px', // <--- Color of your choice
+        },
+      },
+    }),
+    indicatorSeparator: base => ({
+      ...base,
+      display: 'none',
+    }),
+    dropdownIndicator: base => ({
+      ...base,
+      color: ' #315DF7',
+      marginTop: '-6px', // Custom colour
+    }),
+    singleValue: base => ({
+      ...base,
+    }),
+    valueContainer: base => ({
+      ...base,
+      color: 'white',
+      marginTop: '-4px',
+      marginLeft: '-8px',
+      width: '100%',
+    }),
+    option: base => ({
+      ...base,
+      height: '100%',
+    }),
+  };
+
+  const apply = () => {
+    Cookies.set('condition_clinic', condition.province);
+    dispatch({
+      type: 'GET_ALL_CLINIC_API',
+      payload: {
+        token: Cookies.get('access_token'),
+        page: 1,
+        limit: 6,
+        query: condition.province,
+      },
+    });
+    dispatch({
+      type: 'GET_DOCTOR',
+      payload: {
+        page: 1,
+        option: '',
+        query: condition.province,
+      },
+    });
+  };
 
   return (
     <Wrapper>
@@ -21,6 +104,7 @@ const ListProduct = (props: customInputProps) => {
           }}
           onClick={() => {
             setChecked(false);
+            console.log('hello');
           }}
         >
           {' '}
@@ -32,73 +116,21 @@ const ListProduct = (props: customInputProps) => {
           <div style={{ paddingTop: '16px' }}>
             <Label>Province</Label>
             <Select
-              //value={}
-              //onChange={e => setFieldValue('status', e.value)}
-              placeholder={'Choose your status'}
+              onChange={e => setCondition({ ...condition, province: e.value })}
+              placeholder={'Choose province/city'}
               options={Data}
               components={{
                 IndicatorSeparator: () => null,
               }}
-              styles={{
-                container: base => ({
-                  ...base,
-                  borderRadius: '5px',
-                  height: '44px',
-                  padding: '10px',
-                }),
-                control: provided => ({
-                  ...provided,
-                  height: '44px',
-                  padding: 10,
-                  marginLeft: 0,
-                  border: '0px solid black',
-                  fontSize: '0.875rem',
-                  outline: 'none',
-                  textALign: 'center',
-                  color: 'rgb(71, 85, 105)',
-                  borderRadius: '0.25rem',
-                  lineHeight: '1.25rem',
-                  boxShadow: 'rgb(0 0 0 / 10%) 0px 1px 3px 0px, rgb(0 0 0 / 6%) 0px 1px 2px 0px',
-                }),
-                indicatorsContainer: () => ({
-                  '.myDropDown': {
-                    '&__dropdown-indicator': {
-                      marginTop: '-5px', // <--- Color of your choice
-                    },
-                  },
-                }),
-                indicatorSeparator: base => ({
-                  ...base,
-                  display: 'none',
-                }),
-                dropdownIndicator: base => ({
-                  ...base,
-                  color: ' #315DF7',
-                  marginTop: '-6px', // Custom colour
-                }),
-                singleValue: base => ({
-                  ...base,
-                }),
-                valueContainer: base => ({
-                  ...base,
-                  color: 'white',
-                  marginTop: '-4px',
-                  marginLeft: '-8px',
-                  width: '100%',
-                }),
-                option: base => ({
-                  ...base,
-                  height: '100%',
-                }),
-              }}
+              styles={customSelect}
             />
           </div>
           <div style={{ paddingTop: '15px' }}>
             <Label>Type of clinic</Label>
             <Select
               //value={}
-              //onChange={e => setFieldValue('status', e.value)}
-              placeholder={'Choose your status'}
+              onChange={e => setCondition({ ...condition, type: e.value })}
+              placeholder={'Choose type'}
               options={[
                 { value: 'Active', label: 'Active' },
                 { value: 'Inactive', label: 'Inactive' },
@@ -106,165 +138,64 @@ const ListProduct = (props: customInputProps) => {
               components={{
                 IndicatorSeparator: () => null,
               }}
-              styles={{
-                container: base => ({
-                  ...base,
-                  borderRadius: '5px',
-                  height: '44px',
-                  padding: '10px',
-                }),
-                control: provided => ({
-                  ...provided,
-                  height: '44px',
-                  padding: 10,
-                  marginLeft: 0,
-                  border: '0px solid black',
-                  fontSize: '0.875rem',
-                  outline: 'none',
-                  textALign: 'center',
-                  color: 'rgb(71, 85, 105)',
-                  borderRadius: '0.25rem',
-                  lineHeight: '1.25rem',
-                  boxShadow: 'rgb(0 0 0 / 10%) 0px 1px 3px 0px, rgb(0 0 0 / 6%) 0px 1px 2px 0px',
-                }),
-                indicatorSeparator: base => ({
-                  ...base,
-                  display: 'none',
-                }),
-                dropdownIndicator: base => ({
-                  ...base,
-                  color: ' #315DF7',
-                  marginTop: '-6px', // Custom colour
-                }),
-                singleValue: base => ({
-                  ...base,
-                }),
-                valueContainer: base => ({
-                  ...base,
-                  color: 'white',
-                  marginTop: '-4px',
-                  marginLeft: '-8px',
-                  width: '70%',
-                }),
-                option: base => ({
-                  ...base,
-                  height: '90%',
-                }),
-              }}
+              styles={customSelect}
             />
           </div>
         </Content>
       </WrapperContent>
 
-      <WrapperContent style={{ paddingTop: '80px' }}>
+      <WrapperContent style={{ paddingTop: '95px' }}>
         <Content>
-          <p>Price segment</p>{' '}
+          <HeaderText>Price segment</HeaderText>{' '}
           <Grid container style={{ padding: '0px 10px' }}>
-            <Grid
-              xs={6}
-              style={{
-                fontFamily: 'Segoe UI',
-                fontStyle: 'normal',
-                fontWeight: 'normal',
-                fontSize: '13px',
-                lineHeight: '21px',
-                display: 'flex',
-                alignItems: 'center',
-                letterSpacing: '-0.02em',
-                color: '#333333',
-              }}
-            >
-              <Checkbox defaultChecked={isChecked} style={{ width: '14px', height: '14px' }} />
+            <Grid xs={6} style={{ display: 'flex' }}>
+              <Checkbox
+                style={{ display: 'flex', margin: 'auto 0px' }}
+                defaultChecked={isChecked}
+              />
               <P>Under 10 million</P>
             </Grid>
-            <Grid
-              xs={6}
-              style={{
-                fontFamily: 'Segoe UI',
-                fontStyle: 'normal',
-                fontWeight: 'normal',
-                fontSize: '13px',
-                lineHeight: '21px',
-                display: 'flex',
-                alignItems: 'center',
-                letterSpacing: '-0.02em',
-                color: '#333333',
-              }}
-            >
-              <Checkbox defaultChecked={isChecked} /> <P> 5 - less than 8 million</P>
+            <Grid xs={6} style={{ display: 'flex' }}>
+              <Checkbox
+                style={{ display: 'flex', margin: 'auto 0px' }}
+                defaultChecked={isChecked}
+              />{' '}
+              <P> 5 - 8 million</P>
             </Grid>
-            <Grid
-              xs={6}
-              style={{
-                fontFamily: 'Segoe UI',
-                fontStyle: 'normal',
-                fontWeight: 'normal',
-                fontSize: '13px',
-                lineHeight: '21px',
-                display: 'flex',
-                alignItems: 'center',
-                letterSpacing: '-0.02em',
-                color: '#333333',
-              }}
-            >
-              <Checkbox defaultChecked={isChecked} /> <P>1 - less than 3 million</P>
+            <Grid xs={6} style={{ display: 'flex' }}>
+              <Checkbox
+                style={{ display: 'flex', margin: 'auto 0px' }}
+                defaultChecked={isChecked}
+              />{' '}
+              <P>1 - 3 million</P>
             </Grid>
-            <Grid
-              xs={6}
-              style={{
-                fontFamily: 'Segoe UI',
-                fontStyle: 'normal',
-                fontWeight: 'normal',
-                fontSize: '13px',
-                lineHeight: '21px',
-                display: 'flex',
-                alignItems: 'center',
-                letterSpacing: '-0.02em',
-                color: '#333333',
-              }}
-            >
-              <Checkbox defaultChecked={isChecked} /> <P> 8 - 10 million won</P>
+            <Grid xs={6} style={{ display: 'flex' }}>
+              <Checkbox
+                style={{ display: 'flex', margin: 'auto 0px' }}
+                defaultChecked={isChecked}
+              />{' '}
+              <P> 8 - 10 million</P>
             </Grid>
-            <Grid
-              xs={6}
-              style={{
-                fontFamily: 'Segoe UI',
-                fontStyle: 'normal',
-                fontWeight: 'normal',
-                fontSize: '13px',
-                lineHeight: '21px',
-                display: 'flex',
-                alignItems: 'center',
-                letterSpacing: '-0.02em',
-                color: '#333333',
-              }}
-            >
-              <Checkbox defaultChecked={isChecked} />
-              <P>3 - less than 5 million</P>
+            <Grid xs={6} style={{ display: 'flex' }}>
+              <Checkbox
+                style={{ display: 'flex', margin: 'auto 0px' }}
+                defaultChecked={isChecked}
+              />
+              <P>3 - 5 million</P>
             </Grid>
-            <Grid
-              xs={6}
-              style={{
-                fontFamily: 'Segoe UI',
-                fontStyle: 'normal',
-                fontWeight: 'normal',
-                fontSize: '13px',
-                lineHeight: '21px',
-                display: 'flex',
-                alignItems: 'center',
-                letterSpacing: '-0.02em',
-                color: '#333333',
-              }}
-            >
-              <Checkbox defaultChecked={isChecked} />
-              <P>Over 10 million won</P>
+            <Grid xs={6} style={{ display: 'flex' }}>
+              <Checkbox
+                style={{ display: 'flex', margin: 'auto 0px' }}
+                defaultChecked={isChecked}
+              />
+              <P>Over 10 million</P>
             </Grid>
           </Grid>
         </Content>
       </WrapperContent>
 
       <WrapperButton>
-        <ItemExit onClick={() => {}}>
+        <ItemExit onClick={apply}>
           <div>
             <p>Apply</p>
           </div>
@@ -276,11 +207,11 @@ const ListProduct = (props: customInputProps) => {
 
 const Wrapper = styled.div`
   width: 20%;
-  height: 93vh;
+  height: 106vh;
   background: #fdfdfd;
-  position: absolute;
+  position: fixed;
   right: 0px;
-  top: 200px;
+  top: 10px;
   border-radius: 4px;
 `;
 
@@ -289,15 +220,16 @@ const WrapperContent = styled.div`
   height: 204px;
   margin-top: -50px;
 `;
+
 const Header = styled.div`
   width: 100%;
   padding: 30px;
   display: flex;
-  margin-top: 100px;
+  margin-top: 40px;
   p {
-    font-family: Abhaya Libre Medium;
+    font-family: SF Pro Display;
     font-style: normal;
-    font-weight: 500;
+    font-weight: bold;
     font-size: 20px;
     line-height: 30px;
     /* identical to box height, or 150% */
@@ -310,9 +242,9 @@ const Header = styled.div`
     color: #00358e;
   }
   a {
-    font-family: Abhaya Libre SemiBold;
+    font-family: SF Pro Display;
     font-style: normal;
-    font-weight: 600;
+    font-weight: normal;
     font-size: 16px;
     line-height: 24px;
     /* identical to box height, or 150% */
@@ -334,9 +266,9 @@ const Content = styled.div`
 
   label {
     padding: 12px;
-    font-family: Abhaya Libre Medium;
+    font-family: SF Pro Display;
     font-style: normal;
-    font-weight: 500;
+    font-weight: bold;
     font-size: 14px;
     line-height: 19px;
     /* identical to box height, or 133% */
@@ -345,25 +277,12 @@ const Content = styled.div`
 
     color: #0b0d31;
   }
-
-  p {
-    padding: 10px;
-    font-family: Abhaya Libre Medium;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 19px;
-    /* identical to box height, or 133% */
-
-    /* Title-Body text */
-
-    color: #333333;
-  }
 `;
 
 const WrapperButton = styled.div`
   padding-top: 100px;
 `;
+
 const ItemExit = styled.a`
   cursor: pointer;
   text-decoration: none;
@@ -421,8 +340,33 @@ const ItemExit = styled.a`
   }
 `;
 
+const HeaderText = styled.p`
+  margin: 0px;
+  padding: 12px;
+  font-family: SF Pro Display;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 19px;
+  /* identical to box height, or 133% */
+
+  /* Title-Body text */
+
+  color: #333333;
+`;
+
 const Label = styled.label`
   padding: 30px 0px 0px 13px;
+  font-family: SF Pro Display;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 19px;
+  /* identical to box height, or 133% */
+
+  /* Title-Body text */
+
+  color: red;
 `;
 
 const P = styled.p`

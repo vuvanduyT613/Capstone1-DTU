@@ -10,7 +10,7 @@ import {
   createAppointmentClient,
 } from './appointments';
 import { getAllDelivery } from './delivery';
-import { getAllClinic, createClinic, updateClinic, deleteClinic } from './clinics';
+import { getAllClinic, createClinic, updateClinic, deleteClinic, getClinic } from './clinics';
 import { getByIdUtil, updateById, deleteById, adminStatus, chartJS } from './util';
 
 //@ts-ignore
@@ -39,6 +39,7 @@ function* rootSaga() {
     takeLeading('CREATE_ALL_CLINIC_API', createClinic),
     takeLeading('UPDATE_ALL_CLINIC_API', updateClinic),
     takeLeading('DELETE_ALL_CLINIC_API', deleteClinic),
+    takeLeading('GET_ALL_CLINIC_DATA_API', getClinic),
   ]);
 }
 

@@ -13,9 +13,11 @@ const ListProduct = (props: customInputProps) => {
   const { data } = useSelector((state: rootState) => state.userReducer.getAllUser);
 
   console.log(data);
+
   const fucPagination = value => {
     console.log(value);
   };
+
   return (
     <Wrapper>
       <Header />
@@ -30,6 +32,9 @@ const ListProduct = (props: customInputProps) => {
               district={value.district}
               city={value.city}
               image={value.image}
+              overview={value.overview}
+              timeWorkStart={value.timeWorkStart}
+              timeWorkEnd={value.timeWorkEnd}
             />
           ))
         ) : (
@@ -59,14 +64,15 @@ const ListProduct = (props: customInputProps) => {
 
 const Wrapper = styled.div`
   width: 55%;
-  height: 900px;
   background: #fdfdfd;
   margin-left: 19%;
-  margin-top: 7%;
+  margin-top: -7%;
   border-radius: 4px;
 `;
 
 const WrapperClinic = styled.div`
+  padding: 0px 28px 0px 28px;
   display: flex;
+  flex-wrap: wrap;
 `;
 export default ListProduct;

@@ -40,7 +40,7 @@ export function Delivery(props: Props) {
         <meta name="description" content="Homepage" />
       </Helmet>
       <Div>
-        <NavBar />
+        <NavBar number={1} />
         <ListTranfer />
       </Div>
       <PageWrapper>

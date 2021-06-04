@@ -6,8 +6,12 @@ import { ReactComponent as Heart } from './assets/ic_heart.svg';
 import { ReactComponent as List } from './assets/ic_list.svg';
 import { ReactComponent as Phone } from './assets/ic_phone.svg';
 import { ReactComponent as People } from './assets/ic_people.svg';
+import { ReactComponent as HeartSm } from './assets/ic_mini_heart.svg';
+import { ReactComponent as ListSm } from './assets/ic_mini_analysis.svg';
+import { ReactComponent as PhoneSm } from './assets/ic_mini_phone.svg';
+import { ReactComponent as PeopleSm } from './assets/ic_mini_person.svg';
 
-export function SubNav() {
+export function SubNav({ number }) {
   const [offset, setOffset] = React.useState(0);
   React.useEffect(() => {
     window.onscroll = () => {
@@ -17,162 +21,117 @@ export function SubNav() {
 
   return (
     <>
-      {offset >= 70 ? (
-        <Wrapper>
-          <WrapperLeft>
-            <Div>
-              <svg
-                width="39"
-                height="38"
-                viewBox="0 0 39 38"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <ellipse cx="19.6218" cy="19" rx="18.8532" ry="19" fill="#FDFDFD" />
-                <path
-                  d="M21.375 17.7337C21.2199 17.5775 21.0096 17.4897 20.7904 17.4897C20.5711 17.4897 20.3608 17.5775 20.2058 17.7337L19.6211 18.322C19.4686 18.4812 19.2861 18.6082 19.0843 18.6955C18.8826 18.7829 18.6656 18.8289 18.446 18.8308C18.2264 18.8327 18.0086 18.7905 17.8054 18.7067C17.6021 18.6229 17.4175 18.4992 17.2622 18.3427C17.1069 18.1862 16.9841 18.0001 16.901 17.7953C16.8178 17.5905 16.776 17.371 16.7779 17.1497C16.7798 16.9284 16.8254 16.7097 16.9121 16.5064C16.9987 16.303 17.1247 16.1191 17.2827 15.9654L21.9381 11.272C23.0403 11.0194 24.1935 11.1234 25.2337 11.5692C26.2738 12.015 27.1481 12.78 27.7321 13.7553C28.3161 14.7306 28.5801 15.8667 28.4866 17.0019C28.3931 18.1371 27.9468 19.2138 27.2112 20.0787L25.4681 21.8579L21.375 17.7329V17.7337ZM12.3122 12.7237C13.1679 11.8615 14.287 11.3154 15.4888 11.1735C16.6906 11.0317 17.9047 11.3024 18.9348 11.942L16.1126 14.787C15.5014 15.4018 15.153 16.2331 15.1418 17.1033C15.1306 17.9736 15.4576 18.8137 16.0529 19.4442C16.6482 20.0746 17.4645 20.4455 18.3275 20.4775C19.1905 20.5095 20.0317 20.2001 20.6713 19.6154L20.7904 19.5012L24.2989 23.0362L20.7904 26.572C20.4802 26.8845 20.0597 27.06 19.6211 27.06C19.1826 27.06 18.7621 26.8845 18.4519 26.572L12.3114 20.3837C11.3035 19.3679 10.7373 17.9902 10.7373 16.5537C10.7373 15.1172 11.3035 13.7395 12.3114 12.7237H12.3122Z"
-                  fill="#00358E"
-                />
-              </svg>
-            </Div>
-
-            <Div>
-              <svg
-                width="39"
-                height="38"
-                viewBox="0 0 39 38"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <ellipse cx="19.2194" cy="19" rx="18.8532" ry="19" fill="#FDFDFD" />
-                <path
-                  d="M15.0856 20.6667V11.5H11.7781C11.5588 11.5 11.3484 11.5878 11.1934 11.7441C11.0383 11.9004 10.9512 12.1123 10.9512 12.3333V20.6667H15.0856ZM21.7008 20.6667V11.5H16.7394V20.6667H21.7008ZM27.4891 20.6667V12.3333C27.4891 12.1123 27.402 11.9004 27.2469 11.7441C27.0918 11.5878 26.8815 11.5 26.6622 11.5H23.3546V20.6667H27.4891ZM26.6622 26.5C26.8815 26.5 27.0918 26.4122 27.2469 26.2559C27.402 26.0996 27.4891 25.8877 27.4891 25.6667V22.3333H10.9512V25.6667C10.9512 25.8877 11.0383 26.0996 11.1934 26.2559C11.3484 26.4122 11.5588 26.5 11.7781 26.5H26.6622Z"
-                  fill="#00358E"
-                />
-              </svg>
-            </Div>
-            <Div>
-              <svg
-                width="39"
-                height="38"
-                viewBox="0 0 39 38"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <ellipse cx="19.8181" cy="19" rx="18.8532" ry="19" fill="#FDFDFD" />
-                <path
-                  d="M28.0867 23.1687C28.0864 24.3083 27.6998 25.4136 26.9911 26.3017C26.2824 27.1897 25.294 27.8072 24.1896 28.052L23.662 26.457C24.1451 26.3768 24.6046 26.1896 25.0072 25.9089C25.4099 25.6282 25.7457 25.261 25.9906 24.8337H23.9523C23.5137 24.8337 23.093 24.6581 22.7829 24.3455C22.4727 24.0329 22.2985 23.609 22.2985 23.167V19.8337C22.2985 19.3916 22.4727 18.9677 22.7829 18.6551C23.093 18.3426 23.5137 18.167 23.9523 18.167H26.3817C26.1799 16.5561 25.4017 15.0747 24.1932 14.0009C22.9847 12.9271 21.4289 12.3346 19.8178 12.3346C18.2066 12.3346 16.6508 12.9271 15.4423 14.0009C14.2338 15.0747 13.4557 16.5561 13.2539 18.167H15.6833C16.1219 18.167 16.5426 18.3426 16.8527 18.6551C17.1629 18.9677 17.3371 19.3916 17.3371 19.8337V23.167C17.3371 23.609 17.1629 24.0329 16.8527 24.3455C16.5426 24.6581 16.1219 24.8337 15.6833 24.8337H13.2026C12.764 24.8337 12.3434 24.6581 12.0332 24.3455C11.7231 24.0329 11.5488 23.609 11.5488 23.167V19.0003C11.5488 14.3978 15.2508 10.667 19.8178 10.667C24.3847 10.667 28.0867 14.3978 28.0867 19.0003V23.1687Z"
-                  fill="#00358E"
-                />
-              </svg>
-            </Div>
-            <Div>
-              <svg
-                width="39"
-                height="38"
-                viewBox="0 0 39 38"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <ellipse cx="19.4167" cy="19" rx="18.8532" ry="19" fill="#FDFDFD" />
-                <path
-                  d="M15.281 18.167C14.7923 18.167 14.3084 18.07 13.857 17.8815C13.4055 17.6931 12.9953 17.4169 12.6498 17.0686C12.3043 16.7204 12.0302 16.307 11.8432 15.8521C11.6562 15.3971 11.5599 14.9094 11.5599 14.417C11.5599 13.9245 11.6562 13.4369 11.8432 12.9819C12.0302 12.527 12.3043 12.1136 12.6498 11.7653C12.9953 11.4171 13.4055 11.1409 13.857 10.9524C14.3084 10.764 14.7923 10.667 15.281 10.667C16.2678 10.667 17.2143 11.0621 17.9121 11.7653C18.61 12.4686 19.002 13.4224 19.002 14.417C19.002 15.4116 18.61 16.3654 17.9121 17.0686C17.2143 17.7719 16.2678 18.167 15.281 18.167ZM23.9634 21.5003C23.0861 21.5003 22.2448 21.1491 21.6246 20.524C21.0043 19.8989 20.6558 19.051 20.6558 18.167C20.6558 17.2829 21.0043 16.4351 21.6246 15.81C22.2448 15.1848 23.0861 14.8337 23.9634 14.8337C24.8406 14.8337 25.6819 15.1848 26.3022 15.81C26.9225 16.4351 27.2709 17.2829 27.2709 18.167C27.2709 19.051 26.9225 19.8989 26.3022 20.524C25.6819 21.1491 24.8406 21.5003 23.9634 21.5003ZM23.9634 22.3337C24.9502 22.3337 25.8967 22.7287 26.5945 23.432C27.2924 24.1353 27.6844 25.0891 27.6844 26.0837V26.5003H20.2423V26.0837C20.2423 25.0891 20.6344 24.1353 21.3322 23.432C22.03 22.7287 22.9765 22.3337 23.9634 22.3337ZM15.281 19.0003C15.8239 19.0003 16.3615 19.1081 16.8632 19.3175C17.3648 19.5269 17.8206 19.8338 18.2045 20.2207C18.5884 20.6076 18.8929 21.067 19.1007 21.5725C19.3085 22.078 19.4154 22.6198 19.4154 23.167V26.5003H11.1465V23.167C11.1465 22.0619 11.5821 21.0021 12.3574 20.2207C13.1328 19.4393 14.1844 19.0003 15.281 19.0003Z"
-                  fill="#00358E"
-                />
-              </svg>
-            </Div>
-            <WrapperRight>
-              <svg
-                width="25"
-                height="24"
-                viewBox="0 0 25 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M12.5915 21.5C13.1174 21.4984 13.6212 21.2872 13.9931 20.9125C14.3649 20.5377 14.5745 20.0299 14.5761 19.5H10.607C10.607 20.0304 10.8161 20.5391 11.1882 20.9142C11.5604 21.2893 12.0652 21.5 12.5915 21.5ZM18.5452 15.5V10.5C18.5452 7.43 16.9178 4.86 14.0799 4.18V3.5C14.0799 3.10218 13.9231 2.72064 13.644 2.43934C13.3649 2.15804 12.9863 2 12.5915 2C12.1968 2 11.8182 2.15804 11.5391 2.43934C11.2599 2.72064 11.1031 3.10218 11.1031 3.5V4.18C8.25528 4.86 6.63787 7.42 6.63787 10.5V15.5L4.65332 17.5V18.5H20.5297V17.5L18.5452 15.5Z"
-                  fill="#FDFDFD"
-                />
-              </svg>
-            </WrapperRight>
-          </WrapperLeft>
-        </Wrapper>
-      ) : (
+      {number === 2 ? (
         <>
-          <Grid
-            container
-            justify="center"
-            style={{ width: '80%', marginLeft: '5%', marginTop: '7%', height: '200px' }}
-          >
-            <Grid xs={3} style={{ display: 'flex' }} justify="center">
-              <WrapperNav>
-                <Elipse>
-                  {' '}
-                  <Heart />
-                </Elipse>
-                <P> Registration Support Services</P>
-              </WrapperNav>
-            </Grid>
-
-            <Grid xs={3} style={{ display: 'flex' }} justify="center">
-              <WrapperNav>
-                <Elipse>
-                  {' '}
-                  <List />
-                </Elipse>
-                <P>look up the list of clinics</P>
-              </WrapperNav>
-            </Grid>
-
-            <Grid xs={3} style={{ display: 'flex' }} justify="center">
-              <WrapperNav>
-                <Elipse>
-                  {' '}
-                  <Phone />
-                </Elipse>
-                <P>Online support</P>
-              </WrapperNav>
-            </Grid>
-
-            <Grid xs={3} style={{ display: 'flex' }} justify="center">
-              <WrapperNav>
-                <Elipse>
-                  {' '}
-                  <People />
-                </Elipse>
-                <P>Looking for a doctor in charge</P>
-              </WrapperNav>
-            </Grid>
-          </Grid>
-          <WrapperTop>
-            <svg
-              width="25"
-              height="24"
-              viewBox="0 0 25 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M12.5915 21.5C13.1174 21.4984 13.6212 21.2872 13.9931 20.9125C14.3649 20.5377 14.5745 20.0299 14.5761 19.5H10.607C10.607 20.0304 10.8161 20.5391 11.1882 20.9142C11.5604 21.2893 12.0652 21.5 12.5915 21.5ZM18.5452 15.5V10.5C18.5452 7.43 16.9178 4.86 14.0799 4.18V3.5C14.0799 3.10218 13.9231 2.72064 13.644 2.43934C13.3649 2.15804 12.9863 2 12.5915 2C12.1968 2 11.8182 2.15804 11.5391 2.43934C11.2599 2.72064 11.1031 3.10218 11.1031 3.5V4.18C8.25528 4.86 6.63787 7.42 6.63787 10.5V15.5L4.65332 17.5V18.5H20.5297V17.5L18.5452 15.5Z"
-                fill="#FDFDFD"
-              />
-            </svg>
-          </WrapperTop>
+          <DivSigle>
+            <DivSvgSigle>
+              <DivSvg>
+                <HeartSm />
+              </DivSvg>
+              <DivSvg>
+                <ListSm />
+              </DivSvg>
+              <DivSvg>
+                <PhoneSm />
+              </DivSvg>
+              <DivSvg>
+                <PeopleSm />
+              </DivSvg>
+            </DivSvgSigle>
+          </DivSigle>
         </>
+      ) : (
+        <Div color={offset >= 70 ? '60px' : '340px'}>
+          {offset >= 70 ? (
+            <Wrapper>
+              <WrapperLeft>
+                <DivSvg>
+                  <HeartSm />
+                </DivSvg>
+                <DivSvg>
+                  <ListSm />
+                </DivSvg>
+                <DivSvg>
+                  <PhoneSm />
+                </DivSvg>
+                <DivSvg>
+                  <PeopleSm />
+                </DivSvg>
+              </WrapperLeft>
+              <WrapperRight></WrapperRight>
+            </Wrapper>
+          ) : (
+            <>
+              <Grid
+                container
+                justify="center"
+                style={{ width: '80%', marginLeft: '5%', marginTop: '15%', height: '200px' }}
+              >
+                <Grid xs={3} style={{ display: 'flex' }} justify="center">
+                  <WrapperNav>
+                    <Elipse>
+                      {' '}
+                      <Heart />
+                    </Elipse>
+                    <P> Registration Support Services</P>
+                  </WrapperNav>
+                </Grid>
+
+                <Grid xs={3} style={{ display: 'flex' }} justify="center">
+                  <WrapperNav>
+                    <Elipse>
+                      {' '}
+                      <List />
+                    </Elipse>
+                    <P>look up the list of clinics</P>
+                  </WrapperNav>
+                </Grid>
+
+                <Grid xs={3} style={{ display: 'flex' }} justify="center">
+                  <WrapperNav>
+                    <Elipse>
+                      {' '}
+                      <Phone />
+                    </Elipse>
+                    <P>Online support</P>
+                  </WrapperNav>
+                </Grid>
+
+                <Grid xs={3} style={{ display: 'flex' }} justify="center">
+                  <WrapperNav>
+                    <Elipse>
+                      {' '}
+                      <People />
+                    </Elipse>
+                    <P>Looking for a doctor in charge</P>
+                  </WrapperNav>
+                </Grid>
+              </Grid>
+              <WrapperTop></WrapperTop>
+            </>
+          )}
+        </Div>
       )}
     </>
   );
 }
 
 const Wrapper = styled.div`
-  margin-top: 64px;
-  margin-top: 100px;
+  height: 64px;
+  position: absolute;
+  z-index: 11;
+  top: 64px;
   display: flex;
   align-items: center;
 `;
 
+const DivSvg = styled.div`
+  margin-left: 15px;
+  width: 50%;
+`;
 const WrapperLeft = styled.div`
-  margin-top: -55%;
+  position: absolute;
+  margin-top: -134px;
   margin-left: 15px;
   display: flex;
   align-items: center;
@@ -180,9 +139,8 @@ const WrapperLeft = styled.div`
 `;
 
 const WrapperTop = styled.div`
-    margin-top: 41px;
-    margin-left: -110px;
-}
+  margin-top: 41px;
+  margin-left: -110px;
 `;
 
 const WrapperRight = styled.div`
@@ -197,7 +155,22 @@ const WrapperRight = styled.div`
 `;
 
 const Div = styled.div`
-  margin-left: 8%;
+  width: 100%;
+  height: ${props => props.color};
+  background: #00358e;
+`;
+
+const DivSigle = styled.div`
+  width: 100%;
+  height: 64px;
+  background: #00358e;
+  display: flex;
+`;
+
+const DivSvgSigle = styled.div`
+  display: flex;
+  margin-top: 12px;
+  margin-left: 13px;
 `;
 
 const WrapperNav = styled.div`

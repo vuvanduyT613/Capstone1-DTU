@@ -1,4 +1,5 @@
 export default [
+  { value: ' ', label: 'All' },
   { value: 'Hà Nội', label: 'Hà Nội' },
   { value: 'TP HCM', label: 'TP HCM' },
   { value: 'Đà Nẵng', label: 'Đà Nẵng' },

@@ -15,6 +15,7 @@ import { useLocation } from 'react-router-dom';
 import { PageWrapper } from 'app/components/PageWrapper';
 import { Hot } from 'app/components/Hot';
 import { ReactComponent as Heart } from './assets/ic_heart.svg';
+import { ReactComponent as Phone } from './assets/ic_phone.svg';
 import { messages } from './messages';
 import { Overview } from './components/Overview';
 import { Map } from './components/Map';
@@ -42,12 +43,12 @@ export function DetailClinic(props: Props) {
         <meta name="description" content="Homepage" />
       </Helmet>
       <Div>
-        <NavBar />
+        <NavBar number={1} />
         <ContentOutline>
           <Grid xs={6}>
             <Hot />
-            <h2>Phòng khám Đa khoa Quốc tế Exson {`${data.name}`}</h2>
-            <P> Số 722 Sư Vạn Hạnh, phường 12, Quận 10, Tp. Hồ Chí Minh</P>
+            <h2> {`${data.name}`}</h2>
+            <P> {`${data.address},  ${data.city}`}</P>
             <WrapperAction>
               <ActionActive
                 onClick={() => {
@@ -83,7 +84,7 @@ export function DetailClinic(props: Props) {
             <ItemExit onClick={() => {}}>
               <div>
                 <Heart />
-                <p>Quan tâm</p>
+                <p>Interested </p>
               </div>
             </ItemExit>
           </Grid>
@@ -91,7 +92,7 @@ export function DetailClinic(props: Props) {
         <Content>
           <ContentText>
             {page === 1 ? (
-              <Overview />
+              <Overview data={data ? data : ''} />
             ) : page === 2 ? (
               <Map />
             ) : page === 3 ? (
@@ -99,6 +100,21 @@ export function DetailClinic(props: Props) {
             ) : (
               <Strength />
             )}
+            <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+              <ItemAdmin onClick={() => {}}>
+                <div>
+                  <p>Contact admin</p>
+                  <BorderSvg>
+                    <Phone />
+                  </BorderSvg>
+                </div>
+              </ItemAdmin>
+              <ItemSave onClick={() => {}}>
+                <div>
+                  <p>View table of interest</p>
+                </div>
+              </ItemSave>
+            </div>
           </ContentText>
           <WrapperButton></WrapperButton>
         </Content>
@@ -164,6 +180,17 @@ const Img = styled.img`
 
 const WrapperButton = styled.div`
   width: 100%;
+`;
+
+const BorderSvg = styled.p`
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  margin: 7px 10px !important;
+  background: #b8dbff;
+  svg {
+    margin: 10px 10px auto 10px !important;
+  }
 `;
 
 const ActionActive = styled.a`
@@ -267,6 +294,116 @@ const ItemExit = styled.a`
       /* #315DF7 */
 
       color: #315df7;
+    }
+  }
+`;
+
+const ItemAdmin = styled.a`
+  cursor: pointer;
+  text-decoration: none;
+  display: flex;
+  padding: 0.25rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  align-items: center;
+  justify-content: flex-end;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &:active {
+    opacity: 0.4;
+  }
+
+  .icon {
+    margin-right: 0.25rem;
+  }
+
+  div {
+    width: 200px;
+    height: 50px;
+    /* #00358E */
+    /* #FFFFFF */
+
+    background: #e5edff;
+    box-shadow: 0px 8px 20px rgba(49, 93, 247, 0.16);
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+
+    svg {
+      margin: auto 9px auto 0px;
+    }
+
+    p {
+      font-family: SF Pro Display;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 16px;
+      line-height: 24px;
+      /* identical to box height, or 150% */
+
+      display: flex;
+      align-items: center;
+
+      /* #00358E */
+
+      color: #00358e;
+    }
+  }
+`;
+
+const ItemSave = styled.a`
+  cursor: pointer;
+  text-decoration: none;
+  display: flex;
+  padding: 0.25rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &:active {
+    opacity: 0.4;
+  }
+
+  .icon {
+    margin-right: 0.25rem;
+  }
+
+  div {
+    width: 200px;
+    height: 50px;
+    /* #00358E */
+
+    background: #00358e;
+    opacity: 1;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+
+    svg {
+      margin: auto 9px auto 0px;
+    }
+
+    p {
+      font-family: Abhaya Libre Medium;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 21px;
+      display: flex;
+      align-items: center;
+      text-align: center;
+
+      /* #FFFFFF */
+
+      color: #fdfdfd;
     }
   }
 `;

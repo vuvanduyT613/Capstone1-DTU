@@ -40,7 +40,7 @@ export function ClinicPage(props: Props) {
         <meta name="description" content="Homepage" />
       </Helmet>
       <Div>
-        <NavBar />
+        <NavBar number={2} />
         <ListProject />
       </Div>
       <Search />

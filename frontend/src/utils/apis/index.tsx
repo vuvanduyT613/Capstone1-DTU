@@ -172,11 +172,24 @@ export const appointmentEmail = payload => {
 };
 
 //clinic
-export const clinicGetById = payload => {
+export const clinicGetAll = payload => {
   const config = {
     headers: { Authorization: `Bearer ${payload.token}` },
   };
-  return GET_TOKEN(`${ENDPOINT}/clinics/v1?limit=6&page=${payload.page}`, config);
+  return GET_TOKEN(`${ENDPOINT}/clinics/v1?limit=10000&page=1`, config);
+};
+
+export const clinicGetById = payload => {
+  console.log(payload);
+  const config = {
+    headers: { Authorization: `Bearer ${payload.token}` },
+  };
+  return GET_TOKEN(
+    `${ENDPOINT}/clinics/v1?nameClinic=${payload.nameClinic ? payload.nameClinic : ' '}&city=${
+      payload.query ? payload.query : ' '
+    }&limit=6&page=${payload.page}`,
+    config,
+  );
 };
 
 export const clinicCreate = payload => {

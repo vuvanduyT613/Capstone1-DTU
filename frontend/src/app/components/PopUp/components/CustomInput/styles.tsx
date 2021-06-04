@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     inputCustom: {
       width: '90%',
-      height: '44px',
+      height: '43px',
       borderRadius: '5px',
       background: '#fff',
       margin: 'auto',

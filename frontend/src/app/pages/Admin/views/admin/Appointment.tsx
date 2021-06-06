@@ -9,13 +9,21 @@ export default function Tables() {
   const [page, setPage] = useState(1);
 
   useEffect(() => {
-    dispatch({
-      type: 'GET_ALL_APPOINTMENT_API',
-      payload: {
-        token: Cookies.get('access_token'),
-        page: page,
-      },
-    });
+    Cookies.get('role') === 'doctor'
+      ? dispatch({
+          type: 'GET_ALL_APPOINTMENT_DOCTOR_API',
+          payload: {
+            token: Cookies.get('access_token'),
+            page: page,
+          },
+        })
+      : dispatch({
+          type: 'GET_ALL_APPOINTMENT_API',
+          payload: {
+            token: Cookies.get('access_token'),
+            page: page,
+          },
+        });
     dispatch({
       type: 'UPDATE_FIELD_SIGN_UP',
       payload: {
@@ -34,13 +42,21 @@ export default function Tables() {
 
   const actionPage = page => {
     setPage(page);
-    dispatch({
-      type: 'GET_ALL_APPOINTMENT_API',
-      payload: {
-        token: Cookies.get('access_token'),
-        page: page,
-      },
-    });
+    Cookies.get('role') === 'doctor'
+      ? dispatch({
+          type: 'GET_ALL_APPOINTMENT_DOCTOR_API',
+          payload: {
+            token: Cookies.get('access_token'),
+            page: page,
+          },
+        })
+      : dispatch({
+          type: 'GET_ALL_APPOINTMENT_API',
+          payload: {
+            token: Cookies.get('access_token'),
+            page: page,
+          },
+        });
   };
 
   const actionDelete = values => {

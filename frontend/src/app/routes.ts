@@ -8,6 +8,7 @@ import { Detail } from './pages/Detail';
 import { Delivery } from './pages/Delivery';
 import { Personal } from './pages/Personal';
 import { DetailClinic } from './pages/DetailClinic';
+import { SearchInterested } from './pages/SearchInterested';
 
 const routes = [
   {
@@ -54,6 +55,11 @@ const routes = [
     path: '/personal',
     exact: true,
     main: () => Personal,
+  },
+  {
+    path: '/clinic/searchinterested',
+    exact: false,
+    main: () => SearchInterested,
   },
   {
     path: '*',

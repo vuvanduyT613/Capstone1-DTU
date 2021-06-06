@@ -93,6 +93,7 @@ export default function CardSettings(props) {
           userID: data && data.userID !== 'undefined' ? data.userID : '',
           time: data && data.time !== 'undefined' ? new Date(data.time) : new Date(),
           status: data && data.status !== 'undefined' ? data.status : '',
+          payment: data && data.payment !== 'undefined' ? data.payment : '',
           token: Cookies.get('access_token'),
         }}
         validationSchema={Schema}
@@ -154,27 +155,31 @@ export default function CardSettings(props) {
                     </div>
 
                     <div className="w-full lg:w-6/12 px-4">
-                      <div className="relative  w-full mb-3">
+                      <div className="relative w-full mb-3">
                         <label
                           className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                           htmlFor="grid-password"
                         >
-                          Time (*)
+                          Status Payment
                         </label>
-                        <DatePicker
-                          wrapperClassName={classes.wrapper}
-                          selected={values.time}
-                          onChange={date => {
-                            setFieldValue('time', date);
-                          }}
-                          isClearable={true}
-                          customInput={<CustomInputDatePicker />}
-                          showTimeSelect
-                          filterTime={filterPassedTime}
-                          dateFormat="MMMM d, yyyy h:mm"
+                        <Select
+                          value={values.payment}
+                          onChange={e => setFieldValue('payment', e.value)}
+                          placeholder={
+                            values.payment === '' ? 'Choose your status payment' : values.payment
+                          }
+                          options={[
+                            { value: 'Unpaid', label: 'Unpaid' },
+                            { value: 'Failled', label: 'Failled' },
+                            { value: 'Expired', label: 'Expired' },
+                            { value: 'Paid', label: 'Paid' },
+                            { value: 'Refunding', label: 'Refunding' },
+                            { value: 'Refunded', label: 'Refunded' },
+                          ]}
+                          styles={CustomSelect}
                         />
+                        <p className={classes.err}>{Boolean(errors.status) && errors.status}</p>
                       </div>
-                      <p className={classes.err}>{Boolean(errors.time) && errors.time}</p>
                     </div>
 
                     <div className="w-full lg:w-6/12 px-4">
@@ -200,29 +205,42 @@ export default function CardSettings(props) {
                     </div>
 
                     <div className="w-full lg:w-6/12 px-4">
-                      <div className="relative w-full mb-3">
+                      <div className="relative  w-full mb-3">
                         <label
                           className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                           htmlFor="grid-password"
                         >
-                          Status
+                          Time (*)
                         </label>
-                        <Select
-                          value={values.status}
-                          onChange={e => setFieldValue('status', e.value)}
-                          placeholder={values.status === '' ? 'Choose your status' : values.status}
-                          options={[
-                            { value: 'Unpaid', label: 'Unpaid' },
-                            { value: 'Failled', label: 'Failled' },
-                            { value: 'Expired', label: 'Expired' },
-                            { value: 'Paid', label: 'Paid' },
-                            { value: 'Refunding', label: 'Refunding' },
-                            { value: 'Refunded', label: 'Refunded' },
-                          ]}
-                          styles={CustomSelect}
+                        <DatePicker
+                          wrapperClassName={classes.wrapper}
+                          selected={values.time}
+                          onChange={date => {
+                            setFieldValue('time', date);
+                          }}
+                          isClearable={true}
+                          customInput={<CustomInputDatePicker />}
+                          showTimeSelect
+                          filterTime={filterPassedTime}
+                          dateFormat="MMMM d, yyyy h:mm"
                         />
-                        <p className={classes.err}>{Boolean(errors.status) && errors.status}</p>
                       </div>
+                      <p className={classes.err}>{Boolean(errors.time) && errors.time}</p>
+                    </div>
+                    <div className="w-full lg:w-12/12 px-4">
+                      <div className="relative  w-full mb-3">
+                        <label
+                          className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                          htmlFor="grid-password"
+                        >
+                          Note (*)
+                        </label>
+                        <textarea
+                          className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                          style={{ width: '100%' }}
+                        ></textarea>
+                      </div>
+                      <p className={classes.err}>{Boolean(errors.time) && errors.time}</p>
                     </div>
                   </div>
                 </form>

@@ -30,11 +30,11 @@ export function Nav() {
       to: '/delivery',
       exact: false,
     },
-    {
+    /*{
       name: 'Mailbox',
       to: '/mailbox',
       exact: false,
-    },
+    },*/
     {
       name: 'Personal',
       to: '/personal',

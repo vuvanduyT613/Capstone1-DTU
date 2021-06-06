@@ -13,6 +13,10 @@ const appointmentSchema = mongoose.Schema(
 			ref: "Doctor",
 			require: true,
 		},
+		clinic: {
+			type: String,
+			require: true,
+		},
 		time: {
 			type: Date,
 			require: true,
@@ -26,7 +30,7 @@ const appointmentSchema = mongoose.Schema(
 		},
 		payment: {
 			type: String,
-			default: "Balance",
+			default: "UNPAID",
 		},
 	},
 	{

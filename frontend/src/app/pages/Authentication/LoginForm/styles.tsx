@@ -3,6 +3,7 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { color } from '../../../asset/constant/color';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
+    troggle: {},
     forgotPass: {
       textAlign: 'center',
       cursor: 'pointer',

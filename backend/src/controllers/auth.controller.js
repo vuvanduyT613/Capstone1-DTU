@@ -15,6 +15,13 @@ const login = catchAsync(async (req, res) => {
 	res.send({ user, tokens });
 });
 
+const loginDoctor = catchAsync(async (req, res) => {
+	const { email, password } = req.body;
+	const doctor = await authService.loginUserWithEmailAndPasswordDoctor(email, password);
+	const tokens = await tokenService.generateAuthTokens(doctor);
+	res.send({ doctor, tokens });
+});
+
 const logout = catchAsync(async (req, res) => {
 	await authService.logout(req.body.refreshToken);
 	res.status(httpStatus.NO_CONTENT).send();
@@ -37,9 +44,7 @@ const resetPassword = catchAsync(async (req, res) => {
 });
 
 const routeResetPassword = catchAsync(async (req, res) => {
-	res.cookie("forgot_token", req.query.token).redirect(
-		`http://localhost:3000/auth/?token=${req.query.token}`
-	);
+	res.cookie("forgot_token", req.query.token).redirect(`http://localhost:3000/auth/?token=${req.query.token}`);
 });
 
 const sendVerificationEmail = catchAsync(async (req, res) => {
@@ -56,6 +61,7 @@ const verifyEmail = catchAsync(async (req, res) => {
 module.exports = {
 	register,
 	login,
+	loginDoctor,
 	logout,
 	refreshTokens,
 	forgotPassword,

@@ -16,36 +16,46 @@ interface Props {
 
 export function List(props: Props) {
   const { data } = props;
-  console.log(data);
+  const [state, setState] = React.useState('');
+
+  const fucHeader = value => {
+    setState(value);
+  };
+
   return (
     <>
-      <Header />
+      <Header fucHeader={fucHeader} />
       <WrapperList>
-        {Object.keys(data).length > 0 ? (
+        {
           //@ts-ignore
-          data.results.map(value => (
-            <Grid
-              xs={4}
-              justify="center"
-              style={{ marginTop: '25px', marginBottom: '0px', height: '180px' }}
-            >
-              <Link
-                to={`/doctor/detail?id=${value.id}&name=${value.fistName} ${value.lastName}&avatar=${value.avatar}&price=${value.price}&detail=${value.detail}`}
-                style={{ textDecoration: 'none' }}
+          Object.keys(data).length > 0 && Object.keys(data.results).length > 0 ? (
+            //@ts-ignore
+            data.results.map(value => (
+              <Grid
+                xs={4}
+                justify="center"
+                style={{ marginTop: '25px', marginBottom: '0px', height: '180px' }}
               >
-                <ItemDoctor
-                  avatar={value.avatar}
-                  name={value.userName}
-                  level={value.level}
-                  specialize={value.specialize}
-                  booking={value.booking}
-                />
-              </Link>
-            </Grid>
-          ))
-        ) : (
-          <></>
-        )}
+                <Link
+                  to={`/doctor/detail?id=${value.id}&name=${value.fistName} ${value.lastName}&avatar=${value.avatar}&price=${value.price}&detail=${value.detail}`}
+                  style={{ textDecoration: 'none' }}
+                >
+                  <ItemDoctor
+                    avatar={value.avatar}
+                    name={value.userName}
+                    level={value.level}
+                    specialize={value.specialize}
+                    booking={value.booking}
+                  />
+                </Link>
+              </Grid>
+            ))
+          ) : (
+            <NotFound>
+              <h3>Your search - {`${state}`} - did not match any doctor.</h3>
+            </NotFound>
+          )
+        }
       </WrapperList>
     </>
   );
@@ -60,3 +70,7 @@ const WrapperList = styled.div`
   display: flex;
   flex-wrap: wrap;
   `;
+
+const NotFound = styled.div`
+  padding: 0px 38px 0px 45px;
+`;

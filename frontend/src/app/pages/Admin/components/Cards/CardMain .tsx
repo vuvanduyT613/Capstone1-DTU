@@ -231,15 +231,15 @@ export default function CardTable(props) {
                         </td>
 
                         <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                          {value.status === 'Unpaid' ? (
+                          {value.payment === 'Unpaid' ? (
                             <Status color={'#f0ad4e'}> UNPAID</Status>
-                          ) : value.status === 'Failled' ? (
+                          ) : value.payment === 'Failled' ? (
                             <Status color={'#d9534f'}> FAILLED</Status>
-                          ) : value.status === 'Paid' ? (
+                          ) : value.payment === 'Paid' ? (
                             <Status color={'#5cb85c'}> PAID</Status>
-                          ) : value.status === 'Refunding' ? (
+                          ) : value.payment === 'Refunding' ? (
                             <Status color={'#008edd'}> REFUNDING</Status>
-                          ) : value.status === 'Refunded' ? (
+                          ) : value.payment === 'Refunded' ? (
                             <Status color={'#008edd'}> REFUNDED</Status>
                           ) : (
                             <Status color={'#000'}> EXPIRED</Status>
@@ -248,7 +248,7 @@ export default function CardTable(props) {
                         <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
                           <Grid style={{ textAlign: 'center' }}>
                             <Link
-                              to={`${props.to}?id=${value.id}&userID=${value.userID}&doctorID=${value.doctorID}&time=${value.time}&status=${value.status}&level=${value.level}&price=${value.price}&detail=${value.detail}&specialize=${value.specialize}`}
+                              to={`${props.to}?id=${value.id}&payment=${value.payment}&userID=${value.userID}&doctorID=${value.doctorID}&time=${value.time}&status=${value.status}&level=${value.level}&price=${value.price}&detail=${value.detail}&specialize=${value.specialize}`}
                             >
                               <IconButton color="primary" style={{ outline: 0 }}>
                                 <Edit />

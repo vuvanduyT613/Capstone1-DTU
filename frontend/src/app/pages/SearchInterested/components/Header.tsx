@@ -32,9 +32,9 @@ const Header = props => {
     <>
       <WrapperHeader>
         <Title>
-          <p>Clinic </p>
+          <p>Look up the clinic table </p>
           <WrapperInput>
-            <div style={{ display: 'flex', marginRight: '15px' }}>
+            <div style={{ display: 'flex', width: '100%' }}>
               <Input onChange={e => Debounce(e.target.value)} />
               <Icon>
                 <svg
@@ -52,21 +52,6 @@ const Header = props => {
               </Icon>
             </div>
           </WrapperInput>
-          <WrappperAction>
-            <svg
-              width="20"
-              height="16"
-              viewBox="0 0 20 16"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M14.294 0.000217014C13.4503 0.00565665 12.6178 0.163931 11.8525 0.464371C11.0873 0.764812 10.4072 1.20044 9.85798 1.74188C9.30877 1.20044 8.62864 0.764812 7.86342 0.464371C7.09821 0.163931 6.2657 0.00565665 5.422 0.000217014C4.70807 -0.00568457 3.99991 0.108837 3.33896 0.337081C2.67801 0.565325 2.07754 0.902708 1.57269 1.32949C1.06784 1.75627 0.668738 2.26389 0.398742 2.82263C0.128746 3.38137 -0.00672443 3.98002 0.000256711 4.58355C0.000256711 7.73355 3.35188 10.3002 8.42861 14.2002L9.85798 15.2919L11.2873 14.1919C16.3641 10.3002 19.7157 7.73355 19.7157 4.58355C19.7227 3.98002 19.5872 3.38137 19.3172 2.82263C19.0472 2.26389 18.6481 1.75627 18.1433 1.32949C17.6384 0.902708 17.038 0.565325 16.377 0.337081C15.7161 0.108837 15.0079 -0.00568457 14.294 0.000217014ZM9.95656 12.9585L9.85798 13.0419L9.7594 12.9585C5.06713 9.36688 1.9718 6.99188 1.9718 4.58355C1.96072 4.19797 2.04239 3.8145 2.21186 3.4564C2.38132 3.0983 2.63506 2.77303 2.95767 2.5003C3.28029 2.22757 3.66507 2.01308 4.08867 1.86982C4.51228 1.72656 4.96589 1.65752 5.422 1.66688C6.17126 1.66996 6.90321 1.85764 7.52825 2.20694C8.15329 2.55623 8.64431 3.052 8.94121 3.63355H10.7846C11.0783 3.05176 11.5672 2.55546 12.1909 2.20595C12.8146 1.85644 13.5457 1.66903 14.294 1.66688C14.7501 1.65752 15.2037 1.72656 15.6273 1.86982C16.0509 2.01308 16.4357 2.22757 16.7583 2.5003C17.0809 2.77303 17.3346 3.0983 17.5041 3.4564C17.6736 3.8145 17.7552 4.19797 17.7442 4.58355C17.7442 6.99188 14.6488 9.36688 9.95656 12.9585Z"
-                fill="#315DF7"
-              />
-            </svg>
-            <p> interested clinic</p>
-          </WrappperAction>
         </Title>
       </WrapperHeader>
     </>
@@ -78,8 +63,8 @@ const WrapperHeader = styled.div`
 `;
 
 const Title = styled.div`
-  display: flex;
-
+  display: block;
+  width: 100%;
   p {
     width: 55%;
 
@@ -100,12 +85,11 @@ const Title = styled.div`
 `;
 const WrapperInput = styled.div`
   display: flex;
-  justify-content: flex-end;
-  width: 45%;
+  width: 100%;
 `;
 
 const Input = styled.input`
-  width: 400px;
+  width: 100%;
   height: 40px;
   text-indent: 8px;
   margin: auto 0px auto auto;
@@ -133,35 +117,9 @@ const Icon = styled.div`
   /* #315DF7 */
   background: #315df7;
   border-radius: 4px;
-  margin: 22px 0px 0px -31px;
+  margin: 7px 0px 0px -31px;
   svg {
     margin-left: 5px;
-  }
-`;
-
-const WrappperAction = styled.div`
-  width: 200px;
-  height: 40px;
-  margin: auto 0px auto 10px;
-  background: rgba(49, 93, 247, 0.2);
-  border-radius: 4px;
-  display: flex;
-
-  svg {
-    margin: auto;
-  }
-
-  p {
-    font-family: Segoe UI;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 13px;
-    line-height: 24px;
-    /* identical to box height, or 200% */
-    width: 70%;
-    display: flex;
-    align-items: center;
-    text-align: center;
   }
 `;
 

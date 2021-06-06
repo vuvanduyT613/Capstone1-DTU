@@ -228,6 +228,15 @@ const SignUpStepper = () => {
                           ...base,
                           height: '100%',
                         }),
+                        indicatorSeparator: base => ({
+                          ...base,
+                          display: 'none',
+                        }),
+                        dropdownIndicator: base => ({
+                          ...base,
+                          color: ' #315DF7',
+                          marginTop: '-5px', // Custom colour
+                        }),
                         loadingMessage: base => ({
                           ...base,
                           backgroundColor: '#000',

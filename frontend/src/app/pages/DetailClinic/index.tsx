@@ -7,7 +7,7 @@ import * as React from 'react';
 import styled from 'styled-components/macro';
 import { useTranslation } from 'react-i18next';
 import Cookies from 'js-cookie';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { NavBar } from 'app/components/NavBar';
 import queryString from 'query-string';
@@ -16,7 +16,6 @@ import { PageWrapper } from 'app/components/PageWrapper';
 import { Hot } from 'app/components/Hot';
 import { ReactComponent as Heart } from './assets/ic_heart.svg';
 import { ReactComponent as Phone } from './assets/ic_phone.svg';
-import { messages } from './messages';
 import { Overview } from './components/Overview';
 import { Map } from './components/Map';
 import { Examination } from './components/Examination';
@@ -64,7 +63,7 @@ export function DetailClinic(props: Props) {
               >
                 Geographical location
               </Action>
-              <Action
+              {/* <Action
                 onClick={() => {
                   setPage(3);
                 }}
@@ -78,6 +77,7 @@ export function DetailClinic(props: Props) {
               >
                 Strengths and expertise
               </Action>
+              */}
             </WrapperAction>
           </Grid>
           <Grid xs={6}>
@@ -100,7 +100,7 @@ export function DetailClinic(props: Props) {
             ) : (
               <Strength />
             )}
-            <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+            <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '200px' }}>
               <ItemAdmin onClick={() => {}}>
                 <div>
                   <p>Contact admin</p>
@@ -109,11 +109,13 @@ export function DetailClinic(props: Props) {
                   </BorderSvg>
                 </div>
               </ItemAdmin>
-              <ItemSave onClick={() => {}}>
-                <div>
-                  <p>View table of interest</p>
-                </div>
-              </ItemSave>
+              <Link to="/clinic/searchinterested">
+                <ItemSave onClick={() => {}}>
+                  <div>
+                    <p>View table of interest</p>
+                  </div>
+                </ItemSave>
+              </Link>
             </div>
           </ContentText>
           <WrapperButton></WrapperButton>
@@ -323,8 +325,6 @@ const ItemAdmin = styled.a`
   div {
     width: 200px;
     height: 50px;
-    /* #00358E */
-    /* #FFFFFF */
 
     background: #e5edff;
     box-shadow: 0px 8px 20px rgba(49, 93, 247, 0.16);

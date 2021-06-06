@@ -9,6 +9,7 @@ const { assign } = require("../../middlewares/assign");
 const {
 	register,
 	login,
+	loginDoctor,
 	logout,
 	refreshTokens,
 	forgotPassword,
@@ -23,6 +24,7 @@ const router = express.Router();
 router
 	.post("/register", uploadCloud.single("avatar"), assign("avatar"), validate(authValidation.register), register)
 	.post("/login", validate(authValidation.login), login)
+	.post("/login/doctor", validate(authValidation.login), loginDoctor)
 	.post("/logout", validate(authValidation.logout), logout)
 	.post("/refresh-tokens", validate(authValidation.refreshTokens), refreshTokens)
 	.post("/forgot-password", validate(authValidation.forgotPassword), forgotPassword)

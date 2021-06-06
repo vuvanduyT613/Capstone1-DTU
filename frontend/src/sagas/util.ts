@@ -13,7 +13,12 @@ import {
   appointmentGetById,
   appointmentGetAll,
   getAnalysis,
+  getAnalysisDoctor,
 } from 'utils/apis';
+
+import Cookies from 'js-cookie';
+
+const expires = process.env.REACT_APP_EXPIRES_COOKIE;
 
 export function* getByIdUtil(action) {
   try {
@@ -140,7 +145,9 @@ export function* adminStatus(action) {
 
 export function* chartJS() {
   try {
-    const { status, data } = yield call(getAnalysis);
+    const { status, data } = yield call(
+      Cookies.get('role') === 'doctor' ? getAnalysisDoctor : getAnalysis,
+    );
     if (status === 201) {
       yield put({
         type: GET_ALL_CHARTJS,
@@ -149,6 +156,53 @@ export function* chartJS() {
     }
     return;
   } catch (err) {
+    yield put({
+      type: ERROR,
+      payload: { data: err },
+    });
+  }
+}
+
+export function* updateByIdUser(action) {
+  try {
+    const arr = action.payload.userName.split(/(\s+)/);
+    const lastName = arr[arr.length - 1];
+    arr.pop();
+    const form = new FormData();
+    form.append('email', action.payload.email);
+    form.append('fistName', arr.join(''));
+    form.append('lastName', lastName);
+    form.append('dateOfBirth', action.payload.dateOfBirth);
+    form.append('phone', action.payload.phone);
+    form.append('avatar', action.payload.avatar);
+    if (action.payload.changepassword !== '') {
+      form.append('password', action.payload.changepassword);
+    }
+    const { data, status } = yield call(userUpdateById, {
+      token: action.payload.token,
+      id: action.payload.id,
+      data: form,
+    });
+
+    if (status === 200) {
+      Cookies.set('email', data.email, expires);
+      Cookies.set('user_name', `${data.fistName} ${data.lastName}`, expires);
+      Cookies.set('user_phone', `${data.phone}`, expires);
+      Cookies.set('user_date', `${data.dateOfBirth}`, expires);
+      Cookies.set('user_avatar', `${data.avatar}`, expires);
+      if (action.payload.password !== '') {
+        Cookies.set('password', action.payload.password, expires);
+      }
+      yield put({
+        type: UPDATE_FIELD_SIGN_UP,
+        payload: {
+          step: 0,
+        },
+      });
+    }
+    return;
+  } catch (err) {
+    toast.error(`Update fail.!`);
     yield put({
       type: ERROR,
       payload: { data: err },

@@ -86,10 +86,15 @@ const deleteById = async (action, option) => {
  * @param {string} email
  * @returns {Promise<User>}
  */
+const objectByEmail = async (action, email) => {
+	return switchModel(action).findOne({ email });
+};
+
 module.exports = {
 	create,
 	query,
 	getById,
 	updateById,
 	deleteById,
+	objectByEmail,
 };

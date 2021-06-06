@@ -8,10 +8,11 @@ import {
   updateAppointment,
   deleteAppointment,
   createAppointmentClient,
+  getAllAppointmentDoctor,
 } from './appointments';
 import { getAllDelivery } from './delivery';
 import { getAllClinic, createClinic, updateClinic, deleteClinic, getClinic } from './clinics';
-import { getByIdUtil, updateById, deleteById, adminStatus, chartJS } from './util';
+import { getByIdUtil, updateById, deleteById, adminStatus, chartJS, updateByIdUser } from './util';
 
 //@ts-ignore
 function* rootSaga() {
@@ -40,6 +41,8 @@ function* rootSaga() {
     takeLeading('UPDATE_ALL_CLINIC_API', updateClinic),
     takeLeading('DELETE_ALL_CLINIC_API', deleteClinic),
     takeLeading('GET_ALL_CLINIC_DATA_API', getClinic),
+    takeLeading('UPDATE_PERSONAL', updateByIdUser),
+    takeLeading('GET_ALL_APPOINTMENT_DOCTOR_API', getAllAppointmentDoctor),
   ]);
 }
 

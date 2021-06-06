@@ -70,6 +70,7 @@ const getValidation = {
 		userID: Joi.string(),
 		address: Joi.string(),
 		city: Joi.string(),
+		doctorID: Joi.string(),
 		country: Joi.string(),
 		nameClinic: Joi.string(),
 		role: Joi.string(),

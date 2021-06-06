@@ -10,13 +10,14 @@ interface Tranfer {
 
 const List = (props: Tranfer) => {
   //@ts-ignore
-  const { id, userID, time } = props.data;
+  const { id, userID, time, clinic, payment } = props.data;
+  console.log(props.data);
   return (
     <WrapperList>
       {Object.keys(props.data).length > 0 ? (
         <>
           <WrapperInfo>
-            <p>Phòng khám Đa khoa Quốc tế Exson</p>
+            <p>{clinic}</p>
             <p>{Cookies.get('user_name')}</p>
           </WrapperInfo>
           <WrapperTranfer>
@@ -24,13 +25,22 @@ const List = (props: Tranfer) => {
           </WrapperTranfer>
           <WrapperStatus>
             <Code>{userID}</Code>
-            {props.isStatus ? (
-              <Status>Đã thanh toán</Status>
-            ) : (
-              <OffStatus>
+            {payment === 'Unpaid' ? (
+              <Status color={'#f0ad4e'}> UNPAID</Status>
+            ) : payment === 'Failled' ? (
+              <Status color={'#d9534f'}>
+                {' '}
                 Cancel: {new Date(time).getHours()} H - {new Date(time).getDate()} /{' '}
                 {new Date(time).getMonth()} / {new Date(time).getFullYear()}
-              </OffStatus>
+              </Status>
+            ) : payment === 'Paid' ? (
+              <Status color={'#5cb85c'}> PAID</Status>
+            ) : payment === 'Refunding' ? (
+              <Status color={'#008edd'}> REFUNDING</Status>
+            ) : payment === 'Refunded' ? (
+              <Status color={'#008edd'}> REFUNDED</Status>
+            ) : (
+              <Status color={'#000'}> EXPIRED</Status>
             )}
           </WrapperStatus>
         </>
@@ -128,7 +138,7 @@ const Status = styled.p`
 
   /* #FE9C5E */
 
-  color: #ff9832;
+  color: ${props => props.color};
 `;
 
 const OffStatus = styled.p`

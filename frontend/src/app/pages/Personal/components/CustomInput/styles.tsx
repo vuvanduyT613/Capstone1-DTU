@@ -43,6 +43,9 @@ const useStyles = makeStyles((theme: Theme) =>
       '& .MuiOutlinedInput-adornedStart': {
         paddingLeft: 30,
       },
+      '& .MuiInputBase-input.Mui-disabled': {
+        backgroundColor: '#f9f9f9',
+      },
     },
   }),
 );

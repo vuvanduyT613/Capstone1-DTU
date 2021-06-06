@@ -12,13 +12,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { rootState } from 'store/reducers';
 import { debounce } from 'lodash';
 
-interface Props {}
+interface Props {
+  fucHeader: Function;
+}
 
 export function Header(props: Props) {
   const { page, option } = useSelector((state: rootState) => state.authenReducer.pageOption);
   const dispatch = useDispatch();
 
   const search = value => {
+    props.fucHeader(value);
     dispatch({
       type: 'GET_ALL_DOCTOR_API',
       payload: {

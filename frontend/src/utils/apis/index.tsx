@@ -1,3 +1,4 @@
+import Cookies from 'js-cookie';
 import { GET, GET_TOKEN, POST, POST_TOKEN, PATH_TOKEN, DELETE_TOKEN } from '../axiosService';
 
 const ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
@@ -7,6 +8,10 @@ console.log(COUNTRY);
 // Authentication
 export const authenticationSignIn = payload => {
   return POST(`${ENDPOINT}/auth/login`, payload);
+};
+
+export const authenticationSignInDoctor = payload => {
+  return POST(`${ENDPOINT}/auth/login/doctor`, payload);
 };
 
 export const authenticationSendEmail = payload => {
@@ -50,6 +55,7 @@ export const authenticationReset = payload => {
     config,
   );
 };
+
 // Usser
 export const userGetAll = payload => {
   const config = {
@@ -79,6 +85,18 @@ export const doctorGetAll = payload => {
   };
   return GET_TOKEN(
     `${ENDPOINT}/doctors/v1?userName=${payload.userName ? payload.userName : ' '}&limit=${
+      payload.limit ? payload.limit : 5
+    } &page=${payload.page}`,
+    config,
+  );
+};
+
+export const doctorGetAppointment = payload => {
+  const config = {
+    headers: { Authorization: `Bearer ${payload.token}` },
+  };
+  return GET_TOKEN(
+    `${ENDPOINT}/appointments/v1?doctorID=${Cookies.get('user_id')}&limit=${
       payload.limit ? payload.limit : 5
     } &page=${payload.page}`,
     config,
@@ -145,6 +163,7 @@ export const appointmentCreate = payload => {
 };
 
 export const appointmentUpdateById = payload => {
+  console.log(payload);
   const config = {
     headers: { Authorization: `Bearer ${payload.token}` },
   };
@@ -155,6 +174,7 @@ export const appointmentUpdateById = payload => {
       doctorID: payload.doctorID,
       time: payload.time,
       status: payload.status,
+      payment: payload.payment,
     },
     config,
   );
@@ -241,4 +261,8 @@ export const getById = payload => {
 
 export const getAnalysis = () => {
   return GET(`${ENDPOINT}/analysis`);
+};
+
+export const getAnalysisDoctor = () => {
+  return GET(`${ENDPOINT}/analysis/doctor?id=${Cookies.get('user_id')}`);
 };

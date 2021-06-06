@@ -1,10 +1,7 @@
 import React /* useEffect, useState */ from 'react';
-import { Grid, TextField, InputAdornment } from '@material-ui/core';
 import styled from 'styled-components/macro';
 
 const Header = props => {
-  const [textSearch, setTextSearch] = React.useState('');
-
   return (
     <>
       <WrapperHeader>
@@ -24,9 +21,9 @@ const Title = styled.div`
 
   p {
     width: 55%;
-    font-family: Alata;
+    font-family: SF Pro Display;
     font-style: normal;
-    font-weight: normal;
+    font-weight: bold;
     font-size: 20px;
     line-height: 30px;
     /* identical to box height, or 150% */

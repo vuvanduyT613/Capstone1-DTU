@@ -3,6 +3,7 @@ import { Grid, TextField, InputAdornment } from '@material-ui/core';
 import styled from 'styled-components/macro';
 import Header from './Header';
 import List from './List';
+import Detail from './Detail';
 import { Pagination } from 'app/components/Pagination';
 import { useSelector } from 'react-redux';
 import { rootState } from 'store/reducers';
@@ -24,7 +25,19 @@ const ListProduct = (props: customInputProps) => {
     <Wrapper>
       <Header fucHeader={fucHeader} />
       <WrapperClinic>
-        {
+        <List
+          price={343434}
+          name={'dsadsadadds'}
+          address={'dsadsadadds'}
+          district={'dsadsadadds'}
+          city={'dsadsadadds'}
+          image={'https://i.pinimg.com/originals/c6/37/f0/c637f060e0e549b01baf1fd781a75cb0.png'}
+          overview={'dsadsadadds'}
+          timeWorkStart={'dsadsadadds'}
+          timeWorkEnd={'dsadsadadds'}
+        />
+        <Detail />
+        {/*
           //@ts-ignore
           Object.keys(data).length > 0 && Object.keys(data.results).length > 0 ? (
             //@ts-ignore
@@ -46,7 +59,7 @@ const ListProduct = (props: customInputProps) => {
               <h3>Your search - {`${state}`} - did not match any documents.</h3>
             </NotFound>
           )
-        }
+          */}
       </WrapperClinic>
 
       <WrapperPagination>
@@ -72,7 +85,7 @@ const ListProduct = (props: customInputProps) => {
 };
 
 const Wrapper = styled.div`
-  width: 55%;
+  width: 30%;
   background: #fdfdfd;
   margin-left: 19%;
   margin-top: -7%;
@@ -81,7 +94,7 @@ const Wrapper = styled.div`
 
 const WrapperClinic = styled.div`
   padding: 0px 28px 0px 28px;
-  display: flex;
+  display: block;
   flex-wrap: wrap;
 `;
 

@@ -16,6 +16,7 @@ export interface loginFormInterface {
 const Forgot = () => {
   const dispatch = useDispatch();
   const [location, setLocation] = useState(false);
+  const [isOpen, setOpen] = useState(true);
   const classes = useStyles();
 
   const signUp = values => {
@@ -23,6 +24,10 @@ const Forgot = () => {
       type: 'FORGOT_SIGN_IN',
       payload: values,
     });
+  };
+
+  const onChange = value => {
+    value && setOpen(false);
   };
 
   const recaptchaRef = React.createRef();
@@ -48,10 +53,15 @@ const Forgot = () => {
                   handlerChange={e => handleChange(e)}
                 />
                 <div className={classes.captCha}>
-                  <ReCAPTCHA sitekey="Your client site key" ref={recaptchaRef} />,
+                  <ReCAPTCHA
+                    sitekey="6LeJ_hMbAAAAAHHYjg0V4MoiqjDXnvOCTTL-OwP-"
+                    onChange={onChange}
+                    ref={recaptchaRef}
+                  />
                 </div>
                 <button
-                  className={classes.continueBtn}
+                  disabled={isOpen}
+                  className={isOpen ? classes.continueDisable : classes.continueBtn}
                   onClick={() => (errors ? toast.error(errors.email) : handleSubmit)}
                 >
                   Send password rest email

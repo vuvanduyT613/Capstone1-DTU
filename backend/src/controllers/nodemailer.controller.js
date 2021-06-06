@@ -26,11 +26,22 @@ const sendMail = catchAsync(async (req, res) => {
 	});
 });
 
+const sendGmailAdmin = catchAsync(async (email, name) => {
+	await emailService.sendEmail(
+		email,
+		`Notification Appointment`,
+		`
+  <h4> You have a new appoinment to day by ${name}</h4>
+  Please reply as soon as possible !.
+  `
+	);
+});
+
 const sendEmailAppointment = catchAsync(async (req, res, next) => {
-	console.log(req.body);
-	const { email, time, price, phone, address, transaction, username, doctor } = req.body;
+	const { email, time, price, phone, address, transaction, username, doctor, emailDoctor } = req.body;
 	const now = new Date();
 	const pay = price.toLocaleString("it-IT", { style: "currency", currency: "VND" });
+	sendGmailAdmin(emailDoctor, username);
 	const { response } = await emailService.sendEmail(
 		email,
 		`Medical Schedule`,

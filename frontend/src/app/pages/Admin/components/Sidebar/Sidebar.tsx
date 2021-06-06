@@ -28,7 +28,7 @@ export default function Sidebar() {
             className="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
             to="/"
           >
-            ADMIN MEDICAL SCHEDULE
+            {Cookies.get('role')} MEDICAL SCHEDULE
           </Link>
           {/* User */}
           <ul className="md:hidden items-center flex flex-wrap list-none">
@@ -109,49 +109,55 @@ export default function Sidebar() {
                   Dashboard
                 </Link>
               </li>
-              <li className="items-center">
-                <Link
-                  className={
-                    'text-xs uppercase py-3 font-bold block ' +
-                    (window.location.href.indexOf('/admin/doctor') !== -1
-                      ? 'text-lightBlue-500 hover:text-lightBlue-600'
-                      : 'text-blueGray-700 hover:text-blueGray-500')
-                  }
-                  to="/admin/doctor"
-                >
-                  <i
-                    className={
-                      'fa fa-user-md mr-2 text-sm ' +
-                      (window.location.href.indexOf('/admin/doctor') !== -1
-                        ? 'opacity-75'
-                        : 'text-blueGray-300')
-                    }
-                  ></i>{' '}
-                  Doctor
-                </Link>
-              </li>
+              {Cookies.get('role') === 'admin' ? (
+                <>
+                  <li className="items-center">
+                    <Link
+                      className={
+                        'text-xs uppercase py-3 font-bold block ' +
+                        (window.location.href.indexOf('/admin/doctor') !== -1
+                          ? 'text-lightBlue-500 hover:text-lightBlue-600'
+                          : 'text-blueGray-700 hover:text-blueGray-500')
+                      }
+                      to="/admin/doctor"
+                    >
+                      <i
+                        className={
+                          'fa fa-user-md mr-2 text-sm ' +
+                          (window.location.href.indexOf('/admin/doctor') !== -1
+                            ? 'opacity-75'
+                            : 'text-blueGray-300')
+                        }
+                      ></i>{' '}
+                      Doctor
+                    </Link>
+                  </li>
 
-              <li className="items-center">
-                <Link
-                  className={
-                    'text-xs uppercase py-3 font-bold block ' +
-                    (window.location.href.indexOf('/admin/patient') !== -1
-                      ? 'text-lightBlue-500 hover:text-lightBlue-600'
-                      : 'text-blueGray-700 hover:text-blueGray-500')
-                  }
-                  to="/admin/patient"
-                >
-                  <i
-                    className={
-                      'fa fa-wheelchair mr-2 text-sm ' +
-                      (window.location.href.indexOf('/admin/patient') !== -1
-                        ? 'opacity-75'
-                        : 'text-blueGray-300')
-                    }
-                  ></i>{' '}
-                  Patients
-                </Link>
-              </li>
+                  <li className="items-center">
+                    <Link
+                      className={
+                        'text-xs uppercase py-3 font-bold block ' +
+                        (window.location.href.indexOf('/admin/patient') !== -1
+                          ? 'text-lightBlue-500 hover:text-lightBlue-600'
+                          : 'text-blueGray-700 hover:text-blueGray-500')
+                      }
+                      to="/admin/patient"
+                    >
+                      <i
+                        className={
+                          'fa fa-wheelchair mr-2 text-sm ' +
+                          (window.location.href.indexOf('/admin/patient') !== -1
+                            ? 'opacity-75'
+                            : 'text-blueGray-300')
+                        }
+                      ></i>{' '}
+                      Patients
+                    </Link>
+                  </li>
+                </>
+              ) : (
+                <></>
+              )}
 
               <li className="items-center">
                 <Link
@@ -201,28 +207,35 @@ export default function Sidebar() {
             {/* Divider */}
             <hr className="my-4 md:min-w-full" />
             {/* Heading */}
-            <h6 className="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
-              Authencation
-            </h6>
-            {/* Navigation */}
+            {Cookies.get('role') === 'admin' ? (
+              <>
+                <h6 className="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
+                  Authencation
+                </h6>
+                {/* Navigation */}
 
-            <ul className="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
-              <li className="items-center">
-                <Link
-                  className="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
-                  to="/auth/"
-                  onClick={() => {
-                    Cookies.set('role', 'user');
-                  }}
-                >
-                  <i className="fas fa-clipboard-list text-blueGray-300 mr-2 text-sm"></i> LANDING
-                  PAGE
-                </Link>
-              </li>
-            </ul>
-            {/* Divider */}
-            <hr className="my-4 md:min-w-full" />
-            {/* Heading */}
+                <ul className="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
+                  <li className="items-center">
+                    <Link
+                      className="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
+                      to="/auth/"
+                      onClick={() => {
+                        Cookies.set('role', 'user');
+                      }}
+                    >
+                      <i className="fas fa-clipboard-list text-blueGray-300 mr-2 text-sm"></i>{' '}
+                      LANDING PAGE
+                    </Link>
+                  </li>
+                </ul>
+
+                {/* Divider */}
+                <hr className="my-4 md:min-w-full" />
+                {/* Heading */}
+              </>
+            ) : (
+              <></>
+            )}
 
             {/* Heading */}
             <ul className="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">

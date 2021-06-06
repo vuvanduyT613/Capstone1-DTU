@@ -162,7 +162,7 @@ const useStyles = makeStyles((theme: Theme) =>
     addressIcon: {
       zIndex: 1,
       position: 'absolute',
-      margin: '36px 0px 0px 30px ',
+      margin: '32px 0px 0px 30px !important',
     },
     addressContent: {
       width: '100%',

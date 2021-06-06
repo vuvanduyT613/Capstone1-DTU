@@ -14,6 +14,7 @@ import {
   countryAll,
   authenticationForgot,
   authenticationReset,
+  authenticationSignInDoctor,
   authenticationSignUpDoctor,
 } from 'utils/apis';
 import { toast } from 'react-toastify';
@@ -22,32 +23,48 @@ const expires = process.env.REACT_APP_EXPIRES_COOKIE;
 
 export function* signIn(action) {
   try {
-    const { status, data } = yield call(authenticationSignIn, action.payload);
+    const { status, data } = yield call(
+      action.payload.check === false ? authenticationSignIn : authenticationSignInDoctor,
+      { email: action.payload.email, password: action.payload.password },
+    );
     console.log(data);
 
     if (status === 200) {
-      Cookies.set('role', data.user.role, expires);
+      Cookies.set('role', data.user !== undefined ? data.user.role : data.doctor.role, expires);
       Cookies.set('email', action.payload.email, expires);
       Cookies.set('password', action.payload.password, expires);
       Cookies.set('access_token', data.tokens.access.token);
       Cookies.set('refresh_token', data.tokens.refresh.token, expires);
-      Cookies.set('user_name', `${data.user.fistName} ${data.user.lastName}`, expires);
-      Cookies.set('user_id', `${data.user.id}`, expires);
-      Cookies.set('user_phone', `${data.user.phone}`, expires);
-      Cookies.set('user_date', `${data.user.dateOfBirth}`, expires);
-      Cookies.set('user_avatar', `${data.user.avatar}`, expires);
+      Cookies.set(
+        'user_name',
+        `${data.user !== undefined ? data.user.fistName : data.doctor.fistName} ${
+          data.user !== undefined ? data.user.lastName : data.doctor.lastName
+        }`,
+        expires,
+      );
+      Cookies.set('user_id', `${data.user ? data.user.id : data.doctor.id}`, expires);
+      Cookies.set('user_phone', `${data.user ? data.user.phone : data.doctor.phone}`, expires);
+      Cookies.set(
+        'user_date',
+        `${data.user ? data.user.dateOfBirth : data.doctor.dateOfBirth}`,
+        expires,
+      );
+      Cookies.set('user_avatar', `${data.user ? data.user.avatar : data.doctor.avatar}`, expires);
+
       yield put({
         type: UPDATE_FIELD_SIGN_IN,
         payload: {
-          email: data.user.email,
+          email: data.user ? data.user.email : data.doctor.email,
           password: action.payload.password,
-          role: data.user.role,
+          role: data.user ? data.user.role : data.doctor.role,
           status: status,
         },
       });
     }
     return;
   } catch (err) {
+    console.log(err);
+
     toast.error('Incorrect email or password');
     yield put({
       type: UPDATE_FIELD_SIGN_IN_ERROR,

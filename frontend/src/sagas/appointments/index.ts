@@ -7,11 +7,32 @@ import {
   appointmentCreate,
   appointmentUpdateById,
   appointmentDeleteById,
+  doctorGetAppointment,
 } from 'utils/apis';
 
 export function* getAllAppointment(action) {
   try {
     const { status, data } = yield call(appointmentGetById, action.payload);
+    if (status === 201) {
+      yield put({
+        type: GET_ALL_USER,
+        payload: {
+          data: data,
+        },
+      });
+    }
+    return;
+  } catch (err) {
+    yield put({
+      type: ERROR,
+      payload: { data: err },
+    });
+  }
+}
+
+export function* getAllAppointmentDoctor(action) {
+  try {
+    const { status, data } = yield call(doctorGetAppointment, action.payload);
     if (status === 201) {
       yield put({
         type: GET_ALL_USER,
